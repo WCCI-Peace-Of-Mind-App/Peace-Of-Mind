@@ -82,8 +82,20 @@ public class NonMedicalUserTest {
 		underTest = new NonMedicalUser(firstName, lastName, address, contactNumber, workNumber, username, password);
 		String testFirstName = underTest.getFirstName();
 		String testLastName = underTest.getLastName();
+		String testAddress = underTest.getAddress();
+		String testContactNumber = underTest.getContactNumber();
+		String testWorkNumber = underTest.getWorkNumber();
+		String testUsername = underTest.getUsername();
+		String testPassword = underTest.getPassword();
+
 		assertThat(testFirstName, is(firstName));
 		assertThat(testLastName, is(lastName));
+		assertThat(testAddress, is(address));
+		assertThat(testContactNumber, is(contactNumber));
+		assertThat(testWorkNumber, is(workNumber));
+		assertThat(testUsername, is(username));
+		assertThat(testPassword, is(password));
+
 	}
 	
 }

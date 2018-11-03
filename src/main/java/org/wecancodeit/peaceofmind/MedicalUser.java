@@ -2,7 +2,6 @@ package org.wecancodeit.peaceofmind;
 
 public class MedicalUser implements Person {
 
-	private String name;
 	private String address;
 	private String contactInfo;
 	private String medicalSpecialty;
@@ -11,9 +10,11 @@ public class MedicalUser implements Person {
 	private String userName;
 	private String password;
 
-	public MedicalUser(String name, String address, String contactInfo, String medicalSpecialty, String medicalInstitution, String institutionTelephone, String userName, String password) {
+	public MedicalUser(String firstName,String lastName, String address, String contactInfo, String medicalSpecialty,
+			String medicalInstitution, String institutionTelephone, String userName, String password) {
 		super();
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.address = address;
 		this.contactInfo = contactInfo;
 		this.medicalSpecialty = medicalSpecialty;
@@ -23,10 +24,16 @@ public class MedicalUser implements Person {
 		this.password = password;
 	}
 
-	public String getName() {
-
-		return this.name;
+	public String getFirstName() {
+		return firstName;
 	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	private String firstName;
+	private String lastName;
 
 	public String getAddress() {
 
@@ -43,7 +50,7 @@ public class MedicalUser implements Person {
 		return this.medicalSpecialty;
 	}
 
-	public String getMedInstitution() {
+	public String getMedicalInstitution() {
 		
 		return this.medicalInstitution;
 	}

@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class PatientTest {
 	
-	Patient underTest = new Patient("firstName", "lastName", "xxx-xxx-xxxx", "primaryAddress", "01/01/0000", "diagnosis");
+	Patient underTest = new Patient("firstName", "lastName", "email", "xxx-xxx-xxxx", "primaryAddress", "01/01/0000", "diagnosis");
 	
 	
 	@Test
@@ -20,6 +20,12 @@ public class PatientTest {
 	public void shouldReturnPatientLastName() {
 		String result = underTest.getLastName();
 		assertThat(result, is("lastName"));
+	}
+	
+	@Test
+	public void shouldReturnPatientEmail() {
+		String result = underTest.getEmail();
+		assertThat(result, is ("email"));
 	}
 	
 	@Test

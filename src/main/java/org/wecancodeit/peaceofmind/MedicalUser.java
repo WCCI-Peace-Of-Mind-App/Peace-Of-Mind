@@ -2,20 +2,20 @@ package org.wecancodeit.peaceofmind;
 
 public class MedicalUser implements INonPatientUser {
 
-	private String address;
-	private String contactInfo;
+	private String firstName;
+	private String lastName;
+	private ContactInfo contactInfo;
 	private String medicalSpecialty;
 	private String medicalInstitution;
 	private String institutionTelephone;
 	private String userName;
 	private String password;
 
-	public MedicalUser(String firstName,String lastName, String address, String contactInfo, String medicalSpecialty,
+	public MedicalUser(String firstName,String lastName, ContactInfo contactInfo, String medicalSpecialty,
 			String medicalInstitution, String institutionTelephone, String userName, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.address = address;
 		this.contactInfo = contactInfo;
 		this.medicalSpecialty = medicalSpecialty;
 		this.medicalInstitution = medicalInstitution; 
@@ -33,17 +33,9 @@ public class MedicalUser implements INonPatientUser {
 		return lastName;
 	}
 
-	private String firstName;
-	private String lastName;
-
-	public String getAddress() {
-
-		return this.address;
-	}
-
-	public String getContact() {
-
-		return this.contactInfo;
+	@Override
+	public ContactInfo getContactInfo() {
+		return contactInfo;
 	}
 
 	public String getMedicalSpecialty() {
@@ -61,22 +53,17 @@ public class MedicalUser implements INonPatientUser {
 		return this.institutionTelephone;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.wecancodeit.peaceofmind.INonPatientUser#getUserName()
-	 */
 	@Override
 	public String getUserName() {
 
 		return this.userName;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.wecancodeit.peaceofmind.INonPatientUser#getPassword()
-	 */
 	@Override
 	public String getPassword() {
 
 		return this.password;
 	}
+
 
 }

@@ -2,40 +2,88 @@ package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.wecancodeit.peaceofmind.ContactInfo;
+import org.wecancodeit.peaceofmind.MedicalUser;
 
 public class MedicalUserTest {
 	
+	String address;
+	String businessTelephone;
 	
-	Person user ;
-	String firstName = "Simon";
-	String lastName = "Bob";
-	String address = "WcciHighStreet";
-	String businessTelephone = "6142442444";
-	String medicalSpecialty = "Therapist";
-	String medInstitution = "Grant";
-	String institutionTelephone = "800999999";
-	String userName = "wcciAdmin";
-	String userPassword = "1222";
+	Collection<String> addresses = new ArrayList<>();
+	Collection<String> phones = new ArrayList<>();
 	
-	//String name, String address, String contactInfo, String medicalSpecialty, String medicalInstitution, String institutionTelephone, String userName, String password	
-	Person user2  = new MedicalUser(firstName,lastName,address,businessTelephone,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword);
 	
+	ContactInfo contactInfo;
+	
+	MedicalUser user;
+	String firstName;
+	String lastName;
+	String medicalSpecialty;
+	String medInstitution;
+	String institutionTelephone;
+	String userName;
+	String userPassword;
+	
+	//String name, String address, ContactInfo contactInfo, String medicalSpecialty, String medicalInstitution, String institutionTelephone, String userName, String password	
+	MedicalUser user2;
 	
 	@Before
 	public void setUp() {
+		address = "WCCI_CleveLand";
+		businessTelephone = "7402442444";
 		
+		addresses.add(address);
+		phones.add(businessTelephone);
+		contactInfo = new ContactInfo(addresses, phones, null);
+			
+		firstName = "Michael";
+		lastName = "Bob";
+		medicalSpecialty = "Therapist";
+		medInstitution = "MtCarmel";
+		institutionTelephone = "8009999990";
+		userName = "WcciAdmin2";
+		userPassword = "1999";
+
+		
+		
+		user  = new MedicalUser(firstName,lastName,contactInfo,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword);
+
 	}
 	
 	@Test
 	public void shouldAssertUser2Constructor() {
+		String address2 = "WcciHighStreet";
+		String businessTelephone2 = "6142442444";
+		
+		addresses.add(address2);
+		phones.add(businessTelephone2);
+		contactInfo = new ContactInfo(addresses, phones, null);
+			
+		firstName = "Simon";
+		lastName = "Bob";
+		medicalSpecialty = "Therapist";
+		medInstitution = "Grant";
+		institutionTelephone = "800999999";
+		userName = "wcciAdmin";
+		userPassword = "1222";
+
+		user2  = new MedicalUser(firstName,lastName,contactInfo,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword);
+
+		
 		assertThat(((MedicalUser) user2).getFirstName(),is(firstName));
 		assertThat(((MedicalUser) user2).getLastName(),is(lastName));
-		assertThat(((MedicalUser) user2).getContact(),is(businessTelephone));
-		assertThat(((MedicalUser) user2).getAddress(),is(address));
+		assertThat(((MedicalUser) user2).getContactInfo().getPhones(),containsInAnyOrder(businessTelephone, businessTelephone2));
+		assertThat(((MedicalUser) user2).getContactInfo().getAddresses(),containsInAnyOrder(address, address2));
 		assertThat(((MedicalUser) user2).getMedicalSpecialty(),is(medicalSpecialty));
 		assertThat(((MedicalUser) user2).getMedicalInstitution(),is(medInstitution));
 		assertThat(((MedicalUser) user2).getInstitutionTelephone(),is(institutionTelephone));
@@ -43,179 +91,58 @@ public class MedicalUserTest {
 		assertThat(((MedicalUser) user2).getPassword(),is(userPassword));
 	}
 	
-	/*
 	@Test
 	public void shouldCreateMedicalUser() {
 		
-		user = new MedicalUser("","","","","","","","");		
+		user = new MedicalUser("","",null,"","","","","");		
 		assertThat(user, instanceOf(MedicalUser.class));
 		
 	}
 	
 	@Test
 	public void shouldRetunrMedicalUserNameMichael() {
-		
-		String expectedName = "Michael";
-		user = new MedicalUser(expectedName,"","","","","","","");
-		String actualName = ((MedicalUser) user).getName();
-		
-		assertThat(actualName, is(expectedName));
-		
-	}
-
-	
-	@Test
-	public void shouldRetunrMedicalUserNameSimon() {
-		
-		String expectedName = "Simon";
-		user = new MedicalUser(expectedName,"","","","","","","");
-		String actualName = ((MedicalUser) user).getName();
-		
-		assertThat(actualName, is(expectedName));
-		
-	}
-	
-	@Test
-	public void shouldRetunrMedicalUserWCCIHighStreet() {
-		
-		String expectedAddress = "WCCIHighStreet";
-		user = new MedicalUser("", expectedAddress,"","","","","","");
-		String actualAddress = ((MedicalUser) user).getAddress();
-		
-		assertThat(actualAddress, is(expectedAddress));
-		
+		String actualName = ((MedicalUser) user).getFirstName();
+		assertThat(actualName, is(firstName));
 	}
 	
 	@Test
 	public void shouldRetunrMedicalUserWCCI_CleveLand() {
-		
-		String expectedAddress = "WCCI_CleveLand";
-		user = new MedicalUser("", expectedAddress,"","","","","","");
-		String actualAddress = ((MedicalUser) user).getAddress();
-		
-		assertThat(actualAddress, is(expectedAddress));
-		
+		Collection<String> actualAddress = ((MedicalUser) user).getContactInfo().getAddresses();
+		assertThat(actualAddress, contains(address));
 	}
 	
-	@Test
-	public void shouldRetunrMedicalUserBusiness6142442444() {
-		
-		String expectedContact = "Business6142442444";
-		user = new MedicalUser("","", expectedContact,"","","","","");
-		String actualContact = ((MedicalUser) user).getContact();
-		
-		assertThat(actualContact, is(expectedContact));
-		
-	}
 
 	@Test
 	public void shouldRetunrMedicalUserBusiness7402442444() {
-		
-		String expectedContact = "Business7402442444";
-		user = new MedicalUser("","", expectedContact,"","","","","");
-		String actualContact = ((MedicalUser) user).getContact();
-		
-		assertThat(actualContact, is(expectedContact));
-		
+		Collection<String> actualContact = ((MedicalUser) user).getContactInfo().getPhones();
+		assertThat(actualContact, contains(businessTelephone));
 	}
 	
-	@Test
-	public void shouldRetunrMedicalUserTherapist() {
-		
-		String expectedSpecialty = "Therapist";
-		user = new MedicalUser("","","", expectedSpecialty,"","","","");
-		String actualSpecialty = ((MedicalUser) user).getMedicalSpecialty();
-		
-		assertThat(actualSpecialty, is(expectedSpecialty));
-		
-	}
-	
-	@Test
-	public void shouldRetunrMedicalUserGrantMedical() {
-		
-		String expectedMedInstitution = "GrantMedical";
-		user = new MedicalUser("","","","", expectedMedInstitution,"","","");
-		String actualMedInstitution = ((MedicalUser) user).getMedInstitution();
-		
-		assertThat(actualMedInstitution, is(expectedMedInstitution));
-		
-	}
-
 	@Test
 	public void shouldRetunrMedicalUserMtCarmel() {
-		
-		String expectedMedInstitution = "MtCarmel";
-		user = new MedicalUser("","","","", expectedMedInstitution,"","","");
-		String actualMedInstitution = ((MedicalUser) user).getMedInstitution();
-		
-		assertThat(actualMedInstitution, is(expectedMedInstitution));
-		
-	}
-	
-	@Test
-	public void shouldRetunrMedicalUser8009999999() {
-		
-		String expectedTelephone = "8009999999";
-		user = new MedicalUser("","","","","", expectedTelephone,"","");
-		String actualTelephone = ((MedicalUser) user).getInstitutionTelephone();
-		
-		assertThat(actualTelephone, is(expectedTelephone));
-		
+		String actualMedInstitution = ((MedicalUser) user).getMedicalInstitution();	
+		assertThat(actualMedInstitution, is(medInstitution));
 	}
 	
 	@Test
 	public void shouldRetunrMedicalUser8009999990() {
-		
-		String expectedTelephone = "8009999990";
-		user = new MedicalUser("","","","","", expectedTelephone,"","");
 		String actualTelephone = ((MedicalUser) user).getInstitutionTelephone();
-		
-		assertThat(actualTelephone, is(expectedTelephone));
-		
-	}
-	
-	@Test
-	public void shouldRetunrMedicalUserWcciAdmin() {
-		
-		String expectedUserName = "WcciAdmin";
-		user = new MedicalUser("","","","","","", expectedUserName,"");
-		String actualUserName = ((MedicalUser) user).getUserName();
-		
-		assertThat(actualUserName, is(expectedUserName));
+		assertThat(actualTelephone, is(institutionTelephone));
 		
 	}
-	
+		
 	@Test
 	public void shouldRetunrMedicalUserWcciAdmin2() {
-		
-		String expectedUserName = "WcciAdmin2";
-		user = new MedicalUser("","","","","","", expectedUserName,"");
 		String actualUserName = ((MedicalUser) user).getUserName();
-		
-		assertThat(actualUserName, is(expectedUserName));
-		
-	}
-	
-	@Test
-	public void shouldRetunrMedicalUser9999() {
-		
-		String expectedPassword = "9999";
-		user = new MedicalUser("","","","","","","", expectedPassword);
-		String actualPassword = ((MedicalUser) user).getPassword();
-		
-		assertThat(actualPassword, is(expectedPassword));
+		assertThat(actualUserName, is(userName));
 		
 	}
 	
 	@Test
 	public void shouldRetunrMedicalUser1999() {
-		
-		String expectedPassword = "1999";
-		user = new MedicalUser("","","","","","","", expectedPassword);
 		String actualPassword = ((MedicalUser) user).getPassword();
+		assertThat(actualPassword, is(userPassword));
 		
-		assertThat(actualPassword, is(expectedPassword));
-		
-	}*/
+	}
 	
 }

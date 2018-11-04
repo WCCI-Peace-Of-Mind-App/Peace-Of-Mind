@@ -4,10 +4,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+import org.wecancodeit.peaceofmind.ContactInfo;
+import org.wecancodeit.peaceofmind.Patient;
 
 public class PatientTest {
 	
-	Patient underTest = new Patient("firstName", "lastName", "contactinfo", "01/01/0000", "diagnosis");
+	
+	ContactInfo contactInfo = new ContactInfo(null, null, null);
+	Patient underTest = new Patient("firstName", "lastName", contactInfo, "01/01/0000", "diagnosis");
 	
 	
 	@Test
@@ -24,8 +28,8 @@ public class PatientTest {
 	
 	@Test
 	public void shouldReturnPatientEmail() {
-		String result = underTest.getContactInfo();
-		assertThat(result, is ("contactinfo"));
+		ContactInfo result = underTest.getContactInfo();
+		assertThat(result, is (contactInfo));
 	}
 	
 	

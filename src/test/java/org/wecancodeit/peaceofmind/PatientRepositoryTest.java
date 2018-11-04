@@ -25,13 +25,23 @@ public class PatientRepositoryTest {
 	@Resource
 	private PatientRepository patientRepo;
 	
+	@Resource
+	private ContactInfoRepository contactInfoRepo;
+	
+	ContactInfo contactInfo;
+	ContactInfo contactInfo2;
 	Patient patient;
+	Patient patient2;
 	long patientId;
 	
 	@Before
 	public void setUp() {
-		patient = patientRepo.save(new Patient(null, null, null, null, null));
+		contactInfo = new ContactInfo(null, null, null);
+		patient = patientRepo.save(new Patient(null, null, contactInfo, null, null));
 		patientId = patient.getId();
+		
+		contactInfo2 = new ContactInfo(null, null, null);
+		patient2 = patientRepo.save(new Patient(null, null, contactInfo2, null, null));
 		
 		entity.flush();
 		entity.clear();
@@ -48,6 +58,13 @@ public class PatientRepositoryTest {
 		Optional<Patient> underTest = patientRepo.findById(patientId);
 		Patient testPatient = underTest.get();
 		assertThat(testPatient, is(patient));
+	}
+	
+	@Test
+	public void shouldEstablishPatientToContactInfoRelationship() {
+		Optional<Patient> underTest = patientRepo.findById(patientId);
+		Patient testPatient = underTest.get();
+		assertThat(testPatient.getContactInfo(), is(contactInfo));
 	}
 	
 

@@ -15,8 +15,8 @@ import org.wecancodeit.peaceofmind.NonMedicalUser;
 
 public class NonMedicalUserTest {
 	
-	Collection<String> addresses = new ArrayList<>();
-	Collection<String> phones = new ArrayList<>();
+	Collection<Address> addresses = new ArrayList<>();
+	Collection<Phone> phones = new ArrayList<>();
 	
 	NonMedicalUser underTest;
 	String firstName;
@@ -26,15 +26,15 @@ public class NonMedicalUserTest {
 	String password;
 	String relationshipWithPatient;
 	
-	String address;
-	String contactNumber;
+	Address address;
+	Phone contactNumber;
 
 	@Before
 	public void setUp() {
 		firstName = "Joe";
 		lastName = "Bob";
-		address = "1123 Sesame Street, NoWhere, OH 43101";
-		contactNumber = "614-837-5309";
+		address = new Address();
+		contactNumber = new Phone();
 		username = "Mopamus Wrex";
 		password = "Password123";
 		relationshipWithPatient = "Father";
@@ -58,13 +58,13 @@ public class NonMedicalUserTest {
 	
 	@Test
 	public void testAddressIs1123SesameStreetNoWhereOH43101() {
-		Collection<String> testAddress = underTest.getContactInfo().getAddresses();
+		Collection<Address> testAddress = underTest.getContactInfo().getAddresses();
 		assertThat(testAddress, contains(address));
 	}
 	
 	@Test
 	public void shouldHaveContactNumberOf6148375309() {
-		Collection<String> testContactNumber = underTest.getContactInfo().getPhones();
+		Collection<Phone> testContactNumber = underTest.getContactInfo().getPhones();
 		assertThat(testContactNumber, contains(contactNumber));
 	}
 		
@@ -90,8 +90,8 @@ public class NonMedicalUserTest {
 	public void test2ndUserWithAllDifferentValues() {
 		firstName = "Todd";
 		lastName = "Kenzie";
-		String address2 = "789 Market Square, Dublin, OH 41010";
-		String contactNumber2 = "123-456-7890";
+		Address address2 = new Address();
+		Phone contactNumber2 = new Phone();
 		username = "xxxGAMERxxx";
 		password = "123Eureka!";
 		relationshipWithPatient = "Mother";
@@ -104,8 +104,8 @@ public class NonMedicalUserTest {
 
 		String testFirstName = underTest.getFirstName();
 		String testLastName = underTest.getLastName();
-		Collection<String> testAddress = underTest.getContactInfo().getAddresses();
-		Collection<String> testContactNumber = underTest.getContactInfo().getPhones();
+		Collection<Address> testAddress = underTest.getContactInfo().getAddresses();
+		Collection<Phone> testContactNumber = underTest.getContactInfo().getPhones();
 		String testUsername = underTest.getUserName();
 		String testPassword = underTest.getPassword();
 		String testRelationshipWithPatient = underTest.getRelationshipWithPatient();

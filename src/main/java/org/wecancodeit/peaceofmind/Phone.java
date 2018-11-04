@@ -1,11 +1,25 @@
 package org.wecancodeit.peaceofmind;
 
-//Phone Implements IContactType
-public class Phone {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class Phone implements IContactType{
+
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	@ManyToOne
+	private ContactInfo contactInfo;
+	
 	private String phoneNumber;
 	private String type;
 
+	public Phone() {}
+	
 	public Phone(String phoneNumber, String phoneType) {
 		this.phoneNumber = phoneNumber;
 		this.type = phoneType;

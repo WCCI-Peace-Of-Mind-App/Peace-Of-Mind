@@ -16,11 +16,11 @@ import org.wecancodeit.peaceofmind.MedicalUser;
 
 public class MedicalUserTest {
 	
-	String address;
-	String businessTelephone;
+	Address address;
+	Phone businessTelephone;
 	
-	Collection<String> addresses = new ArrayList<>();
-	Collection<String> phones = new ArrayList<>();
+	Collection<Address> addresses = new ArrayList<>();
+	Collection<Phone> phones = new ArrayList<>();
 	
 	
 	ContactInfo contactInfo;
@@ -39,8 +39,8 @@ public class MedicalUserTest {
 	
 	@Before
 	public void setUp() {
-		address = "WCCI_CleveLand";
-		businessTelephone = "7402442444";
+		address = new Address();
+		businessTelephone = new Phone();
 		
 		addresses.add(address);
 		phones.add(businessTelephone);
@@ -62,8 +62,8 @@ public class MedicalUserTest {
 	
 	@Test
 	public void shouldAssertUser2Constructor() {
-		String address2 = "WcciHighStreet";
-		String businessTelephone2 = "6142442444";
+		Address address2 = new Address();
+		Phone businessTelephone2 = new Phone();
 		
 		addresses.add(address2);
 		phones.add(businessTelephone2);
@@ -107,14 +107,14 @@ public class MedicalUserTest {
 	
 	@Test
 	public void shouldRetunrMedicalUserWCCI_CleveLand() {
-		Collection<String> actualAddress = ((MedicalUser) user).getContactInfo().getAddresses();
+		Collection<Address> actualAddress = ((MedicalUser) user).getContactInfo().getAddresses();
 		assertThat(actualAddress, contains(address));
 	}
 	
 
 	@Test
 	public void shouldRetunrMedicalUserBusiness7402442444() {
-		Collection<String> actualContact = ((MedicalUser) user).getContactInfo().getPhones();
+		Collection<Phone> actualContact = ((MedicalUser) user).getContactInfo().getPhones();
 		assertThat(actualContact, contains(businessTelephone));
 	}
 	

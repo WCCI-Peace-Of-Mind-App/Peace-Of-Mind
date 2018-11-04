@@ -1,5 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ public class Patient implements IPerson {
 	private String firstName;
 	private String lastName;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private ContactInfo contactInfo; 
 	private String dateOfBirth;
 	private String diagnosis;

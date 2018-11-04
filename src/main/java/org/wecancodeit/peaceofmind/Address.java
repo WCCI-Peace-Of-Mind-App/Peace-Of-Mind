@@ -1,7 +1,19 @@
 package org.wecancodeit.peaceofmind;
 
-public class Address {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Address implements IContactType{
 	
+	@Id
+	@GeneratedValue
+	private long id;
+	
+	@ManyToOne
+	private ContactInfo contactInfo;
 	
 	private String streetAddress;
 	private String secondaryField; 
@@ -34,6 +46,8 @@ public class Address {
 		return type;
 	}
 
+	public Address() {}
+	
 	public Address(String streetAddress, String secondaryField, String city, String state, String zipCode, String type) {
 		this.streetAddress = streetAddress;
 		this.secondaryField = secondaryField;

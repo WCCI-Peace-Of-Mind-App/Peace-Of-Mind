@@ -10,7 +10,7 @@ public class Patient implements IPerson {
 	
 	@Id
 	@GeneratedValue
-	private Long id;
+	private long id;
 
 	private String firstName;
 	private String lastName;
@@ -21,7 +21,7 @@ public class Patient implements IPerson {
 	private String diagnosis;
 
 	public long getId() {
-		return 0;
+		return id;
 	}
 
 	public String getFirstName() {
@@ -42,6 +42,8 @@ public class Patient implements IPerson {
 		return diagnosis;
 	}
 
+	public Patient() {}
+	
 	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis) {
 		this.firstName = firstName;
 		this.lastName = lastName;

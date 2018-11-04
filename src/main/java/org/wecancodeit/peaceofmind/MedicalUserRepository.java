@@ -2,6 +2,6 @@ package org.wecancodeit.peaceofmind;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface IMedicalUserRepository extends CrudRepository<MedicalUser, Long> {
+public interface MedicalUserRepository extends CrudRepository<MedicalUser, Long> {
 
 }

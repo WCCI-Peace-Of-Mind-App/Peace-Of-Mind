@@ -1,6 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
-public class MedicalUser implements Person {
+public class MedicalUser implements INonPatientUser {
 
 	private String address;
 	private String contactInfo;
@@ -24,10 +24,11 @@ public class MedicalUser implements Person {
 		this.password = password;
 	}
 
+	@Override
 	public String getFirstName() {
 		return firstName;
 	}
-
+    @Override
 	public String getLastName() {
 		return lastName;
 	}
@@ -60,11 +61,19 @@ public class MedicalUser implements Person {
 		return this.institutionTelephone;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.wecancodeit.peaceofmind.INonPatientUser#getUserName()
+	 */
+	@Override
 	public String getUserName() {
 
 		return this.userName;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.wecancodeit.peaceofmind.INonPatientUser#getPassword()
+	 */
+	@Override
 	public String getPassword() {
 
 		return this.password;

@@ -1,6 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
-public class Patient {
+public class Patient implements IPerson {
 	
 	private String firstName;
 	private String lastName;

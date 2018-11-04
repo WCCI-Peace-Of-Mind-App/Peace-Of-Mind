@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class PatientTest {
 	
-	Patient underTest = new Patient("firstName", "lastName", "xxx-xxx-xxxx", "primaryAddress", "01/01/0000", "diagnosis");
+	Patient underTest = new Patient("firstName", "lastName", "contactinfo", "01/01/0000", "diagnosis");
 	
 	
 	@Test
@@ -23,16 +23,11 @@ public class PatientTest {
 	}
 	
 	@Test
-	public void shouldReturnPatientPhone() {
-		String result = underTest.getPrimaryPhone();
-		assertThat(result, is("xxx-xxx-xxxx"));
+	public void shouldReturnPatientEmail() {
+		String result = underTest.getContactInfo();
+		assertThat(result, is ("contactinfo"));
 	}
 	
-	@Test
-	public void shouldReturnPatientAddress() {
-		String result = underTest.getPrimaryAddress();
-		assertThat(result, is("primaryAddress"));
-	}
 	
 	@Test
 	public void shouldReturnPatientDOB() {

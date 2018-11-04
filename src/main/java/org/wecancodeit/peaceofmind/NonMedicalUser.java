@@ -1,6 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
-public class NonMedicalUser  {
+public class NonMedicalUser {
 
 	private String firstName;
 	private String lastName;

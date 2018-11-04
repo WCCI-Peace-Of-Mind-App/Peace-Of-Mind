@@ -1,6 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
-public class NonMedicalUser {
+public class NonMedicalUser implements INonPatientUser {
 
 	private String firstName;
 	private String lastName;
@@ -10,10 +10,18 @@ public class NonMedicalUser {
 	private String userName;
 	private String password;
 
+	/* (non-Javadoc)
+	 * @see org.wecancodeit.peaceofmind.IPerson#getFirstName()
+	 */
+	@Override
 	public String getFirstName() {
 		return firstName;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.wecancodeit.peaceofmind.IPerson#getLastName()
+	 */
+	@Override
 	public String getLastName() {
 		return lastName;
 	}
@@ -29,11 +37,11 @@ public class NonMedicalUser {
 	public String getWorkNumber() {
 		return workNumber;
 	}
-	
+	@Override
 	public String getUserName() {
 		return userName;
 	}
-	
+	@Override
 	public String getPassword() {
 		return password;
 	}

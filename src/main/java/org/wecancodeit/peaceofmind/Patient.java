@@ -1,12 +1,28 @@
 package org.wecancodeit.peaceofmind;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Patient implements IPerson {
 	
+	@Id
+	@GeneratedValue
+	private Long id;
+
 	private String firstName;
 	private String lastName;
+	
+	@OneToOne
 	private ContactInfo contactInfo; 
 	private String dateOfBirth;
 	private String diagnosis;
+
+	public long getId() {
+		return 0;
+	}
 
 	public String getFirstName() {
 		return firstName;

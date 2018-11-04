@@ -1,7 +1,10 @@
 package org.wecancodeit.peaceofmind;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
+
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -39,5 +42,13 @@ public class PatientRepositoryTest {
 	public void shouldVerifyPatientHasId() {
 		assertThat(patientId, greaterThan(0L));
 	}
+	
+	@Test
+	public void shouldSaveAndLoadPatient() {	
+		Optional<Patient> underTest = patientRepo.findById(patientId);
+		Patient testPatient = underTest.get();
+		assertThat(testPatient, is(patient));
+	}
+	
 
 }

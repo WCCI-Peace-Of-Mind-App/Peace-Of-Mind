@@ -1,27 +1,29 @@
 package org.wecancodeit.peaceofmind;
 
+import java.util.Collection;
+
 public class ContactInfo {
 
-	private String address;
-	private String phone;
-	private String email;
+	private Collection<String> addresses;
+	private Collection<String> phones;
+	private Collection<String> emails;
 
-	public String getAddress() {
-		return address;
+	public Collection<String> getAddresses() {
+		return addresses;
 	}
 
-	public String getPhone() {
-		return phone;
+	public Collection<String> getPhones() {
+		return phones;
 	}
 	
-	public String getEmail() {
-		return email;
+	public Collection<String> getEmails() {
+		return emails;
 	}
 
-	public ContactInfo(String address, String phone, String email) {
-		this.address = address;
-		this.phone = phone;
-		this.email = email;
+	public ContactInfo(Collection<String> addresses, Collection<String>phones, Collection<String> emails) {
+		this.addresses = addresses;
+		this.phones = phones;
+		this.emails = emails;
 	}
 
 

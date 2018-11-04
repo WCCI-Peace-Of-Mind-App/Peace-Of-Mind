@@ -1,7 +1,12 @@
 package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +14,10 @@ import org.junit.Test;
 public class ContactInfoTest {
 	
 	ContactInfo underTest;
+	Collection<String> addresses = new ArrayList<>();
+	Collection<String> phones = new ArrayList<>();
+	Collection<String> emails = new ArrayList<>();
+
 	String address;
 	String phone;
 	String email;
@@ -19,42 +28,49 @@ public class ContactInfoTest {
 		phone = "123-456-7890";
 		email = "ABC@XYZ.com";
 
-		underTest = new ContactInfo(address, phone, email);
+		addresses.add(address);
+		phones.add(phone);
+		emails.add(email);
+		underTest = new ContactInfo(addresses, phones, emails);
 	}
 	
 	
 	@Test
 	public void shouldHaveAddressOf1123SesameStreetNoWhereOH43101() {
-		String testAddress = underTest.getAddress();
-		assertThat(testAddress, is(address));
+		Collection<String> testAddress = underTest.getAddresses();
+		assertThat(testAddress, contains(address));
 	}
 	
 	@Test
 	public void shouldHavePhoneNumberOf1234567890() {
-		String testPhone = underTest.getPhone();
-		assertThat(testPhone, is(phone));
+		Collection<String> testPhone = underTest.getPhones();
+		assertThat(testPhone, contains(phone));
 	}
 	
 	@Test
 	public void shouldHaveEMailOfABCatXYZ_com() {
-		String testEmail = underTest.getEmail();
-		assertThat(testEmail, is(email));
+		Collection<String> testEmail = underTest.getEmails();
+		assertThat(testEmail, contains(email));
 	}
-	
 	
 	@Test
 	public void shouldVerify2ndUserHasDifferentInformation() {
-		address = "221B Baker Street, London, England 11211";
-		phone = "987-654-3210";
-		email = "123@wcci.net";
-		underTest = new ContactInfo(address, phone, email);
+		String address2 = "221B Baker Street, London, England 11211";
+		String phone2 = "987-654-3210";
+		String email2 = "123@wcci.net";
 		
-		String testAddress = underTest.getAddress();
-		String testPhone = underTest.getPhone();
-		String testEmail = underTest.getEmail();
-		assertThat(testAddress, is(address));
-		assertThat(testPhone, is(phone));
-		assertThat(testEmail, is(email));
+		addresses.add(address2);
+		phones.add(phone2);
+		emails.add(email2);
+		
+		underTest = new ContactInfo(addresses, phones, emails);
+		
+		Collection<String> testAddresses = underTest.getAddresses();
+		Collection<String> testPhones = underTest.getPhones();
+		Collection<String> testEmails = underTest.getEmails();
+		assertThat(testAddresses, containsInAnyOrder(address, address2));
+		assertThat(testPhones, containsInAnyOrder(phone2, phone));
+		assertThat(testEmails, containsInAnyOrder(email, email2));
 	}
 
 }

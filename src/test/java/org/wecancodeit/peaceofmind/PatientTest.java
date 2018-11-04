@@ -8,7 +8,7 @@ import org.junit.Test;
 public class PatientTest {
 	
 	
-	ContactInfo contactInfo = new ContactInfo("", "", "");
+	ContactInfo contactInfo = new ContactInfo(null, null, null);
 	Patient underTest = new Patient("firstName", "lastName", contactInfo, "01/01/0000", "diagnosis");
 	
 	

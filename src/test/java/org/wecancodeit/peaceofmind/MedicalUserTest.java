@@ -2,7 +2,12 @@ package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +16,10 @@ public class MedicalUserTest {
 	
 	String address;
 	String businessTelephone;
+	
+	Collection<String> addresses = new ArrayList<>();
+	Collection<String> phones = new ArrayList<>();
+	
 	
 	ContactInfo contactInfo;
 	
@@ -31,7 +40,9 @@ public class MedicalUserTest {
 		address = "WCCI_CleveLand";
 		businessTelephone = "7402442444";
 		
-		contactInfo = new ContactInfo(address, businessTelephone, "");
+		addresses.add(address);
+		phones.add(businessTelephone);
+		contactInfo = new ContactInfo(addresses, phones, null);
 			
 		firstName = "Michael";
 		lastName = "Bob";
@@ -49,10 +60,12 @@ public class MedicalUserTest {
 	
 	@Test
 	public void shouldAssertUser2Constructor() {
-		address = "WcciHighStreet";
-		businessTelephone = "6142442444";
+		String address2 = "WcciHighStreet";
+		String businessTelephone2 = "6142442444";
 		
-		contactInfo = new ContactInfo(address, businessTelephone, "");
+		addresses.add(address2);
+		phones.add(businessTelephone2);
+		contactInfo = new ContactInfo(addresses, phones, null);
 			
 		firstName = "Simon";
 		lastName = "Bob";
@@ -67,8 +80,8 @@ public class MedicalUserTest {
 		
 		assertThat(((MedicalUser) user2).getFirstName(),is(firstName));
 		assertThat(((MedicalUser) user2).getLastName(),is(lastName));
-		assertThat(((MedicalUser) user2).getContactInfo().getPhone(),is(businessTelephone));
-		assertThat(((MedicalUser) user2).getContactInfo().getAddress(),is(address));
+		assertThat(((MedicalUser) user2).getContactInfo().getPhones(),containsInAnyOrder(businessTelephone, businessTelephone2));
+		assertThat(((MedicalUser) user2).getContactInfo().getAddresses(),containsInAnyOrder(address, address2));
 		assertThat(((MedicalUser) user2).getMedicalSpecialty(),is(medicalSpecialty));
 		assertThat(((MedicalUser) user2).getMedicalInstitution(),is(medInstitution));
 		assertThat(((MedicalUser) user2).getInstitutionTelephone(),is(institutionTelephone));
@@ -92,15 +105,15 @@ public class MedicalUserTest {
 	
 	@Test
 	public void shouldRetunrMedicalUserWCCI_CleveLand() {
-		String actualAddress = ((MedicalUser) user).getContactInfo().getAddress();
-		assertThat(actualAddress, is(address));
+		Collection<String> actualAddress = ((MedicalUser) user).getContactInfo().getAddresses();
+		assertThat(actualAddress, contains(address));
 	}
 	
 
 	@Test
 	public void shouldRetunrMedicalUserBusiness7402442444() {
-		String actualContact = ((MedicalUser) user).getContactInfo().getPhone();
-		assertThat(actualContact, is(businessTelephone));
+		Collection<String> actualContact = ((MedicalUser) user).getContactInfo().getPhones();
+		assertThat(actualContact, contains(businessTelephone));
 	}
 	
 	@Test

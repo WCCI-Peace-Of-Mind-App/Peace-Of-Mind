@@ -2,6 +2,7 @@ package org.wecancodeit.peaceofmind;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,10 +16,10 @@ public class ContactInfo {
 	@GeneratedValue
 	private long id;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Address> addresses;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private Collection<Phone> phones;
 	
 //	private Collection<String> emails;
@@ -29,6 +30,8 @@ public class ContactInfo {
 	public long getId() {
 		return id;
 	}
+	
+	
 	
 	public Collection<Address> getAddresses() {
 		return addresses;

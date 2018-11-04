@@ -4,7 +4,7 @@ public class Patient implements IPerson {
 	
 	private String firstName;
 	private String lastName;
-	private String contactInfo; 
+	private ContactInfo contactInfo; 
 	private String dateOfBirth;
 	private String diagnosis;
 
@@ -15,7 +15,7 @@ public class Patient implements IPerson {
 		return lastName;
 	}
 	
-	public String getContactInfo() {
+	public ContactInfo getContactInfo() {
 		return contactInfo;
 	}
 	
@@ -26,7 +26,7 @@ public class Patient implements IPerson {
 		return diagnosis;
 	}
 
-	public Patient(String firstName, String lastName, String contactInfo, String dateOfBirth, String diagnosis) {
+	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.contactInfo = contactInfo;

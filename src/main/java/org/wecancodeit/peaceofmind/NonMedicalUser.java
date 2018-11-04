@@ -4,39 +4,26 @@ public class NonMedicalUser implements INonPatientUser {
 
 	private String firstName;
 	private String lastName;
-	private String address;
-	private String contactInfo;
-	private String workNumber;
+	private ContactInfo contactInfo;
 	private String userName;
 	private String password;
+	private String relationshipWithPatient;
 
-	/* (non-Javadoc)
-	 * @see org.wecancodeit.peaceofmind.IPerson#getFirstName()
-	 */
+
 	@Override
 	public String getFirstName() {
 		return firstName;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.wecancodeit.peaceofmind.IPerson#getLastName()
-	 */
 	@Override
 	public String getLastName() {
 		return lastName;
 	}
 	
-	public String getAddress() {
-		return address;
-	}
-
-	public String getContactInfo() {
+	public ContactInfo getContactInfo() {
 		return contactInfo;
 	}
 
-	public String getWorkNumber() {
-		return workNumber;
-	}
 	@Override
 	public String getUserName() {
 		return userName;
@@ -46,14 +33,17 @@ public class NonMedicalUser implements INonPatientUser {
 		return password;
 	}
 	
-	public NonMedicalUser(String firstName, String lastName, String address, String contactInfo, String workNumber, String userName, String password) {
+	public String getRelationshipWithPatient() {
+		return relationshipWithPatient;
+	}
+	
+	public NonMedicalUser(String firstName, String lastName, ContactInfo contactInfo, String userName, String password, String relationshipWithPatient) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.address = address;
 		this.contactInfo = contactInfo;
-		this.workNumber = workNumber;
 		this.userName = userName;
 		this.password = password;
+		this.relationshipWithPatient = relationshipWithPatient;
 	}
 
 

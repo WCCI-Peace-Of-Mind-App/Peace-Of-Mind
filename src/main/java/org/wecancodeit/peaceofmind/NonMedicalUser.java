@@ -9,6 +9,7 @@ public class NonMedicalUser {
 	private String workNumber;
 	private String userName;
 	private String password;
+	private String relationshipWithPatient;
 
 	public String getFirstName() {
 		return firstName;
@@ -38,7 +39,11 @@ public class NonMedicalUser {
 		return password;
 	}
 	
-	public NonMedicalUser(String firstName, String lastName, String address, String contactInfo, String workNumber, String userName, String password) {
+	public String getRelationshipWithPatient() {
+		return relationshipWithPatient;
+	}
+
+	public NonMedicalUser(String firstName, String lastName, String address, String contactInfo, String workNumber, String userName, String password, String relationshipWithPatient) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -46,7 +51,9 @@ public class NonMedicalUser {
 		this.workNumber = workNumber;
 		this.userName = userName;
 		this.password = password;
+		this.relationshipWithPatient = relationshipWithPatient;
 	}
+
 
 
 

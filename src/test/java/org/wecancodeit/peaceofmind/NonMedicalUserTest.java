@@ -16,6 +16,7 @@ public class NonMedicalUserTest {
 	String workNumber;
 	String username;
 	String password;
+	String relationshipWithPatient;
 	
 	@Before
 	public void setUp() {
@@ -26,8 +27,9 @@ public class NonMedicalUserTest {
 		workNumber = "555-555-5555";
 		username = "Mopamus Wrex";
 		password = "Password123";
+		relationshipWithPatient = "Father";
 
-		underTest = new NonMedicalUser(firstName, lastName, address, contactNumber, workNumber, username, password);
+		underTest = new NonMedicalUser(firstName, lastName, address, contactNumber, workNumber, username, password, relationshipWithPatient);
 	}
 	
 	@Test
@@ -47,7 +49,7 @@ public class NonMedicalUserTest {
 	
 	@Test
 	public void shouldHaveContactNumberOf6148375309() {
-		String testContactNumber = underTest.getContactNumber();
+		String testContactNumber = underTest.getContactInfo();
 		assertThat(testContactNumber, is(contactNumber));
 	}
 	
@@ -59,7 +61,7 @@ public class NonMedicalUserTest {
 	
 	@Test
 	public void shouldHaveUserNameOfMopamusWrex() {
-		String testUsername = underTest.getUsername();
+		String testUsername = underTest.getUserName();
 		assertThat(testUsername, is(username));
 	}
 	
@@ -67,6 +69,12 @@ public class NonMedicalUserTest {
 	public void shouldHavePasswordOfPassword123() {
 		String testPassword = underTest.getPassword();
 		assertThat(testPassword, is(password));
+	}
+	
+	@Test
+	public void shouldHaveRelationshipOfFather() {
+		String testRelationshipWithPatient = underTest.getRelationshipWithPatient();
+		assertThat(testRelationshipWithPatient, is(relationshipWithPatient));
 	}
 
 	@Test
@@ -78,15 +86,17 @@ public class NonMedicalUserTest {
 		workNumber = "987-654-3210";
 		username = "xxxGAMERxxx";
 		password = "123Eureka!";
+		relationshipWithPatient = "Mother";
 		
-		underTest = new NonMedicalUser(firstName, lastName, address, contactNumber, workNumber, username, password);
+		underTest = new NonMedicalUser(firstName, lastName, address, contactNumber, workNumber, username, password, relationshipWithPatient);
 		String testFirstName = underTest.getFirstName();
 		String testLastName = underTest.getLastName();
 		String testAddress = underTest.getAddress();
-		String testContactNumber = underTest.getContactNumber();
+		String testContactNumber = underTest.getContactInfo();
 		String testWorkNumber = underTest.getWorkNumber();
-		String testUsername = underTest.getUsername();
+		String testUsername = underTest.getUserName();
 		String testPassword = underTest.getPassword();
+		String testRelationshipWithPatient = underTest.getRelationshipWithPatient();
 
 		assertThat(testFirstName, is(firstName));
 		assertThat(testLastName, is(lastName));
@@ -95,6 +105,7 @@ public class NonMedicalUserTest {
 		assertThat(testWorkNumber, is(workNumber));
 		assertThat(testUsername, is(username));
 		assertThat(testPassword, is(password));
+		assertThat(testRelationshipWithPatient, is(relationshipWithPatient));
 
 	}
 	

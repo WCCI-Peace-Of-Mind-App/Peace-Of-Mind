@@ -1,13 +1,14 @@
 package org.wecancodeit.peaceofmind;
 
+//Phone Implements IContactType
 public class Phone {
 
 	private String phoneNumber;
-	private String phoneType;
+	private String type;
 
 	public Phone(String phoneNumber, String phoneType) {
 		this.phoneNumber = phoneNumber;
-		this.phoneType = phoneType;
+		this.type = phoneType;
 	}
 
 	public String getPhoneNumber() {
@@ -15,9 +16,9 @@ public class Phone {
 		return this.phoneNumber;
 	}
 
-	public String getPhoneType() {
+	public String getType() {
 
-		return this.phoneType;
+		return this.type;
 	}
 
 }

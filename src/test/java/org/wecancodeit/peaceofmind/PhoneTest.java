@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class PhoneTest {
 	
-	//Phone Implements IContactType
+	
 	
 	Phone phoneNum = new Phone("6142002222","Mobile");
 	
@@ -24,7 +24,7 @@ public class PhoneTest {
 	public void shouldReturnPhoneNumberTypeMobile() {
 		
 		String expectedPhoneType = "Mobile";
-		String actualPhoneType = phoneNum.getPhoneType();
+		String actualPhoneType = phoneNum.getType();
 		assertThat(actualPhoneType, is(expectedPhoneType));
 		
 	}
@@ -37,7 +37,7 @@ public class PhoneTest {
 	    Phone phoneNum2 = new Phone(expectedPhoneNum2,expectedPhoneType2);
 		String actualPhoneNum2 = phoneNum2.getPhoneNumber();
 		assertThat(actualPhoneNum2, is(expectedPhoneNum2));	
-		String actualPhoneTypeHome = phoneNum2.getPhoneType();
+		String actualPhoneTypeHome = phoneNum2.getType();
 		assertThat(actualPhoneTypeHome, is(expectedPhoneType2));	
 	}
 }

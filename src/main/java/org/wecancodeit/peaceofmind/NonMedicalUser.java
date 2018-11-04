@@ -7,7 +7,7 @@ public class NonMedicalUser {
 	private String address;
 	private String contactNumber;
 	private String workNumber;
-	private String username;
+	private String userName;
 	private String password;
 
 	public String getFirstName() {
@@ -30,21 +30,21 @@ public class NonMedicalUser {
 		return workNumber;
 	}
 	
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 	
 	public String getPassword() {
 		return password;
 	}
 	
-	public NonMedicalUser(String firstName, String lastName, String address, String contactNumber, String workNumber, String username, String password) {
+	public NonMedicalUser(String firstName, String lastName, String address, String contactNumber, String workNumber, String userName, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.contactNumber = contactNumber;
 		this.workNumber = workNumber;
-		this.username = username;
+		this.userName = userName;
 		this.password = password;
 	}
 

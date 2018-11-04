@@ -37,7 +37,6 @@ public class MedicalUserRepositoryTest {
 			"medicalSpecialty", "medicalInstitution", "institutionTelephone", "userName", "password"
 	  )
 	);
-//	MedicalUser expectedMedicalUser = medUserRepo.save(new MedicalUser());
 	assertTrue(expectedMedicalUser instanceof MedicalUser);
   }
   

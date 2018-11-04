@@ -21,10 +21,13 @@ public class ContactInfo {
 	@OneToMany
 	private Collection<Phone> phones;
 	
-//	private Collection<String> emails;
+	//private Collection<String> emails;
 
 	@OneToOne(mappedBy = "contactInfo")
 	private Patient patient;
+	
+	@OneToOne(mappedBy = "contactInfo")
+	private NonMedicalUser nonMedicalUser;
 	
 	public long getId() {
 		return id;
@@ -38,11 +41,15 @@ public class ContactInfo {
 		return phones;
 	}
 	
-//	public Collection<String> getEmails() {
-//		return emails;
-//	}
+	//public Collection<String> getEmails() {
+	//	return emails;
+	//}
 	public Patient getPatient() {
 		return patient;
+	}
+	
+	public NonMedicalUser getNonMedicalUser() {
+		return nonMedicalUser;
 	}
 
 	public ContactInfo() {}
@@ -50,8 +57,8 @@ public class ContactInfo {
 	public ContactInfo(Collection<Address> addresses, Collection<Phone>phones, Collection<String> emails) {
 		this.addresses = addresses;
 		this.phones = phones;
-//		this.emails = emails;
-	}
+//		this.emails = emails;	
+		}
 
 	@Override
 	public int hashCode() {

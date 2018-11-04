@@ -24,13 +24,13 @@ public class PatientTest {
 	
 	@Test
 	public void shouldReturnPatientPhone() {
-		String result = underTest.getPrimaryPhone();
+		String result = underTest.getPhone();
 		assertThat(result, is("xxx-xxx-xxxx"));
 	}
 	
 	@Test
 	public void shouldReturnPatientAddress() {
-		String result = underTest.getPrimaryAddress();
+		String result = underTest.getAddress();
 		assertThat(result, is("primaryAddress"));
 	}
 	

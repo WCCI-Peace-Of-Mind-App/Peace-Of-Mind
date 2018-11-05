@@ -3,10 +3,8 @@ package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
@@ -28,7 +26,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ContactInfoRepositoryTest {
 	
 	@Resource
-	IContactInfoRepository contactInfoRepo;
+	ContactInfoRepository contactInfoRepo;
 	
 	@Resource
 	private TestEntityManager entityManager;	

@@ -20,12 +20,12 @@ public class MedicalUserRepositoryTest {
   @Resource
   public TestEntityManager entityManager;
   @Resource
-  public IMedicalUserRepository medUserRepo;
+  public MedicalUserRepository medUserRepo;
   @Test
   public void assertSaveLoadMedicalUser()
   {
-	List<Address> addressPayload = new ArrayList();
-	List<Phone> phonePayload = new ArrayList();
+	List<Address> addressPayload = new ArrayList<>();
+	List<Phone> phonePayload = new ArrayList<>();
 	List<String> emailPayload = null;
 	addressPayload.add(new Address("123 Main St", "2nd fl", "Anywhere", "XX", "00000", "Business"));
 	phonePayload.add(new Phone("614-555-1212", "Business"));
@@ -43,8 +43,8 @@ public class MedicalUserRepositoryTest {
   @Test
   public void assertAddressAndPhoneReturnedSaved()
   {
-	 List<Address> addressPayload = new ArrayList();
-	 List<Phone> phonePayload = new ArrayList();
+	 List<Address> addressPayload = new ArrayList<>();
+	 List<Phone> phonePayload = new ArrayList<>();
 	 List<String> emailPayload = null;
 	 Address anAddress = null;
 	 Address aSecondAddress = null;

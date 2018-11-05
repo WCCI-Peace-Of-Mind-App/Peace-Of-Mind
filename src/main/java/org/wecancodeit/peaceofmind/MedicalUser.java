@@ -4,13 +4,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
 @Entity
 public class MedicalUser implements INonPatientUser {
-  @GeneratedValue
-  @Id
-  private long id;
+ 
+	@Id
+	@GeneratedValue
+	private long id;
 
 	private String firstName;
 	private String lastName;
@@ -22,6 +23,8 @@ public class MedicalUser implements INonPatientUser {
 	private String userName;
 	private String password;
 
+	public MedicalUser() {}
+	
 	public MedicalUser(String firstName,String lastName, ContactInfo contactInfo, String medicalSpecialty,
 			String medicalInstitution, String institutionTelephone, String userName, String password) {
 		super();
@@ -35,27 +38,22 @@ public class MedicalUser implements INonPatientUser {
 		this.password = password;
 	}
 
-	public MedicalUser() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public long getId()
-	{
+	public long getId() {
       return this.id;
 	}
 
 	@Override
 	public String getFirstName() {
-		return firstName;
+		return this.firstName;
 	}
     @Override
 	public String getLastName() {
-		return lastName;
+		return this.lastName;
 	}
 
 	@Override
 	public ContactInfo getContactInfo() {
-		return contactInfo;
+		return this.contactInfo;
 	}
 
 	public String getMedicalSpecialty() {
@@ -64,24 +62,20 @@ public class MedicalUser implements INonPatientUser {
 	}
 
 	public String getMedicalInstitution() {
-		
 		return this.medicalInstitution;
 	}
 
 	public String getInstitutionTelephone() {
-
 		return this.institutionTelephone;
 	}
 
 	@Override
 	public String getUserName() {
-
 		return this.userName;
 	}
 
 	@Override
 	public String getPassword() {
-
 		return this.password;
 	}
 

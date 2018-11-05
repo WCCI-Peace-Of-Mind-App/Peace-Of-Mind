@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -17,21 +18,27 @@ public class ContactInfo {
 	private long id;
 
 	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinColumn(name="fk_contactInfo")
 	private Collection<Address> addresses;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinColumn(name="fk_contactInfo")
 	private Collection<Phone> phones;
 	
 //	private Collection<String> emails;
 
 	@OneToOne(mappedBy = "contactInfo")
 	private Patient patient;
+
+	@OneToOne(mappedBy = "contactInfo")
+	private NonMedicalUser nonMedicalUser;
+
+	@OneToOne(mappedBy = "contactInfo")
+	private MedicalUser medicalUser;
 	
 	public long getId() {
 		return id;
 	}
-	
-	
 	
 	public Collection<Address> getAddresses() {
 		return addresses;
@@ -48,6 +55,14 @@ public class ContactInfo {
 		return patient;
 	}
 
+	public NonMedicalUser getNonMedicalUser() {
+		return nonMedicalUser;
+	}
+	
+	public MedicalUser getMedicalUser() {
+		return medicalUser;
+	}
+	
 	public ContactInfo() {}
 	
 	public ContactInfo(Collection<Address> addresses, Collection<Phone>phones, Collection<String> emails) {
@@ -77,5 +92,7 @@ public class ContactInfo {
 			return false;
 		return true;
 	}
+
+
 
 }

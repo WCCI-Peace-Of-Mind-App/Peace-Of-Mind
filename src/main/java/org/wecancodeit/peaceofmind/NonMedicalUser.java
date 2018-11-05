@@ -52,10 +52,8 @@ public class NonMedicalUser implements INonPatientUser {
 		return relationshipWithPatient;
 	}
 	
-	public NonMedicalUser() {
+	public NonMedicalUser() {}
 		
-	}
-	
 	public NonMedicalUser(String firstName, String lastName, ContactInfo contactInfo, String userName, String password, String relationshipWithPatient) {
 		this.firstName = firstName;
 		this.lastName = lastName;

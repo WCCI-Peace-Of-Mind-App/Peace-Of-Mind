@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -35,59 +36,52 @@ public class NonMedicalUserJPATest {
 	@Resource
 	private ContactInfoRepository contactRepo;
 	
+	NonMedicalUser underTest;
+	long nonMedUserId;
+	ContactInfo contact;
+	
+	@Before
+	public void setUp() {
+		Phone phone = new Phone ("phone", "type");
+		phoneRepo.save(phone);
+		Address address = new Address("street", "blarp", "city", "state", "zip", "type" );
+		addressRepo.save(address);
+		
+		
+		Collection<Phone> phones = new ArrayList<>();
+		Collection<Address>addresses = new ArrayList<>();
+		
+		
+		phones.add(phone);
+		addresses.add(address);
+		
+		contact = new ContactInfo(addresses, phones, null);
+		contactRepo.save(contact);
+		underTest = nonMedUserRepo.save(new NonMedicalUser("first", "last", contact, "username", "password", "relation"));
+		nonMedUserId = underTest.getId();
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+	}
 	
 	@Test
 	public void shouldGenerateNonMedicalUserId() {
-		Phone phone = new Phone ("phone", "type");
-		phoneRepo.save(phone);
-		Address address = new Address("street", "blarp", "city", "state", "zip", "type" );
-		addressRepo.save(address);
-
-		
-		Collection<Phone> phones = new ArrayList<>();
-		Collection<Address>addresses = new ArrayList<>();
-
-		
-		phones.add(phone);
-		addresses.add(address);
-
-		ContactInfo contact = new ContactInfo(addresses, phones, null);
-		contactRepo.save(contact);
-		NonMedicalUser underTest = nonMedUserRepo.save(new NonMedicalUser("first", "last", contact, "username", "password", "relation"));
-		long nonMedUserId = underTest.getId();
-		
-		entityManager.flush();
-		entityManager.clear();
-		
 		assertThat(nonMedUserId, is(greaterThan(0l)));
-		}
+	}
 	
 	@Test
-	public void shouldSaveAndLoadNonMedUser() {
-		Phone phone = new Phone ("phone", "type");
-		phoneRepo.save(phone);
-		Address address = new Address("street", "blarp", "city", "state", "zip", "type" );
-		addressRepo.save(address);
-
-		
-		Collection<Phone> phones = new ArrayList<>();
-		Collection<Address>addresses = new ArrayList<>();
-
-		
-		phones.add(phone);
-		addresses.add(address);
-
-		ContactInfo contact = new ContactInfo(addresses, phones, null);
-		contactRepo.save(contact);
-		NonMedicalUser underTest = nonMedUserRepo.save(new NonMedicalUser("first", "last", contact, "username", "password", "relation"));
-		long nonMedUserId = underTest.getId();
-		
-		entityManager.flush();
-		entityManager.clear();
-		
+	public void shouldSaveAndLoadNonMedUser() {	
 		Optional<NonMedicalUser> getresult = nonMedUserRepo.findById(nonMedUserId);
 		NonMedicalUser result = getresult.get();
 		assertThat(result, is(underTest));
+	}
+	
+	@Test
+	public void shouldEstablishRelationshipBetweenNonMedUserAndContactInfo() {
+		Optional<NonMedicalUser> getresult = nonMedUserRepo.findById(nonMedUserId);
+		NonMedicalUser result = getresult.get();
+		assertThat(result.getContactInfo(), is(contact));
 	}
 
 }

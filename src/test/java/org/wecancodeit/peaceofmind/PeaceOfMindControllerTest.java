@@ -40,8 +40,6 @@ public class PeaceOfMindControllerTest {
 	@Mock
 	private MedicalUser nurse;
 
-	@Mock
-	private ContactInfo contact;
 
 	@Mock
 	private PatientRepository patientRepo;

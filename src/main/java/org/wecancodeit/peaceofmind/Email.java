@@ -20,13 +20,9 @@ public class Email implements IContactType {
 	private String emailAddress;
 	private String type;
 	
-
-
 	public long getId() {
-
-	return id;
+		return id;
 	}
-	
 	
 	public String getEmailAddress() {
 		return emailAddress;
@@ -36,15 +32,12 @@ public class Email implements IContactType {
 		return type;
 	}
 	
-	public Email() {
-		
-	}
+	public Email() {}
 	
 	public Email(String emailAddress, String type) {
 		this.emailAddress = emailAddress;
 		this.type = type;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -53,7 +46,6 @@ public class Email implements IContactType {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -68,6 +60,5 @@ public class Email implements IContactType {
 			return false;
 		return true;
 	}
-
 
 }

@@ -24,8 +24,10 @@ public class ContactInfo {
 	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name="fk_contactInfo")
 	private Collection<Phone> phones;
-	
-//	private Collection<String> emails;
+
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinColumn(name="fk_contactInfo")
+	private Collection<Email> emails;
 
 	@OneToOne(mappedBy = "contactInfo")
 	private Patient patient;
@@ -48,9 +50,10 @@ public class ContactInfo {
 		return phones;
 	}
 	
-//	public Collection<String> getEmails() {
-//		return emails;
-//	}
+	public Collection<Email> getEmails() {
+		return emails;
+	}
+	
 	public Patient getPatient() {
 		return patient;
 	}
@@ -65,12 +68,12 @@ public class ContactInfo {
 	
 	public ContactInfo() {}
 	
-	public ContactInfo(Collection<Address> addresses, Collection<Phone>phones, Collection<String> emails) {
+	public ContactInfo(Collection<Address> addresses, Collection<Phone> phones, Collection<Email> emails) {
 		this.addresses = addresses;
 		this.phones = phones;
-//		this.emails = emails;
+		this.emails = emails;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -92,7 +95,5 @@ public class ContactInfo {
 			return false;
 		return true;
 	}
-
-
 
 }

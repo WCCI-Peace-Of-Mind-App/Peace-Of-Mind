@@ -43,27 +43,29 @@ public class ContactInfoRepositoryTest {
 	ContactInfo contact1;
 	Collection<Address> addresses = new ArrayList<>();
 	Collection<Phone> phones = new ArrayList<>();
-	Collection<String> emails = new ArrayList<>();
+	Collection<Email> emails = new ArrayList<>();
 
 	Address address;
 	Phone phone;
-	String email;
+	Email email;
 	long contactId;
 	
 	Patient patient;
 	NonMedicalUser nonMedUser;
 	MedicalUser medicalUser;
+	
+	ContactInfo testContact;
 		
 	@Before
 	public void setUp() {
 		address = new Address();
 		phone = new Phone();
-		email = "ABC@XYZ.com";
+		email = new Email();
 
 		addresses.add(address);
 		phones.add(phone);
 		emails.add(email);
-		contact1 = contactInfoRepo.save(new ContactInfo(addresses, phones, null));
+		contact1 = contactInfoRepo.save(new ContactInfo(addresses, phones, emails));
 		contactId = contact1.getId();
 		
 		patient = patientRepo.save(new Patient("", "", contact1, "", ""));
@@ -72,6 +74,9 @@ public class ContactInfoRepositoryTest {
 		
 		entityManager.flush();
 		entityManager.clear();
+
+		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
+		testContact = underTest.get();
 	}
 	
 	@Test
@@ -81,49 +86,36 @@ public class ContactInfoRepositoryTest {
 	
 	@Test
 	public void shouldVerifyContact1HasIdGreaterThan0L() {
-		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
-		contact1 = underTest.get();
 		assertThat(contactId, is(greaterThan(0L)));
 	}
 
 	@Test
 	public void shouldValidateContactHasAHomeAddress() {
-		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
-		ContactInfo testContact = underTest.get();
 		assertThat(testContact.getAddresses(), contains(address));
 	}
 	
 	@Test
 	public void shouldValidateContactHasAHomePhone() {
-		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
-		ContactInfo testContact = underTest.get();
 		assertThat(testContact.getPhones(), contains(phone));
 	}
 	
 	@Test
 	public void shouldValidateContactHasNoEmail() {
-		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
-		ContactInfo testContact = underTest.get();
+		assertThat(testContact.getEmails(), contains(email));
 	}
 	
 	@Test
 	public void shouldEstablishRelationshipfromContactInfoToPatient() {
-		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
-		ContactInfo testContact = underTest.get();
 		assertThat(testContact.getPatient(), is(patient));
 	}
 		
 	@Test
 	public void shouldEstablishRelationshipFromContactInfoToNonMedUser() {
-		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
-		ContactInfo testContact = underTest.get();
 		assertThat(testContact.getNonMedicalUser(), is(nonMedUser));
 	}
 	
 	@Test
 	public void shouldEstablishRelationshipFromContactInfoToMedicalUser() {
-		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
-		ContactInfo testContact = underTest.get();
 		assertThat(testContact.getMedicalUser(), is(medicalUser));
 	}
 }

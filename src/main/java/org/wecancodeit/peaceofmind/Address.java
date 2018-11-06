@@ -1,6 +1,7 @@
 package org.wecancodeit.peaceofmind;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,7 +14,7 @@ public class Address implements IContactType{
 	@GeneratedValue
 	private long id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_contactInfo")
 	private ContactInfo contactInfo;
 	

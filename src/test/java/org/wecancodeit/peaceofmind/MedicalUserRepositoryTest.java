@@ -26,7 +26,7 @@ public class MedicalUserRepositoryTest {
   {
 	List<Address> addressPayload = new ArrayList<>();
 	List<Phone> phonePayload = new ArrayList<>();
-	List<String> emailPayload = null;
+	List<Email> emailPayload = null;
 	addressPayload.add(new Address("123 Main St", "2nd fl", "Anywhere", "XX", "00000", "Business"));
 	phonePayload.add(new Phone("614-555-1212", "Business"));
 	MedicalUser expectedMedicalUser = medUserRepo.save( new MedicalUser("first-name", "lastName",
@@ -45,7 +45,7 @@ public class MedicalUserRepositoryTest {
   {
 	 List<Address> addressPayload = new ArrayList<>();
 	 List<Phone> phonePayload = new ArrayList<>();
-	 List<String> emailPayload = null;
+	 List<Email> emailPayload = null;
 	 Address anAddress = null;
 	 Address aSecondAddress = null;
 	 Phone aPhone = null;

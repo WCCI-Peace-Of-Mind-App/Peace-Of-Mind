@@ -1,8 +1,9 @@
 package org.wecancodeit.peaceofmind;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+
 import java.util.ArrayList;
 import java.util.List;
 

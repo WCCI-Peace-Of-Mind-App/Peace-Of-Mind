@@ -13,9 +13,9 @@ public class Address implements IContactType{
 	@Id
 	@GeneratedValue
 	private long id;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="fk_contactInfo")
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_contactInfo")
 	private ContactInfo contactInfo;
 	
 	private String streetAddress;
@@ -27,6 +27,10 @@ public class Address implements IContactType{
 
 	public long getId() {
 		return id;
+	}
+	
+	public ContactInfo getContactInfo() {
+		return contactInfo;
 	}
 	
 	public String getStreetAddress() {
@@ -84,6 +88,24 @@ public class Address implements IContactType{
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public void setContactInfo(ContactInfo contactInfo) {
+		if(sameAsFormer(contactInfo)) {
+			return;
+		}
+		ContactInfo oldContactInfo = this.contactInfo;
+		this.contactInfo = contactInfo;
+		if(oldContactInfo != null) {
+			oldContactInfo.removeAddress(this);
+		}
+		if(contactInfo != null) {
+			contactInfo.addAddress(this);
+		}
+	}
+	
+	private boolean sameAsFormer(ContactInfo newContactInfo) {
+	    return contactInfo==null? newContactInfo== null : contactInfo.equals(newContactInfo);
 	}
 
 }

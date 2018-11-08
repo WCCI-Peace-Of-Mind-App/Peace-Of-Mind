@@ -7,8 +7,6 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -41,10 +39,6 @@ public class ContactInfoRepositoryTest {
 	private MedicalUserRepository medicalUserRepo;
 	
 	ContactInfo contact1;
-	Collection<Address> addresses = new ArrayList<>();
-	Collection<Phone> phones = new ArrayList<>();
-	Collection<Email> emails = new ArrayList<>();
-
 	Address address;
 	Phone phone;
 	Email email;
@@ -58,15 +52,18 @@ public class ContactInfoRepositoryTest {
 		
 	@Before
 	public void setUp() {
-		address = new Address();
-		phone = new Phone();
-		email = new Email();
+		contact1 = contactInfoRepo.save(new ContactInfo());
 
-		addresses.add(address);
-		phones.add(phone);
-		emails.add(email);
-		contact1 = contactInfoRepo.save(new ContactInfo(addresses, phones, emails));
+		address = new Address("", "", "", "", "", "");
+		phone = new Phone("", "");
+		email = new Email("", "");
+
 		contactId = contact1.getId();
+		
+		contact1.addAddress(address);
+		contact1.addPhone(phone);
+		contact1.addEmail(email);
+		
 		
 		patient = patientRepo.save(new Patient("", "", contact1, "", ""));
 		nonMedUser = nonMedUserRepo.save(new NonMedicalUser("", "", contact1, "", "", ""));
@@ -75,6 +72,8 @@ public class ContactInfoRepositoryTest {
 		entityManager.flush();
 		entityManager.clear();
 
+
+		
 		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
 		testContact = underTest.get();
 	}
@@ -100,7 +99,7 @@ public class ContactInfoRepositoryTest {
 	}
 	
 	@Test
-	public void shouldValidateContactHasNoEmail() {
+	public void shouldValidateContactHasAnEmail() {
 		assertThat(testContact.getEmails(), contains(email));
 	}
 	

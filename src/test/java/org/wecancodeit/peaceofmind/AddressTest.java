@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class AddressTest {
 	
+	ContactInfo testContactInfo = new ContactInfo();
 	Address underTest = new Address("streetAddress", null, "city", "state", "zip", "type");
 	
 	@Test

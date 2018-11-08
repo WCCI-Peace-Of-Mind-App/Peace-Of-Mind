@@ -4,8 +4,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -48,15 +46,12 @@ public class NonMedicalUserJPATest {
 		addressRepo.save(address);
 		
 		
-		Collection<Phone> phones = new ArrayList<>();
-		Collection<Address>addresses = new ArrayList<>();
-		
-		
-		phones.add(phone);
-		addresses.add(address);
-		
-		contact = new ContactInfo(addresses, phones, null);
+		contact = new ContactInfo();
 		contactRepo.save(contact);
+		
+		contact.addAddress(address);
+		contact.addPhone(phone);
+		
 		underTest = nonMedUserRepo.save(new NonMedicalUser("first", "last", contact, "username", "password", "relation"));
 		nonMedUserId = underTest.getId();
 		
@@ -85,3 +80,4 @@ public class NonMedicalUserJPATest {
 	}
 
 }
+

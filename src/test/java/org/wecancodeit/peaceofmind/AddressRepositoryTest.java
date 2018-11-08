@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -37,21 +36,20 @@ public class AddressRepositoryTest {
 	
 	ContactInfo contactInfo;
 	
-	Collection<Address> addresses = new ArrayList<>();
 	long addressId;
 	
 	@Before
 	public void setUp() {
-		address = addressRepo.save(new Address());
+		contactInfo = contactInfoRepo.save(new ContactInfo());
+
+		address = addressRepo.save(new Address("", "", "", "", "", ""));
 		addressId = address.getId();
 		
-		address2 = addressRepo.save(new Address());
+		address2 = addressRepo.save(new Address("", "", "", "", "", ""));
 		addressNot = addressRepo.save(new Address());
-		
-		addresses.add(address);
-		addresses.add(address2);
-		
-		contactInfo = contactInfoRepo.save(new ContactInfo(addresses, null, null));
+				
+		contactInfo.addAddress(address);
+		contactInfo.addAddress(address2);
 		
 		entity.flush();
 		entity.clear();

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class EmailTest {
 	
+	ContactInfo testContactInfo = new ContactInfo();
 	Email underTest = new Email("email address", "type");
 	
 	@Test

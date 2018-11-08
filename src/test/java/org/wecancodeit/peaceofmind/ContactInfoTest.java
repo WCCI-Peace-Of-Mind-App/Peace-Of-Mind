@@ -1,10 +1,9 @@
 package org.wecancodeit.peaceofmind;
 
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.Before;
@@ -13,9 +12,6 @@ import org.junit.Test;
 public class ContactInfoTest {
 	
 	ContactInfo underTest;
-	Collection<Address> addresses = new ArrayList<>();
-	Collection<Phone> phones = new ArrayList<>();
-	Collection<Email> emails = new ArrayList<>();
 
 	Address address;
 	Phone phone;
@@ -27,49 +23,53 @@ public class ContactInfoTest {
 		phone = new Phone();
 		email = new Email();
 
-		addresses.add(address);
-		phones.add(phone);
-		emails.add(email);
-		underTest = new ContactInfo(addresses, phones, emails);
+		underTest = new ContactInfo();
 	}
 	
 	
 	@Test
-	public void shouldHaveAddressOf1123SesameStreetNoWhereOH43101() {
-		Collection<Address> testAddress = underTest.getAddresses();
-		assertThat(testAddress, contains(address));
+	public void shouldAddAddressToContactInfo() {
+		underTest.addAddress(address);
+		Collection<Address> result = underTest.getAddresses();
+		assertThat(result, contains(address));
 	}
 	
 	@Test
-	public void shouldHavePhoneNumberOf1234567890() {
-		Collection<Phone> testPhone = underTest.getPhones();
-		assertThat(testPhone, contains(phone));
+	public void shouldRemoveAddressFromContactInfo() {
+		underTest.addAddress(address);
+		underTest.removeAddress(address);
+		Collection<Address> result = underTest.getAddresses();
+		assertThat(result, not(contains(address)));
 	}
 	
 	@Test
-	public void shouldHaveEMailOfABCatXYZ_com() {
-		Collection<Email> testEmail = underTest.getEmails();
-		assertThat(testEmail, contains(email));
+	public void shouldAddPhoneToContactInfo() {
+		underTest.addPhone(phone);
+		Collection<Phone> result = underTest.getPhones();
+		assertThat(result, contains(phone));
 	}
 	
 	@Test
-	public void shouldVerify2ndUserHasDifferentInformation() {
-		Address address2 = new Address();
-		Phone phone2 = new Phone();
-		Email email2 = new Email();
-		
-		addresses.add(address2);
-		phones.add(phone2);
-		emails.add(email2);
-		
-		underTest = new ContactInfo(addresses, phones, emails);
-		
-		Collection<Address> testAddresses = underTest.getAddresses();
-		Collection<Phone> testPhones = underTest.getPhones();
-		Collection<Email> testEmails = underTest.getEmails();
-		assertThat(testAddresses, containsInAnyOrder(address, address2));
-		assertThat(testPhones, containsInAnyOrder(phone2, phone));
-		assertThat(testEmails, containsInAnyOrder(email, email2));
+	public void shouldRemovePhoneFromContactInfo() {
+		underTest.addPhone(phone);
+		underTest.removePhone(phone);
+		Collection<Phone> result = underTest.getPhones();
+		assertThat(result, not(contains(phone)));
+	}
+
+	@Test
+	public void shouldAddEmailToContactInfo() {
+		underTest.addEmail(email);
+		Collection<Email> result = underTest.getEmails();
+		assertThat(result, contains(email));
+	}
+	
+	@Test
+	public void shouldRemoveEmailFromContactInfo() {
+		underTest.addEmail(email);
+		underTest.removeEmail(email);
+		Collection<Email> result = underTest.getEmails();
+		assertThat(result, not(contains(email)));
 	}
 
 }

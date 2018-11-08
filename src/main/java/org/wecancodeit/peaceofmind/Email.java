@@ -14,8 +14,8 @@ public class Email implements IContactType {
 	@GeneratedValue
 	private long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="fk_contactInfo")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_contactInfo")
 	private ContactInfo contactInfo;
 	
 	private String emailAddress;
@@ -23,6 +23,10 @@ public class Email implements IContactType {
 	
 	public long getId() {
 		return id;
+	}
+	
+	public ContactInfo getContactInfo() {
+		return contactInfo;
 	}
 	
 	public String getEmailAddress() {
@@ -60,6 +64,24 @@ public class Email implements IContactType {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public void setContactInfo(ContactInfo contactInfo) {
+		if(sameAsFormer(contactInfo)) {
+			return;
+		}
+		ContactInfo oldContactInfo = this.contactInfo;
+		this.contactInfo = contactInfo;
+		if(oldContactInfo != null) {
+			oldContactInfo.removeEmail(this);
+		}
+		if(contactInfo != null) {
+			contactInfo.addEmail(this);
+		}
+	}
+	
+	private boolean sameAsFormer(ContactInfo newContactInfo) {
+	    return contactInfo==null? newContactInfo== null : contactInfo.equals(newContactInfo);
 	}
 
 }

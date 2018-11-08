@@ -1,12 +1,13 @@
 package org.wecancodeit.peaceofmind;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -17,17 +18,14 @@ public class ContactInfo {
 	@GeneratedValue
 	private long id;
 
-	@OneToMany(cascade = {CascadeType.ALL})
-	@JoinColumn(name="fk_contactInfo")
-	private Collection<Address> addresses;
+	@OneToMany(mappedBy = "contactInfo")
+	private Set<Address> addresses = new HashSet<>();
 	
-	@OneToMany(cascade = {CascadeType.ALL})
-	@JoinColumn(name="fk_contactInfo")
-	private Collection<Phone> phones;
+	@OneToMany(mappedBy = "contactInfo")
+	private Set<Phone> phones = new HashSet<>();
 
-	@OneToMany(cascade = {CascadeType.ALL})
-	@JoinColumn(name="fk_contactInfo")
-	private Collection<Email> emails;
+	@OneToMany(mappedBy = "contactInfo")
+	private Set<Email> emails = new HashSet<>();
 
 	@OneToOne(mappedBy = "contactInfo")
 	private Patient patient;
@@ -67,13 +65,7 @@ public class ContactInfo {
 	}
 	
 	public ContactInfo() {}
-	
-	public ContactInfo(Collection<Address> addresses, Collection<Phone> phones, Collection<Email> emails) {
-		this.addresses = addresses;
-		this.phones = phones;
-		this.emails = emails;
-	}
-	
+		
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -94,6 +86,55 @@ public class ContactInfo {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public void addAddress(Address address) {
+		if(addresses.contains(address)) {
+			return;
+		}
+		this.addresses.add(address);
+		address.setContactInfo(this);
+	}
+
+	public void removeAddress(Address address) {
+		if (!addresses.contains(address)) {
+			return;
+		}
+		this.addresses.remove(address);
+		address.setContactInfo(null);
+	}
+	
+
+	public void addPhone(Phone phone) {
+		if(phones.contains(phone)) {
+			return;
+		}
+		this.phones.add(phone);
+		phone.setContactInfo(this);
+	}
+
+	public void removePhone(Phone phone) {
+		if (!phones.contains(phone)) {
+			return;
+		}
+		this.phones.remove(phone);
+		phone.setContactInfo(null);
+	}
+
+	public void addEmail(Email email) {
+		if(emails.contains(email)) {
+			return;
+		}
+		this.emails.add(email);
+		email.setContactInfo(this);
+	}
+
+	public void removeEmail(Email email) {
+		if (!emails.contains(email)) {
+			return;
+		}
+		this.emails.remove(email);
+		email.setContactInfo(null);
 	}
 
 }

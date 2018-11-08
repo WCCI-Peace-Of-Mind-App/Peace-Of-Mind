@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -37,22 +36,20 @@ public class EmailRepositoryTest {
 	Email email2;
 	Email emailNot;
 	
-	Collection<Email> emails = new ArrayList<>();
-	
 	ContactInfo contactInfo;
 	
 	@Before
 	public void setUp() {
+		contactInfo = contactInfoRepo.save(new ContactInfo());
+
 		email = emailRepo.save(new Email("boop@boop.com", "personal"));
 		emailId = email.getId();
 
 		email2 = emailRepo.save(new Email("a@b.com", "work"));
-		emailNot = emailRepo.save(new Email("z@y.com", "play"));
+		emailNot = emailRepo.save(new Email());
 		
-		emails.add(email);
-		emails.add(email2);
-		
-		contactInfo = contactInfoRepo.save(new ContactInfo(null, null, emails));
+		contactInfo.addEmail(email);
+		contactInfo.addEmail(email2);
 		
 		entity.flush();
 		entity.clear();

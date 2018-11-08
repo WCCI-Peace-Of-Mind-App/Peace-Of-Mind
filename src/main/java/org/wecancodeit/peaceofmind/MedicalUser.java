@@ -2,6 +2,7 @@ package org.wecancodeit.peaceofmind;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -15,7 +16,7 @@ public class MedicalUser implements INonPatientUser {
 
 	private String firstName;
 	private String lastName;
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY)
 	private ContactInfo contactInfo;
 	private String medicalSpecialty;
 	private String medicalInstitution;

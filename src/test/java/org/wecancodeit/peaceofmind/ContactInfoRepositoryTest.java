@@ -38,6 +38,15 @@ public class ContactInfoRepositoryTest {
 	@Resource
 	private MedicalUserRepository medicalUserRepo;
 	
+	@Resource
+	private AddressRepository addressRepo;
+	
+	@Resource
+	private PhoneRepository phoneRepo;
+	
+	@Resource
+	private EmailRepository emailRepo;
+	
 	ContactInfo contact1;
 	Address address;
 	Phone phone;
@@ -54,9 +63,9 @@ public class ContactInfoRepositoryTest {
 	public void setUp() {
 		contact1 = contactInfoRepo.save(new ContactInfo());
 
-		address = new Address("", "", "", "", "", "");
-		phone = new Phone("", "");
-		email = new Email("", "");
+		address = addressRepo.save(new Address("", "", "", "", "", ""));
+		phone = phoneRepo.save(new Phone("", ""));
+		email = emailRepo.save(new Email("", ""));
 
 		contactId = contact1.getId();
 		

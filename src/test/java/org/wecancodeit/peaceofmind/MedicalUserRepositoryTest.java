@@ -1,5 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -19,6 +20,7 @@ public class MedicalUserRepositoryTest {
   public TestEntityManager entityManager;
   @Resource
   public MedicalUserRepository medUserRepo;
+  
   @Resource
   private AddressRepository addressRepo;
   @Resource

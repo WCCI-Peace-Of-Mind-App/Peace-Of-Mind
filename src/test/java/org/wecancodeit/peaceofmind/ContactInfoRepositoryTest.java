@@ -25,6 +25,7 @@ public class ContactInfoRepositoryTest {
 	
 	@Resource
 	private ContactInfoRepository contactInfoRepo;
+
 	
 	@Resource
 	private TestEntityManager entityManager;	

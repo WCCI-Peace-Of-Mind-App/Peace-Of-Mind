@@ -1,6 +1,7 @@
 package org.wecancodeit.peaceofmind;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,20 +14,20 @@ public class Email implements IContactType {
 	@GeneratedValue
 	private long id;
 	
-	@ManyToOne
-	@JoinColumn(name="fk_contactInfo")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_contactInfo")
 	private ContactInfo contactInfo;
 	
 	private String emailAddress;
 	private String type;
 	
-
-
 	public long getId() {
-
-	return id;
+		return id;
 	}
 	
+	public ContactInfo getContactInfo() {
+		return contactInfo;
+	}
 	
 	public String getEmailAddress() {
 		return emailAddress;
@@ -36,15 +37,12 @@ public class Email implements IContactType {
 		return type;
 	}
 	
-	public Email() {
-		
-	}
+	public Email() {}
 	
 	public Email(String emailAddress, String type) {
 		this.emailAddress = emailAddress;
 		this.type = type;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -53,7 +51,6 @@ public class Email implements IContactType {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -69,5 +66,22 @@ public class Email implements IContactType {
 		return true;
 	}
 
+	public void setContactInfo(ContactInfo contactInfo) {
+		if(sameAsFormer(contactInfo)) {
+			return;
+		}
+		ContactInfo oldContactInfo = this.contactInfo;
+		this.contactInfo = contactInfo;
+		if(oldContactInfo != null) {
+			oldContactInfo.removeEmail(this);
+		}
+		if(contactInfo != null) {
+			contactInfo.addEmail(this);
+		}
+	}
+	
+	private boolean sameAsFormer(ContactInfo newContactInfo) {
+	    return contactInfo==null? newContactInfo== null : contactInfo.equals(newContactInfo);
+	}
 
 }

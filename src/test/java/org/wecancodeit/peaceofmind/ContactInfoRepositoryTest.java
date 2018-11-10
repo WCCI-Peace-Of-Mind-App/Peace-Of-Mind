@@ -7,8 +7,6 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -26,102 +24,107 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ContactInfoRepositoryTest {
 	
 	@Resource
-	ContactInfoRepository contactInfoRepo;
+	private ContactInfoRepository contactInfoRepo;
+
 	
 	@Resource
 	private TestEntityManager entityManager;	
 	
+	@Resource 
+	private PatientRepository patientRepo;
+	
+	@Resource
+	private NonMedicalUserRepository nonMedUserRepo;
+	
+	@Resource
+	private MedicalUserRepository medicalUserRepo;
+	
+	@Resource
+	private AddressRepository addressRepo;
+	
+	@Resource
+	private PhoneRepository phoneRepo;
+	
+	@Resource
+	private EmailRepository emailRepo;
+	
 	ContactInfo contact1;
-	Collection<Address> addresses = new ArrayList<>();
-	Collection<Phone> phones = new ArrayList<>();
-	Collection<String> emails = new ArrayList<>();
-
 	Address address;
 	Phone phone;
-	String email;
+	Email email;
+	long contactId;
 	
+	Patient patient;
+	NonMedicalUser nonMedUser;
+	MedicalUser medicalUser;
+	
+	ContactInfo testContact;
+		
 	@Before
 	public void setUp() {
-		address = new Address();
-		phone = new Phone();
-		email = "ABC@XYZ.com";
+		contact1 = contactInfoRepo.save(new ContactInfo());
 
-		addresses.add(address);
-		phones.add(phone);
-		emails.add(email);
-		contact1 = new ContactInfo(addresses, phones, null);
+		address = addressRepo.save(new Address("", "", "", "", "", ""));
+		phone = phoneRepo.save(new Phone("", ""));
+		email = emailRepo.save(new Email("", ""));
+
+		contactId = contact1.getId();
+		
+		contact1.addAddress(address);
+		contact1.addPhone(phone);
+		contact1.addEmail(email);
+		
+		
+		patient = patientRepo.save(new Patient("", "", contact1, "", ""));
+		nonMedUser = nonMedUserRepo.save(new NonMedicalUser("", "", contact1, "", "", ""));
+		medicalUser = medicalUserRepo.save(new MedicalUser("", "", contact1, "", "", "", "", ""));
+		
+		entityManager.flush();
+		entityManager.clear();
+
+
+		
+		Optional<ContactInfo> underTest = contactInfoRepo.findById(contactId);
+		testContact = underTest.get();
 	}
 	
 	@Test
 	public void shouldBeAnInstanceofContactInfo() {
-		contact1 = contactInfoRepo.save(contact1);
 		assertThat(contact1, instanceOf(ContactInfo.class));
 	}
 	
 	@Test
-	public void shouldVerifyContact1HasIdGreaterThan1L() {
-		
-	    contact1 = contactInfoRepo.save(contact1);
-		long contactId = contact1.getId();
-
-		entityManager.flush();
-		entityManager.clear();
-		
-		Optional<ContactInfo> result = contactInfoRepo.findById(contactId);
-		contact1 = result.get();
-		
+	public void shouldVerifyContact1HasIdGreaterThan0L() {
 		assertThat(contactId, is(greaterThan(0L)));
-		
 	}
 
 	@Test
 	public void shouldValidateContactHasAHomeAddress() {
-		
-		contact1 = contactInfoRepo.save(contact1);
-		long contactId = contact1.getId();
-		
-		entityManager.flush();
-		entityManager.clear();
-		
-		Optional<ContactInfo> result = contactInfoRepo.findById(contactId);
-		ContactInfo contact2 = result.get();
-	
-		assertThat(contact2.getAddresses(),contains(address));
-		
-
+		assertThat(testContact.getAddresses(), contains(address));
 	}
 	
 	@Test
 	public void shouldValidateContactHasAHomePhone() {
-		
-		contact1 = contactInfoRepo.save(contact1);
-		long contactId = contact1.getId();
-		
-		entityManager.flush();
-		entityManager.clear();
-		
-		Optional<ContactInfo> result = contactInfoRepo.findById(contactId);
-		ContactInfo contact2 = result.get();
-	
-		assertThat(contact2.getPhones(),contains(phone));
-		
-
+		assertThat(testContact.getPhones(), contains(phone));
 	}
 	
 	@Test
-	public void shouldValidateContactHasNoEmail() {
-		
-		contact1 = contactInfoRepo.save(contact1);
-		long contactId = contact1.getId();
-		
-		entityManager.flush();
-		entityManager.clear();
-		
-		Optional<ContactInfo> result = contactInfoRepo.findById(contactId);
-		ContactInfo contact2 = result.get();
+	public void shouldValidateContactHasAnEmail() {
+		assertThat(testContact.getEmails(), contains(email));
+	}
 	
-		//assertNull(email);
+	@Test
+	public void shouldEstablishRelationshipfromContactInfoToPatient() {
+		assertThat(testContact.getPatient(), is(patient));
+	}
 		
-
+	@Test
+	public void shouldEstablishRelationshipFromContactInfoToNonMedUser() {
+		assertThat(testContact.getNonMedicalUser(), is(nonMedUser));
+	}
+	
+	@Test
+	public void shouldEstablishRelationshipFromContactInfoToMedicalUser() {
+		assertThat(testContact.getMedicalUser(), is(medicalUser));
 	}
 }

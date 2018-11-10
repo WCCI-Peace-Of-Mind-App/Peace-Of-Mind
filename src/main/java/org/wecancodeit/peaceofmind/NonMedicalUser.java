@@ -1,6 +1,7 @@
 package org.wecancodeit.peaceofmind;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -14,7 +15,7 @@ public class NonMedicalUser implements INonPatientUser {
 
 	private String firstName;
 	private String lastName;
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private ContactInfo contactInfo;
 	private String userName;
 	private String password;
@@ -52,10 +53,8 @@ public class NonMedicalUser implements INonPatientUser {
 		return relationshipWithPatient;
 	}
 	
-	public NonMedicalUser() {
+	public NonMedicalUser() {}
 		
-	}
-	
 	public NonMedicalUser(String firstName, String lastName, ContactInfo contactInfo, String userName, String password, String relationshipWithPatient) {
 		this.firstName = firstName;
 		this.lastName = lastName;

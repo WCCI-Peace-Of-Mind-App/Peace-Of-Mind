@@ -19,59 +19,58 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
-public class EmailRepositoryTest {
+public class AddressRepositoryTest {
 	
 	@Resource
 	private TestEntityManager entity;
 	
 	@Resource
-	private EmailRepository emailRepo;
+	private AddressRepository addressRepo;
 	
 	@Resource
 	private ContactInfoRepository contactInfoRepo;
 	
-	long emailId;
-
-	Email email;
-	Email email2;
-	Email emailNot;
+	Address address;
+	Address address2;
+	Address addressNot;
 	
 	ContactInfo contactInfo;
+	
+	long addressId;
 	
 	@Before
 	public void setUp() {
 		contactInfo = contactInfoRepo.save(new ContactInfo());
 
-		email = emailRepo.save(new Email("boop@boop.com", "personal"));
-		emailId = email.getId();
-
-		email2 = emailRepo.save(new Email("a@b.com", "work"));
-		emailNot = emailRepo.save(new Email());
+		address = addressRepo.save(new Address("", "", "", "", "", ""));
+		addressId = address.getId();
 		
-		contactInfo.addEmail(email);
-		contactInfo.addEmail(email2);
+		address2 = addressRepo.save(new Address("", "", "", "", "", ""));
+		addressNot = addressRepo.save(new Address());
+				
+		contactInfo.addAddress(address);
+		contactInfo.addAddress(address2);
 		
 		entity.flush();
 		entity.clear();
 	}
 	
 	@Test
-	public void shouldGenerateIdForEmail() {
-		assertThat(emailId, is(greaterThan(0L)));
+	public void shouldHaveAnIdGreaterThan0() {
+		assertThat(addressId, greaterThan(0L));
 	}
 	
 	@Test
-	public void shouldSaveAndLoadEmail() {
-		Optional<Email> retreivedEmail = emailRepo.findById(emailId);
-		Email result = retreivedEmail.get();
-		String emailAddress = result.getEmailAddress();
-		assertThat(emailAddress, is("boop@boop.com"));
+	public void shouldSaveAndLoadAddress() {
+		Optional<Address> underTest = addressRepo.findById(addressId);
+		Address testAddress = underTest.get();
+		assertThat(testAddress, is(address));
 	}
 	
 	@Test
-	public void shouldEstablishRelationshipBetweenEmailAndContactInfo() {
-		Collection<Email> emailsInRepo = emailRepo.findByContactInfo(contactInfo);
-		assertThat(emailsInRepo, containsInAnyOrder(email, email2));
+	public void shouldEstablishRelationshipFromAddressToContactInfo() {
+		Collection<Address> addressesInRepo = addressRepo.findByContactInfo(contactInfo);
+		assertThat(addressesInRepo, containsInAnyOrder(address, address2));
 	}
 
 }

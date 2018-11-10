@@ -36,11 +36,11 @@ public class PatientRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		contactInfo = new ContactInfo(null, null, null);
+		contactInfo = contactInfoRepo.save(new ContactInfo());
 		patient = patientRepo.save(new Patient(null, null, contactInfo, null, null));
 		patientId = patient.getId();
 		
-		contactInfo2 = new ContactInfo(null, null, null);
+		contactInfo2 = contactInfoRepo.save(new ContactInfo());
 		patient2 = patientRepo.save(new Patient(null, null, contactInfo2, null, null));
 		
 		entity.flush();

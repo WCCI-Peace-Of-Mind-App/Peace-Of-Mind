@@ -10,7 +10,7 @@ import org.wecancodeit.peaceofmind.Patient;
 public class PatientTest {
 	
 	
-	ContactInfo contactInfo = new ContactInfo(null, null, null);
+	ContactInfo contactInfo = new ContactInfo();
 	Patient underTest = new Patient("firstName", "lastName", contactInfo, "01/01/0000", "diagnosis");
 	
 	
@@ -27,11 +27,10 @@ public class PatientTest {
 	}
 	
 	@Test
-	public void shouldReturnPatientEmail() {
+	public void shouldReturnPatientContactInfo() {
 		ContactInfo result = underTest.getContactInfo();
 		assertThat(result, is (contactInfo));
 	}
-	
 	
 	@Test
 	public void shouldReturnPatientDOB() {

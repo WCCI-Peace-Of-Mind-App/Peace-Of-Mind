@@ -33,6 +33,7 @@ public class PhoneRepositoryTest {
 	long phoneId;
 	Phone phone;
 	Phone phone2;
+	Phone phoneNot;
 	String phoneNumber;
 	String type;
 	ContactInfo contactInfo;
@@ -41,6 +42,8 @@ public class PhoneRepositoryTest {
 	
 	@Before
 	public void setUp() {
+		contactInfo = contactInfoRepo.save(new ContactInfo());
+
 		type = "Home";
 		phoneNumber = "614-867-5309";
 		
@@ -48,12 +51,11 @@ public class PhoneRepositoryTest {
 		phoneId = phone.getId();
 		
 		phone2 = phoneRepo.save(new Phone("123-456-7890", "Away"));
-		Phone phone3 = phoneRepo.save(new Phone("987-654-3210", "Work"));
+		phoneNot = phoneRepo.save(new Phone());
 		
-		phonesTest.add(phone);
-		phonesTest.add(phone2);
+		contactInfo.addPhone(phone);
+		contactInfo.addPhone(phone2);
 		
-		contactInfo = contactInfoRepo.save(new ContactInfo(null, phonesTest, null));
 		
 		entity.flush();
 		entity.clear();

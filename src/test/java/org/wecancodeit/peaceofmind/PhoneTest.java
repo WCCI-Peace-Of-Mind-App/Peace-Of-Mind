@@ -8,8 +8,9 @@ import org.junit.Test;
 public class PhoneTest {
 	
 	
-	
+	ContactInfo testContactInfo = new ContactInfo();
 	Phone phoneNum = new Phone("6142002222","Mobile");
+	
 	
 	@Test
 	public void shouldReturnPhoneNumber6142002222() {
@@ -17,7 +18,6 @@ public class PhoneTest {
 		String expectedPhoneNumber = "6142002222";
 		String actualPhoneNumber = phoneNum.getPhoneNumber();
 		assertThat(actualPhoneNumber, is(expectedPhoneNumber));
-		
 	}
 	
 	@Test
@@ -26,7 +26,6 @@ public class PhoneTest {
 		String expectedPhoneType = "Mobile";
 		String actualPhoneType = phoneNum.getType();
 		assertThat(actualPhoneType, is(expectedPhoneType));
-		
 	}
 	
 	@Test

@@ -3,9 +3,7 @@ package org.wecancodeit.peaceofmind;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 
 import javax.annotation.Resource;
 
@@ -22,19 +20,19 @@ public class MedicalUserRepositoryTest {
   public TestEntityManager entityManager;
   @Resource
   public MedicalUserRepository medUserRepo;
+  
+  @Resource
+  private AddressRepository addressRepo;
+  @Resource
+  private PhoneRepository phoneRepo;
+  @Resource
+  private ContactInfoRepository contactInfoRepo;
+
   @Test
   public void assertSaveLoadMedicalUser()
   {
-	List<Address> addressPayload = new ArrayList();
-	List<Phone> phonePayload = new ArrayList();
-	List<String> emailPayload = null;
-	addressPayload.add(new Address("123 Main St", "2nd fl", "Anywhere", "XX", "00000", "Business"));
-	phonePayload.add(new Phone("614-555-1212", "Business"));
 	MedicalUser expectedMedicalUser = medUserRepo.save( new MedicalUser("first-name", "lastName",
-			new ContactInfo(
-					addressPayload,
-					phonePayload,
-					emailPayload),
+			new ContactInfo(),
 			"medicalSpecialty", "medicalInstitution", "institutionTelephone", "userName", "password"
 	  )
 	);
@@ -44,22 +42,18 @@ public class MedicalUserRepositoryTest {
   @Test
   public void assertAddressAndPhoneReturnedSaved()
   {
-	 List<Address> addressPayload = new ArrayList();
-	 List<Phone> phonePayload = new ArrayList();
-	 List<String> emailPayload = null;
-	 Address anAddress = null;
-	 Address aSecondAddress = null;
-	 Phone aPhone = null;
-	 Phone aSecondPhone = null; 
-	 addressPayload.add(anAddress = new Address("123 Main St", "2nd fl", "Anywhere", "XX", "00000", "Business"));
-	 addressPayload.add(aSecondAddress = new Address("wet", "dfghxc", "wey", "uo", "879", "Business"));
-	 phonePayload.add(aSecondPhone = new Phone("345345", "Mobile"));
-	 phonePayload.add(aPhone = new Phone("614-555-1212", "Business"));
+	 Address anAddress = addressRepo.save(new Address("123 Main St", "2nd fl", "Anywhere", "XX", "00000", "Business"));
+	 Address aSecondAddress = addressRepo.save(new Address("wet", "dfghxc", "wey", "uo", "879", "Business"));
+	 Phone aPhone = phoneRepo.save(new Phone("614-555-1212", "Business"));
+	 Phone aSecondPhone = phoneRepo.save(new Phone("345345", "Mobile"));
+	 ContactInfo contactInfo = contactInfoRepo.save(new ContactInfo());
+	 contactInfo.addAddress(anAddress);
+	 contactInfo.addAddress(aSecondAddress);
+	 contactInfo.addPhone(aPhone);
+	 contactInfo.addPhone(aSecondPhone);
+	 
 	 MedicalUser expectedMedicalUser = medUserRepo.save( new MedicalUser("first-name", "lastName",
-				new ContactInfo(
-						addressPayload,
-						phonePayload,
-						emailPayload),
+				contactInfo,
 				"medicalSpecialty", "medicalInstitution", "institutionTelephone", "userName", "password"
 	   )
 	 );

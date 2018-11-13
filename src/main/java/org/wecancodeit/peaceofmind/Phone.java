@@ -1,11 +1,11 @@
 package org.wecancodeit.peaceofmind;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Phone implements IContactType{
@@ -14,8 +14,8 @@ public class Phone implements IContactType{
 	@GeneratedValue
 	private long id;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_contactInfo")
+	@OneToOne(mappedBy="phone")
+	@JsonIgnore
 	private ContactInfo contactInfo;
 	
 	private String phoneNumber;
@@ -34,6 +34,10 @@ public class Phone implements IContactType{
 
 	public ContactInfo getContactInfo() {
 		return this.contactInfo;
+	}
+	
+	public void setContactInfo(ContactInfo contact) {
+		contactInfo = contact;
 	}
 
 	public String getPhoneNumber() {
@@ -66,24 +70,6 @@ public class Phone implements IContactType{
 		if (id != other.id)
 			return false;
 		return true;
-	}
-
-	public void setContactInfo(ContactInfo contactInfo) {
-		if(sameAsFormer(contactInfo)) {
-			return;
-		}
-		ContactInfo oldContactInfo = this.contactInfo;
-		this.contactInfo = contactInfo;
-		if(oldContactInfo != null) {
-			oldContactInfo.removePhone(this);
-		}
-		if(contactInfo != null) {
-			contactInfo.addPhone(this);
-		}
-	}
-	
-	private boolean sameAsFormer(ContactInfo newContactInfo) {
-	    return contactInfo==null? newContactInfo== null : contactInfo.equals(newContactInfo);
 	}
 
 }

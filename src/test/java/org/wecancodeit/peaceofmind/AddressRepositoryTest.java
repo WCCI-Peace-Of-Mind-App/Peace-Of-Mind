@@ -1,11 +1,9 @@
 package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -30,9 +28,15 @@ public class AddressRepositoryTest {
 	@Resource
 	private ContactInfoRepository contactInfoRepo;
 	
+	@Resource
+	private PhoneRepository phoneRepo;
+	
+	@Resource
+	private EmailRepository emailRepo;
+	
 	Address address;
-	Address address2;
-	Address addressNot;
+	Phone phone;
+	Email email;
 	
 	ContactInfo contactInfo;
 	
@@ -40,16 +44,13 @@ public class AddressRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		contactInfo = contactInfoRepo.save(new ContactInfo());
-
+		
+		phone = phoneRepo.save(new Phone("", ""));
+		email = emailRepo.save(new Email("", ""));
 		address = addressRepo.save(new Address("", "", "", "", "", ""));
 		addressId = address.getId();
 		
-		address2 = addressRepo.save(new Address("", "", "", "", "", ""));
-		addressNot = addressRepo.save(new Address());
-				
-		contactInfo.addAddress(address);
-		contactInfo.addAddress(address2);
+		contactInfo = contactInfoRepo.save(new ContactInfo(address, email, phone));
 		
 		entity.flush();
 		entity.clear();
@@ -69,8 +70,8 @@ public class AddressRepositoryTest {
 	
 	@Test
 	public void shouldEstablishRelationshipFromAddressToContactInfo() {
-		Collection<Address> addressesInRepo = addressRepo.findByContactInfo(contactInfo);
-		assertThat(addressesInRepo, containsInAnyOrder(address, address2));
+		Address addressInRepo = addressRepo.findByContactInfo(contactInfo);
+		assertThat(addressInRepo, is(address));
 	}
 
 }

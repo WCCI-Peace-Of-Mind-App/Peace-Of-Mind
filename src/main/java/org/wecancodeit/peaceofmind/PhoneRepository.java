@@ -6,6 +6,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PhoneRepository extends CrudRepository<Phone, Long> {
 
-	Collection<Phone> findByContactInfo(ContactInfo contactInfo);
+	Collection<Phone> findByContactInfoContains(ContactInfo contactInfo);
+
+	Phone findByContactInfo(ContactInfo contactInfo);
+
 
 }

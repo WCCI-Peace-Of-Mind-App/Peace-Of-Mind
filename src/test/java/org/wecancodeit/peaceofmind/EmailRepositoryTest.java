@@ -1,11 +1,9 @@
 package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -20,24 +18,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 public class EmailRepositoryTest {
-	
+
 	@Resource
 	private TestEntityManager entity;
-	
+
 	@Resource
 	private EmailRepository emailRepo;
-	
+
 	@Resource
 	private ContactInfoRepository contactInfoRepo;
-	
+
 	long emailId;
 
 	Email email;
-	Email email2;
-	Email emailNot;
-	
+
 	ContactInfo contactInfo;
-	
+
 	@Before
 	public void setUp() {
 		contactInfo = contactInfoRepo.save(new ContactInfo());
@@ -45,21 +41,17 @@ public class EmailRepositoryTest {
 		email = emailRepo.save(new Email("boop@boop.com", "personal"));
 		emailId = email.getId();
 
-		email2 = emailRepo.save(new Email("a@b.com", "work"));
-		emailNot = emailRepo.save(new Email());
-		
 		contactInfo.addEmail(email);
-		contactInfo.addEmail(email2);
-		
+
 		entity.flush();
 		entity.clear();
 	}
-	
+
 	@Test
 	public void shouldGenerateIdForEmail() {
 		assertThat(emailId, is(greaterThan(0L)));
 	}
-	
+
 	@Test
 	public void shouldSaveAndLoadEmail() {
 		Optional<Email> retreivedEmail = emailRepo.findById(emailId);
@@ -67,11 +59,11 @@ public class EmailRepositoryTest {
 		String emailAddress = result.getEmailAddress();
 		assertThat(emailAddress, is("boop@boop.com"));
 	}
-	
+
 	@Test
 	public void shouldEstablishRelationshipBetweenEmailAndContactInfo() {
-		Collection<Email> emailsInRepo = emailRepo.findByContactInfo(contactInfo);
-		assertThat(emailsInRepo, containsInAnyOrder(email, email2));
+		Email emailInRepo = emailRepo.findByContactInfo(contactInfo);
+		assertThat(emailInRepo, is(email));
 	}
 
 }

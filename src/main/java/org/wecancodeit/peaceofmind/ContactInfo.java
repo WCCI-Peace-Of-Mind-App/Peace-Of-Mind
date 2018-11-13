@@ -1,39 +1,42 @@
 package org.wecancodeit.peaceofmind;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ContactInfo {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToMany(mappedBy = "contactInfo")
-	private Set<Address> addresses = new HashSet<>();
+
+	@OneToOne
+	private Address address;
 	
-	@OneToMany(mappedBy = "contactInfo")
-	private Set<Phone> phones = new HashSet<>();
 
-	@OneToMany(mappedBy = "contactInfo")
-	private Set<Email> emails = new HashSet<>();
+	@OneToOne
+	private Phone phone;
 
+
+	@OneToOne
+	private Email email;
+
+	@JsonIgnore
 	@OneToOne(mappedBy = "contactInfo", fetch = FetchType.LAZY, optional = false)
 	private Patient patient;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "contactInfo", fetch = FetchType.LAZY, optional = false)
 	private NonMedicalUser nonMedicalUser;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "contactInfo", fetch = FetchType.LAZY, optional = false)
 	private MedicalUser medicalUser;
 	
@@ -41,16 +44,16 @@ public class ContactInfo {
 		return id;
 	}
 	
-	public Collection<Address> getAddresses() {
-		return addresses;
+	public Address getAddress() {
+		return address;
 	}
 
-	public Collection<Phone> getPhones() {
-		return phones;
+	public Phone getPhone() {
+		return phone;
 	}
 	
-	public Collection<Email> getEmails() {
-		return emails;
+	public Email getEmail() {
+		return email;
 	}
 	
 	public Patient getPatient() {
@@ -66,6 +69,12 @@ public class ContactInfo {
 	}
 	
 	public ContactInfo() {}
+	
+	public ContactInfo(Address address, Email email, Phone phone) {
+		this.address = address;
+		this.email = email; 
+		this.phone = phone;
+	}
 		
 	@Override
 	public int hashCode() {
@@ -89,53 +98,35 @@ public class ContactInfo {
 		return true;
 	}
 
-	public void addAddress(Address address) {
-		if(addresses.contains(address)) {
-			return;
-		}
-		this.addresses.add(address);
-		address.setContactInfo(this);
+	public void addAddress(Address newAddress) {
+		address = newAddress;
+		
 	}
 
-	public void removeAddress(Address address) {
-		if (!addresses.contains(address)) {
-			return;
-		}
-		this.addresses.remove(address);
-		address.setContactInfo(null);
-	}
-	
-
-	public void addPhone(Phone phone) {
-		if(phones.contains(phone)) {
-			return;
-		}
-		this.phones.add(phone);
-		phone.setContactInfo(this);
+	public void removeAddress() {
+		address = null;
+		
 	}
 
-	public void removePhone(Phone phone) {
-		if (!phones.contains(phone)) {
-			return;
-		}
-		this.phones.remove(phone);
-		phone.setContactInfo(null);
+	public void addPhone(Phone newPhone) {
+		phone = newPhone;
+		
 	}
 
-	public void addEmail(Email email) {
-		if(emails.contains(email)) {
-			return;
-		}
-		this.emails.add(email);
-		email.setContactInfo(this);
+	public void removePhone() {
+		phone = null;
+		
 	}
 
-	public void removeEmail(Email email) {
-		if (!emails.contains(email)) {
-			return;
-		}
-		this.emails.remove(email);
-		email.setContactInfo(null);
+	public void addEmail(Email newEmail) {
+		email = newEmail;
+		
 	}
+
+	public void removeEmail() {
+		email = null;
+		
+	}
+
 
 }

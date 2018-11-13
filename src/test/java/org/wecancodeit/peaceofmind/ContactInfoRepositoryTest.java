@@ -2,7 +2,6 @@ package org.wecancodeit.peaceofmind;
 
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertThat;
@@ -62,17 +61,14 @@ public class ContactInfoRepositoryTest {
 		
 	@Before
 	public void setUp() {
-		contact1 = contactInfoRepo.save(new ContactInfo());
+
 
 		address = addressRepo.save(new Address("", "", "", "", "", ""));
 		phone = phoneRepo.save(new Phone("", ""));
 		email = emailRepo.save(new Email("", ""));
 
+		contact1 = contactInfoRepo.save(new ContactInfo(address, email, phone));
 		contactId = contact1.getId();
-		
-		contact1.addAddress(address);
-		contact1.addPhone(phone);
-		contact1.addEmail(email);
 		
 		
 		patient = patientRepo.save(new Patient("", "", contact1, "", ""));
@@ -100,17 +96,17 @@ public class ContactInfoRepositoryTest {
 
 	@Test
 	public void shouldValidateContactHasAHomeAddress() {
-		assertThat(testContact.getAddresses(), contains(address));
+		assertThat(testContact.getAddress(), is(address));
 	}
 	
 	@Test
 	public void shouldValidateContactHasAHomePhone() {
-		assertThat(testContact.getPhones(), contains(phone));
+		assertThat(testContact.getPhone(), is(phone));
 	}
 	
 	@Test
 	public void shouldValidateContactHasAnEmail() {
-		assertThat(testContact.getEmails(), contains(email));
+		assertThat(testContact.getEmail(), is(email));
 	}
 	
 	@Test

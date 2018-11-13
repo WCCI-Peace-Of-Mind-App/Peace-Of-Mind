@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PeaceOfMindPopulator implements CommandLineRunner {
 
+
 	@Resource
 	private AddressRepository addressRepo;
 	
@@ -40,14 +41,12 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		Address address1a = addressRepo.save(new Address("123 Baker St", null, "Columbus", "Ohio", "43081", "home"));
 		
 		Phone phone1a = phoneRepo.save(new Phone("614-123-4567", "home"));
-		Phone phone1b = phoneRepo.save(new Phone("614-987-6544", "work"));
 		
 		Email email1a = emailRepo.save(new Email("123@abd.com", "home"));
 		
-		ContactInfo contactInfo1 = contactInfoRepo.save(new ContactInfo(address1a, email1a, phone1a, phone1b));
+		ContactInfo contactInfo1 = contactInfoRepo.save(new ContactInfo(address1a, email1a, phone1a));
 		
 		phoneRepo.save(phone1a);
-		phoneRepo.save(phone1b);
 		
 		addressRepo.save(address1a);
 		
@@ -79,14 +78,15 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		Address address3a = addressRepo.save(new Address("555 Candlestick Court", null, "Obetz", "Ohio", "43207", "home"));
 		
 		Phone phone3a = phoneRepo.save(new Phone("614-777-6464", "home"));
-		Phone phone3b = phoneRepo.save(new Phone("614-911-9110", "work"));
 		
 		Email email3a = emailRepo.save(new Email("docOc@osu.com", "work"));
 		
-		ContactInfo contactInfo3 = contactInfoRepo.save(new ContactInfo(address3a, email3a, phone3a, phone3b));
+		ContactInfo contactInfo3 = contactInfoRepo.save(new ContactInfo(address3a, email3a, phone3a));
 		
 		
 		medUserRepo.save(new MedicalUser("Otto", "Octavius", contactInfo3, "Therapist", "Ohio State Med", "911", "docOc", "tentacles8"));
+		
+
 	}
 
 }

@@ -1,15 +1,10 @@
 package org.wecancodeit.peaceofmind;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,8 +21,8 @@ public class ContactInfo {
 	private Address address;
 	
 
-	@OneToMany
-	private Collection<Phone> phones;
+	@OneToOne
+	private Phone phone;
 
 
 	@OneToOne
@@ -53,8 +48,8 @@ public class ContactInfo {
 		return address;
 	}
 
-	public Collection<Phone> getPhones() {
-		return phones;
+	public Phone getPhone() {
+		return phone;
 	}
 	
 	public Email getEmail() {
@@ -75,10 +70,10 @@ public class ContactInfo {
 	
 	public ContactInfo() {}
 	
-	public ContactInfo(Address address, Email email, Phone...phones) {
+	public ContactInfo(Address address, Email email, Phone phone) {
 		this.address = address;
 		this.email = email; 
-		this.phones = new HashSet<>(Arrays.asList(phones));
+		this.phone = phone;
 	}
 		
 	@Override
@@ -101,6 +96,36 @@ public class ContactInfo {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public void addAddress(Address newAddress) {
+		address = newAddress;
+		
+	}
+
+	public void removeAddress() {
+		address = null;
+		
+	}
+
+	public void addPhone(Phone newPhone) {
+		phone = newPhone;
+		
+	}
+
+	public void removePhone() {
+		phone = null;
+		
+	}
+
+	public void addEmail(Email newEmail) {
+		email = newEmail;
+		
+	}
+
+	public void removeEmail() {
+		email = null;
+		
 	}
 
 

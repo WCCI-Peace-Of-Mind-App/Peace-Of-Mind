@@ -1,11 +1,11 @@
 package org.wecancodeit.peaceofmind;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Phone implements IContactType{
@@ -14,8 +14,8 @@ public class Phone implements IContactType{
 	@GeneratedValue
 	private long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="contactInfo_id")
+	@OneToOne(mappedBy="phone")
+	@JsonIgnore
 	private ContactInfo contactInfo;
 	
 	private String phoneNumber;
@@ -34,6 +34,10 @@ public class Phone implements IContactType{
 
 	public ContactInfo getContactInfo() {
 		return this.contactInfo;
+	}
+	
+	public void setContactInfo(ContactInfo contact) {
+		contactInfo = contact;
 	}
 
 	public String getPhoneNumber() {

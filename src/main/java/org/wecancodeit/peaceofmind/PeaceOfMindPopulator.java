@@ -1,8 +1,5 @@
 package org.wecancodeit.peaceofmind;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
@@ -41,43 +38,40 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		// Patient 1 build
 		
 		Address address1a = addressRepo.save(new Address("123 Baker St", null, "Columbus", "Ohio", "43081", "home"));
-		Address address1b = addressRepo.save(new Address("4260 Tuller Ridge Drive", null, "Dublin", "OH", "43017", "work"));
 		
 		Phone phone1a = phoneRepo.save(new Phone("614-123-4567", "home"));
 		Phone phone1b = phoneRepo.save(new Phone("614-987-6544", "work"));
 		
 		Email email1a = emailRepo.save(new Email("123@abd.com", "home"));
 		
-		ContactInfo contactInfo1 = contactInfoRepo.save(new ContactInfo());
-		contactInfo1.addAddress(address1a);
-		contactInfo1.addAddress(address1b);
-		contactInfo1.addPhone(phone1a);
-		contactInfo1.addPhone(phone1b);
-		contactInfo1.addEmail(email1a);
+		ContactInfo contactInfo1 = contactInfoRepo.save(new ContactInfo(address1a, email1a, phone1a, phone1b));
 		
-		Patient patient1 = patientRepo.save(new Patient("Joe", "Bob", contactInfo1, "01/01/01", "Alzheimers"));
+		phoneRepo.save(phone1a);
+		phoneRepo.save(phone1b);
+		
+		addressRepo.save(address1a);
+		
+		emailRepo.save(email1a);
+		
+		
+		
+		patientRepo.save(new Patient("Joe", "Bob", contactInfo1, "01/01/01", "Alzheimers"));
 		
 		// End Patient 1 build
 		
 		// Non Med User 2 build
 
 		Address address2a = addressRepo.save(new Address("123 Builder St", null, "Columbus", "Ohio", "43055", "home"));
-		Address address2b = addressRepo.save(new Address("4111 Tuller Road", null, "Dublin", "OH", "43017", "work"));
 		
 		Phone phone2a = phoneRepo.save(new Phone("614-555-4321", "home"));
 		
 		Email email2a = emailRepo.save(new Email("321@zyx.com", "work"));
-		Email email2b = emailRepo.save(new Email("xxGAMERxx@yahoo.com", "home"));
+
 		
-		ContactInfo contactInfo2 = contactInfoRepo.save(new ContactInfo());
-		contactInfo2.addAddress(address2a);
-		contactInfo2.addAddress(address2b);
-		contactInfo2.addPhone(phone2a);
-		contactInfo2.addEmail(email2a);
-		contactInfo2.addEmail(email2b);
+		ContactInfo contactInfo2 = contactInfoRepo.save(new ContactInfo(address2a, email2a, phone2a));
+
 		
-		
-		NonMedicalUser nonMedUser2 = nonMedUserRepo.save(new NonMedicalUser("Jenny", "Wilson", contactInfo2, "xxGAMERxx", "pass1234", "Daughter"));
+		nonMedUserRepo.save(new NonMedicalUser("Jenny", "Wilson", contactInfo2, "xxGAMERxx", "pass1234", "Daughter"));
 		
 		//end NonMedUser 2
 		
@@ -88,17 +82,11 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		Phone phone3b = phoneRepo.save(new Phone("614-911-9110", "work"));
 		
 		Email email3a = emailRepo.save(new Email("docOc@osu.com", "work"));
-		Email email3b = emailRepo.save(new Email("octoDad@gmail.com", "home"));
 		
-		ContactInfo contactInfo3 = contactInfoRepo.save(new ContactInfo());
-		contactInfo3.addAddress(address3a);
-		contactInfo3.addPhone(phone3a);
-		contactInfo3.addPhone(phone3b);
-		contactInfo3.addEmail(email3b);
-		contactInfo3.addEmail(email3a);
+		ContactInfo contactInfo3 = contactInfoRepo.save(new ContactInfo(address3a, email3a, phone3a, phone3b));
 		
 		
-		MedicalUser medUser3 = medUserRepo.save(new MedicalUser("Otto", "Octavius", contactInfo3, "Therapist", "Ohio State Med", "911", "docOc", "tentacles8"));
+		medUserRepo.save(new MedicalUser("Otto", "Octavius", contactInfo3, "Therapist", "Ohio State Med", "911", "docOc", "tentacles8"));
 	}
 
 }

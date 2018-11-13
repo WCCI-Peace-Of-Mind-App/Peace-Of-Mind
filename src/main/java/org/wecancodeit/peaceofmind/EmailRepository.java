@@ -8,4 +8,5 @@ public interface EmailRepository extends CrudRepository<Email, Long> {
 
 	Collection<Email> findByContactInfo(ContactInfo contactInfo);
 
+
 }

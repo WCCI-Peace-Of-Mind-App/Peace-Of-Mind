@@ -15,14 +15,6 @@ public class ContactInfoRestController {
 	@Resource
 	private ContactInfoRepository contactRepo; 
 	
-	@Resource
-	private EmailRepository emailRepo;
-	
-	@Resource
-	private AddressRepository addyRepo;
-	
-	@Resource
-	private PhoneRepository phoneRepo;
 	
 	@RequestMapping("")
 	public Iterable<ContactInfo> findAllContactInfo() {

@@ -1,10 +1,12 @@
 package org.wecancodeit.peaceofmind;
 
-import javax.persistence.CascadeType;
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -43,6 +45,7 @@ public class Patient implements IPerson {
 	public String getDiagnosis() {
 		return diagnosis;
 	}
+
 
 	public Patient() {}
 	

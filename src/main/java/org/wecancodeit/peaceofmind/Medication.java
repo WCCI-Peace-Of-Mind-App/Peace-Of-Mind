@@ -1,11 +1,9 @@
 package org.wecancodeit.peaceofmind;
 
-import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Medication {

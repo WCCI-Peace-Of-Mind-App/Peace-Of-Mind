@@ -1,11 +1,18 @@
 package org.wecancodeit.peaceofmind;
 
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Patient implements IPerson {
@@ -17,10 +24,14 @@ public class Patient implements IPerson {
 	private String firstName;
 	private String lastName;
 	
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
 	private ContactInfo contactInfo; 
 	private String dateOfBirth;
 	private String diagnosis;
+	
+	@OneToMany
+	private Collection<Medication> medications;
 
 	public long getId() {
 		return id;
@@ -43,16 +54,20 @@ public class Patient implements IPerson {
 	public String getDiagnosis() {
 		return diagnosis;
 	}
-
+	
+	public Collection<Medication> getMedications() {
+		return medications;
+	}
 
 	public Patient() {}
 	
-	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis) {
+	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis, Medication...medications) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.contactInfo = contactInfo;
 		this.dateOfBirth = dateOfBirth;
 		this.diagnosis = diagnosis;
+		this.medications = new HashSet<>(Arrays.asList(medications));
 	}
 
 	@Override

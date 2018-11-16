@@ -4,6 +4,7 @@ package org.wecancodeit.peaceofmind;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Medication {
@@ -19,6 +20,9 @@ public class Medication {
 	private String frequencyTime;
 	private String picture;
 	private String reason;
+	
+	@ManyToOne
+	private Patient patient;
 	
 
 	public long getId() {
@@ -52,8 +56,6 @@ public class Medication {
 	public String getReason() {
 		return reason;
 	}
-	
-	
 
 	public Medication() {}
 	

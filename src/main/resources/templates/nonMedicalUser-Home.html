@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Peace Of Mind</title>
+</head>
+
+<body class="container">
+  <div th:each="nonMedicalUser: ${nonMedicalUsers}">
+    <header>
+      <h2>Peace of Mind</h2>
+      <h3>
+        <a th:href="@{/non-medical-user(id=${nonMedicalUser.id})}">Account</a>
+      </h3>
+    </header>
+
+    <section class="medLog">
+      <div>
+        <h2>Med Log</h2>
+        <div>
+          <p> <em>place holder for medlog display</em> </p>
+        </div>
+    </section>
+  </div>
+  <footer>
+    <span>&copy; Peace of Mind WCCI Final project</span>
+  </footer>
+</body>
+
+</html>

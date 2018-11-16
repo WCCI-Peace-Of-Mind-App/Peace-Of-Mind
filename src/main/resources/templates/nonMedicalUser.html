@@ -1,2 +1,29 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Peace Of Mind</title>
+</head>
+
+<body class="container">
+  <div th:each="nonMedicalUser: ${nonMedicalUsers}">
+    <header>
+      <h2>Peace of Mind</h2>
+      <h3>
+        <a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Home</a>
+      </h3>
+    </header>
+    <section class="account-info">
+      <h4>Your Account Information</h4>
+      <p>YourUsername: <span th:text="${nonMedicalUser.userName}"></span></p>
+      <p>First Name: <span th:text="${nonMedicalUser.firstName}"></span></p>
+      <p>Last Name: <span th:text="${nonMedicalUser.lastName}"></span></p>
+      <p>Contact Info: <span th:text="${nonMedicalUser.contactInfo}"></span></p>
+      <p>Your Loved One's Account: <em>placeholder for link to patient account</em> </p>
+    </section>
+  </div>
+  <footer>
+    <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+  </footer>
+</body>
+
+</html>

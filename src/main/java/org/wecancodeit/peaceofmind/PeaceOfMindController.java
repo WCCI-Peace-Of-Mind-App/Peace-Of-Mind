@@ -54,6 +54,20 @@ public class PeaceOfMindController {
 		throw new NonMedicalUserNotFoundException();
 
 	}
+	
+	@RequestMapping("/non-medical-user-home")
+	public String returnNonMedicalUserHomePage(@RequestParam(value = "id") long id, Model model)
+			throws NonMedicalUserNotFoundException {
+		Optional<NonMedicalUser> nonMedUser = nonMedUserRepo.findById(id);
+
+		if (nonMedUser.isPresent()) {
+			model.addAttribute("nonMedicalUsers", nonMedUser.get());
+			return "nonMedicalUser-Home";
+		}
+
+		throw new NonMedicalUserNotFoundException();
+
+	}
 
 	@RequestMapping("/all-non-medical-users")
 	public String returnAllNonMedicalUsers(Model model) {

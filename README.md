@@ -1,0 +1,2 @@
+# Peace-Of-Mind
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cc72052698824ad39e81da6369d7868a)](https://app.codacy.com/app/WCCI-PeaceOfMind-FallFlex2018/Peace-Of-Mind?utm_source=github.com&utm_medium=referral&utm_content=WCCI-Peace-Of-Mind-App/Peace-Of-Mind&utm_campaign=Badge_Grade_Dashboard)

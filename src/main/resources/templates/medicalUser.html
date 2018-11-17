@@ -1,2 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>A Medical User</title>
+</head>
+<body>
+    <h1>Medical User Information</h1>
+    <div th:each="medUser: ${medicalUsers}">
+        <p>YourUsername:<span th:text="${medUser.userName}"></span></p>
+        <p>First Name: <span th:text="${medUser.firstName}"></span></p>
+        <p>Last Name: <span th:text="${medUser.lastName}"></span></p>
+        <p>Contact Info: <span th:text="${medUser.contactInfo}"></span></p>
+        <p>Specialty: <span th:text="${medUser.medicalSpecialty}"></span></p>
+        <p>Institution: <span th:text="${medUser.medicalInstitution}"></span></p>
+        <p>Institution Phone #: <span th:text="${medUser.institutionTelephone}"></span></p>
+    </div>
+    <footer>
+        <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+    </footer>
+</body>

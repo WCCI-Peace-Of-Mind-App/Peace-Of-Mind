@@ -19,7 +19,7 @@
 
     <section class="medUser">
         <div th:if="${patients.nonMedicalUser}">
-            <h2>Friends and Family Members</h2>
+            <h2>Caregiver</h2>
             <div th:each="nonMedUser : ${patients.nonMedicalUser}">
                 <h3 th:text="|${nonMedUser.firstName} ${nonMedUser.lastName}"></h3>
                 <p>Contact</p>

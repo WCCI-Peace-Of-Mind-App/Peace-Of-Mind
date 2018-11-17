@@ -48,7 +48,7 @@
 
                 <section class="nonMedUser">
                     <div th:if="${patient.nonMedicalUser}">
-                        <h3>Friends and Family Members</h3>
+                        <h3>Caregiver</h3>
                         <div th:each="nonMedUser : ${patient.nonMedicalUser}">
                             <h4 th:text="|${nonMedUser.firstName} ${nonMedUser.lastName}"></h4>
                             <p>Relationship to Patient: <span th:text="${nonMedUser.relationshipWithPatient}">unknown</span></p>

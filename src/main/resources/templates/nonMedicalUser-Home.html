@@ -18,8 +18,8 @@
       <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
         <h2>Patient Information</h2>
         <div>
+          <h3 th:text="|${patient.firstName} ${patient.lastName}|">unknown</h3>
           <ul>
-            <li th:text="|${patient.firstName} ${patient.lastName}|">unknown</li>
             <li th:text="${patient.diagnosis}">unknown</li>
             <li>Contact</li>
             <ul>
@@ -35,8 +35,8 @@
           <div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
             <h2>Medical Personnel Information</h2>
             <div>
+              <h3 th:text="|${medicalUser.firstName} ${medicalUser.lastName}|">unknown</h3>
               <ul>
-                  <li th:text="|${medicalUser.firstName} ${medicalUser.lastName}|">unknown</li>
                   <li>Specialty: <span th:text="${medicalUser.medicalSpecialty}">unknown</span></li>
                   <li>Institution: <span th:text="${medicalUser.medicalInstitution}">unknown</span></li>
                   <li>Institution Phone: <span th:text="${medicalUser.institutionTelephone}">unknown</span></li>

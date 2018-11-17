@@ -3,18 +3,68 @@
 <head>
     <title>A Patient</title>
 </head>
-<body>
-    <h1>A Single Patient</h1>
+<body class="container">
+    <h1>Your Information</h1>
     <div th:each="patient: ${patients}">
-        <p>First Name: <span th:text="${patient.firstName}"></span></p>
-        <p>Last Name: <span th:text="${patient.lastName}"></span></p>
-        <p>Contact Info: <span th:text="${patient.contactInfo}"></span></p>
+        <p>Name: <span th:text="|${patient.firstName} ${patient.lastName}|"></span></p>
+        <p>Contact Info:</p>
+        <ul>
+            <li>Address <span th:text="${patient.contactInfo.address}"></span></li>
+            <li>Phone <span th:text="${patient.contactInfo.phone}"></span></li>
+            <li>Email <span th:text="${patient.contactInfo.email}"></span></li>
+        </ul>
         <p>DOB: <span th:text="${patient.dateOfBirth}"></span></p>
         <p>Diagnosis: <span th:text="${patient.diagnosis}"></span></p>
     </div>
+
+    <section class="medUser">
+        <div th:if="${patients.nonMedicalUser}">
+            <h2>Friends and Family Members</h2>
+            <div th:each="nonMedUser : ${patients.nonMedicalUser}">
+                <h3 th:text="|${nonMedUser.firstName} ${nonMedUser.lastName}"></h3>
+                <p>Contact</p>
+                <ul>
+                    <li>Address <span th:text="${nonMedUser.contactInfo.address}"></span></li>
+                    <li>Phone <span th:text="${nonMedUser.contactInfo.phone}"></span></li>
+                    <li>Email <span th:text="${nonMedUser.contactInfo.email}"></span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="medUser">
+        <div th:if="${patients.medicalUser}">
+            <h2>Medical Care Professionals</h2>
+            <div th:each="medUser : ${patients.medicalUser}">
+                <h3 th:text="|${medUser.firstName} ${medUser.lastName}"></h3>
+                <p>Medical Specialty: <span th:text="${medUser.medicalSpecialty}">unknown</span></p>
+                <p>Medical Care Center: <span th:text="${medUser.medicalInstitution}">unknown</span></p>
+                <p>Medical Center Phone Number: <span th:text="${medUser.institutionTelephone}">unknown</span></p>
+                <p>Contact</p>
+                <ul>
+                    <li>Phone <span th:text="${medUser.contactInfo.phone}"></span></li>
+                    <li>Email <span th:text="${medUser.contactInfo.email}"></span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="medication">
+        <div th:if="${patients.medications}">
+            <h2>Medications</h2>
+            <div th:each="medication : ${patients.medications}">
+                <h3 th:text="${medication.genericName}"></h3>
+                <p>Reason to Take: <span th:text="${medication.reason}"></span></p>
+                <p>Please take <span th:text="${medication.dosage}"></span> via <span th:text="${medication.administration}"></span> every <span th:text="${medication.frequencyAmount}"></span> <span th:text="${medication.frequencyTime}"></span></p>
+
+            </div>
+        </div>
+    </section>
+
     <footer>
         <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
     </footer>
+
 </body>
 
 </html>

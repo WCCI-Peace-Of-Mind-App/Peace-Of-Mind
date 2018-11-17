@@ -40,7 +40,6 @@ public class Patient implements IPerson {
 	private Collection<Medication> medications;
 
 
-
 	public long getId() {
 		return id;
 	}

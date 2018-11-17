@@ -40,10 +40,10 @@ public class MedicationLog {
 	}
 
 	public MedicationLog(long medicationId, long patientId) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+		DateTimeFormatter yyyymmddhhmm = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 		this.medicationId = medicationId;
 		this.patientId = patientId;
-		this.dateTime = LocalDateTime.now().format(dtf);
+		this.dateTime = LocalDateTime.now().format(yyyymmddhhmm);
 
 	}
 

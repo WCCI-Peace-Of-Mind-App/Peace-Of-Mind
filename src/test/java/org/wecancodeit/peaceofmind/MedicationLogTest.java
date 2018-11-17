@@ -14,7 +14,7 @@ public class MedicationLogTest {
 	MedicationLog underTest;
 	String date;
 	
-	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");  
+	DateTimeFormatter yyyymmddhhmm = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");  
 	
 	@Before
 	public void setUp() {
@@ -36,7 +36,7 @@ public class MedicationLogTest {
 	
 	@Test
 	public void shouldHaveDateTime() {
-		date = LocalDateTime.now().format(dtf);
+		date = LocalDateTime.now().format(yyyymmddhhmm);
 		String result = underTest.getDateTime();
 		assertThat(result, is(date));
 	}

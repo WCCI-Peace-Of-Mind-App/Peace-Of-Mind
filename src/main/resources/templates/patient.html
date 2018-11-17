@@ -9,9 +9,9 @@
         <p>Name: <span th:text="|${patient.firstName} ${patient.lastName}|"></span></p>
         <p>Contact Info:</p>
         <ul>
-            <li>Address <span th:text="${patient.contactInfo.address}"></span></li>
-            <li>Phone <span th:text="${patient.contactInfo.phone}"></span></li>
-            <li>Email <span th:text="${patient.contactInfo.email}"></span></li>
+            <li th:text="${patient.contactInfo.address}"></li>
+            <li th:text="${patient.contactInfo.phone}"></li>
+            <li th:text="${patient.contactInfo.email}"></li>
         </ul>
         <p>DOB: <span th:text="${patient.dateOfBirth}"></span></p>
         <p>Diagnosis: <span th:text="${patient.diagnosis}"></span></p>
@@ -24,9 +24,9 @@
                 <h3 th:text="|${nonMedUser.firstName} ${nonMedUser.lastName}"></h3>
                 <p>Contact</p>
                 <ul>
-                    <li>Address <span th:text="${nonMedUser.contactInfo.address}"></span></li>
-                    <li>Phone <span th:text="${nonMedUser.contactInfo.phone}"></span></li>
-                    <li>Email <span th:text="${nonMedUser.contactInfo.email}"></span></li>
+                    <li th:text="${nonMedUser.contactInfo.address}"></li>
+                    <li th:text="${nonMedUser.contactInfo.phone}"></li>
+                    <li th:text="${nonMedUser.contactInfo.email}"></li>
                 </ul>
             </div>
         </div>
@@ -42,8 +42,8 @@
                 <p>Medical Center Phone Number: <span th:text="${medUser.institutionTelephone}">unknown</span></p>
                 <p>Contact</p>
                 <ul>
-                    <li>Phone <span th:text="${medUser.contactInfo.phone}"></span></li>
-                    <li>Email <span th:text="${medUser.contactInfo.email}"></span></li>
+                    <li th:text="${medUser.contactInfo.phone}"></li>
+                    <li th:text="${medUser.contactInfo.email}"></li>
                 </ul>
             </div>
         </div>

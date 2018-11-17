@@ -73,7 +73,7 @@ public class Phone implements IContactType{
 	}
 	
 	public String toString() {
-		return type + ": " + phoneNumber;
+		return type + " phone: " + phoneNumber;
 	}
 
 }

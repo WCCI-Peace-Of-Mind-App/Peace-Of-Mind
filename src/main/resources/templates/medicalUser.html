@@ -54,9 +54,9 @@
                             <p>Relationship to Patient: <span th:text="${nonMedUser.relationshipWithPatient}">unknown</span></p>
                             <p>Contact</p>
                             <ul>
-                                <li>Address <span th:text="${nonMedUser.contactInfo.address}"></span></li>
-                                <li>Phone <span th:text="${nonMedUser.contactInfo.phone}"></span></li>
-                                <li>Email <span th:text="${nonMedUser.contactInfo.email}"></span></li>
+                                <li th:text="${nonMedUser.contactInfo.address}"></li>
+                                <li th:text="${nonMedUser.contactInfo.phone}"></li>
+                                <li th:text="${nonMedUser.contactInfo.email}"></li>
                             </ul>
                         </div>
                     </div>

@@ -20,6 +20,9 @@ public class NonMedicalUser implements INonPatientUser {
 	private String userName;
 	private String password;
 	private String relationshipWithPatient;
+	
+	@OneToOne(mappedBy = "nonMedicalUser", fetch = FetchType.LAZY, optional = false)
+	private Patient patient;
 
 
 	public Long getId() {
@@ -53,6 +56,10 @@ public class NonMedicalUser implements INonPatientUser {
 		return relationshipWithPatient;
 	}
 	
+	public Patient getPatient() {
+		return patient;
+	}
+
 	public NonMedicalUser() {}
 		
 	public NonMedicalUser(String firstName, String lastName, ContactInfo contactInfo, String userName, String password, String relationshipWithPatient) {
@@ -85,6 +92,7 @@ public class NonMedicalUser implements INonPatientUser {
 			return false;
 		return true;
 	}
+
 
 
 }

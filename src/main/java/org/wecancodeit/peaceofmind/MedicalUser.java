@@ -1,6 +1,5 @@
 package org.wecancodeit.peaceofmind;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,10 +23,13 @@ public class MedicalUser implements INonPatientUser {
 	private String userName;
 	private String password;
 
+	@OneToOne
+	private Patient patient;
+
 	public MedicalUser() {}
 	
 	public MedicalUser(String firstName,String lastName, ContactInfo contactInfo, String medicalSpecialty,
-			String medicalInstitution, String institutionTelephone, String userName, String password) {
+			String medicalInstitution, String institutionTelephone, String userName, String password, Patient patient) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -37,6 +39,7 @@ public class MedicalUser implements INonPatientUser {
 		this.institutionTelephone = institutionTelephone;
 		this.userName = userName;
 		this.password = password;
+		this.patient = patient;
 	}
 
 	public long getId() {
@@ -78,6 +81,10 @@ public class MedicalUser implements INonPatientUser {
 	@Override
 	public String getPassword() {
 		return this.password;
+	}
+	
+	public Patient getPatient() {
+		return patient;
 	}
 
 	@Override

@@ -37,6 +37,22 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		// Non Med User 2 build
+		
+		Address address2a = addressRepo.save(new Address("123 Builder St", null, "Columbus", "Ohio", "43055", "home"));
+		
+		Phone phone2a = phoneRepo.save(new Phone("614-555-4321", "home"));
+		
+		Email email2a = emailRepo.save(new Email("321@zyx.com", "work"));
+		
+		
+		ContactInfo contactInfo2 = contactInfoRepo.save(new ContactInfo(address2a, email2a, phone2a));
+		
+		
+		NonMedicalUser nonMedUser2 = nonMedUserRepo.save(new NonMedicalUser("Jenny", "Wilson", contactInfo2, "xxGAMERxx", "pass1234", "Daughter"));
+		
+		//end NonMedUser 2
+
 		// Patient 1 build
 		
 		Address address1a = addressRepo.save(new Address("123 Baker St", null, "Columbus", "Ohio", "43081", "home"));
@@ -52,25 +68,10 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 				
 
 		
-		patientRepo.save(new Patient("Joe", "Bob", contactInfo1, "01/01/01", "Alzheimers", med1, med2));
+		Patient patient1 = patientRepo.save(new Patient("Joe", "Bob", contactInfo1, "01/01/01", "Alzheimers", nonMedUser2, med1, med2));
 		
 		// End Patient 1 build
 		
-		// Non Med User 2 build
-
-		Address address2a = addressRepo.save(new Address("123 Builder St", null, "Columbus", "Ohio", "43055", "home"));
-		
-		Phone phone2a = phoneRepo.save(new Phone("614-555-4321", "home"));
-		
-		Email email2a = emailRepo.save(new Email("321@zyx.com", "work"));
-
-		
-		ContactInfo contactInfo2 = contactInfoRepo.save(new ContactInfo(address2a, email2a, phone2a));
-
-		
-		nonMedUserRepo.save(new NonMedicalUser("Jenny", "Wilson", contactInfo2, "xxGAMERxx", "pass1234", "Daughter"));
-		
-		//end NonMedUser 2
 		
 		//begin MedUser 3
 		Address address3a = addressRepo.save(new Address("555 Candlestick Court", null, "Obetz", "Ohio", "43207", "home"));
@@ -82,7 +83,7 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		ContactInfo contactInfo3 = contactInfoRepo.save(new ContactInfo(address3a, email3a, phone3a));
 		
 		
-		medUserRepo.save(new MedicalUser("Otto", "Octavius", contactInfo3, "Therapist", "Ohio State Med", "911", "docOc", "tentacles8"));
+		medUserRepo.save(new MedicalUser("Otto", "Octavius", contactInfo3, "Therapist", "Ohio State Med", "911", "docOc", "tentacles8", patient1));
 		
 		
 

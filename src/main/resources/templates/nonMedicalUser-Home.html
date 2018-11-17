@@ -33,9 +33,9 @@
         
         <section class="medUser">
           <div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
-            <h2>Medical Personnel Information</h2>
+            <h3>Medical Personnel Information</h3>
             <div>
-              <h3 th:text="|${medicalUser.firstName} ${medicalUser.lastName}|">unknown</h3>
+              <h4 th:text="|${medicalUser.firstName} ${medicalUser.lastName}|">unknown</h4>
               <ul>
                   <li>Specialty: <span th:text="${medicalUser.medicalSpecialty}">unknown</span></li>
                   <li>Institution: <span th:text="${medicalUser.medicalInstitution}">unknown</span></li>
@@ -48,6 +48,18 @@
               </ul>
             </div>
           </div>
+        </section>
+
+        <section class="medication">
+            <div th:if="${patient.medications}">
+                <h3>Medications</h3>
+                <div th:each="medication : ${patient.medications}">
+                    <h4 th:text="${medication.genericName}"></h4>
+                    <p>Reason for administration: <span th:text="${medication.reason}"></span></p>
+                    <p>Dosage: <span th:text="${medication.dosage}"></span> via <span th:text="${medication.administration}"></span> every <span th:text="${medication.frequencyAmount}"></span> <span th:text="${medication.frequencyTime}"></span></p>
+                    <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
+                </div>
+            </div>
         </section>
 
       </div>

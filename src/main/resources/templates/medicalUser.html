@@ -36,10 +36,10 @@
 
                 <section class="medication">
                     <div th:if="${patient.medications}">
-                        <h2>Medications</h2>
+                        <h3>Medications</h3>
                         <div th:each="medication : ${patient.medications}">
-                            <h3 th:text="${medication.genericName}"></h3>
-                            <p>Reason to Take: <span th:text="${medication.reason}"></span></p>
+                            <h4 th:text="${medication.genericName}"></h4>
+                            <p>Reason for administration: <span th:text="${medication.reason}"></span></p>
                             <p>Doasge: <span th:text="${medication.dosage}"></span> via <span th:text="${medication.administration}"></span> every <span th:text="${medication.frequencyAmount}"></span> <span th:text="${medication.frequencyTime}"></span></p>
                             <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
                         </div>
@@ -48,7 +48,7 @@
 
                 <section class="nonMedUser">
                     <div th:if="${patient.nonMedicalUser}">
-                        <h3>Caregiver</h3>
+                        <h3><span th:text="${patient.firstName}"></span>'s Caregiver</h3>
                         <div th:each="nonMedUser : ${patient.nonMedicalUser}">
                             <h4 th:text="|${nonMedUser.firstName} ${nonMedUser.lastName}"></h4>
                             <p>Relationship to Patient: <span th:text="${nonMedUser.relationshipWithPatient}">unknown</span></p>

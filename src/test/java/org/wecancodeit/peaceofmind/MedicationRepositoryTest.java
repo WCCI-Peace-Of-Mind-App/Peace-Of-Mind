@@ -1,6 +1,7 @@
 package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
@@ -42,6 +43,7 @@ public class MedicationRepositoryTest {
 		medId = med1.getId();
 		
 		med2 = medRepo.save(new Medication("drugs", "1L", "oral", 1, "daily", "bbb.jpg", "memory"));
+		
 		medNot = medRepo.save(new Medication("blammo", "5 cc", "injection", 1, "weekly", "xxx.jpg", "nausea"));
 		
 		patient = patientRepo.save(new Patient("John", "Bowles", null, "01/01/2001", "Alzh", null));
@@ -65,7 +67,10 @@ public class MedicationRepositoryTest {
 	@Test
 	public void shouldEstablishRelationshipWithPatient() {
 		
-		
+//		long patientId = patient.getId();
+//		Optional<Patient> result = patientRepo.findById(patientId);
+//		patient = result.get();
+//		assertThat(patient.getMedications(),containsInAnyOrder(med2,med1));
 		
 	}
 	

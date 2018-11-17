@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Medication</title>
+</head>
+
+<body>
+    <article id="content">
+        <h1>A Single Medication</h1>
+        <div th:each="medication: ${medications}">
+            <p>Generic Name: [[${medication.genericName}]]</p>
+            <p>Dosage: [[${medication.dosage}]]</p>
+            <p>Administration: [[${medication.administration}]]</p>
+            <p>Frequency: [[${medication.frequencyAmount}]]</p>
+            <p>Times Taken: [[${medication.frequencyTime}]]</p>
+            <img src="${medication.picture}">Picture: </p>
+            <p>Reason: [[${medication.reason}]]</p>
+        </div>
+    </article>
+    <footer>
+        <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+    </footer>
+</body>
+
+</html>

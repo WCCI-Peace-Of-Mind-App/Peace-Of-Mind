@@ -25,6 +25,7 @@ public class Medication {
 	private Patient patient;
 	
 
+
 	public long getId() {
 		return id;
 	}
@@ -57,6 +58,10 @@ public class Medication {
 		return reason;
 	}
 
+	public Patient getPatient() {
+		return patient;
+	}
+	
 	public Medication() {}
 	
 	public Medication(String genericName, String dosage, String administration, int frequencyAmount, String frequencyTime, String picture, String reason) {

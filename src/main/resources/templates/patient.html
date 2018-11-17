@@ -56,7 +56,7 @@
                 <h3 th:text="${medication.genericName}"></h3>
                 <p>Reason to Take: <span th:text="${medication.reason}"></span></p>
                 <p>Please take <span th:text="${medication.dosage}"></span> via <span th:text="${medication.administration}"></span> every <span th:text="${medication.frequencyAmount}"></span> <span th:text="${medication.frequencyTime}"></span></p>
-
+                <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
             </div>
         </div>
     </section>

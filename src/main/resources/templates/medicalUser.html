@@ -3,7 +3,7 @@
 <head>
    <title>A Medical User</title>
 </head>
-<body>
+<body class="container">
    <article id="content">
            <h1>Medical User Information</h1>
            <div id="content-body" th:each="medUser: ${medicalUsers}">
@@ -18,8 +18,58 @@
            </div>
    </article>
 
+   <section class="patient">
+       <div th:if="${medicalUsers.patient}">
+           <h2>Your Patient</h2>
+           <div th:each="patient : ${medicalUsers.patient}">
+               <h3 th:text="|${patient.firstName} ${patient.lastName}|"></h3>
+               <ul>
+                   <li th:text="${patient.diagnosis}">unknown</li>
+                   <li>Contact</li>
+                   <ul>
+                       <li th:text="${patient.contactInfo.address}"></li>
+                       <li th:text="${patient.contactInfo.phone}"></li>
+                       <li th:text="${patient.contactInfo.email}"></li>
+                   </ul>
+                   <li>Recent Status: <span><em>placeholder for patient emotion</em></span></li>
+                </ul>
+
+                <section class="medication">
+                    <div th:if="${patient.medications}">
+                        <h2>Medications</h2>
+                        <div th:each="medication : ${patient.medications}">
+                            <h3 th:text="${medication.genericName}"></h3>
+                            <p>Reason to Take: <span th:text="${medication.reason}"></span></p>
+                            <p>Doasge: <span th:text="${medication.dosage}"></span> via <span th:text="${medication.administration}"></span> every <span th:text="${medication.frequencyAmount}"></span> <span th:text="${medication.frequencyTime}"></span></p>
+                            <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
+                        </div>
+                    </div>
+                </section>
+
+                <section class="nonMedUser">
+                    <div th:if="${patient.nonMedicalUser}">
+                        <h3>Friends and Family Members</h3>
+                        <div th:each="nonMedUser : ${patient.nonMedicalUser}">
+                            <h4 th:text="|${nonMedUser.firstName} ${nonMedUser.lastName}"></h4>
+                            <p>Relationship to Patient: <span th:text="${nonMedUser.relationshipWithPatient}">unknown</span></p>
+                            <p>Contact</p>
+                            <ul>
+                                <li>Address <span th:text="${nonMedUser.contactInfo.address}"></span></li>
+                                <li>Phone <span th:text="${nonMedUser.contactInfo.phone}"></span></li>
+                                <li>Email <span th:text="${nonMedUser.contactInfo.email}"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+       </div>
+   </section>
+
+
    <footer>
        <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
    </footer>
+
 </body>
 </html>

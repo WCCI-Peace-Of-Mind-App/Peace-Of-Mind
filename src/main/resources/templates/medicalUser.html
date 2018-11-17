@@ -5,13 +5,18 @@
 </head>
 <body class="container">
    <article id="content">
-           <h1>Medical User Information</h1>
+           <h1>Your Information</h1>
            <div id="content-body" th:each="medUser: ${medicalUsers}">
 
                <p class="stats" id="userName">YourUsername: [[${medUser.userName}]]</p>
                <p class="stats" id="F-Name">First Name: [[${medUser.firstName}]]</p>
                <p class="stats" id="L-Name">Last Name: [[${medUser.lastName}]]</p>
-               <p class="stats" id="contactInfo">Contact Info: [[${medUser.contactInfo}]]</p>
+               <p class="stats" id="contactInfo">Contact Info:</p>
+               <ul>
+                   <li th:text="${medUser.contactInfo.address}"></li>
+                   <li th:text="${medUser.contactInfo.phone}"></li>
+                   <li th:text="${medUser.contactInfo.email}"></li>
+               </ul>
                <p class="stats" id="specialty">Specialty: [[${medUser.medicalSpecialty}]]</p>
                <p class="stats" id="institution">Institution: [[${medUser.medicalInstitution}]]</p>
                <p class="stats" id="phone">Institution Phone #: [[${medUser.institutionTelephone}]]</p>
@@ -24,7 +29,7 @@
            <div th:each="patient : ${medicalUsers.patient}">
                <h3 th:text="|${patient.firstName} ${patient.lastName}|"></h3>
                <ul>
-                   <li th:text="${patient.diagnosis}">unknown</li>
+                   <li>Diagnosis: <span th:text="${patient.diagnosis}">unknown</span></li>
                    <li>Contact</li>
                    <ul>
                        <li th:text="${patient.contactInfo.address}"></li>
@@ -51,12 +56,14 @@
                         <h3><span th:text="${patient.firstName}"></span>'s Caregiver</h3>
                         <div th:each="nonMedUser : ${patient.nonMedicalUser}">
                             <h4 th:text="|${nonMedUser.firstName} ${nonMedUser.lastName}"></h4>
-                            <p>Relationship to Patient: <span th:text="${nonMedUser.relationshipWithPatient}">unknown</span></p>
-                            <p>Contact</p>
                             <ul>
-                                <li th:text="${nonMedUser.contactInfo.address}"></li>
-                                <li th:text="${nonMedUser.contactInfo.phone}"></li>
-                                <li th:text="${nonMedUser.contactInfo.email}"></li>
+                                <li>Relationship to Patient: <span th:text="${nonMedUser.relationshipWithPatient}">unknown</span></li>
+                                <li>Contact</li>
+                                <ul>
+                                    <li th:text="${nonMedUser.contactInfo.address}"></li>
+                                    <li th:text="${nonMedUser.contactInfo.phone}"></li>
+                                    <li th:text="${nonMedUser.contactInfo.email}"></li>
+                                </ul>
                             </ul>
                         </div>
                     </div>

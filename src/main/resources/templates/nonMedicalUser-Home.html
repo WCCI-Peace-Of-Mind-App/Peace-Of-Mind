@@ -15,19 +15,44 @@
     </header>
 
     <section class="patient">
-      <div>
+      <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
         <h2>Patient Information</h2>
         <div>
           <ul>
-            <li th:text="|${nonMedicalUser.patient.firstName} ${nonMedicalUser.patient.lastName}|"></li>
-            <li th:text="${nonMedicalUser.patient.diagnosis}"></li>
-            <li>Contact
-              <li th:text="${nonMedicalUser.patient.contactInfo.address}"></li>
-            </li>
+            <li th:text="|${patient.firstName} ${patient.lastName}|">unknown</li>
+            <li th:text="${patient.diagnosis}">unknown</li>
+            <li>Contact</li>
+            <ul>
+              <li th:text="${patient.contactInfo.address}"></li>
+              <li th:text="${patient.contactInfo.phone}"></li>
+              <li th:text="${patient.contactInfo.email}"></li>
+            </ul>
+            <li>Recent Status: <span><em>placeholder for patient emotion</em></span></li>
           </ul>
         </div>
+        
+        <section class="medUser">
+          <div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
+            <h2>Medical Personnel Information</h2>
+            <div>
+              <ul>
+                  <li th:text="|${medicalUser.firstName} ${medicalUser.lastName}|">unknown</li>
+                  <li>Specialty: <span th:text="${medicalUser.medicalSpecialty}">unknown</span></li>
+                  <li>Institution: <span th:text="${medicalUser.medicalInstitution}">unknown</span></li>
+                  <li>Institution Phone: <span th:text="${medicalUser.institutionTelephone}">unknown</span></li>
+                  <li>Other Contact Methods</li>
+                  <ul>
+                    <li th:text="${medicalUser.contactInfo.phone}">No phone</li>
+                    <li th:text="${medicalUser.contactInfo.email}">no email</li>
+                  </ul>
+              </ul>
+            </div>
+          </div>
+        </section>
+
       </div>
     </section>
+
 
     <section class="medLog">
       <div>

@@ -71,5 +71,9 @@ public class Phone implements IContactType{
 			return false;
 		return true;
 	}
+	
+	public String toString() {
+		return type + ": " + phoneNumber;
+	}
 
 }

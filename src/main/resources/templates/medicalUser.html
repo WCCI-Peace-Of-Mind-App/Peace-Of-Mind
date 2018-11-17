@@ -6,6 +6,7 @@
 <body>
     <h1>Medical User Information</h1>
     <div th:each="medUser: ${medicalUsers}">
+        <!-- Instead of an unnecessary HTML element you can do in-line Thymeleaf <p>Your Username: [[${medUser.userName}]]</p> Also, please consider putting #id or .classes -->
         <p>YourUsername:<span th:text="${medUser.userName}"></span></p>
         <p>First Name: <span th:text="${medUser.firstName}"></span></p>
         <p>Last Name: <span th:text="${medUser.lastName}"></span></p>

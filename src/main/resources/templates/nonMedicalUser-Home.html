@@ -14,6 +14,21 @@
       </h3>
     </header>
 
+    <section class="patient">
+      <div>
+        <h2>Patient Information</h2>
+        <div>
+          <ul>
+            <li th:text="|${nonMedicalUser.patient.firstName} ${nonMedicalUser.patient.lastName}|"></li>
+            <li th:text="${nonMedicalUser.patient.diagnosis}"></li>
+            <li>Contact
+              <li th:text="${nonMedicalUser.patient.contactInfo.address}"></li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section class="medLog">
       <div>
         <h2>Med Log</h2>

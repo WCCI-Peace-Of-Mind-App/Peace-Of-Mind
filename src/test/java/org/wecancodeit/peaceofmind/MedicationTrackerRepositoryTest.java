@@ -49,7 +49,7 @@ public class MedicationTrackerRepositoryTest {
 	public void setUp() {
 		
 		ContactInfo contact = contactRepo.save(new ContactInfo());
-		Patient testPatient = patientRepo.save(new Patient("Gilderoy", "Lockhart", contact, "date", "dementia"));
+		Patient testPatient = patientRepo.save(new Patient("Gilderoy", "Lockhart", contact, "date", "dementia", null));
 		Medication testMed = medRepo
 				.save(new Medication("Chocolate Frog", "1 frog", "oral", 1, "daily", "img.jpg", "good spirits"));
 

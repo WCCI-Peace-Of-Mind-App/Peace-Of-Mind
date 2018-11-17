@@ -30,8 +30,16 @@ public class Patient implements IPerson {
 	private String dateOfBirth;
 	private String diagnosis;
 	
+	@OneToOne
+	private NonMedicalUser nonMedicalUser;
+
+	@OneToOne(mappedBy = "patient", fetch = FetchType.LAZY, optional = false)
+	private MedicalUser medicalUser;
+
 	@OneToMany
 	private Collection<Medication> medications;
+
+
 
 	public long getId() {
 		return id;
@@ -55,18 +63,27 @@ public class Patient implements IPerson {
 		return diagnosis;
 	}
 	
+	public NonMedicalUser getNonMedicalUser() {
+		return nonMedicalUser;
+	}
+
+	public MedicalUser getMedicalUser() {
+		return medicalUser;
+	}
+	
 	public Collection<Medication> getMedications() {
 		return medications;
 	}
 
 	public Patient() {}
 	
-	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis, Medication...medications) {
+	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis, NonMedicalUser nonMedicalUser, Medication...medications) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.contactInfo = contactInfo;
 		this.dateOfBirth = dateOfBirth;
 		this.diagnosis = diagnosis;
+		this.nonMedicalUser = nonMedicalUser;
 		this.medications = new HashSet<>(Arrays.asList(medications));
 	}
 
@@ -91,6 +108,7 @@ public class Patient implements IPerson {
 			return false;
 		return true;
 	}
+
 
 
 }

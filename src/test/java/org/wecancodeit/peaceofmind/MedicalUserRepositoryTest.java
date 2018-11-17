@@ -32,7 +32,7 @@ public class MedicalUserRepositoryTest {
   {
 	MedicalUser expectedMedicalUser = medUserRepo.save( new MedicalUser("first-name", "lastName",
 			new ContactInfo(),
-			"medicalSpecialty", "medicalInstitution", "institutionTelephone", "userName", "password"
+			"medicalSpecialty", "medicalInstitution", "institutionTelephone", "userName", "password", null
 	  )
 	);
 	assertTrue(expectedMedicalUser instanceof MedicalUser);
@@ -49,7 +49,7 @@ public class MedicalUserRepositoryTest {
 	 
 	 MedicalUser expectedMedicalUser = medUserRepo.save( new MedicalUser("first-name", "lastName",
 				contactInfo,
-				"medicalSpecialty", "medicalInstitution", "institutionTelephone", "userName", "password"
+				"medicalSpecialty", "medicalInstitution", "institutionTelephone", "userName", "password", null
 	   )
 	 );
 	 assertThat(expectedMedicalUser.getContactInfo().getAddress(), is(anAddress));

@@ -90,6 +90,17 @@ public class Address implements IContactType{
 		return true;
 	}
 
+	public String toString() {
+		return type + ": " + streetAddress + checkSecondaryField() + ", " + city + ", " + state + " " + zipCode;
+	}
+	
+	public String checkSecondaryField() {
+		if (secondaryField == null) {
+			return "";
+		} else {
+			return ", " + secondaryField;
+		}
+	}
 
 
 }

@@ -9,8 +9,7 @@
            <div id="content-body" th:each="medUser: ${medicalUsers}">
 
                <p class="stats" id="userName">YourUsername: [[${medUser.userName}]]</p>
-               <p class="stats" id="F-Name">First Name: [[${medUser.firstName}]]</p>
-               <p class="stats" id="L-Name">Last Name: [[${medUser.lastName}]]</p>
+               <p class="stats" id="name">Name: [[${medUser.firstName}]] [[${medUser.lastName}]]</p>
                <p class="stats" id="contactInfo">Contact Info:</p>
                <ul>
                    <li th:text="${medUser.contactInfo.address}"></li>
@@ -29,7 +28,7 @@
            <div th:each="patient : ${medicalUsers.patient}">
                <h3 th:text="|${patient.firstName} ${patient.lastName}|"></h3>
                <ul>
-                   <li>Diagnosis: <span th:text="${patient.diagnosis}">unknown</span></li>
+                   <li>Diagnosis: [[${patient.diagnosis}]]</li>
                    <li>Contact</li>
                    <ul>
                        <li th:text="${patient.contactInfo.address}"></li>

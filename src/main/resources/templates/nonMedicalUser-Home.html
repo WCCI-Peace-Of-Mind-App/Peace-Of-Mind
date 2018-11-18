@@ -23,9 +23,9 @@
             <li th:text="${patient.diagnosis}">unknown</li>
             <li>Contact</li>
             <ul>
-              <li th:text="${patient.contactInfo.address}"></li>
-              <li th:text="${patient.contactInfo.phone}"></li>
-              <li th:text="${patient.contactInfo.email}"></li>
+              <li th:if="${patient.contactInfo.address}" th:text="${patient.contactInfo.address}"></li>
+              <li th:if="${patient.contactInfo.phone}" th:text="${patient.contactInfo.phone}"></li>
+              <li th:if="${patient.contactInfo.email}" th:text="${patient.contactInfo.email}"></li>
             </ul>
             <li>Recent Status: <span><em>placeholder for patient emotion</em></span></li>
           </ul>
@@ -42,8 +42,8 @@
                   <li>Institution Phone: <span th:text="${medicalUser.institutionTelephone}">unknown</span></li>
                   <li>Other Contact Methods</li>
                   <ul>
-                    <li th:text="${medicalUser.contactInfo.phone}">No phone</li>
-                    <li th:text="${medicalUser.contactInfo.email}">no email</li>
+                    <li th:if="${medicalUser.contactInfo.phone}" th:text="${medicalUser.contactInfo.phone}">No phone</li>
+                    <li th:if="${medicalUser.contactInfo.email}" th:text="${medicalUser.contactInfo.email}">no email</li>
                   </ul>
               </ul>
             </div>

@@ -12,9 +12,9 @@
                <p class="stats" id="name">Name: [[${medUser.firstName}]] [[${medUser.lastName}]]</p>
                <p class="stats" id="contactInfo">Contact Info:</p>
                <ul>
-                   <li th:text="${medUser.contactInfo.address}"></li>
-                   <li th:text="${medUser.contactInfo.phone}"></li>
-                   <li th:text="${medUser.contactInfo.email}"></li>
+                   <li th:if="${medUser.contactInfo.address}" th:text="${medUser.contactInfo.address}"></li>
+                   <li th:if="${medUser.contactInfo.phone}" th:text="${medUser.contactInfo.phone}"></li>
+                   <li th:if="${medUser.contactInfo.email}" th:text="${medUser.contactInfo.email}"></li>
                </ul>
                <p class="stats" id="specialty">Specialty: [[${medUser.medicalSpecialty}]]</p>
                <p class="stats" id="institution">Institution: [[${medUser.medicalInstitution}]]</p>
@@ -31,9 +31,9 @@
                    <li>Diagnosis: [[${patient.diagnosis}]]</li>
                    <li>Contact</li>
                    <ul>
-                       <li th:text="${patient.contactInfo.address}"></li>
-                       <li th:text="${patient.contactInfo.phone}"></li>
-                       <li th:text="${patient.contactInfo.email}"></li>
+                       <li th:if="${patient.contactInfo.address}" th:text="${patient.contactInfo.address}"></li>
+                       <li th:if="${patient.contactInfo.phone}" th:text="${patient.contactInfo.phone}"></li>
+                       <li th:if="${patient.contactInfo.email}" th:text="${patient.contactInfo.email}"></li>
                    </ul>
                    <li>Recent Status: <span><em>placeholder for patient emotion</em></span></li>
                 </ul>
@@ -50,6 +50,14 @@
                     </div>
                 </section>
 
+                <section class="medLog">
+                    <div>
+                      <h3>Med Log</h3>
+                      <div>
+                        <p> <em>place holder for medlog display</em> </p>
+                      </div>
+                  </section>
+
                 <section class="nonMedUser">
                     <div th:if="${patient.nonMedicalUser}">
                         <h3><span th:text="${patient.firstName}"></span>'s Caregiver</h3>
@@ -59,9 +67,9 @@
                                 <li>Relationship to Patient: <span th:text="${nonMedUser.relationshipWithPatient}">unknown</span></li>
                                 <li>Contact</li>
                                 <ul>
-                                    <li th:text="${nonMedUser.contactInfo.address}"></li>
-                                    <li th:text="${nonMedUser.contactInfo.phone}"></li>
-                                    <li th:text="${nonMedUser.contactInfo.email}"></li>
+                                    <li th:if="${nonMedUser.contactInfo.address}" th:text="${nonMedUser.contactInfo.address}"></li>
+                                    <li th:if="${nonMedUser.contactInfo.phone}" th:text="${nonMedUser.contactInfo.phone}"></li>
+                                    <li th:if="${nonMedUser.contactInfo.email}" th:text="${nonMedUser.contactInfo.email}"></li>
                                 </ul>
                             </ul>
                         </div>

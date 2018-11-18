@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Patient implements IPerson {
 	
@@ -21,10 +23,12 @@ public class Patient implements IPerson {
 	private String firstName;
 	private String lastName;
 	
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
 	private ContactInfo contactInfo; 
 	private String dateOfBirth;
 	private String diagnosis;
+
   @OneToMany(mappedBy="parent")
   private Collection<PatientStatus> statusHistory;
 
@@ -49,10 +53,22 @@ public class Patient implements IPerson {
 	public String getDiagnosis() {
 		return diagnosis;
 	}
+	
+	public NonMedicalUser getNonMedicalUser() {
+		return nonMedicalUser;
+	}
+
+	public MedicalUser getMedicalUser() {
+		return medicalUser;
+	}
+	
+	public Collection<Medication> getMedications() {
+		return medications;
+	}
 
 	public Patient() {}
 	
-	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis) {
+	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis, NonMedicalUser nonMedicalUser, Medication...medications) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.contactInfo = contactInfo;
@@ -92,6 +108,7 @@ public class Patient implements IPerson {
   {
     return (PatientStatus)this.statusHistory.toArray()[this.statusHistory.toArray().length-1];
   }
+
 
 
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns: th="http://www.thymeleaf.org">
+
+<head>
+    <title>Medications</title>
+</head>
+<h1>A List of Medications</h1>
+<body>
+    <section class="medication-info">
+
+            <div th:each="medication: ${medications}">
+                    <ul>
+                        <li th:text="${medication.getGenericName()}"></li>
+                        <li th:text="${medication.getDosage()}"></li>
+                        <li th:text="${medication.getAdministration()}"></li>
+                        <li th:text="${medication.getFrequencyAmount()}"></li>
+                        <li th:text="${medication.getFrequencyTime()}"></li>
+                        <li th:text="${medication.getPicture()}"></li>
+                        <li th:text="${medication.getReason()}"></li>
+                    </ul>
+            
+                </div>
+    </section>
+    
+
+
+</body>
+
+
+</html>

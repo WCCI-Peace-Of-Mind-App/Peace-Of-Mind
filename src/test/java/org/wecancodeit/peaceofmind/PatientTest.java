@@ -11,7 +11,7 @@ public class PatientTest {
 	
 	
 	ContactInfo contactInfo = new ContactInfo();
-	Patient underTest = new Patient("firstName", "lastName", contactInfo, "01/01/0000", "diagnosis");
+	Patient underTest = new Patient("firstName", "lastName", contactInfo, "01/01/0000", "diagnosis", null);
 	
 	
 	@Test

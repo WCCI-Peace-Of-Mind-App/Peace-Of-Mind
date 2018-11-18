@@ -1,2 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>A Patient</title>
+</head>
+<body>
+    <h1>A Single Patient</h1>
+    <div th:each="patient: ${patients}">
+        <p>First Name: <span th:text="${patient.firstName}"></span></p>
+        <p>Last Name: <span th:text="${patient.lastName}"></span></p>
+        <p>Contact Info: <span th:text="${patient.contactInfo}"></span></p>
+        <p>DOB: <span th:text="${patient.dateOfBirth}"></span></p>
+        <p>Diagnosis: <span th:text="${patient.diagnosis}"></span></p>
+    </div>
+    <footer>
+        <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+    </footer>
+</body>
+
+</html>

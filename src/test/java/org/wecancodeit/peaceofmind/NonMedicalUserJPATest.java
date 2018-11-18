@@ -34,9 +34,13 @@ public class NonMedicalUserJPATest {
 	@Resource
 	private ContactInfoRepository contactRepo;
 	
+	@Resource
+	private PatientRepository patientRepo;
+	
 	NonMedicalUser underTest;
 	long nonMedUserId;
 	ContactInfo contact;
+	Patient patient;
 	
 	@Before
 	public void setUp() {
@@ -54,6 +58,8 @@ public class NonMedicalUserJPATest {
 		
 		underTest = nonMedUserRepo.save(new NonMedicalUser("first", "last", contact, "username", "password", "relation"));
 		nonMedUserId = underTest.getId();
+		
+		patient = patientRepo.save(new Patient("joe", "bob", null, "01/01/2001", "alzh", underTest));
 		
 		entityManager.flush();
 		entityManager.clear();
@@ -77,6 +83,13 @@ public class NonMedicalUserJPATest {
 		Optional<NonMedicalUser> getresult = nonMedUserRepo.findById(nonMedUserId);
 		NonMedicalUser result = getresult.get();
 		assertThat(result.getContactInfo(), is(contact));
+	}
+	
+	@Test
+	public void shouldEstablishRelationshipBetweenNonMedUserAndPatient() {
+		Optional<NonMedicalUser> getresult = nonMedUserRepo.findById(nonMedUserId);
+		NonMedicalUser result = getresult.get();
+		assertThat(result.getPatient(), is(patient));
 	}
 
 }

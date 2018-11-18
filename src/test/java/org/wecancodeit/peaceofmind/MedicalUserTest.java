@@ -39,7 +39,7 @@ public class MedicalUserTest {
 
 		
 		
-		user  = new MedicalUser(firstName,lastName,contactInfo,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword);
+		user  = new MedicalUser(firstName,lastName,contactInfo,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword, null);
 
 	}
 	
@@ -55,7 +55,7 @@ public class MedicalUserTest {
 		userName = "wcciAdmin";
 		userPassword = "1222";
 
-		user2  = new MedicalUser(firstName,lastName,contactInfo,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword);
+		user2  = new MedicalUser(firstName,lastName,contactInfo,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword, null);
 
 		
 		assertThat(((MedicalUser) user2).getFirstName(),is(firstName));
@@ -70,7 +70,7 @@ public class MedicalUserTest {
 	@Test
 	public void shouldCreateMedicalUser() {
 		
-		user = new MedicalUser("","",null,"","","","","");		
+		user = new MedicalUser("","",null,"","","","","", null);		
 		assertThat(user, instanceOf(MedicalUser.class));
 		
 	}

@@ -36,6 +36,9 @@ public class PatientRepositoryTest {
   @Resource
   private PatientStatusRepository patientStatusRepo;
 	
+	@Resource
+	private MedicalUserRepository medUserRepo;
+	
 	ContactInfo contactInfo;
 	ContactInfo contactInfo2;
 	Patient patient;
@@ -43,15 +46,18 @@ public class PatientRepositoryTest {
   PatientStatus patientStatus1;
   PatientStatus patientStatus2;
 	long patientId;
+	MedicalUser medUser;
 	
 	@Before
 	public void setUp() {
 		contactInfo = contactInfoRepo.save(new ContactInfo());
-		patient = patientRepo.save(new Patient(null, null, contactInfo, null, null));
+		patient = patientRepo.save(new Patient(null, null, contactInfo, null, null, null));
 		patientId = patient.getId();
 		
 		contactInfo2 = contactInfoRepo.save(new ContactInfo());
-		patient2 = patientRepo.save(new Patient(null, null, contactInfo2, null, null));
+		patient2 = patientRepo.save(new Patient(null, null, contactInfo2, null, null, null));
+		
+		medUser = medUserRepo.save(new MedicalUser("Otto", "Octavius", null, "Therapist", "Ohio State Med", "911", "docOc", "tentacles8", patient));
 		
 		entity.flush();
 		entity.clear();
@@ -76,7 +82,7 @@ public class PatientRepositoryTest {
 		Patient testPatient = underTest.get();
 		assertThat(testPatient.getContactInfo(), is(contactInfo));
 	}
-	
+
   @Test
   public void assertGetCurrentStatusReturnsMostRecentDuple() throws InterruptedException
   {
@@ -124,4 +130,5 @@ public class PatientRepositoryTest {
     assertThat(statusOrdered.toArray()[0], is(patientStatus2));
     assertThat(statusOrdered.toArray()[1], is(patientStatus1));
   }
+
 }

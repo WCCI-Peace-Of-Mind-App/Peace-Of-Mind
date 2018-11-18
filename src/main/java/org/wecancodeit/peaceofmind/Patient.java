@@ -83,6 +83,7 @@ public class Patient implements IPerson {
 		this.contactInfo = contactInfo;
 		this.dateOfBirth = dateOfBirth;
 		this.diagnosis = diagnosis;
+		
 		this.nonMedicalUser = nonMedicalUser;
 		this.medications = new HashSet<>(Arrays.asList(medications));
 	}

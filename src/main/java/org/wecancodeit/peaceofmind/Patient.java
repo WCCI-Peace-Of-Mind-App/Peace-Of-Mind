@@ -3,7 +3,6 @@ package org.wecancodeit.peaceofmind;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,6 +28,15 @@ public class Patient implements IPerson {
 	private String dateOfBirth;
 	private String diagnosis;
 
+	@OneToOne
+	private NonMedicalUser nonMedicalUser;
+
+	@OneToOne(mappedBy = "patient", fetch = FetchType.LAZY, optional = false)
+	private MedicalUser medicalUser;
+
+	@OneToMany
+	private Collection<Medication> medications;
+	
   @OneToMany(mappedBy="parent")
   private Collection<PatientStatus> statusHistory;
 

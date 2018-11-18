@@ -63,7 +63,7 @@ public class PeaceOfMindControllerTest {
 		when(patientRepo.findById(patientOneId)).thenReturn(Optional.of(patientOne));
 
 		underTest.returnPatient(patientOneId, model);
-		verify(model).addAttribute("patients", patientOne);
+		verify(model).addAttribute("patient", patientOne);
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class PeaceOfMindControllerTest {
 		when(nonMedUserRepo.findById(caregiverOneId)).thenReturn(Optional.of(caregiverOne));
 
 		underTest.returnNonMedicalUser(caregiverOneId, model);
-		verify(model).addAttribute("nonMedicalUsers", caregiverOne);
+		verify(model).addAttribute("nonMedicalUser", caregiverOne);
 	}
 
 	@Test
@@ -97,7 +97,7 @@ public class PeaceOfMindControllerTest {
 		when(medUserRepo.findById(doctorId)).thenReturn(Optional.of(doctor));
 
 		underTest.returnMedicalUser(doctorId, model);
-		verify(model).addAttribute("medicalUsers", doctor);
+		verify(model).addAttribute("medUser", doctor);
 	}
 
 }

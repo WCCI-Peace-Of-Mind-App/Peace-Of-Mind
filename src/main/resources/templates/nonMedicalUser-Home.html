@@ -37,9 +37,9 @@
             <div>
               <h4>[[${medicalUser.firstName}]] [[${medicalUser.lastName}]]</h4>
               <ul>
-                  <li>Specialty: <span th:text="${medicalUser.medicalSpecialty}">unknown</span></li>
-                  <li>Institution: <span th:text="${medicalUser.medicalInstitution}">unknown</span></li>
-                  <li>Institution Phone: <span th:text="${medicalUser.institutionTelephone}">unknown</span></li>
+                  <li th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
+                  <li th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
+                  <li th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
                   <li>Other Contact Methods</li>
                   <ul>
                     <li th:if="${medicalUser.contactInfo.phone}">[[${medicalUser.contactInfo.phone}]]</li>

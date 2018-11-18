@@ -4,7 +4,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
@@ -27,11 +32,16 @@ public class PatientRepositoryTest {
 	
 	@Resource
 	private ContactInfoRepository contactInfoRepo;
+
+  @Resource
+  private PatientStatusRepository patientStatusRepo;
 	
 	ContactInfo contactInfo;
 	ContactInfo contactInfo2;
 	Patient patient;
 	Patient patient2;
+  PatientStatus patientStatus1;
+  PatientStatus patientStatus2;
 	long patientId;
 	
 	@Before
@@ -67,5 +77,51 @@ public class PatientRepositoryTest {
 		assertThat(testPatient.getContactInfo(), is(contactInfo));
 	}
 	
-
+  @Test
+  public void assertGetCurrentStatusReturnsMostRecentDuple() throws InterruptedException
+  {
+    // assemble
+    LocalDateTime firstDT = LocalDateTime.now();
+    PatientStatusEnum firstStatus = PatientStatusEnum.WELL;
+    patient.setCurrentStatus(patientStatusRepo.save(new PatientStatus(firstStatus,firstDT, patient)));
+    TimeUnit.SECONDS.sleep(1);
+    LocalDateTime secondDT = LocalDateTime.now();
+    PatientStatusEnum secondStatus = PatientStatusEnum.NOTWELL;
+    patientStatus2 = patientStatusRepo.save(new PatientStatus(secondStatus,secondDT, patient));
+    patient.setCurrentStatus(patientStatus2);
+    patient = patientRepo.save(patient);
+    // action
+    entity.flush();
+    entity.clear();
+    Optional<Patient> queriedPatient = patientRepo.findById(patientId);
+    Patient testPatient = queriedPatient.get();
+    // assert
+    assertThat(testPatient.getCurrentStatus(), is(patientStatus2));
+    assertThat(testPatient.getCurrentStatus().getDateTime(), is(secondDT));
+    assertThat(testPatient.getCurrentStatus().getStatus(), is(secondStatus));
+  }
+  
+  @Test
+  public void assertGetAllStatusReturnInReverseTimeOrder() throws InterruptedException
+  {
+ // assemble
+    LocalDateTime firstDT = LocalDateTime.now();
+    PatientStatusEnum firstStatus = PatientStatusEnum.WELL;
+    patient.setCurrentStatus(patientStatusRepo.save(new PatientStatus(firstStatus,firstDT, patient)));
+    patientStatus1 = patient.getCurrentStatus();
+    TimeUnit.SECONDS.sleep(1);
+    LocalDateTime secondDT = LocalDateTime.now();
+    PatientStatusEnum secondStatus = PatientStatusEnum.NOTWELL;
+    patientStatus2 = patientStatusRepo.save(new PatientStatus(secondStatus,secondDT, patient));
+    patient.setCurrentStatus(patientStatus2);
+    patient = patientRepo.save(patient);
+    // action
+    entity.flush();
+    entity.clear();
+    Optional<Patient> queriedPatient = patientRepo.findById(patientId);
+    Collection<PatientStatus> statusOrdered = patientStatusRepo.findByParentIdOrderByStatusDateTimeStampDesc(queriedPatient.get().getId());
+    // assert
+    assertThat(statusOrdered.toArray()[0], is(patientStatus2));
+    assertThat(statusOrdered.toArray()[1], is(patientStatus1));
+  }
 }

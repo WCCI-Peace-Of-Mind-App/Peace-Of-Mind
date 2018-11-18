@@ -6,12 +6,12 @@
 <body class="container">
     <h1>Your Information</h1>
     <div th:each="patient: ${patients}">
-        <p>Name: <span th:text="|${patient.firstName} ${patient.lastName}|"></span></p>
+        <p>Name: [[${patient.firstName}]] [[${patient.lastName}]]</p>
         <p>Contact Info:</p>
-        <ul>
-            <li th:if="${patient.contactInfo.address}" th:text="${patient.contactInfo.address}"></li>
-            <li th:if="${patient.contactInfo.phone}" th:text="${patient.contactInfo.phone}"></li>
-            <li th:if="${patient.contactInfo.email}" th:text="${patient.contactInfo.email}"></li>
+        <ul th:if="${patient.contactInfo}">
+            <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
+            <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
+            <li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
         </ul>
         <p>DOB: [[${patient.dateOfBirth}]]</p>
         <p>Diagnosis: [[${patient.diagnosis}]]</p>
@@ -21,12 +21,12 @@
         <div th:if="${patients.nonMedicalUser}">
             <h2>Caregiver</h2>
             <div th:each="nonMedUser : ${patients.nonMedicalUser}">
-                <h3 th:text="|${nonMedUser.firstName} ${nonMedUser.lastName}"></h3>
+                <h3>[[${nonMedUser.firstName}]] [[${nonMedUser.lastName}]]</h3>
                 <p>Contact</p>
                 <ul>
-                    <li th:if="${nonMedUser.contactInfo.address}" th:text="${nonMedUser.contactInfo.address}"></li>
-                    <li th:if="${nonMedUser.contactInfo.phone}" th:text="${nonMedUser.contactInfo.phone}"></li>
-                    <li th:if="${nonMedUser.contactInfo.email}" th:text="${nonMedUser.contactInfo.email}"></li>
+                    <li th:if="${nonMedUser.contactInfo.address}">[[${nonMedUser.contactInfo.address}]]</li>
+                    <li th:if="${nonMedUser.contactInfo.phone}">[[${nonMedUser.contactInfo.phone}]]</li>
+                    <li th:if="${nonMedUser.contactInfo.email}">[[${nonMedUser.contactInfo.email}]]</li>
                 </ul>
             </div>
         </div>
@@ -36,14 +36,14 @@
         <div th:if="${patients.medicalUser}">
             <h2>Medical Care Professionals</h2>
             <div th:each="medUser : ${patients.medicalUser}">
-                <h3 th:text="|${medUser.firstName} ${medUser.lastName}"></h3>
+                <h3>[[${medUser.firstName}]] [[${medUser.lastName}]]</h3>
                 <p>Medical Specialty: <span th:text="${medUser.medicalSpecialty}">unknown</span></p>
                 <p>Medical Care Center: <span th:text="${medUser.medicalInstitution}">unknown</span></p>
                 <p>Medical Center Phone Number: <span th:text="${medUser.institutionTelephone}">unknown</span></p>
                 <p>Contact</p>
                 <ul>
-                    <li th:if="${medUser.contactInfo.phone}" th:text="${medUser.contactInfo.phone}"></li>
-                    <li th:if="${medUser.contactInfo.email}" th:text="${medUser.contactInfo.email}"></li>
+                    <li th:if="${medUser.contactInfo.phone}">[[${medUser.contactInfo.phone}]]</li>
+                    <li th:if="${medUser.contactInfo.email}">[[${medUser.contactInfo.email}]]</li>
                 </ul>
             </div>
         </div>
@@ -53,9 +53,9 @@
         <div th:if="${patients.medications}">
             <h2>Medications</h2>
             <div th:each="medication : ${patients.medications}">
-                <h3 th:text="${medication.genericName}"></h3>
-                <p>Reason to Take: <span th:text="${medication.reason}"></span></p>
-                <p>Please take <span th:text="${medication.dosage}"></span> via <span th:text="${medication.administration}"></span> every <span th:text="${medication.frequencyAmount}"></span> <span th:text="${medication.frequencyTime}"></span></p>
+                <h3>[[${medication.genericName}]]</h3>
+                <p>Reason to Take: [[${medication.reason}]]</p>
+                <p>Please take [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
                 <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
             </div>
         </div>

@@ -13,8 +13,8 @@
             <li th:if="${patient.contactInfo.phone}" th:text="${patient.contactInfo.phone}"></li>
             <li th:if="${patient.contactInfo.email}" th:text="${patient.contactInfo.email}"></li>
         </ul>
-        <p>DOB: <span th:text="${patient.dateOfBirth}"></span></p>
-        <p>Diagnosis: <span th:text="${patient.diagnosis}"></span></p>
+        <p>DOB: [[${patient.dateOfBirth}]]</p>
+        <p>Diagnosis: [[${patient.diagnosis}]]</p>
     </div>
 
     <section class="medUser">

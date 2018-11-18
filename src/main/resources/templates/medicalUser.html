@@ -6,7 +6,7 @@
 <body class="container">
    <article id="content">
            <h1>Your Information</h1>
-           <div id="content-body" th:each="medUser: ${medicalUsers}">
+           <div id="content-body">
 
                <p class="stats" id="userName">YourUsername: [[${medUser.userName}]]</p>
                <p class="stats" id="name">Name: [[${medUser.firstName}]] [[${medUser.lastName}]]</p>
@@ -23,9 +23,9 @@
    </article>
 
    <section class="patient">
-       <div th:if="${medicalUsers.patient}">
+       <div th:if="${medUser.patient}">
            <h2>Your Patient</h2>
-           <div th:each="patient : ${medicalUsers.patient}">
+           <div th:each="patient : ${medUser.patient}">
                <h3>[[${patient.firstName}]] [[${patient.lastName}]]</h3>
                <ul>
                    <li>Diagnosis: [[${patient.diagnosis}]]</li>

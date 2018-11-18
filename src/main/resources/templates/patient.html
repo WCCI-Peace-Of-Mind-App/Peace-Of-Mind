@@ -5,7 +5,7 @@
 </head>
 <body class="container">
     <h1>Your Information</h1>
-    <div th:each="patient: ${patients}">
+    <div>
         <p>Name: [[${patient.firstName}]] [[${patient.lastName}]]</p>
         <p>Contact Info:</p>
         <ul th:if="${patient.contactInfo}">
@@ -18,9 +18,9 @@
     </div>
 
     <section class="medUser">
-        <div th:if="${patients.nonMedicalUser}">
+        <div th:if="${patient.nonMedicalUser}">
             <h2>Caregiver</h2>
-            <div th:each="nonMedUser : ${patients.nonMedicalUser}">
+            <div th:each="nonMedUser : ${patient.nonMedicalUser}">
                 <h3>[[${nonMedUser.firstName}]] [[${nonMedUser.lastName}]]</h3>
                 <p>Contact</p>
                 <ul>
@@ -33,9 +33,9 @@
     </section>
 
     <section class="medUser">
-        <div th:if="${patients.medicalUser}">
+        <div th:if="${patient.medicalUser}">
             <h2>Medical Care Professionals</h2>
-            <div th:each="medUser : ${patients.medicalUser}">
+            <div th:each="medUser : ${patient.medicalUser}">
                 <h3>[[${medUser.firstName}]] [[${medUser.lastName}]]</h3>
                 <p th:text=" 'Specialty: ' + (${medUser.medicalSpecialty} ?: 'unknown')"></p>
                 <p th:text=" 'Institution: ' + (${medUser.medicalInstitution} ?: 'unknown')"></p>
@@ -50,9 +50,9 @@
     </section>
 
     <section class="medication">
-        <div th:if="${patients.medications}">
+        <div th:if="${patient.medications}">
             <h2>Medications</h2>
-            <div th:each="medication : ${patients.medications}">
+            <div th:each="medication : ${patient.medications}">
                 <h3>[[${medication.genericName}]]</h3>
                 <p>Reason to Take: [[${medication.reason}]]</p>
                 <p>Please take [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>

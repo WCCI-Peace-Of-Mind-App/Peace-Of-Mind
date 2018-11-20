@@ -1,7 +1,9 @@
 package org.wecancodeit.peaceofmind;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,8 +39,8 @@ public class Patient implements IPerson {
 	@OneToMany
 	private Collection<Medication> medications;
 	
-  @OneToMany(mappedBy="parent")
-  private Collection<PatientStatus> statusHistory;
+	@OneToMany(mappedBy="parent")
+	private Collection<PatientStatus> statusHistory;
 
 	public long getId() {
 		return id;
@@ -82,7 +84,9 @@ public class Patient implements IPerson {
 		this.contactInfo = contactInfo;
 		this.dateOfBirth = dateOfBirth;
 		this.diagnosis = diagnosis;
-  this.statusHistory = new ArrayList();
+		this.nonMedicalUser = nonMedicalUser;
+		this.medications = new HashSet<>(Arrays.asList(medications));
+		this.statusHistory = new ArrayList<>();
 	}
 
 	@Override

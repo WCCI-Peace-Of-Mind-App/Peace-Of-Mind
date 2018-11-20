@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 public class NonMedicalUser implements INonPatientUser {
 	
@@ -67,7 +69,7 @@ public class NonMedicalUser implements INonPatientUser {
 		this.lastName = lastName;
 		this.contactInfo = contactInfo;
 		this.userName = userName;
-		this.password = password;
+		this.password = new BCryptPasswordEncoder().encode(password);
 		this.relationshipWithPatient = relationshipWithPatient;
 	}
 
@@ -92,6 +94,11 @@ public class NonMedicalUser implements INonPatientUser {
 			return false;
 		return true;
 	}
+
+  public String getRole()
+  {
+    return "NONMEDICAL";
+  }
 
 
 

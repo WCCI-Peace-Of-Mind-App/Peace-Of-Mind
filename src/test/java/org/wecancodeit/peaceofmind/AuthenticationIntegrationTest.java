@@ -5,6 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import javax.servlet.ServletContext;
 
 import org.junit.Before;
@@ -49,5 +52,20 @@ public class AuthenticationIntegrationTest {
   public void loginAvailableForAll() throws Exception
   {
     mvc.perform(get("/login")).andExpect(status().isOk());
+  }
+  
+  @Test
+  public void mvcConfigAndSpringSecurityWiredCorrectly() throws Exception
+  {
+    String adminUsername = "admin";
+    String adminPassword = "admin";
+    String badUsername = "bad";
+    String badPassword = "bad";
+
+    // Ensure bad credentials can NOT log in
+    mvc.perform(formLogin("/login").user(badUsername).password(badPassword)
+        ).andDo(print()
+        ).andExpect(status().isFound()
+        ).andExpect(redirectedUrl("/login?error"));
   }
 }

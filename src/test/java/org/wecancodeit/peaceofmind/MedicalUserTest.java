@@ -3,9 +3,12 @@ package org.wecancodeit.peaceofmind;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.wecancodeit.peaceofmind.ContactInfo;
 import org.wecancodeit.peaceofmind.MedicalUser;
 
@@ -64,7 +67,8 @@ public class MedicalUserTest {
 		assertThat(((MedicalUser) user2).getMedicalInstitution(),is(medInstitution));
 		assertThat(((MedicalUser) user2).getInstitutionTelephone(),is(institutionTelephone));
 		assertThat(((MedicalUser) user2).getUserName(),is(userName));
-		assertThat(((MedicalUser) user2).getPassword(),is(userPassword));
+  PasswordEncoder encoder = new BCryptPasswordEncoder();
+		  assertTrue(encoder.matches(userPassword, user2.getPassword()));
 	}
 	
 	@Test
@@ -105,8 +109,15 @@ public class MedicalUserTest {
 	@Test
 	public void shouldRetunrMedicalUser1999() {
 		String actualPassword = ((MedicalUser) user).getPassword();
-		assertThat(actualPassword, is(userPassword));
+  PasswordEncoder encoder = new BCryptPasswordEncoder();
+		  assertTrue(encoder.matches(userPassword, actualPassword));
 		
 	}
+
+  @Test
+  public void assertUserRoleIsMedical()
+  {
+    assertThat(user.getRole(), is("MEDICAL"));
+  }
 	
 }

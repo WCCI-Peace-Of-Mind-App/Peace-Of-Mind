@@ -2,9 +2,12 @@ package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.wecancodeit.peaceofmind.ContactInfo;
 import org.wecancodeit.peaceofmind.NonMedicalUser;
 
@@ -48,7 +51,8 @@ public class NonMedicalUserTest {
 	@Test
 	public void shouldHavePasswordOfPassword123() {
 		String testPassword = underTest.getPassword();
-		assertThat(testPassword, is(password));
+  PasswordEncoder encoder = new BCryptPasswordEncoder();
+  assertTrue(encoder.matches(password, testPassword));
 	}
 	
 	@Test
@@ -64,6 +68,7 @@ public class NonMedicalUserTest {
 		username = "xxxGAMERxxx";
 		password = "123Eureka!";
 		relationshipWithPatient = "Mother";
+  String userRole = "NONMEDICAL";
 		
 		contactInfo = new ContactInfo();
 		underTest = new NonMedicalUser(firstName, lastName, contactInfo, username, password, relationshipWithPatient);
@@ -77,8 +82,10 @@ public class NonMedicalUserTest {
 		assertThat(testFirstName, is(firstName));
 		assertThat(testLastName, is(lastName));
 		assertThat(testUsername, is(username));
-		assertThat(testPassword, is(password));
+PasswordEncoder encoder = new BCryptPasswordEncoder();
+assertTrue(encoder.matches(password, testPassword));
 		assertThat(testRelationshipWithPatient, is(relationshipWithPatient));
+  assertThat(underTest.getRole(), is(userRole));
 
 	}
 	

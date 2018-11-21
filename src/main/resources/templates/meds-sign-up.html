@@ -23,7 +23,7 @@
             <input type="text" name="administration">
         </div>
         <div>
-            <label>frequency</label>
+            <label>Frequency</label>
             <input type="text" name="frequencyAmount">
         </div>
         <div>
@@ -32,7 +32,7 @@
         </div>
         <div>
             <p>Image</p>
-            <img src="../static/images/confused.png">
+            <img src="../static/images/need-meds.png">
         </div>
         <div>
             <label>Reason</label>
@@ -42,6 +42,12 @@
             <button type="">Submit</button>
         </div>
     </form>
+    <h3>
+        <a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Home</a>
+    </h3>
+    <footer>
+        <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+    </footer>
 </body>
 
 </html>

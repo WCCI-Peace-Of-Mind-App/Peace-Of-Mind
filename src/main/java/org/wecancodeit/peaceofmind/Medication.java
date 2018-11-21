@@ -69,6 +69,7 @@ public class Medication {
 	public Patient getPatient() {
 		return patient;
 	}
+
 	
 	public Collection<MedicationLog> getMedicationLogs() {
 		return medicationLogs;
@@ -78,6 +79,7 @@ public class Medication {
 		return medicationTrackers;
 	}
 	
+
 	public Medication() {}
 	
 	public Medication(String genericName, String dosage, String administration, int frequencyAmount, String frequencyTime, String picture, String reason) {

@@ -34,6 +34,7 @@ public class MedicationRepositoryTest {
 	Medication medNot;
 	
 	long medId;
+	long patientId;
 	
 	Patient patient;
 	
@@ -46,7 +47,8 @@ public class MedicationRepositoryTest {
 		
 		medNot = medRepo.save(new Medication("blammo", "5 cc", "injection", 1, "weekly", "xxx.jpg", "nausea"));
 		
-		patient = patientRepo.save(new Patient("John", "Bowles", null, "01/01/2001", "Alzh", null));
+		patient = patientRepo.save(new Patient("John", "Bowles", null, "01/01/2001", "Alzh", null, med1, med2));
+		patientId = patient.getId();
 		
 		entity.flush();
 		entity.clear();
@@ -66,12 +68,9 @@ public class MedicationRepositoryTest {
 	
 	@Test
 	public void shouldEstablishRelationshipWithPatient() {
-		
-//		long patientId = patient.getId();
-//		Optional<Patient> result = patientRepo.findById(patientId);
-//		patient = result.get();
-//		assertThat(patient.getMedications(),containsInAnyOrder(med2,med1));
-		
+		Optional<Patient> result = patientRepo.findById(patientId);
+		patient = result.get();
+		assertThat(patient.getMedications(),containsInAnyOrder(med2,med1));
 	}
 	
 	

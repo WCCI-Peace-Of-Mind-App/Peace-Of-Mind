@@ -41,6 +41,9 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 	
 	@Resource
 	private MedicationTrackerRepository medTrackerRepo;
+  
+  @Resource
+  private PatientStatusRepository patientStatusRepo;
 	
 	DateTimeFormatter yyyymmddhhmm = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"); 
 	String pastDate = LocalDateTime.now().minusDays(2).format(yyyymmddhhmm);
@@ -86,6 +89,11 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		medLogRepo.save(new MedicationLog(med1, pastDate));
 		medTrackerRepo.save(new MedicationTracker(med1));
 		medTrackerRepo.save(new MedicationTracker(med2));
+
+		
+        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.WELL, patient1));
+        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.NOTWELL, patient1));
+
 		// End Patient 1 build
 		
 		

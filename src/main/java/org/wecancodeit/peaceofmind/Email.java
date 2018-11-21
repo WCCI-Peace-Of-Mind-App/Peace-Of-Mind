@@ -67,7 +67,7 @@ public class Email implements IContactType {
 	}
 	
 	public String toString() {
-		return type + ": " + emailAddress;
+		return type + " email: " + emailAddress;
 	}
 
 

@@ -32,6 +32,9 @@ public class PeaceOfMindPostControllerTest {
 	private ContactInfoRepository contactInfoRepo;
 	
 	@Mock
+	private NonMedicalUserRepository nonMedUserRepo;
+	
+	@Mock
 	private Model model;
 	
 	long arbitraryId = 1;
@@ -101,6 +104,35 @@ public class PeaceOfMindPostControllerTest {
 		ArgumentCaptor<ContactInfo> contactInfoArgument = ArgumentCaptor.forClass(ContactInfo.class);
 		verify(contactInfoRepo).save(contactInfoArgument.capture());
 		
+	}
+	
+	@Test
+	public void shouldAddSingleNonMedUserToModel() throws Exception {
+		
+		String streetAddress = "123 Main St.";
+		String secondaryField = "Apt 111";
+		String city = "Dublin";
+		String state = "OH";
+		String zipCode = "43101";
+		String aType = "home";
+		
+		String phoneNumber = "614-837-5609";
+		String pType = "home";
+		
+		String emailAddress = "123@xyz.com";
+		String eType = "home";
+		
+		String firstName = "Joe";
+		String lastName = "Bob";
+		String username = "mainman";
+		String password = "l33tus3r";
+		String relationshipToPatient = "son";
+		
+		underTest.addNonMedicalUser(firstName, lastName, username, password, relationshipToPatient, streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
+		
+		ArgumentCaptor<NonMedicalUser> nonMedUserArgument = ArgumentCaptor.forClass(NonMedicalUser.class);
+		verify(nonMedUserRepo).save(nonMedUserArgument.capture());
+		assertEquals(firstName, nonMedUserArgument.getValue().getFirstName());
 	}
 
 }

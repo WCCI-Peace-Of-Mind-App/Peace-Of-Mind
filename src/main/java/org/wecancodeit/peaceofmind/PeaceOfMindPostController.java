@@ -21,6 +21,9 @@ public class PeaceOfMindPostController {
 	@Resource
 	private ContactInfoRepository contactInfoRepo;
 	
+	@Resource
+	private NonMedicalUserRepository nonMedUserRepo;
+	
 	public Address addAddress(String streetAddress, String secondaryField, String city, String state, String zipCode,
 			String type) {
 		Address address = new Address(streetAddress, secondaryField, city, state, zipCode, type);
@@ -43,13 +46,23 @@ public class PeaceOfMindPostController {
 	}
 
 
-	public void addContactInfo(String streetAddress, String secondaryField, String city, String state, String zipCode,
+	public ContactInfo addContactInfo(String streetAddress, String secondaryField, String city, String state, String zipCode,
 			String aType, String phoneNumber, String pType, String emailAddress, String eType) {
 		Address address = addAddress(streetAddress, secondaryField, city, state, zipCode, aType);
 		Phone phone = addPhone(phoneNumber, pType);
 		Email email = addEmail(emailAddress, eType);
 		ContactInfo contactInfo = new ContactInfo(address, email, phone);
 		contactInfoRepo.save(contactInfo);
+		return contactInfo;
+	}
+
+
+	public void addNonMedicalUser(String firstName, String lastName, String userName, String password,
+			String relationshipWithPatient, String streetAddress, String secondaryField, String city, String state,
+			String zipCode, String aType, String phoneNumber, String pType, String emailAddress, String eType) {
+		ContactInfo contactInfo = addContactInfo(streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
+		NonMedicalUser nonMedUser = new NonMedicalUser(firstName, lastName, contactInfo, userName, password, relationshipWithPatient);
+		nonMedUserRepo.save(nonMedUser);
 		
 	}
 

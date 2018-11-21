@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class PeaceOfMindPostController {
 
 	@Resource
+	private MedicalUserRepository medUserRepo;
+	
+	@Resource
+	private PatientRepository patientRepo;
+	
+	@Resource
 	private NonMedicalUserRepository nonMedUserRepo;
 
 	@Resource
@@ -25,7 +31,23 @@ public class PeaceOfMindPostController {
 	private PhoneRepository phoneRepo;
 	
 	
+	public void addMedicalUser(String firstName, String lastName, String medicalSpecialty, String medicalInstitution,
+			String institutionTelephone, String userName, String password, Patient patient, String streetAddress,
+			String secondaryField, String city, String state, String zipCode, String aType, String phoneNumber,
+			String pType, String emailAddress, String eType) {
+		ContactInfo contactInfo = addContactInfo(streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
+		MedicalUser medUser = new MedicalUser(firstName, lastName, contactInfo, medicalSpecialty, medicalInstitution, institutionTelephone, userName, password, patient);
+		medUserRepo.save(medUser);
+	}
 
+	public void addPatient(String firstName, String lastName, String dateOfBirth, String diagnosis,
+			NonMedicalUser nonMedUser, String streetAddress, String secondaryField, String city, String state,
+			String zipCode, String aType, String phoneNumber, String pType, String emailAddress, String eType) {
+		ContactInfo contactInfo = addContactInfo(streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
+		Patient patient = new Patient(firstName, lastName, contactInfo, dateOfBirth, diagnosis, nonMedUser);
+		patientRepo.save(patient);
+	}
+	
 	public void addNonMedicalUser(String firstName, String lastName, String userName, String password,
 			String relationshipWithPatient, String streetAddress, String secondaryField, String city, String state,
 			String zipCode, String aType, String phoneNumber, String pType, String emailAddress, String eType) {
@@ -63,6 +85,7 @@ public class PeaceOfMindPostController {
 		phoneRepo.save(phone);
 		return phone;
 	}
-	
+
+
 
 }

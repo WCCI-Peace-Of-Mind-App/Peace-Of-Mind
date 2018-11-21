@@ -2,9 +2,6 @@ package org.wecancodeit.peaceofmind;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,25 +32,45 @@ public class PeaceOfMindPostControllerTest {
 	private NonMedicalUserRepository nonMedUserRepo;
 	
 	@Mock
-	private Model model;
+	private PatientRepository patientRepo;
 	
-	long arbitraryId = 1;
+	@Mock
+	private MedicalUserRepository medUserRepo;
+	
+	String streetAddress;
+	String secondaryField;
+	String city;
+	String state;
+	String zipCode;
+	String aType;
+	
+	String phoneNumber;
+	String pType;
+	
+	String emailAddress;
+	String eType;
 	
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
+		
+		streetAddress = "123 Main St.";
+		secondaryField = "Apt 111";
+		city = "Dublin";
+		state = "OH";
+		zipCode = "43101";
+		aType = "home";
+		
+		phoneNumber = "614-837-5609";
+		pType = "home";
+		
+		emailAddress = "123@xyz.com";
+		eType = "home";
 	}
 	
 	@Test
 	public void shouldAddSingleAddressToModel() throws Exception {
-		String streetAddress = "123 Main St.";
-		String secondaryField = "Apt 111";
-		String city = "Dublin";
-		String state = "OH";
-		String zipCode = "43101";
-		String type = "home";
-		
-		underTest.addAddress(streetAddress,secondaryField, city, state, zipCode, type);
+		underTest.addAddress(streetAddress,secondaryField, city, state, zipCode, aType);
 		
 		ArgumentCaptor<Address> addressArgument = ArgumentCaptor.forClass(Address.class);
 		verify(addressRepo).save(addressArgument.capture());
@@ -62,10 +79,7 @@ public class PeaceOfMindPostControllerTest {
 	
 	@Test
 	public void shouldAddSinglePhoneToModel() throws Exception {
-		String phoneNumber = "614-837-5609";
-		String type = "home";
-		
-		underTest.addPhone(phoneNumber, type);
+		underTest.addPhone(phoneNumber, pType);
 		
 		ArgumentCaptor<Phone> phoneArgument = ArgumentCaptor.forClass(Phone.class);
 		verify(phoneRepo).save(phoneArgument.capture());
@@ -74,10 +88,7 @@ public class PeaceOfMindPostControllerTest {
 	
 	@Test
 	public void shouldAddSingleEmailToModel() throws Exception {
-		String emailAddress = "123@xyz.com";
-		String type = "home";
-		
-		underTest.addEmail(emailAddress, type);
+		underTest.addEmail(emailAddress, eType);
 		
 		ArgumentCaptor<Email> emailArgument = ArgumentCaptor.forClass(Email.class);
 		verify(emailRepo).save(emailArgument.capture());
@@ -85,20 +96,7 @@ public class PeaceOfMindPostControllerTest {
 	}
 	
 	@Test
-	public void shouldAddSingleContactInfoToModel() throws Exception {
-		String streetAddress = "123 Main St.";
-		String secondaryField = "Apt 111";
-		String city = "Dublin";
-		String state = "OH";
-		String zipCode = "43101";
-		String aType = "home";
-		
-		String phoneNumber = "614-837-5609";
-		String pType = "home";
-		
-		String emailAddress = "123@xyz.com";
-		String eType = "home";
-		
+	public void shouldAddSingleContactInfoToModel() throws Exception {	
 		underTest.addContactInfo(streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
 		
 		ArgumentCaptor<ContactInfo> contactInfoArgument = ArgumentCaptor.forClass(ContactInfo.class);
@@ -108,20 +106,6 @@ public class PeaceOfMindPostControllerTest {
 	
 	@Test
 	public void shouldAddSingleNonMedUserToModel() throws Exception {
-		
-		String streetAddress = "123 Main St.";
-		String secondaryField = "Apt 111";
-		String city = "Dublin";
-		String state = "OH";
-		String zipCode = "43101";
-		String aType = "home";
-		
-		String phoneNumber = "614-837-5609";
-		String pType = "home";
-		
-		String emailAddress = "123@xyz.com";
-		String eType = "home";
-		
 		String firstName = "Joe";
 		String lastName = "Bob";
 		String username = "mainman";
@@ -133,6 +117,41 @@ public class PeaceOfMindPostControllerTest {
 		ArgumentCaptor<NonMedicalUser> nonMedUserArgument = ArgumentCaptor.forClass(NonMedicalUser.class);
 		verify(nonMedUserRepo).save(nonMedUserArgument.capture());
 		assertEquals(firstName, nonMedUserArgument.getValue().getFirstName());
+	}
+	
+	@Test
+	public void shouldAddPatientToModel() throws Exception {
+		NonMedicalUser nonMedUser = nonMedUserRepo.save(new NonMedicalUser("Joe", "Bob", null, "xx", "yy", "son"));
+		
+		String firstName = "Jen";
+		String lastName = "Senn";
+		String dateOfBirth = "01/01/1951";
+		String diagnosis = "alzh";
+		
+		underTest.addPatient(firstName, lastName, dateOfBirth, diagnosis, nonMedUser, streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
+		
+		ArgumentCaptor<Patient> patientArgument = ArgumentCaptor.forClass(Patient.class);
+		verify(patientRepo).save(patientArgument.capture());
+		assertEquals(firstName, patientArgument.getValue().getFirstName());
+	}
+	
+	@Test
+	public void shouldAddMedicalUserToModel() throws Exception {
+		Patient patient = patientRepo.save(new Patient("Jen", "Senn", null, "01/01/1951", "alzh", null));
+		
+		String firstName = "Doc";
+		String lastName = "Oc";
+		String medicalSpecialty = "therapist";
+		String medicalInstitution = "OSU";
+		String institutionTelephone = "911";
+		String userName = "parker";
+		String password = "p4rk3r";
+
+		underTest.addMedicalUser(firstName, lastName, medicalSpecialty, medicalInstitution, institutionTelephone, userName, password, patient, streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
+		
+		ArgumentCaptor<MedicalUser> medUserArgument = ArgumentCaptor.forClass(MedicalUser.class);
+		verify(medUserRepo).save(medUserArgument.capture());
+		assertEquals(firstName, medUserArgument.getValue().getFirstName());
 	}
 
 }

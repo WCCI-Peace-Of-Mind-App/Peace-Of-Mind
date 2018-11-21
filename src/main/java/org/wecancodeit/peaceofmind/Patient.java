@@ -1,5 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,7 +30,7 @@ public class Patient implements IPerson {
 	private ContactInfo contactInfo; 
 	private String dateOfBirth;
 	private String diagnosis;
-
+	
 	@OneToOne
 	private NonMedicalUser nonMedicalUser;
 
@@ -38,7 +39,7 @@ public class Patient implements IPerson {
 
 	@OneToMany
 	private Collection<Medication> medications;
-	
+
 	@OneToMany(mappedBy="parent")
 	private Collection<PatientStatus> statusHistory;
 
@@ -75,6 +76,10 @@ public class Patient implements IPerson {
 	public Collection<Medication> getMedications() {
 		return medications;
 	}
+	
+	public Collection<PatientStatus> getStatusHistory() {
+		return statusHistory;
+	}
 
 	public Patient() {}
 	
@@ -87,6 +92,14 @@ public class Patient implements IPerson {
 		this.nonMedicalUser = nonMedicalUser;
 		this.medications = new HashSet<>(Arrays.asList(medications));
 		this.statusHistory = new ArrayList<>();
+	}
+	
+	public void setCurrentStatus(PatientStatus currentStatus) {
+		this.statusHistory.add(currentStatus);
+	}
+	
+	public PatientStatus getCurrentStatus() {
+		return (PatientStatus)this.statusHistory.toArray()[this.statusHistory.toArray().length-1];
 	}
 
 	@Override
@@ -110,16 +123,6 @@ public class Patient implements IPerson {
 			return false;
 		return true;
 	}
-
-  public void setCurrentStatus(PatientStatus currentStatus)
-  {
-    this.statusHistory.add(currentStatus);
-  }
-
-  public PatientStatus getCurrentStatus()
-  {
-    return (PatientStatus)this.statusHistory.toArray()[this.statusHistory.toArray().length-1];
-  }
 
 
 

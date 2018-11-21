@@ -34,7 +34,7 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 	private MedicationRepository medRepo;
 	
 	@Resource
-    private PatientStatusRepository patientStatusRepo;
+	private PatientStatusRepository patientStatusRepo;
 	
 	
 	@Override
@@ -72,8 +72,10 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 
 		
 		Patient patient1 = patientRepo.save(new Patient("Joe", "Bob", contactInfo1, "01/01/01", "Alzheimers", nonMedUser2, med1, med2));
+		
         patientStatusRepo.save(new PatientStatus(PatientStatusEnum.WELL, patient1));
         patientStatusRepo.save(new PatientStatus(PatientStatusEnum.NOTWELL, patient1));
+
 		
 		// End Patient 1 build
 		

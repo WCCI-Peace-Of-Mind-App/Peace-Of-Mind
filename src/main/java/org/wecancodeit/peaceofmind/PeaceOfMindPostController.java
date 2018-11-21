@@ -10,41 +10,30 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class PeaceOfMindPostController {
 
 	@Resource
-	private AddressRepository addressRepo;
+	private NonMedicalUserRepository nonMedUserRepo;
+
+	@Resource
+	private ContactInfoRepository contactInfoRepo;
 	
 	@Resource
-	private PhoneRepository phoneRepo;
+	private AddressRepository addressRepo;
 	
 	@Resource
 	private EmailRepository emailRepo;
 	
 	@Resource
-	private ContactInfoRepository contactInfoRepo;
+	private PhoneRepository phoneRepo;
 	
-	@Resource
-	private NonMedicalUserRepository nonMedUserRepo;
 	
-	public Address addAddress(String streetAddress, String secondaryField, String city, String state, String zipCode,
-			String type) {
-		Address address = new Address(streetAddress, secondaryField, city, state, zipCode, type);
-		addressRepo.save(address);
-		return address;
+
+	public void addNonMedicalUser(String firstName, String lastName, String userName, String password,
+			String relationshipWithPatient, String streetAddress, String secondaryField, String city, String state,
+			String zipCode, String aType, String phoneNumber, String pType, String emailAddress, String eType) {
+		ContactInfo contactInfo = addContactInfo(streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
+		NonMedicalUser nonMedUser = new NonMedicalUser(firstName, lastName, contactInfo, userName, password, relationshipWithPatient);
+		nonMedUserRepo.save(nonMedUser);
+		
 	}
-
-
-	public Phone addPhone(String phoneNumber, String type) {
-		Phone phone = new Phone(phoneNumber, type);
-		phoneRepo.save(phone);
-		return phone;
-	}
-
-
-	public Email addEmail(String emailAddress, String type) {
-		Email email = new Email(emailAddress, type);
-		emailRepo.save(email);
-		return email;
-	}
-
 
 	public ContactInfo addContactInfo(String streetAddress, String secondaryField, String city, String state, String zipCode,
 			String aType, String phoneNumber, String pType, String emailAddress, String eType) {
@@ -56,14 +45,24 @@ public class PeaceOfMindPostController {
 		return contactInfo;
 	}
 
-
-	public void addNonMedicalUser(String firstName, String lastName, String userName, String password,
-			String relationshipWithPatient, String streetAddress, String secondaryField, String city, String state,
-			String zipCode, String aType, String phoneNumber, String pType, String emailAddress, String eType) {
-		ContactInfo contactInfo = addContactInfo(streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
-		NonMedicalUser nonMedUser = new NonMedicalUser(firstName, lastName, contactInfo, userName, password, relationshipWithPatient);
-		nonMedUserRepo.save(nonMedUser);
-		
+	public Address addAddress(String streetAddress, String secondaryField, String city, String state, String zipCode,
+			String type) {
+		Address address = new Address(streetAddress, secondaryField, city, state, zipCode, type);
+		addressRepo.save(address);
+		return address;
 	}
+		
+	public Email addEmail(String emailAddress, String type) {
+		Email email = new Email(emailAddress, type);
+		emailRepo.save(email);
+		return email;
+	}
+
+	public Phone addPhone(String phoneNumber, String type) {
+		Phone phone = new Phone(phoneNumber, type);
+		phoneRepo.save(phone);
+		return phone;
+	}
+	
 
 }

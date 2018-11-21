@@ -1,10 +1,13 @@
 package org.wecancodeit.peaceofmind;
 
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Medication {
@@ -24,6 +27,11 @@ public class Medication {
 	@ManyToOne
 	private Patient patient;
 	
+	@OneToMany(mappedBy = "medication")
+	private Collection<MedicationLog> medicationLogs;
+	
+	@OneToMany(mappedBy = "medication")
+	private Collection<MedicationTracker> medicationTrackers;
 
 
 	public long getId() {
@@ -62,6 +70,14 @@ public class Medication {
 		return patient;
 	}
 	
+	public Collection<MedicationLog> getMedicationLogs() {
+		return medicationLogs;
+	}
+	
+	public Collection<MedicationTracker> getMedicationTrackers() {
+		return medicationTrackers;
+	}
+	
 	public Medication() {}
 	
 	public Medication(String genericName, String dosage, String administration, int frequencyAmount, String frequencyTime, String picture, String reason) {
@@ -73,6 +89,7 @@ public class Medication {
 		this.picture = picture;
 		this.reason = reason;
 	}
+	
 
 	@Override
 	public int hashCode() {

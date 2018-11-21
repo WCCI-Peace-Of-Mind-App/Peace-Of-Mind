@@ -12,6 +12,7 @@ import org.junit.Test;
 public class MedicationTrackerTest {
 	
 	MedicationTracker underTest;
+	Medication testMed;
 	String date;
 	
 	DateTimeFormatter yyyymmdd = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -19,21 +20,17 @@ public class MedicationTrackerTest {
 	@Before
 	public void setUp() {
 		
+		testMed = new Medication("Chocolate Frog", "1 frog", "oral", 1, "daily", "img.jpg", "good spirits");
+		
 		date = LocalDateTime.now().format(yyyymmdd);
 		
-		underTest = new MedicationTracker(1L, 2L);
+		underTest = new MedicationTracker(testMed);
 	}
 	
 	@Test
-	public void shouldHaveMedId() {
-		long result = underTest.getMedicationId();
-		assertThat(result, is (1L));
-	}
-	
-	@Test
-	public void shouldHavePatientId() {
-		long result = underTest.getPatientId();
-		assertThat(result, is(2L));
+	public void shouldHaveMed() {
+		Medication result = underTest.getMedication();
+		assertThat(result, is (testMed));
 	}
 	
 	@Test

@@ -13,7 +13,7 @@ public class MedicalUser implements INonPatientUser {
 	@Id
 	@GeneratedValue
 	private long id;
-
+  private final String role = "MEDICAL";
 	private String firstName;
 	private String lastName;
 	@OneToOne(fetch = FetchType.LAZY)
@@ -112,6 +112,6 @@ public class MedicalUser implements INonPatientUser {
 
   public String getRole()
   {
-    return "MEDICAL";
+    return this.role;
   }
 }

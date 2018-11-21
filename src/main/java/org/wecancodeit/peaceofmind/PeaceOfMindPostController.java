@@ -57,7 +57,7 @@ public class PeaceOfMindPostController {
 		
 	}
 
-	public ContactInfo addContactInfo(String streetAddress, String secondaryField, String city, String state, String zipCode,
+	protected ContactInfo addContactInfo(String streetAddress, String secondaryField, String city, String state, String zipCode,
 			String aType, String phoneNumber, String pType, String emailAddress, String eType) {
 		Address address = addAddress(streetAddress, secondaryField, city, state, zipCode, aType);
 		Phone phone = addPhone(phoneNumber, pType);
@@ -67,20 +67,20 @@ public class PeaceOfMindPostController {
 		return contactInfo;
 	}
 
-	public Address addAddress(String streetAddress, String secondaryField, String city, String state, String zipCode,
+	private Address addAddress(String streetAddress, String secondaryField, String city, String state, String zipCode,
 			String type) {
 		Address address = new Address(streetAddress, secondaryField, city, state, zipCode, type);
 		addressRepo.save(address);
 		return address;
 	}
 		
-	public Email addEmail(String emailAddress, String type) {
+	private Email addEmail(String emailAddress, String type) {
 		Email email = new Email(emailAddress, type);
 		emailRepo.save(email);
 		return email;
 	}
 
-	public Phone addPhone(String phoneNumber, String type) {
+	private Phone addPhone(String phoneNumber, String type) {
 		Phone phone = new Phone(phoneNumber, type);
 		phoneRepo.save(phone);
 		return phone;

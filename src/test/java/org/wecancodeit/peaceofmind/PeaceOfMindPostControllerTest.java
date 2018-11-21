@@ -9,7 +9,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.ui.Model;
 
 public class PeaceOfMindPostControllerTest {
 	
@@ -67,41 +66,25 @@ public class PeaceOfMindPostControllerTest {
 		emailAddress = "123@xyz.com";
 		eType = "home";
 	}
-	
-	@Test
-	public void shouldAddSingleAddressToModel() throws Exception {
-		underTest.addAddress(streetAddress,secondaryField, city, state, zipCode, aType);
 		
-		ArgumentCaptor<Address> addressArgument = ArgumentCaptor.forClass(Address.class);
-		verify(addressRepo).save(addressArgument.capture());
-		assertEquals(streetAddress, addressArgument.getValue().getStreetAddress());
-	}
-	
 	@Test
-	public void shouldAddSinglePhoneToModel() throws Exception {
-		underTest.addPhone(phoneNumber, pType);
-		
-		ArgumentCaptor<Phone> phoneArgument = ArgumentCaptor.forClass(Phone.class);
-		verify(phoneRepo).save(phoneArgument.capture());
-		assertEquals(phoneNumber, phoneArgument.getValue().getPhoneNumber());
-	}
-	
-	@Test
-	public void shouldAddSingleEmailToModel() throws Exception {
-		underTest.addEmail(emailAddress, eType);
-		
-		ArgumentCaptor<Email> emailArgument = ArgumentCaptor.forClass(Email.class);
-		verify(emailRepo).save(emailArgument.capture());
-		assertEquals(emailAddress, emailArgument.getValue().getEmailAddress());
-	}
-	
-	@Test
-	public void shouldAddSingleContactInfoToModel() throws Exception {	
+	public void shouldAddSingleContactInfoToModelAndVerifyEachContactMethod() throws Exception {	
 		underTest.addContactInfo(streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
 		
 		ArgumentCaptor<ContactInfo> contactInfoArgument = ArgumentCaptor.forClass(ContactInfo.class);
 		verify(contactInfoRepo).save(contactInfoArgument.capture());
 		
+		ArgumentCaptor<Address> addressArgument = ArgumentCaptor.forClass(Address.class);
+		verify(addressRepo).save(addressArgument.capture());
+		assertEquals(streetAddress, addressArgument.getValue().getStreetAddress());
+
+		ArgumentCaptor<Phone> phoneArgument = ArgumentCaptor.forClass(Phone.class);
+		verify(phoneRepo).save(phoneArgument.capture());
+		assertEquals(phoneNumber, phoneArgument.getValue().getPhoneNumber());
+
+		ArgumentCaptor<Email> emailArgument = ArgumentCaptor.forClass(Email.class);
+		verify(emailRepo).save(emailArgument.capture());
+		assertEquals(emailAddress, emailArgument.getValue().getEmailAddress());
 	}
 	
 	@Test

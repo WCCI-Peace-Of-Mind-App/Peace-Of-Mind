@@ -80,8 +80,8 @@ public class ViewTest {
 		// assert
 		mvc.perform(get("/patient?id=1234")).andExpect(status().isOk()).andExpect(view().name(is("patient")))
 				.andExpect(content().contentType("text/html;charset=UTF-8"))
-				.andExpect(model().attributeExists("patients"))
-				.andExpect(model().attribute("patients", is(oMockPatient)));
+				.andExpect(model().attributeExists("patient"))
+				.andExpect(model().attribute("patient", is(oMockPatient)));
 	}
 
 	@Test(expected = NestedServletException.class) /* MedicalUserNotFoundException */
@@ -102,8 +102,8 @@ public class ViewTest {
 		// assert
 		mvc.perform(get("/medical-user?id=1234")).andExpect(status().isOk()).andExpect(view().name(is("medicalUser")))
 				.andExpect(content().contentType("text/html;charset=UTF-8"))
-				.andExpect(model().attributeExists("medicalUsers"))
-				.andExpect(model().attribute("medicalUsers", is(oMockMedUser)));
+				.andExpect(model().attributeExists("medUser"))
+				.andExpect(model().attribute("medUser", is(oMockMedUser)));
 	}
 
 	@Test
@@ -136,8 +136,8 @@ public class ViewTest {
 		mvc.perform(get("/non-medical-user?id=1234")).andExpect(status().isOk())
 				.andExpect(view().name(is("nonMedicalUser")))
 				.andExpect(content().contentType("text/html;charset=UTF-8"))
-				.andExpect(model().attributeExists("nonMedicalUsers"))
-				.andExpect(model().attribute("nonMedicalUsers", oMockNonMedUser));
+				.andExpect(model().attributeExists("nonMedicalUser"))
+				.andExpect(model().attribute("nonMedicalUser", oMockNonMedUser));
 	}
 
 	@Test
@@ -146,8 +146,8 @@ public class ViewTest {
 		mvc.perform(get("/non-medical-user-home?id=1234")).andExpect(status().isOk())
 				.andExpect(view().name(is("nonMedicalUser-Home")))
 				.andExpect(content().contentType("text/html;charset=UTF-8"))
-				.andExpect(model().attributeExists("nonMedicalUsers"))
-				.andExpect(model().attribute("nonMedicalUsers", oMockNonMedUser));
+				.andExpect(model().attributeExists("nonMedicalUser"))
+				.andExpect(model().attribute("nonMedicalUser", oMockNonMedUser));
 	}
 
 }

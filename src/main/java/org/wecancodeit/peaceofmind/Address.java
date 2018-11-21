@@ -91,10 +91,10 @@ public class Address implements IContactType{
 	}
 
 	public String toString() {
-		return type + ": " + streetAddress + checkSecondaryField() + ", " + city + ", " + state + " " + zipCode;
+		return type + " address: " + streetAddress + checkSecondaryField() + ", " + city + ", " + state + " " + zipCode;
 	}
 	
-	public String checkSecondaryField() {
+	private String checkSecondaryField() {
 		if (secondaryField == null) {
 			return "";
 		} else {

@@ -30,7 +30,7 @@ public class PeaceOfMindController {
 		Optional<Patient> patient = patientRepo.findById(id);
 
 		if (patient.isPresent()) {
-			model.addAttribute("patients", patient.get());
+			model.addAttribute("patient", patient.get());
 			return "patient";
 		}
 
@@ -51,7 +51,7 @@ public class PeaceOfMindController {
 		Optional<NonMedicalUser> nonMedUser = nonMedUserRepo.findById(id);
 
 		if (nonMedUser.isPresent()) {
-			model.addAttribute("nonMedicalUsers", nonMedUser.get());
+			model.addAttribute("nonMedicalUser", nonMedUser.get());
 			return "nonMedicalUser";
 		}
 
@@ -65,7 +65,7 @@ public class PeaceOfMindController {
 		Optional<NonMedicalUser> nonMedUser = nonMedUserRepo.findById(id);
 
 		if (nonMedUser.isPresent()) {
-			model.addAttribute("nonMedicalUsers", nonMedUser.get());
+			model.addAttribute("nonMedicalUser", nonMedUser.get());
 			return "nonMedicalUser-Home";
 		}
 
@@ -86,7 +86,7 @@ public class PeaceOfMindController {
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
 
 		if (medUser.isPresent()) {
-			model.addAttribute("medicalUsers", medUser.get());
+			model.addAttribute("medUser", medUser.get());
 			return "medicalUser";
 		}
 

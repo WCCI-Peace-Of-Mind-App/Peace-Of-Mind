@@ -3,18 +3,77 @@
 <head>
     <title>A Patient</title>
 </head>
-<body>
-    <h1>A Single Patient</h1>
-    <div th:each="patient: ${patients}">
-        <p>First Name: <span th:text="${patient.firstName}"></span></p>
-        <p>Last Name: <span th:text="${patient.lastName}"></span></p>
-        <p>Contact Info: <span th:text="${patient.contactInfo}"></span></p>
-        <p>DOB: <span th:text="${patient.dateOfBirth}"></span></p>
-        <p>Diagnosis: <span th:text="${patient.diagnosis}"></span></p>
-    </div>
+<body class="container">
+    
+    <h1>Peace Of Mind</h1>
+
+    <section class="medication">
+        <div th:if="${patient.medications}">
+            <h2>Medications</h2>
+            <div th:each="medication : ${patient.medications}">
+                <h3>[[${medication.genericName}]]</h3>
+                <p>Reason to Take: [[${medication.reason}]]</p>
+                <p>Please take [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
+                <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
+            </div>
+        </div>
+    </section>
+    
+    <section class="patientStatus">
+        <h2>How are you feeling?</h2>
+    </section>
+
+    <section class="nonMedUser">
+        <div th:if="${patient.nonMedicalUser}">
+            <h2>Caregiver</h2>
+            <div th:each="nonMedUser : ${patient.nonMedicalUser}">
+                <h3>[[${nonMedUser.firstName}]] [[${nonMedUser.lastName}]]</h3>
+                <p>Contact</p>
+                <ul>
+                    <li th:if="${nonMedUser.contactInfo.address}">[[${nonMedUser.contactInfo.address}]]</li>
+                    <li th:if="${nonMedUser.contactInfo.phone}">[[${nonMedUser.contactInfo.phone}]]</li>
+                    <li th:if="${nonMedUser.contactInfo.email}">[[${nonMedUser.contactInfo.email}]]</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section class="medUser">
+        <div th:if="${patient.medicalUser}">
+            <h2>Medical Care Professionals</h2>
+            <div th:each="medUser : ${patient.medicalUser}">
+                <h3>[[${medUser.firstName}]] [[${medUser.lastName}]]</h3>
+                <p th:text=" 'Specialty: ' + (${medUser.medicalSpecialty} ?: 'unknown')"></p>
+                <p th:text=" 'Institution: ' + (${medUser.medicalInstitution} ?: 'unknown')"></p>
+                <p th:text=" 'Institution Phone: ' + (${medUser.institutionTelephone} ?: 'unknown')"></p>
+                <p>Contact</p>
+                <ul>
+                    <li th:if="${medUser.contactInfo.phone}">[[${medUser.contactInfo.phone}]]</li>
+                    <li th:if="${medUser.contactInfo.email}">[[${medUser.contactInfo.email}]]</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section class="userInfo">
+        <h2>Your Information</h2>
+        <div>
+            <p>Name: [[${patient.firstName}]] [[${patient.lastName}]]</p>
+            <p>Contact Info:</p>
+            <ul th:if="${patient.contactInfo}">
+                <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
+                <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
+                <li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
+            </ul>
+            <p>DOB: [[${patient.dateOfBirth}]]</p>
+            <p>Diagnosis: [[${patient.diagnosis}]]</p>
+        </div>
+    </section>
+    
     <footer>
         <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
     </footer>
+    
 </body>
 
 </html>

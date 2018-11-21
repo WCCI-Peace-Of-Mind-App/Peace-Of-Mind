@@ -61,7 +61,7 @@ public class Medication {
 	public Patient getPatient() {
 		return patient;
 	}
-	
+
 	public Medication() {}
 	
 	public Medication(String genericName, String dosage, String administration, int frequencyAmount, String frequencyTime, String picture, String reason) {

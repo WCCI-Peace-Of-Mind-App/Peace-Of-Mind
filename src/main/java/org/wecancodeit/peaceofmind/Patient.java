@@ -1,6 +1,7 @@
 package org.wecancodeit.peaceofmind;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -39,6 +40,8 @@ public class Patient implements IPerson {
 	@OneToMany
 	private Collection<Medication> medications;
 
+	@OneToMany(mappedBy="parent")
+	private Collection<PatientStatus> statusHistory;
 
 	public long getId() {
 		return id;
@@ -73,6 +76,10 @@ public class Patient implements IPerson {
 	public Collection<Medication> getMedications() {
 		return medications;
 	}
+	
+	public Collection<PatientStatus> getStatusHistory() {
+		return statusHistory;
+	}
 
 	public Patient() {}
 	
@@ -84,6 +91,15 @@ public class Patient implements IPerson {
 		this.diagnosis = diagnosis;
 		this.nonMedicalUser = nonMedicalUser;
 		this.medications = new HashSet<>(Arrays.asList(medications));
+		this.statusHistory = new ArrayList<>();
+	}
+	
+	public void setCurrentStatus(PatientStatus currentStatus) {
+		this.statusHistory.add(currentStatus);
+	}
+	
+	public PatientStatus getCurrentStatus() {
+		return (PatientStatus)this.statusHistory.toArray()[this.statusHistory.toArray().length-1];
 	}
 
 	@Override

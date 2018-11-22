@@ -70,11 +70,10 @@ public class PeaceOfMindController {
 	public String returnMedicalUser(@RequestParam(value = "id") long id, Model model)
 			throws MedicalUserNotFoundException {
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
-		NonMedicalUser nonMed = medUser.get().getPatient().getNonMedicalUser();
+
 
 		if (medUser.isPresent()) {
 			model.addAttribute("medicalUser", medUser.get());
-			model.addAttribute("nonMedicalUser", nonMed);
 			return "medicalUser";
 		}
 
@@ -86,9 +85,11 @@ public class PeaceOfMindController {
 	public String returnMedicalUserHomePage(@RequestParam(value = "id") long id, Model model)
 			throws MedicalUserNotFoundException {
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
-
+		NonMedicalUser nonMed = medUser.get().getPatient().getNonMedicalUser();
+		
 		if (medUser.isPresent()) {
 			model.addAttribute("medicalUser", medUser.get());
+			model.addAttribute("nonMedicalUser", nonMed);
 			return "medicalUser-Home";
 		}
 

@@ -8,10 +8,12 @@
 <body class="container">
   <div>
     <header>
-      <h2>Peace of Mind</h2>
-      <h3>
-        <a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Home</a>
-      </h3>
+      <h1>Peace of Mind</h1>
+      <nav>
+        <h2>
+          <a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Home</a>
+          <h2>
+      </nav>
     </header>
     <section class="account-info">
       <h4>Your Account Information</h4>
@@ -24,31 +26,31 @@
       <p><span th:text="${nonMedicalUser.contactInfo.phone}"></span></p>
       <section class="associated-patient">
         <h4>Your Loved One's Account:</h4>
-      <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
-        <section class="medication">
-          <div th:if="${patient.medications}">
-            <h3>Medications</h3>
-            <div th:each="medication : ${patient.medications}">
-              <h4>[[${medication.genericName}]]</h4>
-              <p>Reason for administration: [[${medication.reason}]]</p>
-              <p>Dosage: [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
+        <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
+          <section class="medication">
+            <div th:if="${patient.medications}">
+              <h3>Medications</h3>
+              <div th:each="medication : ${patient.medications}">
+                <h4>[[${medication.genericName}]]</h4>
+                <p>Reason for administration: [[${medication.reason}]]</p>
+                <p>Dosage: [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section class="patient">
-          <div>
-            <h3>Contact</h3>
-            <ul>
-              <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
-              <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
-              <li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
-            </ul>
-          </div>
+          <section class="patient">
+            <div>
+              <h3>Contact</h3>
+              <ul>
+                <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
+                <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
+                <li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
+              </ul>
+            </div>
         </div>
-        </section>
-
       </section>
+
+    </section>
     </section>
   </div>
 

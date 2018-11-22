@@ -8,55 +8,56 @@
 <body class="container">
 
   <header>
-      <h1>Peace of Mind</h1>
-    </header>
-
-    <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
-
-
-      <section class="medLog">
-        <h3>Med Log</h3>
-        <div>
-          <p> <em>place holder for medlog display</em> </p>
-        </div>
-      </section>
-
-      <section class="patientStatus">
-        <h3>Current Patient Status</h3>
-        <p><em>placeholder!!!!</em></p>
-      </section>
-
-
-      <section class="medUser">
-        <div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
-          <h3>Medical Personnel Information</h3>
-          <div>
-            <h4>[[${medicalUser.firstName}]] [[${medicalUser.lastName}]]</h4>
-            <ul>
-              <li th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
-              <li th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
-              <li th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
-              <li>Other Contact Methods</li>
-              <ul>
-                <li th:if="${medicalUser.contactInfo.phone}">[[${medicalUser.contactInfo.phone}]]</li>
-                <li th:if="${medicalUser.contactInfo.email}">[[${medicalUser.contactInfo.email}]]</li>
-              </ul>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-
-    </div>
-
+    <h1>Peace of Mind</h1>
     <nav>
-      <a th:href="@{/non-medical-user(id=${nonMedicalUser.id})}">Account</a>
+      <h2>
+        <a th:href="@{/non-medical-user(id=${nonMedicalUser.id})}">Account</a>
+      </h2>
     </nav>
+  </header>
 
-    <footer>
-      <span>&copy; Peace of Mind WCCI Final project</span>
-    </footer>
+  <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
 
-  </body>
+
+    <section class="medLog">
+      <h3>Med Log</h3>
+      <div>
+        <p> <em>place holder for medlog display</em> </p>
+      </div>
+    </section>
+
+    <section class="patientStatus">
+      <h3>Current Patient Status</h3>
+      <p><em>placeholder!!!!</em></p>
+    </section>
+
+
+    <section class="medUser">
+      <div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
+        <h3>Medical Personnel Information</h3>
+        <div>
+          <h4>[[${medicalUser.firstName}]] [[${medicalUser.lastName}]]</h4>
+          <ul>
+            <li th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
+            <li th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
+            <li th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
+            <li>Other Contact Methods</li>
+            <ul>
+              <li th:if="${medicalUser.contactInfo.phone}">[[${medicalUser.contactInfo.phone}]]</li>
+              <li th:if="${medicalUser.contactInfo.email}">[[${medicalUser.contactInfo.email}]]</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+
+  <footer>
+    <span>&copy; Peace of Mind WCCI Final project</span>
+  </footer>
+
+</body>
 
 </html>

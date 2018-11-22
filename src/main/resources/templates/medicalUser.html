@@ -7,66 +7,28 @@
 
 <body class="container">
 
-    <header>
-      <h2>Peace of Mind</h2>
-      <h3>
-        <a th:href="@{/non-medical-user-home(id=${medicalUser.id})}">Home</a>
-      </h3>
-    </header>
+  <header>
+    <h1>Peace of Mind</h1>
+    <nav>
+      <h2>
+        <a th:href="@{/medical-user-home(id=${medicalUser.id})}">Home</a>
+      </h2>
+    </nav>
+  </header>
 
-    <section class="account-info">
-      <h4>Your Account Information</h4>
-      <p>YourUsername: <span th:text="${medicalUser.userName}"></span></p>
-      <p>First Name: <span th:text="${medicalUser.firstName}"></span></p>
-      <p>Last Name: <span th:text="${medicalUser.lastName}"></span></p>
-      <p>Contact Info:</p>
-      <p><span th:text="${medicalUser.contactInfo.address}"></span></p>
-      <p><span th:text="${medicalUser.contactInfo.email}"></span></p>
-      <p><span th:text="${medicalUser.contactInfo.phone}"></span></p>
-      <p><span th:text="${medicalUser.medicalSpecialty}"></span></p>
-      <p><span th:text="${medicalUser.medicalInstitution}"></span></p>
-      <p><span th:text="${medicalUser.institutionTelephone}"></span></p>
-      <section class="associated-patient">
-
-        <h4>Your Patient's Account:</h4>
-      <div th:if="${medicalUser.patient}" th:each="patient : ${medicalUser.patient}">
-        <section class="medication">
-          <div th:if="${patient.medications}">
-            <h3>Medications</h3>
-            <div th:each="medication : ${patient.medications}">
-              <h4>[[${medication.genericName}]]</h4>
-              <p>Reason for administration: [[${medication.reason}]]</p>
-              <p>Dosage: [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="patient">
-          <div>
-            <h3>Contact</h3>
-            <ul>
-              <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
-              <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
-              <li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
-            </ul>
-          </div>
-        </div>
-        </section>
-
-        <div th:if="${nonMedicalUser.id}">
-        <h4>Your Patient's Emergency Contact:</h4>
-        <div th:if="${nonMedicalUser.id}">
-          <p>[[${nonMedicalUser.firstName}]] [[${nonMedicalUser.lastName}]]</p>
-          <p th:text="${nonMedicalUser.relationshipWithPatient}"></p>
-          <ul>
-            <li th:if="${nonMedicalUser.contactInfo.phone}">[[${nonMedicalUser.contactInfo.phone}]]</li>
-            <li th:if="${nonMedicalUser.contactInfo.email}">[[${nonMedicalUser.contactInfo.email}]]</li>
-          </ul>
-        </div>
-      </div>
-
-      </section>
-    </section>
+  <section class="account-info">
+    <h4>Your Account Information</h4>
+    <p>Your Username: <span th:text="${medicalUser.userName}"></span></p>
+    <p>First Name: <span th:text="${medicalUser.firstName}"></span></p>
+    <p>Last Name: <span th:text="${medicalUser.lastName}"></span></p>
+    <p>Contact Info:</p>
+    <p><span th:text="${medicalUser.contactInfo.address}"></span></p>
+    <p>Email: <span th:text="${medicalUser.contactInfo.email}"></span></p>
+    <p>Phone: <span th:text="${medicalUser.contactInfo.phone}"></span></p>
+    <p>Specialty: <span th:text="${medicalUser.medicalSpecialty}"></span></p>
+    <p>Institution: <span th:text="${medicalUser.medicalInstitution}"></span></p>
+    <p>Institution Telephone: <span th:text="${medicalUser.institutionTelephone}"></span></p>
+  </section>
 
   <footer>
     <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>

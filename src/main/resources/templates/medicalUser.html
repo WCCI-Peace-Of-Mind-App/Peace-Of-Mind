@@ -1,82 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>A Medical User</title>
+  <title>Peace Of Mind</title>
 </head>
+
 <body class="container">
-    
-    <h1>Peace Of Mind</h1>
-    
-    
-    <section class="patient">
-        <div th:if="${medUser.patient}" th:each="patient : ${medUser.patient}">
-            <h2>Patient: [[${patient.firstName}]] [[${patient.lastName}]]</h2>
-            <h3>Diagnosis: [[${patient.diagnosis}]]</h3>
-            
-            <section class="medLog">
-                <h3>Med Log</h3>
-                <div>
-                    <p> <em>place holder for medlog display</em> </p>
-                </div>
-            </section>
 
-            <section class="patientStatus">
-                <h3>Current Patient Status</h3>
-                <div>
-                    <p><em>placeholder!!!!</em></p>
-                </div>
-            </section>
-            
-            <section class="medication">
-                <div th:if="${patient.medications}">
-                    <h3>Medications</h3>
-                    <div th:each="medication : ${patient.medications}">
-                        <h4>[[${medication.genericName}]]</h4>
-                        <p>Reason for administration: [[${medication.reason}]]</p>
-                        <p>Doasge: [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
-                        <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
-                    </div>
-                </div>
-            </section>
+    <header>
+      <h2>Peace of Mind</h2>
+      <h3>
+        <a th:href="@{/non-medical-user-home(id=${medicalUser.id})}">Home</a>
+      </h3>
+    </header>
 
-            <section class="patientInfo">
-                <h3>Contact</h3>
-                <ul>
-                    <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
-                    <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
-                    <li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
-                </ul>          
-            </section>    
+    <section class="account-info">
+      <h4>Your Account Information</h4>
+      <p>YourUsername: <span th:text="${medicalUser.userName}"></span></p>
+      <p>First Name: <span th:text="${medicalUser.firstName}"></span></p>
+      <p>Last Name: <span th:text="${medicalUser.lastName}"></span></p>
+      <p>Contact Info:</p>
+      <p><span th:text="${medicalUser.contactInfo.address}"></span></p>
+      <p><span th:text="${medicalUser.contactInfo.email}"></span></p>
+      <p><span th:text="${medicalUser.contactInfo.phone}"></span></p>
+      <p><span th:text="${medicalUser.medicalSpecialty}"></span></p>
+      <p><span th:text="${medicalUser.medicalInstitution}"></span></p>
+      <p><span th:text="${medicalUser.institutionTelephone}"></span></p>
+      <section class="associated-patient">
 
+        <h4>Your Patient's Account:</h4>
+      <div th:if="${medicalUser.patient}" th:each="patient : ${medicalUser.patient}">
+        <section class="medication">
+          <div th:if="${patient.medications}">
+            <h3>Medications</h3>
+            <div th:each="medication : ${patient.medications}">
+              <h4>[[${medication.genericName}]]</h4>
+              <p>Reason for administration: [[${medication.reason}]]</p>
+              <p>Dosage: [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
+            </div>
+          </div>
+        </section>
 
-            <section class="nonMedUser">
-                <div th:if="${patient.nonMedicalUser}">
-                    <h3>[[${patient.firstName}]]'s Caregiver</h3>
-                    <div th:each="nonMedUser : ${patient.nonMedicalUser}">
-                        <h4>[[${nonMedUser.firstName}]] [[${nonMedUser.lastName}]]</h4>
-                        <ul>
-                            <li>Relationship to Patient: <span th:text="${nonMedUser.relationshipWithPatient}">unknown</span></li>
-                            <li>Contact</li>
-                            <ul>
-                                <li th:if="${nonMedUser.contactInfo.address}">[[${nonMedUser.contactInfo.address}]]</li>
-                                <li th:if="${nonMedUser.contactInfo.phone}">[[${nonMedUser.contactInfo.phone}]]</li>
-                                <li th:if="${nonMedUser.contactInfo.email}">[[${nonMedUser.contactInfo.email}]]</li>
-                            </ul>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
+        <section class="patient">
+          <div>
+            <h3>Contact</h3>
+            <ul>
+              <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
+              <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
+              <li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
+            </ul>
+          </div>
         </div>
+        </section>
+
+        <div th:if="${nonMedicalUser.id}">
+        <h4>Your Patient's Emergency Contact:</h4>
+        <div th:if="${nonMedicalUser.id}">
+          <p>[[${nonMedicalUser.firstName}]] [[${nonMedicalUser.lastName}]]</p>
+          <p th:text="${nonMedicalUser.relationshipWithPatient}"></p>
+          <ul>
+            <li th:if="${nonMedicalUser.contactInfo.phone}">[[${nonMedicalUser.contactInfo.phone}]]</li>
+            <li th:if="${nonMedicalUser.contactInfo.email}">[[${nonMedicalUser.contactInfo.email}]]</li>
+          </ul>
+        </div>
+      </div>
+
+      </section>
     </section>
 
-    <nav>
-        <a th:href="@{/medical-user(id=${medUser.id})}">Account</a>
-    </nav>
-
-    <footer>
-        <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
-    </footer>
-
+  <footer>
+    <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+  </footer>
 </body>
+
 </html>

@@ -21,10 +21,9 @@ public class PeaceOfMindController {
 	@Resource
 	MedicalUserRepository medUserRepo;
 
-	
 	@Resource
 	MedicationRepository medRepo;
-	
+
 	@RequestMapping("/patient")
 	public String returnPatient(@RequestParam(value = "id") long id, Model model) throws PatientNotFoundException {
 		Optional<Patient> patient = patientRepo.findById(id);
@@ -38,13 +37,6 @@ public class PeaceOfMindController {
 
 	}
 
-	@RequestMapping("/all-patients")
-	public String returnAllPatients(Model model) {
-		model.addAttribute("patients", patientRepo.findAll());
-		return "patients";
-
-	}
-
 	@RequestMapping("/non-medical-user")
 	public String returnNonMedicalUser(@RequestParam(value = "id") long id, Model model)
 			throws NonMedicalUserNotFoundException {
@@ -52,13 +44,14 @@ public class PeaceOfMindController {
 
 		if (nonMedUser.isPresent()) {
 			model.addAttribute("nonMedicalUser", nonMedUser.get());
+
 			return "nonMedicalUser";
 		}
 
 		throw new NonMedicalUserNotFoundException();
 
 	}
-	
+
 	@RequestMapping("/non-medical-user-home")
 	public String returnNonMedicalUserHomePage(@RequestParam(value = "id") long id, Model model)
 			throws NonMedicalUserNotFoundException {
@@ -73,21 +66,30 @@ public class PeaceOfMindController {
 
 	}
 
-	@RequestMapping("/all-non-medical-users")
-	public String returnAllNonMedicalUsers(Model model) {
-		model.addAttribute("nonMedicalUsers", nonMedUserRepo.findAll());
-		return "nonMedicalUsers";
-
-	}
-
 	@RequestMapping("/medical-user")
 	public String returnMedicalUser(@RequestParam(value = "id") long id, Model model)
 			throws MedicalUserNotFoundException {
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
+		NonMedicalUser nonMed = medUser.get().getPatient().getNonMedicalUser();
 
 		if (medUser.isPresent()) {
-			model.addAttribute("medUser", medUser.get());
+			model.addAttribute("medicalUser", medUser.get());
+			model.addAttribute("nonMedicalUser", nonMed);
 			return "medicalUser";
+		}
+
+		throw new MedicalUserNotFoundException();
+
+	}
+
+	@RequestMapping("/medical-user-home")
+	public String returnMedicalUserHomePage(@RequestParam(value = "id") long id, Model model)
+			throws MedicalUserNotFoundException {
+		Optional<MedicalUser> medUser = medUserRepo.findById(id);
+
+		if (medUser.isPresent()) {
+			model.addAttribute("medicalUser", medUser.get());
+			return "medicalUser-Home";
 		}
 
 		throw new MedicalUserNotFoundException();
@@ -107,7 +109,7 @@ public class PeaceOfMindController {
 		throw new MedicationNotFoundException();
 
 	}
-	
+
 	@RequestMapping("/all-medications")
 	public String returnAllMedications(Model model) {
 		model.addAttribute("medications", medRepo.findAll());

@@ -6,15 +6,13 @@
 </head>
 
 <body class="container">
-  
+
   <header>
       <h1>Peace of Mind</h1>
     </header>
-    
+
     <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
-      
-      <h2>[[${patient.firstName}]] [[${patient.lastName}]]</h2>
-      <h3>Diagnosis: [[${patient.diagnosis}]]</h3>
+
 
       <section class="medLog">
         <h3>Med Log</h3>
@@ -22,35 +20,13 @@
           <p> <em>place holder for medlog display</em> </p>
         </div>
       </section>
-    
+
       <section class="patientStatus">
         <h3>Current Patient Status</h3>
         <p><em>placeholder!!!!</em></p>
       </section>
-    
-      <section class="medication">
-        <div th:if="${patient.medications}">
-          <h3>Medications</h3>
-          <div th:each="medication : ${patient.medications}">
-            <h4>[[${medication.genericName}]]</h4>
-            <p>Reason for administration: [[${medication.reason}]]</p>
-            <p>Dosage: [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
-            <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
-          </div>
-        </div>
-      </section>
 
-      <section class="patient">
-        <div>
-          <h3>Contact</h3>
-          <ul>
-            <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
-            <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
-            <li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
-          </ul>
-        </div>
-      </section>
-        
+
       <section class="medUser">
         <div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
           <h3>Medical Personnel Information</h3>
@@ -69,19 +45,18 @@
           </div>
         </div>
       </section>
-        
+
 
     </div>
 
     <nav>
       <a th:href="@{/non-medical-user(id=${nonMedicalUser.id})}">Account</a>
     </nav>
-      
+
     <footer>
       <span>&copy; Peace of Mind WCCI Final project</span>
     </footer>
-      
+
   </body>
-    
+
 </html>
-    

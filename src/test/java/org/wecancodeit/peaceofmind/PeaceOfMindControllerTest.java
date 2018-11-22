@@ -1,10 +1,8 @@
 package org.wecancodeit.peaceofmind;
 
-import static java.util.Arrays.asList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -66,14 +64,6 @@ public class PeaceOfMindControllerTest {
 		verify(model).addAttribute("patient", patientOne);
 	}
 
-	@Test
-	public void shouldAddAllPatientsToModel() {
-		Collection<Patient> allPatients = asList(patientOne, patientTwo);
-		when(patientRepo.findAll()).thenReturn(allPatients);
-
-		underTest.returnAllPatients(model);
-		verify(model).addAttribute("patients", allPatients);
-	}
 
 	@Test
 	public void shouldAddOneNonMedicalUserToModel() throws NonMedicalUserNotFoundException {
@@ -81,15 +71,6 @@ public class PeaceOfMindControllerTest {
 
 		underTest.returnNonMedicalUser(caregiverOneId, model);
 		verify(model).addAttribute("nonMedicalUser", caregiverOne);
-	}
-
-	@Test
-	public void shouldAddAllNonMedUsersToModel() {
-		Collection<NonMedicalUser> allNonMedUsers = asList(caregiverOne, caregiverTwo);
-		when(nonMedUserRepo.findAll()).thenReturn(allNonMedUsers);
-
-		underTest.returnAllNonMedicalUsers(model);
-		verify(model).addAttribute("nonMedicalUsers", allNonMedUsers);
 	}
 
 	@Test

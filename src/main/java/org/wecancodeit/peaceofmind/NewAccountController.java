@@ -4,9 +4,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @CrossOrigin
 @Controller
+@RequestMapping("/new-user")
 public class NewAccountController {
 
 	@Resource
@@ -40,21 +43,26 @@ public class NewAccountController {
 		medUserRepo.save(medUser);
 	}
 
-	public void addPatient(String firstName, String lastName, String dateOfBirth, String diagnosis,
+	
+	@PostMapping("/patient")
+	public String addPatient(String firstName, String lastName, String dateOfBirth, String diagnosis,
 			NonMedicalUser nonMedUser, String streetAddress, String secondaryField, String city, String state,
 			String zipCode, String aType, String phoneNumber, String pType, String emailAddress, String eType) {
 		ContactInfo contactInfo = addContactInfo(streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
 		Patient patient = new Patient(firstName, lastName, contactInfo, dateOfBirth, diagnosis, nonMedUser);
 		patientRepo.save(patient);
+		return "redirect:/new-user/add-medical";
 	}
 	
-	public void addNonMedicalUser(String firstName, String lastName, String userName, String password,
+	@PostMapping("/caregiver")
+	public String addNonMedicalUser(String firstName, String lastName, String userName, String password,
 			String relationshipWithPatient, String streetAddress, String secondaryField, String city, String state,
 			String zipCode, String aType, String phoneNumber, String pType, String emailAddress, String eType) {
 		ContactInfo contactInfo = addContactInfo(streetAddress, secondaryField, city, state, zipCode, aType, phoneNumber, pType, emailAddress, eType);
 		NonMedicalUser nonMedUser = new NonMedicalUser(firstName, lastName, contactInfo, userName, password, relationshipWithPatient);
 		nonMedUserRepo.save(nonMedUser);
 		
+		return "redirect:/new-user/add-patient";
 	}
 
 	protected ContactInfo addContactInfo(String streetAddress, String secondaryField, String city, String state, String zipCode,

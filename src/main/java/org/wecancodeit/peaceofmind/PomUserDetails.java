@@ -6,10 +6,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class PocUserDetails implements UserDetails {
+public class PomUserDetails implements UserDetails {
   private INonPatientUser theUser;
 
-  public PocUserDetails(INonPatientUser user)
+  public PomUserDetails(INonPatientUser user)
   {
     this.theUser = user;
   }

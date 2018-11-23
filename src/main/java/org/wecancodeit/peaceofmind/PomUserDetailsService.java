@@ -27,6 +27,6 @@ public class PomUserDetailsService implements UserDetailsService {
     } else {
       throw new UsernameNotFoundException("The provided username, " + username + " is not valid");
     }
-    return new PocUserDetails(user);
+    return new PomUserDetails(user);
   }
 }

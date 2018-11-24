@@ -78,7 +78,7 @@ public class PeaceOfMindControllerTest {
 		when(medUserRepo.findById(doctorId)).thenReturn(Optional.of(doctor));
 
 		underTest.returnMedicalUser(doctorId, model);
-		verify(model).addAttribute("medUser", doctor);
+		verify(model).addAttribute("medicalUser", doctor);
 	}
 
 }

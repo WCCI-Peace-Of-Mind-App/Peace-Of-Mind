@@ -6,82 +6,58 @@
 </head>
 
 <body class="container">
-  
+
   <header>
-      <h1>Peace of Mind</h1>
-    </header>
-    
-    <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
-      
-      <h2>[[${patient.firstName}]] [[${patient.lastName}]]</h2>
-      <h3>Diagnosis: [[${patient.diagnosis}]]</h3>
+    <h1>Peace of Mind</h1>
+    <nav>
+      <h2>
+        <a th:href="@{/non-medical-user(id=${nonMedicalUser.id})}">Account</a>
+      </h2>
+    </nav>
+  </header>
 
-      <section class="medLog">
-        <h3>Med Log</h3>
-        <div>
-          <p> <em>place holder for medlog display</em> </p>
-        </div>
-      </section>
-    
-      <section class="patientStatus">
-        <h3>Current Patient Status</h3>
-        <p><em>placeholder!!!!</em></p>
-      </section>
-    
-      <section class="medication">
-        <div th:if="${patient.medications}">
-          <h3>Medications</h3>
-          <div th:each="medication : ${patient.medications}">
-            <h4>[[${medication.genericName}]]</h4>
-            <p>Reason for administration: [[${medication.reason}]]</p>
-            <p>Dosage: [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
-            <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
-          </div>
-        </div>
-      </section>
+  <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
 
-      <section class="patient">
+
+    <section class="medLog">
+      <h3>Med Log</h3>
+      <div>
+        <p> <em>place holder for medlog display</em> </p>
+      </div>
+    </section>
+
+    <section class="patientStatus">
+      <h3>Current Patient Status</h3>
+      <p><em>placeholder!!!!</em></p>
+    </section>
+
+
+    <section class="medUser">
+      <div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
+        <h3>Medical Personnel Information</h3>
         <div>
-          <h3>Contact</h3>
+          <h4>[[${medicalUser.firstName}]] [[${medicalUser.lastName}]]</h4>
           <ul>
-            <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
-            <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
-            <li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
+            <li th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
+            <li th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
+            <li th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
+            <li>Other Contact Methods</li>
+            <ul>
+              <li th:if="${medicalUser.contactInfo.phone}">[[${medicalUser.contactInfo.phone}]]</li>
+              <li th:if="${medicalUser.contactInfo.email}">[[${medicalUser.contactInfo.email}]]</li>
+            </ul>
           </ul>
         </div>
-      </section>
-        
-      <section class="medUser">
-        <div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
-          <h3>Medical Personnel Information</h3>
-          <div>
-            <h4>[[${medicalUser.firstName}]] [[${medicalUser.lastName}]]</h4>
-            <ul>
-              <li th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
-              <li th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
-              <li th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
-              <li>Other Contact Methods</li>
-              <ul>
-                <li th:if="${medicalUser.contactInfo.phone}">[[${medicalUser.contactInfo.phone}]]</li>
-                <li th:if="${medicalUser.contactInfo.email}">[[${medicalUser.contactInfo.email}]]</li>
-              </ul>
-            </ul>
-          </div>
-        </div>
-      </section>
-        
+      </div>
+    </section>
 
-    </div>
 
-    <nav>
-      <a th:href="@{/non-medical-user(id=${nonMedicalUser.id})}">Account</a>
-    </nav>
-      
-    <footer>
-      <span>&copy; Peace of Mind WCCI Final project</span>
-    </footer>
-      
-  </body>
-    
+  </div>
+
+  <footer>
+    <span>&copy; Peace of Mind WCCI Final project</span>
+  </footer>
+
+</body>
+
 </html>
-    

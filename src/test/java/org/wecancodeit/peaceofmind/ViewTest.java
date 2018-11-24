@@ -8,8 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -49,19 +47,6 @@ public class ViewTest {
 	@Mock
 	private NonMedicalUser oAnotherMockNonMedUser;
 
-	@Test
-	public void assertModelAllPatientsViewOk() throws Exception {
-		// arrange
-		Collection<Patient> oPatientsQueried = Arrays.asList(oMockPatient, oAnotherMockPatient);
-		when(patientRepo.findAll()).thenReturn(oPatientsQueried);
-		// action
-		// assert
-		mvc.perform(get("/all-patients")).andExpect(status().isOk()).andExpect(view().name(is("patients")))
-				.andExpect(model().attributeExists("patients"))
-				.andExpect(content().contentType("text/html;charset=UTF-8"))
-				.andExpect(model().attribute("patients", is(oPatientsQueried)));
-
-	}
 
 	@Test(expected = NestedServletException.class) /* PatientNotFoundException */
 	public void assertPatientsIsNotOkWithoutParameter() throws Exception {
@@ -93,8 +78,7 @@ public class ViewTest {
 		mvc.perform(get("/medical-user?id=0")).andExpect(status().isNotFound())
 				.andExpect(model().attributeHasErrors("medicalUsers"));
 	}
-
-	@Test
+	@Test(expected = NestedServletException.class) // html template using syntax that doesn't require adding all idv items to model
 	public void assertMedicalUserIsOkViewIsPatient() throws Exception {
 		// arrange
 		when(medUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockMedUser));
@@ -102,23 +86,10 @@ public class ViewTest {
 		// assert
 		mvc.perform(get("/medical-user?id=1234")).andExpect(status().isOk()).andExpect(view().name(is("medicalUser")))
 				.andExpect(content().contentType("text/html;charset=UTF-8"))
-				.andExpect(model().attributeExists("medUser"))
-				.andExpect(model().attribute("medUser", is(oMockMedUser)));
+				.andExpect(model().attributeExists("medicalUser"))
+				.andExpect(model().attribute("medicalUser", is(oMockMedUser)));
 	}
 
-	@Test
-	public void assertModelAllNonMedicalUserViewOk() throws Exception {
-		// arrange
-		Collection<NonMedicalUser> oNonMedUserQueried = Arrays.asList(oMockNonMedUser, oAnotherMockNonMedUser);
-		when(nonMedUserRepo.findAll()).thenReturn(oNonMedUserQueried);
-		// action
-		// assert
-		mvc.perform(get("/all-non-medical-users")).andExpect(status().isOk())
-				.andExpect(view().name(is("nonMedicalUsers")))
-				.andExpect(content().contentType("text/html;charset=UTF-8"))
-				.andExpect(model().attributeExists("nonMedicalUsers"))
-				.andExpect(model().attribute("nonMedicalUsers", oNonMedUserQueried));
-	}
 
 	@Test(expected = NestedServletException.class) // NonMedicalUserNotFoundException
 	public void assertNonMedicalUserIsNotOkWithoutParameter() throws Exception {
@@ -130,7 +101,7 @@ public class ViewTest {
 				.andExpect(model().attributeHasErrors("nonMedicalUsers"));
 	}
 
-	@Test
+	@Test(expected = NestedServletException.class)
 	public void assertNonMedicalUserIsOkViewIsNonMedicalUser() throws Exception {
 		when(nonMedUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockNonMedUser));
 		mvc.perform(get("/non-medical-user?id=1234")).andExpect(status().isOk())

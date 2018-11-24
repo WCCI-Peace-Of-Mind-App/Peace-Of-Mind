@@ -1,5 +1,8 @@
 package org.wecancodeit.peaceofmind;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
@@ -34,7 +37,16 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 	private MedicationRepository medRepo;
 	
 	@Resource
-	private PatientStatusRepository patientStatusRepo;
+	private MedicationLogRepository medLogRepo; 
+	
+	@Resource
+	private MedicationTrackerRepository medTrackerRepo;
+  
+  @Resource
+  private PatientStatusRepository patientStatusRepo;
+	
+	DateTimeFormatter yyyymmddhhmm = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"); 
+	String pastDate = LocalDateTime.now().minusDays(2).format(yyyymmddhhmm);
 	
 	
 	@Override
@@ -72,11 +84,16 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 
 		
 		Patient patient1 = patientRepo.save(new Patient("Joe", "Bob", contactInfo1, "01/01/01", "Alzheimers", nonMedUser2, med1, med2));
+		medLogRepo.save(new MedicationLog(med1));
+		medLogRepo.save(new MedicationLog(med2));
+		medLogRepo.save(new MedicationLog(med1, pastDate));
+		medTrackerRepo.save(new MedicationTracker(med1));
+		medTrackerRepo.save(new MedicationTracker(med2));
+
 		
         patientStatusRepo.save(new PatientStatus(PatientStatusEnum.WELL, patient1));
         patientStatusRepo.save(new PatientStatus(PatientStatusEnum.NOTWELL, patient1));
 
-		
 		// End Patient 1 build
 		
 		

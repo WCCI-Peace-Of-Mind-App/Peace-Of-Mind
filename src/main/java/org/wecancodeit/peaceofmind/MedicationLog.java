@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class MedicationLog {
@@ -14,23 +15,18 @@ public class MedicationLog {
 	@Id
 	@GeneratedValue
 	private long id;
-	private long medicationId;
-	private long patientId;
+	@ManyToOne
+	private Medication medication;
 	private String dateTime;
 
 	public long getId() {
 		return id;
 	}
 
-
-	public long getMedicationId() {
-		return medicationId;
+	public Medication getMedication() {
+		return medication;
 	}
-
-	public long getPatientId() {
-		return patientId;
-	}
-
+	
 	public String getDateTime() {
 		return dateTime;
 	}
@@ -38,11 +34,16 @@ public class MedicationLog {
 	public MedicationLog() {
 		
 	}
+	
+	//for testing purposes only//
+	public MedicationLog(Medication medication, String pastDateTime) {
+		this.medication = medication;
+		this.dateTime = pastDateTime;
+	}
 
-	public MedicationLog(long medicationId, long patientId) {
+	public MedicationLog(Medication medication) {
 		DateTimeFormatter yyyymmddhhmm = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-		this.medicationId = medicationId;
-		this.patientId = patientId;
+		this.medication = medication;
 		this.dateTime = LocalDateTime.now().format(yyyymmddhhmm);
 
 	}

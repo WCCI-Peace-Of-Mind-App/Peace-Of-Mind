@@ -31,6 +31,9 @@ public class MedicationTrackerRepositoryTest {
 	private MedicationLogRepository medLogRepo;
 	
 	@Resource
+	private NonMedicalUserRepository nonMedUserRepo;
+	
+	@Resource
 	private MedicationRepository medRepo;
 	
 	@Resource
@@ -49,16 +52,15 @@ public class MedicationTrackerRepositoryTest {
 	public void setUp() {
 		
 		ContactInfo contact = contactRepo.save(new ContactInfo());
-		Patient testPatient = patientRepo.save(new Patient("Gilderoy", "Lockhart", contact, "date", "dementia", null));
+		NonMedicalUser nonMedUser = nonMedUserRepo.save(new NonMedicalUser("Albus", "Dumbledore", contact, "colleague", "", "" ));
 		Medication testMed = medRepo
 				.save(new Medication("Chocolate Frog", "1 frog", "oral", 1, "daily", "img.jpg", "good spirits"));
+		Patient testPatient = patientRepo.save(new Patient("Gilderoy", "Lockhart", contact, "date", "dementia", nonMedUser, testMed ));
 
-		MedicationLog medLog = medLogRepo.save(new MedicationLog(testMed.getId(), testPatient.getId()));
-		underTest = medTrackerRepo.save(new MedicationTracker(testMed.getId(), testPatient.getId()));
+		MedicationLog medLog = medLogRepo.save(new MedicationLog(testMed));
+		underTest = medTrackerRepo.save(new MedicationTracker(testMed));
 		medTrackerId = underTest.getId();
-		
-		
-		
+
 		entity.flush();
 		entity.clear();
 		
@@ -71,21 +73,10 @@ public class MedicationTrackerRepositoryTest {
 	}
 
 	@Test
-	public void shouldHaveValidPatientId() {
-		Optional<MedicationTracker> medTracker = medTrackerRepo.findById(medTrackerId);
-		long patId = medTracker.get().getPatientId();
-
-		Optional<Patient> patient = patientRepo.findById(patId);
-		String result = patient.get().getFirstName();
-
-		assertThat(result, is("Gilderoy"));
-	}
-
-	@Test
 	public void shouldHaveValidMedicationId() {
-		long medId = underTest.getMedicationId();
+		Medication med = underTest.getMedication();
 
-		Optional<Medication> medication = medRepo.findById(medId);
+		Optional<Medication> medication = medRepo.findById(med.getId());
 		String result = medication.get().getGenericName();
 
 		assertThat(result, is("Chocolate Frog"));
@@ -101,6 +92,7 @@ public class MedicationTrackerRepositoryTest {
 
 		assertThat(result, is(date));
 	}
+	
 	
 	
 	

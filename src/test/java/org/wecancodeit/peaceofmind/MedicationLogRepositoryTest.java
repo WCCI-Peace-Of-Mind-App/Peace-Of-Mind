@@ -43,14 +43,13 @@ public class MedicationLogRepositoryTest {
 	
 	DateTimeFormatter yyyymmddmmhh = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");  
 
+
 	@Before
 	public void setUp() {
-		ContactInfo contact = contactRepo.save(new ContactInfo());
-		Patient testPatient = patientRepo.save(new Patient("Gilderoy", "Lockhart", contact, "date", "dementia", null));
 		Medication testMed = medRepo
 				.save(new Medication("Chocolate Frog", "1 frog", "oral", 1, "daily", "img.jpg", "good spirits"));
 
-		underTest = medLogRepo.save(new MedicationLog(testMed.getId(), testPatient.getId()));
+		underTest = medLogRepo.save(new MedicationLog(testMed));
 		medLogId = underTest.getId();
 
 		entity.flush();
@@ -64,26 +63,15 @@ public class MedicationLogRepositoryTest {
 	}
 
 	@Test
-	public void shouldHaveValidPatientId() {
-		Optional<MedicationLog> medLog = medLogRepo.findById(medLogId);
-		long patId = medLog.get().getPatientId();
+	public void shouldHaveValidMedication() {
+		Medication med = underTest.getMedication();
 
-		Optional<Patient> patient = patientRepo.findById(patId);
-		String result = patient.get().getFirstName();
-
-		assertThat(result, is("Gilderoy"));
-	}
-
-	@Test
-	public void shouldHaveValidMedicationId() {
-		long medId = underTest.getMedicationId();
-
-		Optional<Medication> medication = medRepo.findById(medId);
-		String result = medication.get().getGenericName();
+		String result = med.getGenericName();
 
 		assertThat(result, is("Chocolate Frog"));
 
 	}
+	
 
 	@Test
 	public void shouldHaveDateTimeStamp() {
@@ -94,5 +82,10 @@ public class MedicationLogRepositoryTest {
 
 		assertThat(result, not(pastDateTime));
 	}
+	
+	
+	
+	
+	
 
 }

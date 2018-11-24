@@ -1,90 +1,77 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700');
-body, div, section, article, h2, header, footer{
-  box-sizing: border-box;
-  margin: 0px;
+* {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 15px;
+    max-width: auto;
+    padding: 1.2rem 2rem 0 2rem;
+    background: rgb(203, 223, 203);
 }
-body{
-  font-family: "Montserrat", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  letter-spacing: 1.5px;
-  margin:0 auto;
-  max-width: 1337px;
+
+.container {
+    box-sizing: border-box;
+    box-shadow: 0 0 8px 5px rgba(16, 18, 19, 0.664);
+    max-width: auto;
+    text-align: left;
+
 }
-header{
-  margin-top:24px;
-  padding: 24px;
-  text-align:center;
+
+header h1 {
+	text-align: center;
+	font-weight: 200;
+	color: rgba(0, 0, 0, .7);
+	margin: 0px 0px 0px 0px;
 }
-header h1{
-  font-size: 36px;
-  font-weight: 200;
-  color: rgba(0,0,0,.7);
-  margin: 0px 0px 0px 0px;
+
+nav {
+	border-top: 1px solid var(- -white);
+	text-align: right;
+	padding: 2rem 2rem;
+	background: #333;
+}
+
+nav a {
+	padding: 0.5em 2em;
+	text-decoration: none;
+	color: rgb(12, 23, 234);	
+	
+}
+
+nav a:hover {
+	background: #666;
+}
+
+footer {
+	text-align: center;
+	color: rgb(12, 23, 234);
+	padding-bottom:2rem;
+}
+
+  @media screen and (max-width: 750px) {
+
+    nav {
+      display: flex;
+      flex-flow: column;
+    }
+    nav a {
+      display: none;
+    }
+    nav::before {
+      content: 'SHOW NAV';
+      color: rgb(12, 11, 11);
+      background: aqua;
+      font-weight: bold;
+      padding: 0.5em 2em;
+    }
+    nav.open::before {
+      content: 'HIDE NAV';
+    }
+    nav.open a {
+      display: block;
+    }
+  
+    nav ::selection {
+      color: inherit;
+      background: transparent;
+    }
   }
-header h3{
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(0,0,0,.2);
-  margin: 16px 0px 0px 0px;
-}
-footer{
-  clear:both;
-  padding: 24px;
-}
-footer h4{
-  font-size: 12px;
-  color: rgba(0,0,0,.4);
-}
-section{
-  width:100%;  
-  padding: 12px;
-}
-article{
-  color: white;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  float: left;
-  width: 50%;
-  padding: 12px;
-}
-div{
-  position:relative;
-  min-height: 280px;
-  width: 100%;
-  background-color: #A9C9FF;
-  background-image: linear-gradient(45deg, #A9C9FF 0%, #FFBBEC 100%);
-  border-radius: 15px;
-  padding: 24px;
-  box-shadow: 0 10px 20px rgba(169, 201, 255, .4);
-  transition: 0.3s ease-in-out;
-}
-div:hover{
-  transform: scale(1.02);
-  box-shadow: 0 15px 20px rgba(169, 201, 255, .6);
-}
-h2{
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-@media only screen and (max-width: 960px) {
-  article{
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 680px) {
-  article{
-    width: 100%;
-    padding: 8px;
-  }
-  section{  
-  padding: 8px;
-  }
-  div:hover{
-  transform: scale(1);
-  box-shadow: 0 10px 20px rgba(169, 201, 255, .4);
-  }
-}

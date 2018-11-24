@@ -3,6 +3,7 @@
 
 <head>
   <title>Peace Of Mind</title>
+  <link href="/css/styles.css" rel="stylesheet">
 </head>
 
 <body class="container">
@@ -10,9 +11,10 @@
     <header>
       <h1>Peace of Mind</h1>
       <nav>
-        <h2>
           <a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Home</a>
-          <h2>
+          <a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Account</a>
+          <a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Medications</a>
+          <a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Patient</a>
       </nav>
     </header>
     <section class="account-info">

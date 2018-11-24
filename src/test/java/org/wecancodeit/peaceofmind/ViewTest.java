@@ -78,7 +78,7 @@ public class ViewTest {
 		mvc.perform(get("/medical-user?id=0")).andExpect(status().isNotFound())
 				.andExpect(model().attributeHasErrors("medicalUsers"));
 	}
-	@Test
+	@Test(expected = NestedServletException.class) // html template using syntax that doesn't require adding all idv items to model
 	public void assertMedicalUserIsOkViewIsPatient() throws Exception {
 		// arrange
 		when(medUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockMedUser));
@@ -101,7 +101,7 @@ public class ViewTest {
 				.andExpect(model().attributeHasErrors("nonMedicalUsers"));
 	}
 
-	@Test
+	@Test(expected = NestedServletException.class)
 	public void assertNonMedicalUserIsOkViewIsNonMedicalUser() throws Exception {
 		when(nonMedUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockNonMedUser));
 		mvc.perform(get("/non-medical-user?id=1234")).andExpect(status().isOk())

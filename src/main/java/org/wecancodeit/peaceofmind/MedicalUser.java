@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class MedicalUser implements INonPatientUser {
@@ -12,7 +13,7 @@ public class MedicalUser implements INonPatientUser {
 	@Id
 	@GeneratedValue
 	private long id;
-
+  private final String role = "MEDICAL";
 	private String firstName;
 	private String lastName;
 	@OneToOne(fetch = FetchType.LAZY)
@@ -38,7 +39,7 @@ public class MedicalUser implements INonPatientUser {
 		this.medicalInstitution = medicalInstitution; 
 		this.institutionTelephone = institutionTelephone;
 		this.userName = userName;
-		this.password = password;
+		this.password = new BCryptPasswordEncoder().encode(password);
 		this.patient = patient;
 	}
 
@@ -108,4 +109,9 @@ public class MedicalUser implements INonPatientUser {
 		return false;
 	  return true;
 	 }
+
+  public String getRole()
+  {
+    return this.role;
+  }
 }

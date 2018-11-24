@@ -115,6 +115,9 @@ public class PeaceOfMindController {
 	public String returnAllMedications(Model model) {
 		model.addAttribute("medications", medRepo.findAll());
 		return "medications";
-
 	}
+  @RequestMapping("/login")
+  public String login() {
+    return "auth/login";
+  }
 }

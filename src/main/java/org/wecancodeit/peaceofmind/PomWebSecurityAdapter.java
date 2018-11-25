@@ -30,9 +30,9 @@ public class PomWebSecurityAdapter extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception
   {
     http.authorizeRequests()
-        .antMatchers("/h2-console/**", "/css/**", "/js/**").permitAll()
+        .antMatchers("/h2-console", "/css/**", "/js/**").permitAll()
         .anyRequest().authenticated()
-        .and().csrf().ignoringAntMatchers("/h2-console/**")
+        //.and().csrf().ignoringAntMatchers("/h2-console/**")
         .and()
     .formLogin()
         .loginPage("/login").permitAll()

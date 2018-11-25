@@ -49,7 +49,7 @@ public class ViewTest {
 	private NonMedicalUser oMockNonMedUser;
 	@Mock
 	private NonMedicalUser oAnotherMockNonMedUser;
-
+@WithMockUser("xxGAMERxx")
 	@Test
 	public void assertModelAllPatientsViewOk() throws Exception {
 		// arrange
@@ -63,7 +63,7 @@ public class ViewTest {
 				.andExpect(model().attribute("patients", is(oPatientsQueried)));
 
 	}
-
+@WithMockUser("xxGAMERxx")
 	@Test(expected = NestedServletException.class) /* PatientNotFoundException */
 	public void assertPatientsIsNotOkWithoutParameter() throws Exception {
 		// arrange
@@ -72,7 +72,7 @@ public class ViewTest {
 		// assert
 		mvc.perform(get("/patient?id=0")).andExpect(status().isNotFound());
 	}
-
+@WithMockUser("docOc")
 	@Test
 	public void assertPatientIsOkViewIsPatient() throws Exception {
 		// arrange

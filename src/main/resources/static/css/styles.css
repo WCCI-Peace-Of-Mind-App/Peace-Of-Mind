@@ -1,75 +1,78 @@
 * {
-    font-family: 'Raleway', sans-serif;
-    max-width: auto;
-    padding: 0.5rem;
-    background: rgb(203, 223, 203);
+  font-family: 'Raleway', sans-serif;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  background-color: #ebf5fa;
 }
 
 .container {
-
-    max-width: auto;
-    text-align: left;
-
-}
-
-header h1 {
-	text-align: left;
-	font-weight: 200;
-	color: rgba(0, 0, 0, .7);
+  max-width: auto;
+  text-align: center;
 }
 
 nav {
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
+  background-image: linear-gradient(
+    to right,
+    #0f87c3,
+    #068bcd,
+    #49b9f2,
+    #49b9f2
+  );
+}
 
-	text-align: right;
-	padding: 2rem 2rem;
-
+.logo {
+  display: flex;
+  text-align: left;
+  padding: 0.5em;
+  color: white;
+  background-image: linear-gradient(
+    to right,
+    #0f87c3,
+    #068bcd
+    );
 }
 
 nav a {
-	padding: 0.5em 2em;
-	text-decoration: none;	
-	
+  display: flex;
+  padding: 0.5em;
+  text-align: right;
+  text-decoration: none;
+  color: #04496b;
+  background-image: linear-gradient(
+    to right,
+      #49b9f2,
+      #49b9f2,
+     lightblue
+     );
+}
+
+nav a:visited {
+  color: #04496b;
 }
 
 nav a:hover {
-	background: #666;
+  opacity: 0.6;
+}
+
+.dashboard {
+  padding: 2em 2em;
+  height: 80%;
+}
+
+li {
+  list-style: none;
+}
+
+section {
+  padding: 2em 2em;
 }
 
 footer {
-	text-align: center;
-	color: rgb(12, 23, 234);
-	padding-bottom:2rem;
+  text-align: center;
+  color: black;
+  padding-top: 15%;
 }
-
-@media only screen and (max-width: 960px) {
-  article{
-    width: 50%;
-  }
-  @media screen and (max-width: 750px) {
-
-    nav {
-      display: flex;
-      flex-flow: column;
-    }
-    nav a {
-      display: none;
-    }
-    nav::before {
-      content: 'SHOW NAV';
-      color: rgb(12, 11, 11);
-      background: aqua;
-      font-weight: bold;
-      padding: 0.5em 2em;
-    }
-    nav.open::before {
-      content: 'HIDE NAV';
-    }
-    nav.open a {
-      display: block;
-    }
-  
-    nav ::selection {
-      color: inherit;
-      background: transparent;
-    }
-  }

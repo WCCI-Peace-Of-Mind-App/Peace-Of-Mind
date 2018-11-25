@@ -9,16 +9,16 @@
 <body class="container">
 
 	<header>
-		<h1>Peace of Mind</h1>
 		<nav>
+			<h2 class="logo">Peace of Mind</h2>
 			<h2>
-				<a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Home</a>
+				<a th:href="@{/non-medical-user(id=${nonMedicalUser.id})}">Account</a>
 
 			</h2>
 		</nav>
 	</header>
 
-	<div th:if="${nonMedicalUser.patient}"
+	<div class="dashboard" th:if="${nonMedicalUser.patient}"
 		th:each="patient : ${nonMedicalUser.patient}">
 
 
@@ -66,7 +66,7 @@
 	</div>
 
 	<footer>
-		<span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+		<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>
 	</footer>
 
 </body>

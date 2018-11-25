@@ -9,14 +9,16 @@
 <body class="container">
 	<div>
 		<header>
-			<h1>Peace of Mind</h1>
+
 			<nav>
+				<h2 class="logo">Peace of Mind</h2>
 				<h2>
 					<a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Home</a>
 
 				</h2>
 			</nav>
 		</header>
+		<div class="dashboard">
 		<section class="account-info">
 			<h4>Your Account Information</h4>
 			<p>
@@ -42,6 +44,7 @@
 				<h4>Your Loved One's Account:</h4>
 				<div th:if="${nonMedicalUser.patient}"
 					th:each="patient : ${nonMedicalUser.patient}">
+					<p>[[${patient.firstName}]] [[${patient.lastName}]]</p>
 					<section class="medication">
 						<div th:if="${patient.medications}">
 							<h3>Medications</h3>
@@ -73,7 +76,7 @@
 	</div>
 
 	<footer>
-		<span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+		<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>
 	</footer>
 </body>
 

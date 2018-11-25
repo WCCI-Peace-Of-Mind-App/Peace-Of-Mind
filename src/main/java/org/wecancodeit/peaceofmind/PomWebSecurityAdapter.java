@@ -20,6 +20,11 @@ public class PomWebSecurityAdapter extends WebSecurityConfigurerAdapter {
   {
     return new BCryptPasswordEncoder();
   }
+  
+  public PomWebSecurityAdapter()
+  {
+    super();
+  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception

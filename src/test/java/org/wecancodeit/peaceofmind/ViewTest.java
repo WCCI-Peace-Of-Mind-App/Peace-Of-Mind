@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.NestedServletException;
@@ -84,6 +85,7 @@ public class ViewTest {
 				.andExpect(model().attribute("patients", is(oMockPatient)));
 	}
 
+@WithMockUser(value = "docOc")
 	@Test(expected = NestedServletException.class) /* MedicalUserNotFoundException */
 	public void assertMedicalUserIsNotOkWithoutParameter() throws Exception {
 		// arrange
@@ -94,8 +96,9 @@ public class ViewTest {
 				.andExpect(model().attributeHasErrors("medicalUsers"));
 	}
 
-	@Test
-	public void assertMedicalUserIsOkViewIsPatient() throws Exception {
+	@WithMockUser(value = "docOc")
+@Test
+	public void assertMedicalUserIsOkViewIsMedicalUser() throws Exception {
 		// arrange
 		when(medUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockMedUser));
 		// action
@@ -106,7 +109,8 @@ public class ViewTest {
 				.andExpect(model().attribute("medicalUsers", is(oMockMedUser)));
 	}
 
-	@Test
+	@WithMockUser(value = "xxGAMERxx")
+@Test
 	public void assertModelAllNonMedicalUserViewOk() throws Exception {
 		// arrange
 		Collection<NonMedicalUser> oNonMedUserQueried = Arrays.asList(oMockNonMedUser, oAnotherMockNonMedUser);
@@ -120,7 +124,8 @@ public class ViewTest {
 				.andExpect(model().attribute("nonMedicalUsers", oNonMedUserQueried));
 	}
 
-	@Test(expected = NestedServletException.class) // NonMedicalUserNotFoundException
+	@WithMockUser(value = "docOc")
+@Test(expected = NestedServletException.class) // NonMedicalUserNotFoundException
 	public void assertNonMedicalUserIsNotOkWithoutParameter() throws Exception {
 		// arrange
 		when(nonMedUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockNonMedUser));
@@ -130,7 +135,8 @@ public class ViewTest {
 				.andExpect(model().attributeHasErrors("nonMedicalUsers"));
 	}
 
-	@Test
+	@WithMockUser(value = "xxGAMERxx")
+@Test
 	public void assertNonMedicalUserIsOkViewIsNonMedicalUser() throws Exception {
 		when(nonMedUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockNonMedUser));
 		mvc.perform(get("/non-medical-user?id=1234")).andExpect(status().isOk())
@@ -140,7 +146,8 @@ public class ViewTest {
 				.andExpect(model().attribute("nonMedicalUsers", oMockNonMedUser));
 	}
 
-	@Test
+	@WithMockUser(value = "xxGAMERxx")
+@Test
 	public void assertNonMedicalUserHomeIsOKViewIsNonMedicalUserHome() throws Exception {
 		when(nonMedUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockNonMedUser));
 		mvc.perform(get("/non-medical-user-home?id=1234")).andExpect(status().isOk())

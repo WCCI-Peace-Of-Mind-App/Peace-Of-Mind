@@ -36,6 +36,24 @@ public class PeaceOfMindController {
 		throw new PatientNotFoundException();
 
 	}
+	
+	@RequestMapping("/patient-home")
+	public String returnPatientHomePage(@RequestParam(value = "id") long id, Model model) throws PatientNotFoundException {
+		Optional<Patient> patient = patientRepo.findById(id);
+		MedicalUser medUser = patient.get().getMedicalUser();
+		NonMedicalUser nonMedUser = patient.get().getNonMedicalUser();
+		
+
+		if (patient.isPresent()) {
+			model.addAttribute("patient", patient.get());
+			model.addAttribute("medicalUser", medUser);
+			model.addAttribute("nonMedicalUser", nonMedUser);
+			return "patient-Home";
+		}
+
+		throw new PatientNotFoundException();
+
+	}
 
 	@RequestMapping("/non-medical-user")
 	public String returnNonMedicalUser(@RequestParam(value = "id") long id, Model model)
@@ -71,7 +89,6 @@ public class PeaceOfMindController {
 			throws MedicalUserNotFoundException {
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
 
-
 		if (medUser.isPresent()) {
 			model.addAttribute("medicalUser", medUser.get());
 			return "medicalUser";
@@ -86,7 +103,7 @@ public class PeaceOfMindController {
 			throws MedicalUserNotFoundException {
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
 		NonMedicalUser nonMed = medUser.get().getPatient().getNonMedicalUser();
-		
+
 		if (medUser.isPresent()) {
 			model.addAttribute("medicalUser", medUser.get());
 			model.addAttribute("nonMedicalUser", nonMed);
@@ -116,5 +133,18 @@ public class PeaceOfMindController {
 		model.addAttribute("medications", medRepo.findAll());
 		return "medications";
 
+	}
+
+	@RequestMapping("/my-medications")
+	public String returnPatientMedications(@RequestParam(value = "id") long patientId, Model model)
+			throws PatientNotFoundException {
+		Optional<Patient> patient = patientRepo.findById(patientId);
+
+		if (patient.isPresent()) {
+			model.addAttribute("patient", patient.get());
+			return "patient";
+		}
+
+		throw new PatientNotFoundException();
 	}
 }

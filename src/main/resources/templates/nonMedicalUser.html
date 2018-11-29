@@ -19,65 +19,78 @@
 			</nav>
 		</header>
 		<div class="dashboard">
-		<section class="account-info">
-			<h4>Your Account Information</h4>
-			<p>
-				YourUsername: <span th:text="${nonMedicalUser.userName}"></span>
-			</p>
-			<p>
-				First Name: <span th:text="${nonMedicalUser.firstName}"></span>
-			</p>
-			<p>
-				Last Name: <span th:text="${nonMedicalUser.lastName}"></span>
-			</p>
-			<p>Contact Info:</p>
-			<p>
-				<span th:text="${nonMedicalUser.contactInfo.address}"></span>
-			</p>
-			<p>
-				<span th:text="${nonMedicalUser.contactInfo.email}"></span>
-			</p>
-			<p>
-				<span th:text="${nonMedicalUser.contactInfo.phone}"></span>
-			</p>
-			<section class="associated-patient">
-				<h4>Your Loved One's Account:</h4>
-				<div th:if="${nonMedicalUser.patient}"
-					th:each="patient : ${nonMedicalUser.patient}">
-					<p>[[${patient.firstName}]] [[${patient.lastName}]]</p>
-					<section class="medication">
-						<div th:if="${patient.medications}">
-							<h3>Medications</h3>
-							<div th:each="medication : ${patient.medications}">
-								<h4>[[${medication.genericName}]]</h4>
-								<p>Reason for administration: [[${medication.reason}]]</p>
-								<p>Dosage: [[${medication.dosage}]] via
-									[[${medication.administration}]] every
-									[[${medication.frequencyAmount}]]
-									[[${medication.frequencyTime}]]</p>
+			<section class="account-info">
+				<h4>Your Account Information</h4>
+				<p>
+					YourUsername: <span th:text="${nonMedicalUser.userName}"></span>
+				</p>
+				<p>
+					First Name: <span th:text="${nonMedicalUser.firstName}"></span>
+				</p>
+				<p>
+					Last Name: <span th:text="${nonMedicalUser.lastName}"></span>
+				</p>
+				<p>Contact Info:</p>
+				<p>
+					<span th:text="${nonMedicalUser.contactInfo.address}"></span>
+				</p>
+				<p>
+					<span th:text="${nonMedicalUser.contactInfo.email}"></span>
+				</p>
+				<p>
+					<span th:text="${nonMedicalUser.contactInfo.phone}"></span>
+				</p>
+				<section class="associated-patient">
+					<h4>Your Loved One's Account:</h4>
+					<div th:if="${nonMedicalUser.patient}"
+						th:each="patient : ${nonMedicalUser.patient}">
+						<p>[[${patient.firstName}]] [[${patient.lastName}]]</p>
+						<section class="medication">
+							<div th:if="${patient.medications}">
+								<h3>Medications</h3>
+								<div th:each="medication : ${patient.medications}">
+									<h4 id="par-container" class="collapsed-par"
+										onclick="expandText(this)">
+										[[${medication.genericName}]] 
+										<span class="up-arrow">
+											&#x25BC; 
+											</span> 
+											<span class="down-arrow"> 
+											&#9650; 
+											</span>
+									</h4>
+									<div class="paragraph-copy">
+										<p>Reason for administration: [[${medication.reason}]]</p>
+										<p>Dosage: [[${medication.dosage}]] via
+											[[${medication.administration}]] every
+											[[${medication.frequencyAmount}]]
+											[[${medication.frequencyTime}]]</p>
+									</div>
+								</div>
 							</div>
-						</div>
-					</section>
+						</section>
 
-					<section class="patient">
-						<div>
-							<h3>Contact</h3>
-							<ul>
-								<li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
-								<li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
-								<li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
-							</ul>
-						</div>
-				</div>
+						<section class="patient">
+							<div>
+								<h3>Contact</h3>
+								<ul>
+									<li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
+									<li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
+									<li th:if="${patient.contactInfo.email}">[[${patient.contactInfo.email}]]</li>
+								</ul>
+							</div>
+					</div>
+				</section>
+
+			</section>
 			</section>
 
-		</section>
-		</section>
-	</div>
-
-	<footer>
-		<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>
-	</footer>
+		</div>
+		<script src="./js/javascript.js"></script>
+		<footer>
+			<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus
+				Final project</small>
+		</footer>
 </body>
 
 </html>

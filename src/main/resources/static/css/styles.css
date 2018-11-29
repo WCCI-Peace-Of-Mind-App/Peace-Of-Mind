@@ -76,3 +76,34 @@ footer {
   color: black;
   padding-top: 15%;
 }
+
+.collapsed-par + .paragraph-copy {
+  display: none;
+}
+.expanded-par + .paragraph-copy {
+  display: block;
+}
+.expanded-par .up-arrow {
+  display: none;
+}
+.expanded-par .down-arrow {
+  display: inline;
+}
+.collapsed-par .up-arrow {
+  display: inline;
+}
+.collapsed-par .down-arrow {
+  display: none;
+}
+.up-arrow, .down-arrow {
+  font-size: 15px;
+  margin-left: 10px;
+}
+#par-container {
+  padding: 5px;
+
+  border-radius: 5px;
+  align-items: center;
+  cursor: pointer;
+ 
+}

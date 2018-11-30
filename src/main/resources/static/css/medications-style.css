@@ -1,14 +1,10 @@
 * {
   font-family: 'Raleway', sans-serif;
-  max-width: auto;
   padding: 0;
   margin: 0;
   background-color: #ebf5fa;
 }
 
-.container {
-  max-width: auto;
-}
 
 nav {
   display: flex;
@@ -62,6 +58,13 @@ nav h2 {
   grid-template-rows: repeat(3, 1fr);
 }
 
+header {
+  text-align: center;
+  text-decoration: underline;
+  padding-top: 2%;
+  color: #04496b;
+}
+
 li {
   list-style: none;
 }
@@ -69,8 +72,52 @@ li {
 section {
   display: flex;
   flex-direction: column;
-  grid-gap: 5%;
-  padding: 2em 2em;
+  height: 10em;
+  padding: 1em 1em;
+  background-image: linear-gradient(#0f87c3, #068bcd 0%, #49b9f2 100%);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(169, 201, 255, .4);
+  transition: 0.3s ease-in-out;
+  align-items: center;
+  justify-content: center;
+}
+
+.medication h3 {
+  background: transparent;
+}
+
+.medication p {
+  background: transparent;
+}
+
+med-button {
+
+}
+
+.log-medication button {
+  background: transparent;
+  height: 2em;
+  border: none;
+  background-image: linear-gradient(#0f87c3, #068bcd 0%, #49b9f2 100%);
+  font-size: medium;
+  border-radius: 10px;
+  padding: 2%;
+  outline: transparent;
+  text-align: center;
+}
+
+.log-medication button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 20px rgba(169, 201, 255, .6);
+}
+
+.log-medication {
+  padding: 0;
+  margin: 2%;
+  height: 2em;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 footer {

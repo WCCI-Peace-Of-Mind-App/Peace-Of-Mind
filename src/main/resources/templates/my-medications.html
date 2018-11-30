@@ -3,32 +3,39 @@
 
 <head>
   <title>Patient-Medications</title>
-  <link href="/css/styles.css" rel="stylesheet">
+  <link href="/css/medications-style.css" rel="stylesheet">
 </head>
 
 <body class="container">
 
   <nav>
-    <h2 class="logo">Peace Of Mind</h2>
+    <img class="logo" src="images/logo.png" alt="logo">
     <h2>
       <a th:href="@{/patient-home(id=${patient.id})}">Home</a>
     </h2>
   </nav>
+  <header>
+    <h2>My Medications</h2>
+  </header>
+  <div class="dashboard" th:if="${patient.medications}">
 
-  <div class="dashboard">
-    <section class="medication">
-      <div th:if="${patient.medications}">
-        <h2>Medications</h2>
-        <div th:each="medication : ${patient.medications}">
-          <h3>[[${medication.genericName}]]</h3>
-          <p>Reason to Take: [[${medication.reason}]]</p>
-          <p>Please take [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
+    <div class="med-button" th:each="medication : ${medications}">
+      <section class="medication">
+        <h3>[[${medication.genericName}]]</h3>
+        <p>Reason to Take: [[${medication.reason}]]</p>
+        <p>Please take [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
+        <div th:if="${medication.picture}">
           <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
         </div>
+      </section>
+      <div class="log-medication">
+        <input type="hidden" th:value="${medication.id}" name="medId" />
+        <button th:formaction="@{log-medication}">Dose Taken</button>
       </div>
-    </section>
+    </div>
 
   </div>
+
   <footer>
     <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
   </footer>

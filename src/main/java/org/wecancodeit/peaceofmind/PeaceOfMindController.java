@@ -1,5 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -23,6 +24,9 @@ public class PeaceOfMindController {
 
 	@Resource
 	MedicationRepository medRepo;
+	
+	@Resource
+	MedicationLogRepository medLogRepo;
 
 	@RequestMapping("/patient")
 	public String returnPatient(@RequestParam(value = "id") long id, Model model) throws PatientNotFoundException {
@@ -136,15 +140,28 @@ public class PeaceOfMindController {
 	}
 
 	@RequestMapping("/my-medications")
-	public String returnPatientMedications(@RequestParam(value = "id") long patientId, Model model)
+	public String returnPatientMedications(@RequestParam(value = "id") long id, Model model)
 			throws PatientNotFoundException {
-		Optional<Patient> patient = patientRepo.findById(patientId);
+		Optional<Patient> patient = patientRepo.findById(id);
+		Collection<Medication> meds = patient.get().getMedications();
 
 		if (patient.isPresent()) {
 			model.addAttribute("patient", patient.get());
-			return "patient";
+			model.addAttribute("medications", meds);
+			return "my-Medications";
 		}
 
 		throw new PatientNotFoundException();
+	}
+	
+	@RequestMapping("/log-medication")
+	public String logMedication(long medId) {
+		Optional<Medication> medLogged = medRepo.findById(medId);
+		Medication med = medLogged.get();
+
+		MedicationLog logEntry = new MedicationLog(med);
+		medLogRepo.save(logEntry);
+
+		return "partials/medication-Logged";
 	}
 }

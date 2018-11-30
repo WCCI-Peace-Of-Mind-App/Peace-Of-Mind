@@ -19,13 +19,19 @@
 
     <section class="medication" th:if="${patient.medications}">
       <img class="medicineIcon" src="images/medicine.png" alt="medication-icon">
-      <h2>Medications</h2>
+      <h2>
+        <a th:href="@{/my-medications(id=${patient.id})}">Medications</a>
+      </h2>
     </section>
 
     <section class="patientStatus">
       <img class="emotionsIcon" src="images/emotions.png" alt="emotion-icon">
       <h2>How are you feeling?</h2>
       <div class="emotionalStatus">
+        <img class="emotionIndicator" src="images/happy.png" alt="happy-icon">
+        <img class="emotionIndicator" src="images/sad.png" alt="sad-icon">
+        <img class="emotionIndicator" src="images/angry.png" alt="angry-icon">
+        <img class="emotionIndicator" src="images/confused.png" alt="confused-icon">
       </div>
     </section>
 

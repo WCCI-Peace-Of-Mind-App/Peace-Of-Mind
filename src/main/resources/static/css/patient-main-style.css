@@ -88,7 +88,27 @@ section {
   justify-content: center;
 }
 
+section .emotionIndicator {
+  visibility: hidden;
+  background: transparent;
+}
+
 section h2 {
+  visibility: visible;
+  background: transparent;
+  color: #04496b;
+  padding: 2%;
+}
+
+section a {
+  visibility: visible;
+  background: transparent;
+  color: #04496b;
+  padding: 2%;
+  text-decoration: none;
+}
+
+section a:visited {
   visibility: visible;
   background: transparent;
   color: #04496b;

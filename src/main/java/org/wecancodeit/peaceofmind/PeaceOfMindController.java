@@ -1,5 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -23,6 +24,9 @@ public class PeaceOfMindController {
 
 	@Resource
 	MedicationRepository medRepo;
+	
+	@Resource
+	MedicationLogRepository medLogRepo;
 
 	@RequestMapping("/patient")
 	public String returnPatient(@RequestParam(value = "id") long id, Model model) throws PatientNotFoundException {
@@ -31,6 +35,24 @@ public class PeaceOfMindController {
 		if (patient.isPresent()) {
 			model.addAttribute("patient", patient.get());
 			return "patient";
+		}
+
+		throw new PatientNotFoundException();
+
+	}
+	
+	@RequestMapping("/patient-home")
+	public String returnPatientHomePage(@RequestParam(value = "id") long id, Model model) throws PatientNotFoundException {
+		Optional<Patient> patient = patientRepo.findById(id);
+		MedicalUser medUser = patient.get().getMedicalUser();
+		NonMedicalUser nonMedUser = patient.get().getNonMedicalUser();
+		
+
+		if (patient.isPresent()) {
+			model.addAttribute("patient", patient.get());
+			model.addAttribute("medicalUser", medUser);
+			model.addAttribute("nonMedicalUser", nonMedUser);
+			return "patient-Home";
 		}
 
 		throw new PatientNotFoundException();
@@ -71,7 +93,6 @@ public class PeaceOfMindController {
 			throws MedicalUserNotFoundException {
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
 
-
 		if (medUser.isPresent()) {
 			model.addAttribute("medicalUser", medUser.get());
 			return "medicalUser";
@@ -86,7 +107,7 @@ public class PeaceOfMindController {
 			throws MedicalUserNotFoundException {
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
 		NonMedicalUser nonMed = medUser.get().getPatient().getNonMedicalUser();
-		
+
 		if (medUser.isPresent()) {
 			model.addAttribute("medicalUser", medUser.get());
 			model.addAttribute("nonMedicalUser", nonMed);
@@ -117,4 +138,20 @@ public class PeaceOfMindController {
 		return "medications";
 
 	}
+
+	@RequestMapping("/my-medications")
+	public String returnPatientMedications(@RequestParam(value = "id") long id, Model model)
+			throws PatientNotFoundException {
+		Optional<Patient> patient = patientRepo.findById(id);
+		Collection<Medication> meds = patient.get().getMedications();
+
+		if (patient.isPresent()) {
+			model.addAttribute("patient", patient.get());
+			model.addAttribute("medications", meds);
+			return "my-Medications";
+		}
+
+		throw new PatientNotFoundException();
+	}
+	
 }

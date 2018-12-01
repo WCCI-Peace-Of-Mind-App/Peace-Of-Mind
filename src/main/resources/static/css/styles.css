@@ -8,32 +8,26 @@
 
 .container {
   max-width: auto;
-  text-align: center;
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   text-align: right;
-  background-image: linear-gradient(
-    to right,
+  background-image: linear-gradient(to right,
     #0f87c3,
     #068bcd,
     #49b9f2,
-    #49b9f2
-  );
+    #49b9f2,
+    lightblue);
 }
 
 .logo {
   display: flex;
   text-align: left;
-  padding: 0.5em;
-  color: white;
-  background-image: linear-gradient(
-    to right,
-    #0f87c3,
-    #068bcd
-    );
+  height: 3em;
+  justify-content: center;
+  background: transparent;
 }
 
 nav a {
@@ -42,25 +36,30 @@ nav a {
   text-align: right;
   text-decoration: none;
   color: #04496b;
-  background-image: linear-gradient(
-    to right,
-      #49b9f2,
-      #49b9f2,
-     lightblue
-     );
+  background: transparent;
 }
 
 nav a:visited {
   color: #04496b;
+  background: transparent;
 }
 
 nav a:hover {
   opacity: 0.6;
+  background: transparent;
+}
+
+nav h2 {
+  background: transparent;
 }
 
 .dashboard {
-  padding: 2em 2em;
-  height: 80%;
+  height: 100%;
+  grid-gap: 5%;
+  padding: 5%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
 
 li {
@@ -105,5 +104,5 @@ footer {
   border-radius: 5px;
   align-items: center;
   cursor: pointer;
- 
+
 }

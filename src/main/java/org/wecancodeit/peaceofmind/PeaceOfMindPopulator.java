@@ -78,15 +78,15 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		
 		ContactInfo contactInfo1 = contactInfoRepo.save(new ContactInfo(address1a, email1a, phone1a));
 		
-		Medication med1 = medRepo.save(new Medication("Donepezil", "23mg", "Oral", 1, "Daily", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/45802-0571-78_NLMIMAGE10_7008B865.jpg", "dementia"));
-		Medication med2 = medRepo.save(new Medication("Sumatriptan", "100mg", "Oral", 0, "As Needed", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00378-4532-01_NLMIMAGE10_613F30B9.jpg", "migraines"));
+		Medication med1 = medRepo.save(new Medication("Donepezil", "23mg", "Oral", 1, "Daily", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/45802-0571-78_NLMIMAGE10_7008B865.jpg", "Senile Dementia"));
+		Medication med2 = medRepo.save(new Medication("Sumatriptan", "100mg", "Oral", 0, "As needed", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00378-4532-01_NLMIMAGE10_613F30B9.jpg", "Migraines"));
 Medication med3 = medRepo.save(new Medication("Aricept", "5mg", "Oral", 1, "Daily, with evening meal", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00143-3142-05_NLMIMAGE10_E005702B.jpg", "Senile Dementia"));
 Medication med4 = medRepo.save(new Medication("Galantamine", "4mg", "Oral", 1, "Daily, with morning meal", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5440-50_NLMIMAGE10_B834DC76.jpg", "Senile Dementia"));
 				Medication med5 = medRepo.save(new Medication("Memantine", "5mg", "Oral", 1, "Daily, with evening meal", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00378-3030-01_NLMIMAGE10_093984BC.jpg", "Senile Dementia"));
 Medication med6 = medRepo.save(new Medication("Donepezil", "5mg", "Oral", 1, "Daily, before sleep", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00143-3142-05_NLMIMAGE10_E005702B.jpg", "Senile Dementia"));
-Medication med7 = medRepo.save(new Medication("Ondansetron", "8mg", "Oral", 3, "Daily","https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5553-50_NLMIMAGE10_DD346E93.jpg", "Nausea"));
-Medication med8 = medRepo.save(new Medication("Promethazine", "25mg", "Oral", 4, "Daily", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5440-50_NLMIMAGE10_B834DC76.jpg", "Nausea"));
-Medication med9 = medRepo.save(new Medication("Metoclopramide", "10mg", "Oral", 4, "Daily", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5535-50_NLMIMAGE10_331599CC.jpg", "Nausea"));
+Medication med7 = medRepo.save(new Medication("Ondansetron", "8mg", "Oral", 0, "As needed","https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5553-50_NLMIMAGE10_DD346E93.jpg", "Nausea"));
+Medication med8 = medRepo.save(new Medication("Promethazine", "25mg", "Oral", 0, "As needed", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5440-50_NLMIMAGE10_B834DC76.jpg", "Nausea"));
+Medication med9 = medRepo.save(new Medication("Metoclopramide", "10mg", "Oral", 0, "As needed", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5535-50_NLMIMAGE10_331599CC.jpg", "Nausea"));
 Medication med10 = medRepo.save(new Medication("Oxcarbazepine", "300mg", "Oral", 3, "Daily", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5553-50_NLMIMAGE10_DD346E93.jpg", "Anti-Convulsant"));
 Medication med11 = medRepo.save(new Medication("Phenytoin", "30mg", "Oral", 1, "Daily, before sleep", "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5553-50_NLMIMAGE10_DD346E93.jpg", "Anti-Convulsant"));
 Medication med12 = medRepo.save(new Medication("Gabapentin", "800mg", "Oral", 2, "Daily","https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5535-50_NLMIMAGE10_331599CC.jpg", "Anti-Convulsant"));

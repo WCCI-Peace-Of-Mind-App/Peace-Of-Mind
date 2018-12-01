@@ -84,32 +84,24 @@ footer {
 }
 .expanded-par .up-arrow {
   display: none;
-  cursor: pointer;
 }
 .expanded-par .down-arrow {
   display: inline;
-  cursor: pointer;
 }
 .collapsed-par .up-arrow {
   display: inline;
-  cursor: pointer;
 }
 .collapsed-par .down-arrow {
   display: none;
-  cursor: pointer;
 }
 .up-arrow, .down-arrow {
   font-size: 15px;
   margin-left: 10px;
-  cursor: pointer;
 }
-#par-container {
+.par-container .collapsed-par {
   padding: 5px;
-
   border-radius: 5px;
   align-items: center;
   cursor: pointer;
 
 }
-
-

@@ -1,9 +1,26 @@
-function expandText(div) {
-  var className = div.getAttribute("class");
-  if(className==="collapsed-par") {
-    div.className = "expanded-par";
+
+document.addEventListener('readystatechange',(evt) => {
+  if(evt.target.readyState === 'complete'){
+
+	  const collapsedElems = document.querySelectorAll('.collapsed-par')
+    for(let i in collapsedElems){
+    	if(collapsedElems.hasOwnProperty(i))
+    		collapsedElems[i].addEventListener('click',expandText.bind(collapsedElems[i]));
+
+    }
+  }
+})
+
+
+function expandText() {
+
+	const collapsed = "collapsed-par";
+	const expanded = "expanded-par";
+
+  if(this.classList.contains(collapsed)) {
+    this.classList.replace(collapsed,expanded);
   }
   else{
-    div.className = "collapsed-par";
+	  this.classList.replace(expanded,collapsed);
   }
 }

@@ -47,10 +47,11 @@
 							<div th:if="${patient.medications}">
 								<h3>Medications</h3>
 								<div th:each="medication : ${patient.medications}">
-									<h4 id="par-container" class="collapsed-par" onclick="expandText(this)">
+									<h4 class="par-container collapsed-par" >
 										[[${medication.genericName}]]
 										<span class="up-arrow">
 											&#x25BC;
+											
 										</span>
 										<span class="down-arrow">
 											&#9650;

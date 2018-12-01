@@ -84,19 +84,24 @@ footer {
 }
 .expanded-par .up-arrow {
   display: none;
+  cursor: pointer;
 }
 .expanded-par .down-arrow {
   display: inline;
+  cursor: pointer;
 }
 .collapsed-par .up-arrow {
   display: inline;
+  cursor: pointer;
 }
 .collapsed-par .down-arrow {
   display: none;
+  cursor: pointer;
 }
 .up-arrow, .down-arrow {
   font-size: 15px;
   margin-left: 10px;
+  cursor: pointer;
 }
 #par-container {
   padding: 5px;
@@ -106,3 +111,5 @@ footer {
   cursor: pointer;
 
 }
+
+

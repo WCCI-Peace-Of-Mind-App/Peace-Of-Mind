@@ -154,14 +154,4 @@ public class PeaceOfMindController {
 		throw new PatientNotFoundException();
 	}
 	
-	@RequestMapping("/log-medication")
-	public String logMedication(long medId) {
-		Optional<Medication> medLogged = medRepo.findById(medId);
-		Medication med = medLogged.get();
-
-		MedicationLog logEntry = new MedicationLog(med);
-		medLogRepo.save(logEntry);
-
-		return "partials/medication-Logged";
-	}
 }

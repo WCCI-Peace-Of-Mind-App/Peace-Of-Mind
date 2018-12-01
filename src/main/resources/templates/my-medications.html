@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Patient-Medications</title>
+  <link href="/css/medications-style.css" rel="stylesheet">
+</head>
+
+<body class="container">
+
+  <nav>
+    <img class="logo" src="images/logo.png" alt="logo">
+    <h2>
+      <a th:href="@{/patient-home(id=${patient.id})}">Home</a>
+    </h2>
+  </nav>
+  <header>
+    <h2>My Medications</h2>
+  </header>
+  <div class="dashboard" th:if="${patient.medications}">
+
+    <div class="med-button" th:each="medication : ${medications}">
+      <section class="medication">
+        <h3>[[${medication.genericName}]]</h3>
+        <p>Reason to Take: [[${medication.reason}]]</p>
+        <p>Please take [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
+        <div th:if="${medication.picture}">
+          <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
+        </div>
+      </section>
+      <div class="log-medication">
+            <button>Dose Taken</button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+  </footer>
+
+</body>
+
+</html>

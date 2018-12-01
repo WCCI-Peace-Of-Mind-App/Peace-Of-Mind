@@ -38,7 +38,7 @@ public class PatientStatusRepositoryTest {
 	public void setUp() {
 		patient1 = patientRepo.save(new Patient("Joe", "Bob", null, "01/01/2001", "alzh", null));
 		
-		patientStatus1 = patientStatusRepo.save(new PatientStatus(PatientStatusEnum.WELL, patient1));
+		patientStatus1 = patientStatusRepo.save(new PatientStatus(PatientStatusEnum.HAPPY, patient1));
 		psId = patientStatus1.getId();
 		
 		entity.flush();

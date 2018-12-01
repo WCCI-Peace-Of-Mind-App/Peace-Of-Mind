@@ -1,5 +1,5 @@
 package org.wecancodeit.peaceofmind;
 
 public enum PatientStatusEnum {
-  WELL, NOTWELL
+  HAPPY, SAD, ANGRY, CONFUSED
 }

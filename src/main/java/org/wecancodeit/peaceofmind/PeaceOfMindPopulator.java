@@ -91,8 +91,8 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		medTrackerRepo.save(new MedicationTracker(med2));
 
 		
-        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.WELL, patient1));
-        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.NOTWELL, patient1));
+        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.HAPPY, patient1));
+        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.SAD, patient1));
 
 		// End Patient 1 build
 		

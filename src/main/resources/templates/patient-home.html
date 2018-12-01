@@ -4,6 +4,17 @@
 <head>
   <title>A Patient</title>
   <link href="/css/patient-main-style.css" rel="stylesheet">
+  <script src="/js/patient-home.js"></script>
+  <script>
+
+      document.addEventListener('readystatechange',(evt) => {
+        if(evt.target.readyState === 'complete'){
+          const test = document.querySelector('.medUser');
+          test.addEventListener(
+            'click' , hoverInnerDiv.bind(test, '.medUser'));
+        }
+      })
+  </script>
 </head>
 
 <body class="container">
@@ -52,7 +63,7 @@
     <section class="medUser" th:if="${patient.medicalUser}">
       <img class="docIcon" src="images/doctor.png" alt="doctor-icon">
       <h2>Medical Care Professional</h2>
-      <div class="medUserInfo">
+      <div class="medUserInfo"> 
         <h3>[[${patient.medicalUser.firstName}]] [[${patient.medicalUser.lastName}]]</h3>
         <p th:text=" 'Specialty: ' + (${patient.medicalUser.medicalSpecialty} ?: 'unknown')"></p>
         <p th:text=" 'Institution: ' + (${patient.medicalUser.medicalInstitution} ?: 'unknown')"></p>

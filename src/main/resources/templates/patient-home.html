@@ -24,14 +24,21 @@
       </h2>
     </section>
 
+    <input type="hidden" class="patient-id" name="patientId" th:value="${patient.id}"/>
+  
     <section class="patientStatus">
       <img class="emotionsIcon" src="images/emotions.png" alt="emotion-icon">
       <h2>How are you feeling?</h2>
       <div class="emotionalStatus">
-        <img class="emotionIndicator" src="images/happy.png" alt="happy-icon">
-        <img class="emotionIndicator" src="images/sad.png" alt="sad-icon">
+        <img class="emotionIndicator" src="images/happiness.png" alt="happy-icon">
+        <input type="radio" id="happy" name="currentStatus" value="happy" checked>
+        <img class="emotionIndicator" src="images/tearful.png" alt="sad-icon">
+        <input type="radio" id="sad" name="currentStatus" value="sad">
         <img class="emotionIndicator" src="images/angry.png" alt="angry-icon">
+        <input type="radio" id="angry" name="currentStatus" value="angry">
         <img class="emotionIndicator" src="images/confused.png" alt="confused-icon">
+        <input type="radio" id="confused" name="currentStatus" value="confused">
+        <button class="submit-status btn">Submit Status</button>
       </div>
     </section>
 
@@ -86,6 +93,8 @@
   <footer>
     <small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>
   </footer>
+
+  <script src="./js/add-status.js"></script>
 
 </body>
 

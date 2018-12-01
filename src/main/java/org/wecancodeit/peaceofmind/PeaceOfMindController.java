@@ -114,10 +114,15 @@ public class PeaceOfMindController {
 			throws MedicalUserNotFoundException {
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
 		NonMedicalUser nonMed = medUser.get().getPatient().getNonMedicalUser();
+		Patient patient = medUser.get().getPatient();
+		Long patientId = patient.getId();
+		PatientStatus currentStatus = patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(patientId);
 
 		if (medUser.isPresent()) {
 			model.addAttribute("medicalUser", medUser.get());
 			model.addAttribute("nonMedicalUser", nonMed);
+			model.addAttribute("patient", patient);
+			model.addAttribute("status", currentStatus);
 			return "medicalUser-Home";
 		}
 

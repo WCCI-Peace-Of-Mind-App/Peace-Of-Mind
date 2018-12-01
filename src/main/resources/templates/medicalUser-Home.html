@@ -20,7 +20,7 @@
     <h3>Your Dashboard</h3>
 
   <h4>Your Patients:</h4>
-  <div th:if="${medicalUser.patient}" th:each="patient : ${medicalUser.patient}">
+  <div th:if="${medicalUser.patient}">
     <p> [[${patient.firstName}]] [[${patient.lastName}]] </p>
     <p>Diagnosis: <span th:text="${patient.diagnosis}"></span></p>
 
@@ -31,9 +31,10 @@
       </div>
     </section>
 
-    <section class="patientStatus">
+    <section class="patientStatus" th:if="${status.id}">
       <h3>Current Patient Status</h3>
-      <p><em>placeholder!!!!</em></p>
+			<img th:src="@{'images/' + ${status.status.getImageFile()}}">
+			<p>Entered at [[${status.printDateTime()}]]</p>
     </section>
 
     <section class="medication-info">

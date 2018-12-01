@@ -36,6 +36,8 @@ public class ViewTest {
 	private MedicationRepository medicationRepo;
 	@MockBean
 	private MedicationLogRepository medLogRepo;
+	@MockBean
+	private PatientStatusRepository patientStatusRepo;
 	@Mock
 	private Patient oMockPatient;
 	@Mock
@@ -48,6 +50,10 @@ public class ViewTest {
 	private NonMedicalUser oMockNonMedUser;
 	@Mock
 	private NonMedicalUser oAnotherMockNonMedUser;
+	@Mock
+	private PatientStatus patientStatus;
+	
+	long arbitraryId = 1;
 
 
 	@Test(expected = NestedServletException.class) /* PatientNotFoundException */
@@ -116,6 +122,9 @@ public class ViewTest {
 	@Test
 	public void assertNonMedicalUserHomeIsOKViewIsNonMedicalUserHome() throws Exception {
 		when(nonMedUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockNonMedUser));
+		when(oMockNonMedUser.getPatient()).thenReturn(oMockPatient);
+		when(oMockPatient.getId()).thenReturn(arbitraryId);
+		when(patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatus);
 		mvc.perform(get("/non-medical-user-home?id=1234")).andExpect(status().isOk())
 				.andExpect(view().name(is("nonMedicalUser-Home")))
 				.andExpect(content().contentType("text/html;charset=UTF-8"))

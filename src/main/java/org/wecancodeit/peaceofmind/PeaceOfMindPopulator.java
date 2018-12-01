@@ -80,6 +80,7 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		
 		Medication med1 = medRepo.save(new Medication("Donepezil", "23mg", "Oral", 1, "Daily", "imgurl", "dementia"));
 		Medication med2 = medRepo.save(new Medication("Sumatriptan", "100mg", "Oral", 0, "As Needed", "imgurl", "migraines"));
+		medRepo.save(new Medication("Sumatriptan2", "200mg", "Oral", 0, "As Needed", "imgurl", "migraines"));
 				
 
 		

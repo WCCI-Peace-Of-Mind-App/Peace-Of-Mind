@@ -17,6 +17,5 @@ submitStatus.addEventListener('click', function() {
 
 function postStatus(currentStatus, patientId) {
     xhr.open('POST', '/add-status/' + currentStatus + '/' + patientId, true)
-    console.log("Hello")
     xhr.send();
 }

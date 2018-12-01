@@ -2,61 +2,72 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Peace Of Mind</title>
+<title>Peace Of Mind</title>
+<link href="/css/non-med-styles.css" rel="stylesheet">
 </head>
 
 <body class="container">
 
-  <header>
-    <h1>Peace of Mind</h1>
-    <nav>
-      <h2>
-        <a th:href="@{/non-medical-user(id=${nonMedicalUser.id})}">Account</a>
-      </h2>
-    </nav>
-  </header>
+	<header>
+		<nav>
+			<img class="logo" src="images/logo.png" alt="logo">
+			<h2>
+				<a th:href="@{/non-medical-user(id=${nonMedicalUser.id})}">Account</a>
 
-  <div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
+			</h2>
+		</nav>
+	</header>
 
-
-    <section class="medLog">
-      <h3>Med Log</h3>
-      <div>
-        <p> <em>place holder for medlog display</em> </p>
-      </div>
-    </section>
-
-    <section class="patientStatus">
-      <h3>Current Patient Status</h3>
-      <p><em>placeholder!!!!</em></p>
-    </section>
+	<div class="dashboard" th:if="${nonMedicalUser.patient}"
+		th:each="patient : ${nonMedicalUser.patient}">
 
 
-    <section class="medUser">
-      <div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
-        <h3>Medical Personnel Information</h3>
-        <div>
-          <h4>[[${medicalUser.firstName}]] [[${medicalUser.lastName}]]</h4>
-          <ul>
-            <li th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
-            <li th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
-            <li th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
-            <li>Other Contact Methods</li>
-            <ul>
-              <li th:if="${medicalUser.contactInfo.phone}">[[${medicalUser.contactInfo.phone}]]</li>
-              <li th:if="${medicalUser.contactInfo.email}">[[${medicalUser.contactInfo.email}]]</li>
-            </ul>
-          </ul>
-        </div>
-      </div>
-    </section>
+		<section class="medLog">
+			<h3>Med Log</h3>
+			<div>
+				<p>
+					<em>place holder for medlog display</em>
+				</p>
+			</div>
+		</section>
+
+		<section class="patientStatus">
+			<h3>Current Patient Status</h3>
+			<p>
+				<em>placeholder!!!!</em>
+			</p>
+		</section>
 
 
-  </div>
+		<section class="medUser">
+			<div th:if="${patient.medicalUser}"
+				th:each="medicalUser : ${patient.medicalUser}">
+				<h3>Medical Personnel Information</h3>
+				<div>
+					<h4>[[${medicalUser.firstName}]] [[${medicalUser.lastName}]]</h4>
+					<ul>
+						<li
+							th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
+						<li
+							th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
+						<li
+							th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
+						<li>Other Contact Methods</li>
+						<ul>
+							<li th:if="${medicalUser.contactInfo.phone}">[[${medicalUser.contactInfo.phone}]]</li>
+							<li th:if="${medicalUser.contactInfo.email}">[[${medicalUser.contactInfo.email}]]</li>
+						</ul>
+					</ul>
+				</div>
+			</div>
+		</section>
 
-  <footer>
-    <span>&copy; Peace of Mind WCCI Final project</span>
-  </footer>
+
+	</div>
+
+	<footer>
+		<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>
+	</footer>
 
 </body>
 

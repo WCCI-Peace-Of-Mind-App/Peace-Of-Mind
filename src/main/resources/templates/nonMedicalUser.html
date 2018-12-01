@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Peace Of Mind</title>
-<link href="/css/styles.css" rel="stylesheet">
+	<title>Peace Of Mind</title>
+	<link href="/css/non-med-styles.css" rel="stylesheet">
 </head>
 
 <body class="container">
@@ -11,10 +11,9 @@
 		<header>
 
 			<nav>
-				<h2 class="logo">Peace of Mind</h2>
+				<img class="logo" src="images/logo.png" alt="logo">
 				<h2>
 					<a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}">Home</a>
-
 				</h2>
 			</nav>
 		</header>
@@ -42,22 +41,20 @@
 				</p>
 				<section class="associated-patient">
 					<h4>Your Loved One's Account:</h4>
-					<div th:if="${nonMedicalUser.patient}"
-						th:each="patient : ${nonMedicalUser.patient}">
+					<div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
 						<p>[[${patient.firstName}]] [[${patient.lastName}]]</p>
-						<section class="medication">
+						<article class="medication">
 							<div th:if="${patient.medications}">
 								<h3>Medications</h3>
 								<div th:each="medication : ${patient.medications}">
-									<h4 id="par-container" class="collapsed-par"
-										onclick="expandText(this)">
-										[[${medication.genericName}]] 
+									<h4 id="par-container" class="collapsed-par" onclick="expandText(this)">
+										[[${medication.genericName}]]
 										<span class="up-arrow">
-											&#x25BC; 
-											</span> 
-											<span class="down-arrow"> 
-											&#9650; 
-											</span>
+											&#x25BC;
+										</span>
+										<span class="down-arrow">
+											&#9650;
+										</span>
 									</h4>
 									<div class="paragraph-copy">
 										<p>Reason for administration: [[${medication.reason}]]</p>
@@ -68,9 +65,9 @@
 									</div>
 								</div>
 							</div>
-						</section>
+						</article>
 
-						<section class="patient">
+						<article class="patient">
 							<div>
 								<h3>Contact</h3>
 								<ul>
@@ -80,9 +77,9 @@
 								</ul>
 							</div>
 					</div>
-				</section>
+					</article>
 
-			</section>
+				</section>
 			</section>
 
 		</div>

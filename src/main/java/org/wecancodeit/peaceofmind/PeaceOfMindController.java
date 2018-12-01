@@ -27,6 +27,9 @@ public class PeaceOfMindController {
 	
 	@Resource
 	MedicationLogRepository medLogRepo;
+	
+	@Resource
+	PatientStatusRepository patientStatusRepo;
 
 	@RequestMapping("/patient")
 	public String returnPatient(@RequestParam(value = "id") long id, Model model) throws PatientNotFoundException {
@@ -78,9 +81,13 @@ public class PeaceOfMindController {
 	public String returnNonMedicalUserHomePage(@RequestParam(value = "id") long id, Model model)
 			throws NonMedicalUserNotFoundException {
 		Optional<NonMedicalUser> nonMedUser = nonMedUserRepo.findById(id);
+		Patient patient = nonMedUser.get().getPatient();
+		Long patientId = patient.getId();
+		PatientStatus currentStatus = patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(patientId);
 
 		if (nonMedUser.isPresent()) {
 			model.addAttribute("nonMedicalUser", nonMedUser.get());
+			model.addAttribute("status", currentStatus);
 			return "nonMedicalUser-Home";
 		}
 

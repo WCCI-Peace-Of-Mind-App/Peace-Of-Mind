@@ -1,11 +1,13 @@
 package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -55,9 +57,9 @@ public class MedicationTrackerRepositoryTest {
 		NonMedicalUser nonMedUser = nonMedUserRepo.save(new NonMedicalUser("Albus", "Dumbledore", contact, "colleague", "", "" ));
 		Medication testMed = medRepo
 				.save(new Medication("Chocolate Frog", "1 frog", "oral", 1, "daily", "img.jpg", "good spirits"));
-		Patient testPatient = patientRepo.save(new Patient("Gilderoy", "Lockhart", contact, "date", "dementia", nonMedUser, testMed ));
+		patientRepo.save(new Patient("Gilderoy", "Lockhart", contact, "date", "dementia", nonMedUser, testMed ));
 
-		MedicationLog medLog = medLogRepo.save(new MedicationLog(testMed));
+		medLogRepo.save(new MedicationLog(testMed));
 		underTest = medTrackerRepo.save(new MedicationTracker(testMed));
 		medTrackerId = underTest.getId();
 
@@ -93,6 +95,14 @@ public class MedicationTrackerRepositoryTest {
 		assertThat(result, is(date));
 	}
 	
+	@Test
+	public void shouldBeAbleToFindByDate() {
+		String date = LocalDateTime.now().format(yyyymmdd);
+		
+		Collection<MedicationTracker> medTrackers = medTrackerRepo.findAllByDate(date);
+		
+		assertThat(medTrackers, contains(underTest));
+	}
 	
 	
 	

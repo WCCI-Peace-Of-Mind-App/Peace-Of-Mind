@@ -69,6 +69,14 @@ section {
   padding: 2em 2em;
 }
 
+section img {
+  width: 4em;
+  height: 4em;
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
 footer {
   text-align: center;
   color: black;

@@ -7,7 +7,14 @@ const expectedInnerHTML =
 
 test('expected body of text', 
     ()=> {
-        functions.hoverInnerDiv(document.querySelector('.medUser'));
+        const sQuerySelection = '.medUser';
+        const oTargetDivParent = document.querySelector(sQuerySelection);
+        oTargetDivParent.addEventListener(
+            'click',
+            functions.hoverInnerDiv.bind(oTargetDivParent)
+        );
+        oTargetDivParent.click();
+        // expect(functions.hoverInnerDiv).toBeCalled();
         expect(document.innerHTML).toBe(expectedInnerHTML.innerHTML);
     }
 

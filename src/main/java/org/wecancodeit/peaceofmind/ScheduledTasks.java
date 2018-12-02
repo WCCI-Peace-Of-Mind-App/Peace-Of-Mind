@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ScheduledTasks {
-
+	
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
 	@Resource
@@ -26,14 +26,18 @@ public class ScheduledTasks {
 	MedicationRepository medRepo;
 
 	DateTimeFormatter yyyymmdd = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-	String date = LocalDateTime.now().format(yyyymmdd);
+	String todayDate = LocalDateTime.now().format(yyyymmdd);
+	String pastDate;
+	int doseNeeded;
+	int dosesMissed;
+	int pastDosesTaken;
 
 	@Scheduled(cron = "0 * * ? * *")
 	public void updateMedTrackers() {
 
-		Collection<MedicationTracker> medTrackers = medTrackerRepo.findAllByDate(date);
+		Collection<MedicationTracker> medTrackers = medTrackerRepo.findAllByDate(todayDate);
 
-		Collection<MedicationLog> medLogs = medLogRepo.findAllByDateTimeContains(date);
+		Collection<MedicationLog> medLogs = medLogRepo.findAllByDateTimeContains(todayDate);
 
 		for (MedicationTracker medTracker : medTrackers) {
 
@@ -59,14 +63,73 @@ public class ScheduledTasks {
 
 		for (Medication medication : medications) {
 
-			MedicationTracker todayMedTracker = medTrackerRepo.findByMedicationAndDate(medication, date);
+			MedicationTracker todayMedTracker = medTrackerRepo.findByMedicationAndDate(medication, todayDate);
 
 			if (todayMedTracker == null) {
 				todayMedTracker = medTrackerRepo.save(new MedicationTracker(medication));
 
+				// set dosesNeededForTheDay
+
+				if (medication.getFrequencyTime() == doseFrequencyTimeEnum.Daily) {
+
+					doseNeeded = (medication.getFrequencyAmount() * 1);
+
+				} else if (medication.getFrequencyTime() == doseFrequencyTimeEnum.Weekly) {
+
+					pastDate = LocalDateTime.now().minusDays(7).format(yyyymmdd);
+
+					Collection<MedicationTracker> pastMedTrackers = medTrackerRepo
+							.findAllByMedicationAndDateGreaterThan(medication, pastDate);
+
+					for (MedicationTracker medTracker : pastMedTrackers) {
+						pastDosesTaken += medTracker.getDosesTaken();
+					}
+
+					doseNeeded = medication.getFrequencyAmount() - pastDosesTaken;
+
+				} else if (medication.getFrequencyTime() == doseFrequencyTimeEnum.Monthly) {
+
+					pastDate = LocalDateTime.now().minusMonths(1).format(yyyymmdd);
+
+					Collection<MedicationTracker> pastMedTrackers = medTrackerRepo
+							.findAllByMedicationAndDateGreaterThan(medication, pastDate);
+					
+
+							pastDosesTaken = 0;
+					for (MedicationTracker medTracker : pastMedTrackers) {
+						pastDosesTaken += medTracker.getDosesTaken();
+						
+
+					}
+					doseNeeded = medication.getFrequencyAmount() - pastDosesTaken;
+
+				}
+				todayMedTracker.setDoseNeeded(doseNeeded);
+				medTrackerRepo.save(todayMedTracker);
 			}
 
 		}
 	}
+	
+	//"0 0 0 * * ?"
 
+	@Scheduled(cron = "0 * * ? * *")
+	public void checkForDosesMissed() {
+		
+		pastDate = LocalDateTime.now().minusHours(24).format(yyyymmdd);
+		
+		log.info("past date is {}", pastDate);
+		
+		Collection<MedicationTracker> medTrackers = medTrackerRepo.findAllByDate(pastDate);
+		
+		log.info("trackers for pastdate are {}", medTrackers.toString());
+		
+		for(MedicationTracker medTracker : medTrackers) {
+			dosesMissed = medTracker.getDosesNeeded() - medTracker.getDosesTaken();
+			log.info("doses missed {}", dosesMissed);
+			
+			medTracker.setDosesMissed(dosesMissed);
+			medTrackerRepo.save(medTracker);
+		}
+	}
 }

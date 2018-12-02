@@ -20,7 +20,7 @@ public class Medication {
 	private String dosage;
 	private String administration;
 	private int frequencyAmount;
-	private String frequencyTime;
+	private doseFrequencyTimeEnum frequencyTime;
 	private String picture;
 	private String reason;
 	
@@ -54,7 +54,7 @@ public class Medication {
 		return frequencyAmount;
 	}
 	
-	public String getFrequencyTime() {
+	public doseFrequencyTimeEnum getFrequencyTime() {
 		return frequencyTime;
 	}
 	
@@ -82,7 +82,7 @@ public class Medication {
 
 	public Medication() {}
 	
-	public Medication(String genericName, String dosage, String administration, int frequencyAmount, String frequencyTime, String picture, String reason) {
+	public Medication(String genericName, String dosage, String administration, int frequencyAmount, doseFrequencyTimeEnum frequencyTime, String picture, String reason) {
 		this.genericName = genericName;
 		this.dosage = dosage;
 		this.administration = administration;

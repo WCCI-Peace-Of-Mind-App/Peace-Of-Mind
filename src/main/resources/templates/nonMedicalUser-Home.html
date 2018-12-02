@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Peace Of Mind</title>
-<link href="/css/non-med-styles.css" rel="stylesheet">
+	<title>Peace Of Mind</title>
+	<link href="/css/non-med-styles.css" rel="stylesheet">
 </head>
 
 <body class="container">
@@ -18,17 +18,17 @@
 		</nav>
 	</header>
 
-	<div class="dashboard" th:if="${nonMedicalUser.patient}"
-		th:each="patient : ${nonMedicalUser.patient}">
+	<div class="dashboard" th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
+		<h1>Your Dashboard</h1>
 
-
-		<section class="medLog">
-			<h3>Med Log</h3>
-			<div>
-				<p>
-					<em>place holder for medlog display</em>
-				</p>
+		<section class="medAdherence" th:if="${medications}">
+			<h3>Medication Adherence</h3>
+			<p>This Month</p>
+			<div th:each="medication : ${medications}">
+				<p th:text=${medication.genericName}></p>
+				<p th:text=${medication.adherentThisMonth}></p>
 			</div>
+			<a th:href="@{/med-tracker-history-non-med(id=${patient.id})}">Full Adherence History</a>
 		</section>
 
 		<section class="patientStatus" th:if="${status.id}">
@@ -39,18 +39,14 @@
 
 
 		<section class="medUser">
-			<div th:if="${patient.medicalUser}"
-				th:each="medicalUser : ${patient.medicalUser}">
+			<div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
 				<h3>Medical Personnel Information</h3>
 				<div>
 					<h4>[[${medicalUser.firstName}]] [[${medicalUser.lastName}]]</h4>
 					<ul>
-						<li
-							th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
-						<li
-							th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
-						<li
-							th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
+						<li th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
+						<li th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
+						<li th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
 						<li>Other Contact Methods</li>
 						<ul>
 							<li th:if="${medicalUser.contactInfo.phone}">[[${medicalUser.contactInfo.phone}]]</li>

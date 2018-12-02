@@ -10,13 +10,13 @@ const reason = document.querySelector("#reason");
 
 const submitMed = document.querySelector(".submit-btn");
 
-const xhr = new XMLHttpRequest()
+const xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
     if(xhr.readyState === 4 && xhr.status === 200) {
         const res = xhr.responseText;
         newMedication.innerHTML = res;
     }
-}
+};
 
 function postMedication(id, drugname, dosage, administration, frequencyAmount, frequencyTime, picture, reason) {
      xhr.open('POST', "/add-medication/add/" + id + "/" + drugname + "/" + dosage + "/" + administration + "/" + frequencyAmount + "/" + frequencyTime + "/" + picture + "/" + reason);
@@ -33,7 +33,7 @@ function textIsNumber(textbox) {
 }
 
 function validateTextData() {
-    return (textHasValue(drugName) && textHasValue(dosage) && textHasValue(administration) && textHasValue(reason))
+    return (textHasValue(drugName) && textHasValue(dosage) && textHasValue(administration) && textHasValue(reason));
 }
 
 function validateAllData() {
@@ -55,4 +55,4 @@ submitMed.addEventListener('click', function() {
     } else {
         alert ("Frequency Amount must be a number");
     }
-})
+});

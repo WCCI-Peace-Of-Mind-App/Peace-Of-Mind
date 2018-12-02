@@ -103,6 +103,8 @@ public class ScheduledTasks {
 					}
 					doseNeeded = medication.getFrequencyAmount() - pastDosesTaken;
 
+				} else {
+					doseNeeded = 0;
 				}
 				todayMedTracker.setDoseNeeded(doseNeeded);
 				medTrackerRepo.save(todayMedTracker);
@@ -118,15 +120,17 @@ public class ScheduledTasks {
 		
 		pastDate = LocalDateTime.now().minusHours(24).format(yyyymmdd);
 		
-		log.info("past date is {}", pastDate);
 		
 		Collection<MedicationTracker> medTrackers = medTrackerRepo.findAllByDate(pastDate);
 		
-		log.info("trackers for pastdate are {}", medTrackers.toString());
 		
 		for(MedicationTracker medTracker : medTrackers) {
+			
+			if(medTracker.getMedication().getFrequencyTime() != doseFrequencyTimeEnum.As_Needed) {
 			dosesMissed = medTracker.getDosesNeeded() - medTracker.getDosesTaken();
-			log.info("doses missed {}", dosesMissed);
+			} else {
+				dosesMissed = 0;
+			}
 			
 			medTracker.setDosesMissed(dosesMissed);
 			medTrackerRepo.save(medTracker);

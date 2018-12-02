@@ -31,11 +31,10 @@
 			</div>
 		</section>
 
-		<section class="patientStatus">
+		<section class="patientStatus" th:if="${status.id}">
 			<h3>Current Patient Status</h3>
-			<p>
-				<em>placeholder!!!!</em>
-			</p>
+			<img th:src="@{'images/' + ${status.status.getImageFile()}}">
+			<p>Entered at [[${status.printDateTime()}]]</p>
 		</section>
 
 

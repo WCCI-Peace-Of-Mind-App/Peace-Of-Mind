@@ -32,6 +32,9 @@ public class AddMedicationControllerTest {
 	private Patient testPatient;
 	
 	@Mock
+	private MedicalUser medUser;
+	
+	@Mock
 	private Model model;
 	
 	private long arbitraryId;
@@ -61,11 +64,13 @@ public class AddMedicationControllerTest {
 	}
 	
 	@Test
-	public void shouldAddPatientToModel() throws Exception {
+	public void shouldAddMedUserAndPatientToModel() throws Exception {
+		when(medUserRepo.findById(arbitraryId)).thenReturn(Optional.of(medUser));
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(testPatient));
 		
-		underTest.returnPatientToAddMedication(arbitraryId, model);
+		underTest.returnPatientToAddMedication(arbitraryId, arbitraryId, model);
 		verify(model).addAttribute("patient", testPatient);
+		verify(model).addAttribute("medicalUser", medUser);
 	}
 	
 	@Test

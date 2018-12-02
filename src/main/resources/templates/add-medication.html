@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Peace Of Mind</title>
+  <link href="/css/non-med-styles.css" rel="stylesheet">
+</head>
+
+<body class="container">
+    
+    <header>
+        <nav>
+          <img class="logo" src="images/logo.png" alt="logo">
+          <h2>
+              <a th:href="@{/medical-user(id=${medicalUser.id})}">Account</a>
+          </h2>
+        </nav>
+    </header>
+          
+    <div class="dashboard">
+
+        <h3>Add a New Medication for [[${patient.firstName}]] [[${patient.lastName}]]</h3>
+
+
+
+
+
+
+    </div>
+</body>
+</html>

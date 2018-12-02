@@ -52,10 +52,9 @@
         </ul>
       </div>
       <br/>
-      <form class="add-medication" method="GET">
+      <form method="post">
         <p>Would you like to add a new medication to this patient?</p>
-        <input type="hidden" name="id" value="${patient.id}">
-        <button class="btn" id="btn-add-med" type="submit" value="submit" th:formaction=@{/add-medication}>Yes</button>
+        <button class="btn meds-btn" type="submit" value="submit" id="btn-add-med" th:formaction="@{|/add-medication/${patient.id}/${medicalUser.id}|}">Add Medication</button>
       </form>
     </section>
 

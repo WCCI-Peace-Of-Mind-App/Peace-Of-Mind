@@ -39,15 +39,23 @@ public class AddMedicationControllerMockMvcTest {
 	@Mock
 	private Medication medication;
 	
+	@MockBean
+	private MedicalUserRepository medUserRepo;
+	
+	@Mock
+	private MedicalUser medUser;
+	
 	private long arbitraryId = 1;
 	
 	@Test
 	public void shouldBeOkToGoToAddMedicationSite() throws Exception {
+		when(medUserRepo.findById(arbitraryId)).thenReturn(Optional.of(medUser));
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
 		
-		mvc.perform(get("/add-medication/1"))
+		mvc.perform(get("/add-medication/1/1"))
 			.andExpect(status().isOk())
 			.andExpect(view().name(is("add-medication")))
+			.andExpect(model().attribute("medicalUser", medUser))
 			.andExpect(model().attribute("patient", patient));
 	}
 	

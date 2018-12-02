@@ -20,17 +20,25 @@ public class AddMedicationController {
 	
 	@Resource
 	private MedicationRepository medicationRepo;
+	
+	@Resource
+	private MedicalUserRepository medUserRepo;
 
-	@GetMapping("/{id}")
-	public String returnPatientToAddMedication(@PathVariable(value="id")long id, Model model) throws PatientNotFoundException {
-		Optional<Patient> patient = patientRepo.findById(id);
-		
-		if(patient.isPresent()) {
-			model.addAttribute("patient", patient.get());
-			return "add-medication";
+	@RequestMapping("/{id}/{medId}")
+	public String returnPatientToAddMedication(@PathVariable(value="id")long patientId,@PathVariable(value = "medId") long medUserId, Model model) throws Exception {
+		Optional<MedicalUser> medUser = medUserRepo.findById(medUserId);
+		if(medUser.isPresent()) {
+			Optional<Patient> patient = patientRepo.findById(patientId);
+			
+			if(patient.isPresent()) {
+				model.addAttribute("medicalUser", medUser.get());
+				model.addAttribute("patient", patient.get());
+				return "add-medication";
+			}
+			
+			throw new PatientNotFoundException();
 		}
-		
-		throw new PatientNotFoundException();
+		throw new MedicalUserNotFoundException();
 	}
 
 	@PostMapping("/add/{id}/{genericName}/{dosage}/{administration}/{frequencyAmount}/{frequencyTime}/{picture}/{reason}")

@@ -3,6 +3,7 @@ package org.wecancodeit.peaceofmind;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -54,7 +55,9 @@ public class AddMedicationControllerMockMvcTest {
 	public void shouldbeOkToAddMedicationToPatient() throws Exception {
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
 		
-//		mvc.perform(post("/add-medication/add/"))
+		mvc.perform(post("/add-medication/add/1/generic/twice/oral/5/daily/o/placebo"))
+			.andExpect(status().isOk())
+			.andExpect(view().name(is("partials/new-medication-added")));
 			
 	}
 	

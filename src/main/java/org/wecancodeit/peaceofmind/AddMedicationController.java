@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -32,8 +33,11 @@ public class AddMedicationController {
 		throw new PatientNotFoundException();
 	}
 
-	public void addMedicationToPatient(String genericName, String dosage, String administration, int frequencyAmount,
-			String frequencyTime, String picture, String reason, long id) {
+	@PostMapping("/add/{id}/{genericName}/{dosage}/{administration}/{frequencyAmount}/{frequencyTime}/{picture}/{reason}")
+	public String addMedicationToPatient(@PathVariable(value = "id") long id, @PathVariable(value = "genericName") String genericName, @PathVariable(value = "dosage") String dosage, 
+			@PathVariable(value = "administration") String administration, @PathVariable(value= "frequencyAmount") int frequencyAmount,
+			@PathVariable(value = "frequencyTime") String frequencyTime, @PathVariable(value = "picture") String picture, @PathVariable(value = "reason") String reason)
+			throws PatientNotFoundException {
 		Optional<Patient> patient = patientRepo.findById(id);
 
 		if(patient.isPresent()) {
@@ -41,7 +45,10 @@ public class AddMedicationController {
 			Medication newMed = new Medication(genericName, dosage, administration, frequencyAmount, freqTime, picture, reason);
 			medicationRepo.save(newMed);
 			patient.get().addMedication(newMed);
+			return "partials/new-medication-added";
 		}
+		
+		throw new PatientNotFoundException();
 		
 	}
 

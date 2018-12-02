@@ -69,10 +69,10 @@ public class AddMedicationControllerTest {
 	}
 	
 	@Test
-	public void shouldAddNewMedicationToPatient() {
+	public void shouldAddNewMedicationToPatient() throws Exception {
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(testPatient));
 		
-		underTest.addMedicationToPatient(genericName, dosage, administration, frequencyAmount, frequencyTime, picture, reason, arbitraryId);
+		underTest.addMedicationToPatient(arbitraryId, genericName, dosage, administration, frequencyAmount, frequencyTime, picture, reason);
 		
 		ArgumentCaptor<Medication> medicationArgument = ArgumentCaptor.forClass(Medication.class);
 		verify(medicationRepo).save(medicationArgument.capture());

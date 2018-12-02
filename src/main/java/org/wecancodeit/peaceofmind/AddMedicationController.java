@@ -51,8 +51,8 @@ public class AddMedicationController {
 		if(patient.isPresent()) {
 			doseFrequencyTimeEnum freqTime = doseFrequencyTimeEnum.fromString(frequencyTime);
 			Medication newMed = new Medication(genericName, dosage, administration, frequencyAmount, freqTime, picture, reason);
-			medicationRepo.save(newMed);
 			patient.get().addMedication(newMed);
+			medicationRepo.save(newMed);
 			return "partials/new-medication-added";
 		}
 		

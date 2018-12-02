@@ -15,7 +15,9 @@ test('expected body of text',
         );
         oTargetDivParent.click();
         // expect(functions.hoverInnerDiv).toBeCalled();
-        expect(document.innerHTML).toBe(expectedInnerHTML.innerHTML);
+        const sPattern = />{1}\s*<{1}/g;
+        const sReplacement = '><';
+        expect(document.body.innerHTML.replace(sPattern, sReplacement)).toBe(expectedInnerHTML.replace(sPattern, sReplacement));
     }
 
 )

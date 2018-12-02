@@ -21,14 +21,16 @@
 	<div class="dashboard" th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
 		<h1>Your Dashboard</h1>
 
-		<section class="medAdherence" th:if="${medications}">
+		<section class="main">
 			<h3>Medication Adherence</h3>
 			<p>This Month</p>
-			<div th:each="medication : ${medications}">
-				<p th:text=${medication.genericName}></p>
-				<p th:text=${medication.adherentThisMonth}></p>
-			</div>
-			<a th:href="@{/med-tracker-history-non-med(id=${patient.id})}">Full Adherence History</a>
+			<section class="medAdherenceDash" th:if="${medications}">
+				<div class="medStatus" th:each="medication : ${medications}">
+						<img th:src=${medication.adherentThisMonth}>
+						<h4><p id="medName" th:text=${medication.genericName}></p></h4>
+				</div>
+			</section>
+							<a th:href="@{/med-tracker-history-non-med(id=${patient.id})}">Full Adherence History</a>
 		</section>
 
 		<section class="patientStatus" th:if="${status.id}">

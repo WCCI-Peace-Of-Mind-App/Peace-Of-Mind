@@ -104,28 +104,32 @@ public class PeaceOfMindController {
 			Collection<MedicationTracker> medicationTrackers = new HashSet<>();
 
 			for (Medication medication : medications) {
-
-				medicationTrackers = medTrackerRepo.findAllByMedicationAndDateGreaterThanEqual(medication,
-						currentMonthStart);
+				
+				int missedDose = 0;
+				
+				medicationTrackers = medTrackerRepo.findAllByMedicationAndDateGreaterThanEqual(medication, currentMonthStart);
+				
 				for (MedicationTracker medTracker : medicationTrackers) {
 					if (medTracker.getDosesMissed() > 0
 							&& medication.getFrequencyTime() != doseFrequencyTimeEnum.As_Needed) {
-						medication.setAdherentThisMonth(false);
-						medRepo.save(medication);
-					} else {
-						medication.setAdherentThisMonth(true);
+						missedDose++; 
 					}
+				} if (missedDose > 0) {
+						medication.setAdherentThisMonth("/images/false.png");
+					} else {
+						medication.setAdherentThisMonth("/images/true.png");
+					}
+				medRepo.save(medication);
 				}
 			}
 
 			if (nonMedUser.isPresent()) {
 				model.addAttribute("nonMedicalUser", nonMedUser.get());
 				model.addAttribute("status", currentStatus);
-
+				
 				if (medications != null) {
 					model.addAttribute("medications", medications);
 				}
-			}
 
 			return "nonMedicalUser-Home";
 		}
@@ -151,17 +155,52 @@ public class PeaceOfMindController {
 	@RequestMapping("/medical-user-home")
 	public String returnMedicalUserHomePage(@RequestParam(value = "id") long id, Model model)
 			throws MedicalUserNotFoundException {
+		DateTimeFormatter yyyymm = DateTimeFormatter.ofPattern("yyyy/MM");
+
+		String thisMonth = LocalDateTime.now().format(yyyymm);
+
 		Optional<MedicalUser> medUser = medUserRepo.findById(id);
 		NonMedicalUser nonMed = medUser.get().getPatient().getNonMedicalUser();
 		Patient patient = medUser.get().getPatient();
 		Long patientId = patient.getId();
 		PatientStatus currentStatus = patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(patientId);
+		Collection<Medication> medications = patient.getMedications();
 
-		if (medUser.isPresent()) {
-			model.addAttribute("medicalUser", medUser.get());
-			model.addAttribute("nonMedicalUser", nonMed);
-			model.addAttribute("patient", patient);
-			model.addAttribute("status", currentStatus);
+		String currentMonthStart = thisMonth + "/01";
+
+		if (medications != null) {
+
+			Collection<MedicationTracker> medicationTrackers = new HashSet<>();
+
+			for (Medication medication : medications) {
+				
+				int missedDose = 0;
+				
+				medicationTrackers = medTrackerRepo.findAllByMedicationAndDateGreaterThanEqual(medication, currentMonthStart);
+				
+				for (MedicationTracker medTracker : medicationTrackers) {
+					if (medTracker.getDosesMissed() > 0
+							&& medication.getFrequencyTime() != doseFrequencyTimeEnum.As_Needed) {
+						missedDose++; 
+					}
+				} if (missedDose > 0) {
+						medication.setAdherentThisMonth("/images/false.png");
+					} else {
+						medication.setAdherentThisMonth("/images/true.png");
+					}
+				medRepo.save(medication);
+				}
+			}
+
+			if (medUser.isPresent()) {
+				model.addAttribute("medicalUser", medUser.get());
+				model.addAttribute("nonMedicalUser", nonMed);
+				model.addAttribute("patient", patient);
+				model.addAttribute("status", currentStatus);
+				
+				if (medications != null) {
+					model.addAttribute("medications", medications);
+				}
 			return "medicalUser-Home";
 		}
 
@@ -208,8 +247,9 @@ public class PeaceOfMindController {
 	@RequestMapping("/med-tracker-history-non-med")
 	public String returnMedTrackerHistory(@RequestParam(value = "id") long id, Model model) {
 
-		DateTimeFormatter yyyymmdd = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		String currentDate = LocalDateTime.now().format(yyyymmdd);
+		DateTimeFormatter yyyy = DateTimeFormatter.ofPattern("yyyy");
+		String currentYear = LocalDateTime.now().format(yyyy);
+		String startDate = currentYear + "/01/01";
 
 		Optional<Patient> patient = patientRepo.findById(id);
 		NonMedicalUser nonMedUser = patient.get().getNonMedicalUser();
@@ -229,7 +269,7 @@ public class PeaceOfMindController {
 			for (Medication medication : medications) {
 
 				medicationTrackers
-						.addAll(medTrackerRepo.findAllByMedicationAndDateGreaterThanEqual(medication, currentDate));
+						.addAll(medTrackerRepo.findAllByMedicationAndDateGreaterThanEqual(medication, startDate));
 			}
 
 			if (medicationTrackers.size() > 0) {
@@ -238,6 +278,43 @@ public class PeaceOfMindController {
 		}
 
 		return "med-Tracker-History-Non-Med";
+
+	}
+	
+	@RequestMapping("/med-tracker-history-med")
+	public String returnMedTrackerHistoryMedUser(@RequestParam(value = "id") long id, Model model) {
+
+		DateTimeFormatter yyyy = DateTimeFormatter.ofPattern("yyyy");
+		String currentYear = LocalDateTime.now().format(yyyy);
+		String startDate = currentYear + "/01/01";
+
+		Optional<Patient> patient = patientRepo.findById(id);
+		MedicalUser medUser = patient.get().getMedicalUser();
+
+		Collection<Medication> medications = patient.get().getMedications();
+
+		model.addAttribute("medicalUser", medUser);
+
+		if (patient.isPresent()) {
+			model.addAttribute("patient", patient.get());
+		}
+
+		if (medications != null) {
+
+			Collection<MedicationTracker> medicationTrackers = new HashSet<>();
+
+			for (Medication medication : medications) {
+
+				medicationTrackers
+						.addAll(medTrackerRepo.findAllByMedicationAndDateGreaterThanEqual(medication, startDate));
+			}
+
+			if (medicationTrackers.size() > 0) {
+				model.addAttribute("medicationTrackers", medicationTrackers);
+			}
+		}
+
+		return "med-Tracker-History-Med";
 
 	}
 

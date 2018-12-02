@@ -17,9 +17,10 @@
       </nav>
     </header>
 
+    <div class="dashboard">
     <h3>Your Dashboard</h3>
 
-  <h4>Your Patients:</h4>
+  <h4>Your Patient:</h4>
   <div th:if="${medicalUser.patient}">
     <p> [[${patient.firstName}]] [[${patient.lastName}]] </p>
     <p>Diagnosis: <span th:text="${patient.diagnosis}"></span></p>
@@ -39,11 +40,12 @@
 
     <section class="medication-info">
 
-      <p>Medication Details:</p>
+      <h3>Medication Details:</h3>
       <div th:if="${patient.medications}">
         <ul>
           <div th:each="medication : ${patient.medications}">
-            <li>[[${medication.genericName}]]</li>
+            <br/>
+            <h4>[[${medication.genericName}]]</h4>
             <p>Reason for administration: [[${medication.reason}]]</p>
             <p>Dosage: [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
           </div>
@@ -53,7 +55,7 @@
 
     <section class="patient-contactinfo">
       <div>
-        <p>Contact Information:</p>
+        <h3>Contact Information:</h3>
         <ul>
           <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
           <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
@@ -75,6 +77,7 @@
       </div>
     </div>
   </div>
+</div>
   <footer>
     <span>&copy; Peace of Mind WCCI Final project</span>
   </footer>

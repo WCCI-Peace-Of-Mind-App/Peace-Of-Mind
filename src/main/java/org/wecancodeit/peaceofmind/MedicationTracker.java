@@ -20,6 +20,8 @@ public class MedicationTracker {
 	@ManyToOne
 	private Medication medication;
 	private int dosesTaken;
+	private int dosesNeeded;
+	private int dosesMissed;
 	private String date;
 
 	public long getId() {
@@ -36,6 +38,23 @@ public class MedicationTracker {
 
 	public void setDosesTaken(int totalDoses) {
 		dosesTaken = totalDoses;
+	}
+	
+	public int getDosesNeeded() {
+		return dosesNeeded;
+	}
+	
+	public void setDoseNeeded(int doseNeeded) {
+		dosesNeeded = doseNeeded;
+		
+	}
+	
+	public int getDosesMissed() {
+		return dosesMissed;
+	}
+	
+	public void setDosesMissed(int doseMissed) {
+		dosesMissed = doseMissed;
 	}
 
 	public String getDate() {
@@ -55,6 +74,13 @@ public class MedicationTracker {
 		this.date = LocalDateTime.now().format(yyyymmdd);
 	}
 
+	//for testing purposes only
+	public MedicationTracker(Medication medication, String pastDate, int needed, int taken) {
+		this.medication = medication;
+		this.dosesNeeded = needed;
+		this.dosesTaken = taken;
+		this.date = pastDate;
+	}
 
 	@Override
 	public int hashCode() {
@@ -77,5 +103,6 @@ public class MedicationTracker {
 			return false;
 		return true;
 	}
+
 
 }

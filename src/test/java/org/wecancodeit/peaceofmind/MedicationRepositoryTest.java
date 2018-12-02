@@ -40,12 +40,12 @@ public class MedicationRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		med1 = medRepo.save(new Medication("drug", "2 pills", "oral", 2, "two days", "aaa.jpg", "placebo"));
+		med1 = medRepo.save(new Medication("drug", "2 pills", "oral", 2, doseFrequencyTimeEnum.Daily, "aaa.jpg", "placebo"));
 		medId = med1.getId();
 		
-		med2 = medRepo.save(new Medication("drugs", "1L", "oral", 1, "daily", "bbb.jpg", "memory"));
+		med2 = medRepo.save(new Medication("drugs", "1L", "oral", 1, doseFrequencyTimeEnum.Daily, "bbb.jpg", "memory"));
 		
-		medNot = medRepo.save(new Medication("blammo", "5 cc", "injection", 1, "weekly", "xxx.jpg", "nausea"));
+		medNot = medRepo.save(new Medication("blammo", "5 cc", "injection", 1, doseFrequencyTimeEnum.Weekly, "xxx.jpg", "nausea"));
 		
 		patient = patientRepo.save(new Patient("John", "Bowles", null, "01/01/2001", "Alzh", null, med1, med2));
 		patientId = patient.getId();

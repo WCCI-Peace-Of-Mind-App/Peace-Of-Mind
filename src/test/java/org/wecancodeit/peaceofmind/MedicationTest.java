@@ -12,7 +12,7 @@ public class MedicationTest {
 	
 	@Before
 	public void setUp() {
-	underTest = new Medication("drug", "2 pills", "oral", 2, "two days", "aaa.jpg", "placebo");	
+	underTest = new Medication("drug", "2 pills", "oral", 2, doseFrequencyTimeEnum.Daily, "aaa.jpg", "placebo");	
 	}
 
 	@Test
@@ -36,10 +36,10 @@ public class MedicationTest {
 	@Test
 	public void shouldHaveAFrequency() {
 		int result1 = underTest.getFrequencyAmount();
-		String result2 = underTest.getFrequencyTime();
+		doseFrequencyTimeEnum result2 = underTest.getFrequencyTime();
 		
 		assertThat(result1, is(2));
-		assertThat(result2, is("two days"));
+		assertThat(result2, is(doseFrequencyTimeEnum.Daily));
 	}
 	
 	@Test

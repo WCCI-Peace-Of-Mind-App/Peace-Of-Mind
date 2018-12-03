@@ -23,6 +23,7 @@ public class Medication {
 	private doseFrequencyTimeEnum frequencyTime;
 	private String picture;
 	private String reason;
+	private String adherentThisMonth;
 	
 	@ManyToOne
 	private Patient patient;
@@ -68,6 +69,14 @@ public class Medication {
 
 	public Patient getPatient() {
 		return patient;
+	}
+	
+	public String getAdherentThisMonth() {
+		return adherentThisMonth;
+	}
+	
+	public void setAdherentThisMonth(String adherence) {
+		adherentThisMonth = adherence;
 	}
 
 	

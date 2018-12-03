@@ -12,5 +12,9 @@ public interface MedicationTrackerRepository extends CrudRepository<MedicationTr
 
 	Collection<MedicationTracker> findAllByDate(String date);
 
+	Collection<MedicationTracker> findAllByMedicationAndDateGreaterThanEqual(Medication medication,
+			String date);
+
+
 
 }

@@ -38,6 +38,8 @@ public class ViewTest {
 	private MedicationLogRepository medLogRepo;
 	@MockBean
 	private PatientStatusRepository patientStatusRepo;
+	@MockBean
+	private MedicationTrackerRepository medTrackerRepo;
 	@Mock
 	private Patient oMockPatient;
 	@Mock

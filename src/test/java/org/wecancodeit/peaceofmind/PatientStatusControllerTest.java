@@ -81,9 +81,11 @@ public class PatientStatusControllerTest {
 		Collection<PatientStatus> patientStatuses = Arrays.asList(ps1, ps2, ps3);
 		
 		when(patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatuses);
+		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
 		
 		underTest.findThreeRecentStatuses(arbitraryId, model);
 		verify(model).addAttribute("patientStatuses", patientStatuses);
+		verify(model).addAttribute("patient", patient);
 	}
 	
 

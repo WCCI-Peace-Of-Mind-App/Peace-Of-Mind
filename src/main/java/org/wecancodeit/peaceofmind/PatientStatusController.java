@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PatientStatusController {
@@ -37,10 +38,16 @@ public class PatientStatusController {
 	}
 
 	@GetMapping("/status-history")
-	public String findThreeRecentStatuses(long id, Model model) {
-		Collection<PatientStatus> patientStatuses = patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(id);
-		model.addAttribute("patientStatuses", patientStatuses);
-		return "status-history";
+	public String findThreeRecentStatuses(@RequestParam(value = "id")long id, Model model) throws Exception {
+		Optional<Patient> patient = patientRepo.findById(id);
+		
+		if(patient.isPresent()) {
+			Collection<PatientStatus> patientStatuses = patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(id);
+			model.addAttribute("patientStatuses", patientStatuses);
+			model.addAttribute("patient", patient.get());
+			return "status-history";			
+		}
+		throw new PatientNotFoundException();
 	}
 
 }

@@ -86,6 +86,7 @@ public class PatientStatusControllerMockMvcTest {
 	
 	@Test
 	public void shouldBeOkToRouteTo3StatusView() throws Exception {
+		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
 		Collection<PatientStatus> patientStatuses = Arrays.asList(status, status2, status3);
 		when(patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatuses);
 		
@@ -93,7 +94,8 @@ public class PatientStatusControllerMockMvcTest {
 				.param("id", "1"))
 			.andExpect(status().isOk())
 			.andExpect(view().name(is("status-history")))
-			.andExpect(model().attribute("patientStatuses", patientStatuses));
+			.andExpect(model().attribute("patientStatuses", patientStatuses))
+			.andExpect(model().attribute("patient", patient));
 		
 		
 	}

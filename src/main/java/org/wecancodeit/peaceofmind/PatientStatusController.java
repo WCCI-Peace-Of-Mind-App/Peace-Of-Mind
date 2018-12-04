@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -35,9 +36,11 @@ public class PatientStatusController {
 		
 	}
 
-	public void findThreeRecentStatuses(long id, Model model) {
+	@GetMapping("/status-history")
+	public String findThreeRecentStatuses(long id, Model model) {
 		Collection<PatientStatus> patientStatuses = patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(id);
 		model.addAttribute("patientStatuses", patientStatuses);
+		return "status-history";
 	}
 
 }

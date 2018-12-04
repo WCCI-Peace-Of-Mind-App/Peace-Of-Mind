@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -12,6 +14,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.ui.Model;
 
 public class PatientStatusControllerTest {
 	
@@ -19,10 +22,22 @@ public class PatientStatusControllerTest {
 	private PatientStatusController underTest;
 	
 	@Mock
+	private Model model;
+	
+	@Mock
 	private PatientStatusRepository patientStatusRepo;
 	
 	@Mock
 	private PatientRepository patientRepo;
+	
+	@Mock
+	private PatientStatus ps1;
+	
+	@Mock
+	private PatientStatus ps2;
+	
+	@Mock
+	private PatientStatus ps3;
 	
 	@Mock
 	private Patient patient;
@@ -59,6 +74,17 @@ public class PatientStatusControllerTest {
 		ArgumentCaptor<PatientStatus> patientStatusArgument = ArgumentCaptor.forClass(PatientStatus.class);
 		verify(patientStatusRepo).save(patientStatusArgument.capture());
 		assertEquals(testStatus2, patientStatusArgument.getValue().getStatus());
+	}
+	
+	@Test
+	public void shouldFindTop3ResultsForPatientStatus() throws Exception {
+		Collection<PatientStatus> patientStatuses = Arrays.asList(ps1, ps2, ps3);
+		
+		when(patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatuses);
+		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
+		
+		underTest.findThreeRecentStatuses(arbitraryId, model);
+		verify(model).addAttribute("patientStatuses", patientStatuses);
 	}
 	
 

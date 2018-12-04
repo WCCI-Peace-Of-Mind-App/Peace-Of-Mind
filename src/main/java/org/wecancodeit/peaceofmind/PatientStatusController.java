@@ -1,5 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -27,12 +28,16 @@ public class PatientStatusController {
 		if(patient.isPresent()) {
 			PatientStatus newStatus = new PatientStatus(statusEnum, patient.get());
 			patientStatusRepo.save(newStatus);
-//			model.addAttribute("patient", patientRepo.findById(patientId));
 			return "partials/patientStatus-update";			
 		}
 		
 		throw new PatientNotFoundException();
 		
+	}
+
+	public void findThreeRecentStatuses(long id, Model model) {
+		Collection<PatientStatus> patientStatuses = patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(id);
+		model.addAttribute("patientStatuses", patientStatuses);
 	}
 
 }

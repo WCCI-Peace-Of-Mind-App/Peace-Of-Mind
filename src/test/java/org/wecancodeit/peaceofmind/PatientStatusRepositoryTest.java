@@ -98,4 +98,10 @@ public class PatientStatusRepositoryTest {
 		assertThat(checkedStatus, is(status5));
 	}
 	
+	@Test
+	public void shouldReturnTop3RecentStatuses() {
+		Collection<PatientStatus> checkedStatuses = patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(patientId);
+		assertThat(checkedStatuses, contains(status5, status4, status3));
+	}
+	
 }

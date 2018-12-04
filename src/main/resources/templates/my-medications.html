@@ -4,6 +4,32 @@
 <head>
   <title>Patient-Medications</title>
   <link href="/css/medications-style.css" rel="stylesheet">
+  <script type="text/javascript">
+    function asyncAddMedicationLog(evt){
+        // /show-patients/{patientId}/patient-medication-log-update"
+        let sPayload = "http://localhost:8080/show-patients/" + [[${patient.getId()}]] + "/patient-medication-log-update?medicationId=" + evt.target.getAttribute('data-medicationId');
+        fetch(sPayload).then(
+          (response) => response.text()
+        ).then(
+          (text) => {
+            evt.target.parentElement.insertAdjacentHTML(`beforebegin`, text);
+          }
+        ).catch(
+          (error) => console.log(`asyncAddReview fetch attempt to ${sPayload}: error.getMessage()`)
+        );
+    }
+    document.addEventListener("readystatechange", (evt) => {
+        if(evt.target.readyState==="complete"){
+          const oButtonCollection = document.querySelectorAll('.log-medication button');
+          for(let i in oButtonCollection){
+            if(typeof i === 'number'  && oButtonCollection.hasOwnProperty(i)){
+              oButtonCollection[i].addEventListener("click", asyncAddMedicationLog);
+            }
+          }
+        }
+      }
+    );
+    </script>
 </head>
 
 <body class="container">
@@ -29,8 +55,7 @@
         </div>
       </section>
       <div class="log-medication">
-            <button>Dose Taken</button>
-
+            <button th:attr="data-medId=${medication.getId()}">Dose Taken</button>
       </div>
     </div>
 

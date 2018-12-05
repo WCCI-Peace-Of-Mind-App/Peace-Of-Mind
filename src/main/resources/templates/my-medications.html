@@ -22,7 +22,9 @@
         if(evt.target.readyState==="complete"){
           const oButtonCollection = document.querySelectorAll('.log-medication button');
           for(let i in oButtonCollection){
-            if(typeof i === 'number'  && oButtonCollection.hasOwnProperty(i)){
+            //if(i==0 || i==1){ console.log(`In readyState event. The i of oButtonCollection is: ${typeof i} and oBUttonCollection has own property: ${oButtonCollection.hasOwnProperty(i)}`);}
+            if(oButtonCollection.hasOwnProperty(i)){
+              console.log(`In readyState event, in loop, in conditional`);
               oButtonCollection[i].addEventListener("click", asyncAddMedicationLog);
             }
           }
@@ -55,7 +57,7 @@
         </div>
       </section>
       <div class="log-medication">
-            <button th:attr="data-medId=${medication.getId()}">Dose Taken</button>
+            <button th:attr="data-medicationId=${medication.getId()}">Dose Taken</button>
       </div>
     </div>
 

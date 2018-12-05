@@ -1,0 +1,9 @@
+<h3>Short Status History</h3>
+<div class="status" th:each="status: ${patientStatuses}">
+    <img th:src="@{'images/' + ${status.status.getImageFile()}}">
+    <p>Entered at [[${status.printDateTime()}]]</p>
+</div>
+<p>Would you like to see the history?</p>
+<input type="hidden" name="id" th:value="${patient.id}">
+<button class="show-one" type="submit" value="submit">Show Less</button>
+<button class="show-all" type="submit" value="submit">Show All</button>

@@ -37,11 +37,10 @@
 			<h3>Current Patient Status</h3>
 			<img th:src="@{'images/' + ${status.status.getImageFile()}}">
 			<p>Entered at [[${status.printDateTime()}]]</p>
-			<form method="GET">
-				<p>Would you like to view the status history?</p>
-				<input type="hidden" name="id" th:value="${patient.id}">
-				<button type="submit" value="submit" formaction="/status-history">View Status History</button>
-			</form>
+			<p>Would you like to view the status history?</p>
+			<input class="id" type="hidden" name="id" th:value="${patient.id}">
+			<button class="show-three" type="submit" value="submit">View Status History</button>
+			<script src="./js/showing-one-status.js"></script>
 		</section>
 
 

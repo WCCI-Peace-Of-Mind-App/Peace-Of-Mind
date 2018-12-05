@@ -90,10 +90,9 @@ public class PatientStatusControllerMockMvcTest {
 		Collection<PatientStatus> patientStatuses = Arrays.asList(status, status2, status3);
 		when(patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatuses);
 		
-		mvc.perform(get("/status-history")
-				.param("id", "1"))
+		mvc.perform(get("/status-history-three/1"))
 			.andExpect(status().isOk())
-			.andExpect(view().name(is("status-history")))
+			.andExpect(view().name(is("partials/patientStatus-three")))
 			.andExpect(model().attribute("patientStatuses", patientStatuses))
 			.andExpect(model().attribute("patient", patient));
 		

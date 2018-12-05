@@ -6,7 +6,10 @@ const hoverInnerDiv = (evt)=> {
       hoverParent.classList.add(...evt.target.className.split(' '));
       hoverParent.classList.add('hover');
       hoverParent.insertBefore(oOriginalDiv.cloneNode(true), null);
-      evt.target.parentElement.insertBefore(hoverParent, evt.target);
+      hoverParent.addEventListener('click', (event)=> {
+        event.target.parentElement.removeChild(event.target);
+      } )
+      document.body.insertBefore(hoverParent, document.querySelector('.dashboard'));
     }
   }
 };

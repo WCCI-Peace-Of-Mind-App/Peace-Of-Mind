@@ -25,3 +25,5 @@
 /nbdist/
 /.nb-gradle/
 /bin
+/src/main/resources/static/js/test/node_modules
+/node_modules

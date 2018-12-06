@@ -87,7 +87,9 @@
 			<img class="addressIcon" src="images/address.png" alt="address-icon">
 			<h2>Your Address</h2>
 			<div class="userInfo">
+			<address>
 				<p th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</p>
+			</address>	
 			</div>
 		</section>
 

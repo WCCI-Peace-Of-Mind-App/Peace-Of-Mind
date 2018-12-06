@@ -4,6 +4,7 @@
 <head>
 	<title>Peace Of Mind</title>
 	<link href="/css/non-med-styles.css" rel="stylesheet">
+	<link href="/css/status-history.css" rel="stylesheet">
 </head>
 
 <body class="container">
@@ -33,17 +34,20 @@
 							<a th:href="@{/med-tracker-history-non-med(id=${patient.id})}">Full Adherence History</a>
 		</section>
 
+		<input class="id" type="hidden" name="id" th:value="${patient.id}">
 		<section class="patientStatus" th:if="${status.id}">
-			<h3>Current Patient Status</h3>
-			<img th:src="@{'images/' + ${status.status.getImageFile()}}">
-			<p>Entered at [[${status.printDateTime()}]]</p>
-			<p>Would you like to view the status history?</p>
-			<input class="id" type="hidden" name="id" th:value="${patient.id}">
+			<div class="statusChange">
+				<h3>Current Patient Status</h3>
+				<img th:src="@{'images/' + ${status.status.getImageFile()}}">
+				<p>Entered at [[${status.printDateTime()}]]</p>
+				<p>Would you like to view the status history?</p>
+			</div>
+			<button class="show-one" type="submit" value="submit">Show Less</button>
 			<button class="show-three" type="submit" value="submit">View Status History</button>
-			<script src="./js/showing-one-status.js"></script>
+			<button class="show-all" type="submit" value="submit">Show All</button>
 		</section>
-
-
+		
+		
 		<section class="medUser">
 			<div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
 				<h3>Medical Personnel Information</h3>
@@ -62,14 +66,15 @@
 				</div>
 			</div>
 		</section>
-
-
+		
+		
 	</div>
-
+	
 	<footer>
 		<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>
 	</footer>
-
+	
+	<script src="./js/showing-one-status.js"></script>
 </body>
 
 </html>

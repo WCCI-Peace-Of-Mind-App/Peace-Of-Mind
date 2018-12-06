@@ -110,8 +110,14 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 
 		
 		LocalDateTime time1 = LocalDateTime.of(2018, 12, 1, 8, 30);
+		LocalDateTime time2 = LocalDateTime.of(2018, 12, 3, 8, 30);
+		LocalDateTime time3 = LocalDateTime.of(2018, 12, 4, 8, 30);
+		LocalDateTime time4 = LocalDateTime.of(2018, 12, 4, 9, 30);
 		
-        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.HAPPY, time1, patient1));
+        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.ANGRY, time1, patient1));
+        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.SAD, time2, patient1));
+        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.HAPPY, time3, patient1));
+        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.CONFUSED, time4, patient1));
         patientStatusRepo.save(new PatientStatus(PatientStatusEnum.SAD, patient1));
 
 		// End Patient 1 build

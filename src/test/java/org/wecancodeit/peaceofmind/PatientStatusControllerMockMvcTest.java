@@ -92,11 +92,20 @@ public class PatientStatusControllerMockMvcTest {
 		
 		mvc.perform(get("/status-history-three/1"))
 			.andExpect(status().isOk())
-			.andExpect(view().name(is("partials/patientStatus-three")))
-			.andExpect(model().attribute("patientStatuses", patientStatuses))
-			.andExpect(model().attribute("patient", patient));
+			.andExpect(view().name(is("partials/statusChange-three")))
+			.andExpect(model().attribute("patientStatuses", patientStatuses));
+	}
+	
+	@Test
+	public void shouldBeOkToRouteToAllStatusHistoryView() throws Exception {
+		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
+		Collection<PatientStatus> allStatuses = Arrays.asList(status, status2, status3);
+		when(patientStatusRepo.findByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(allStatuses);
 		
-		
+		mvc.perform(get("/status-history-all/1"))
+			.andExpect(status().isOk())
+			.andExpect(view().name(is("partials/statusChange-all")))
+			.andExpect(model().attribute("patientStatuses", allStatuses));
 	}
 
 }

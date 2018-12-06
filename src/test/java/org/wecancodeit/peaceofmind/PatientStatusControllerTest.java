@@ -40,6 +40,9 @@ public class PatientStatusControllerTest {
 	private PatientStatus ps3;
 	
 	@Mock
+	private PatientStatus ps4;
+	
+	@Mock
 	private Patient patient;
 	private PatientStatusEnum testStatus;
 	private PatientStatusEnum testStatus2;
@@ -85,7 +88,18 @@ public class PatientStatusControllerTest {
 		
 		underTest.findThreeRecentStatuses(arbitraryId, model);
 		verify(model).addAttribute("patientStatuses", patientStatuses);
-		verify(model).addAttribute("patient", patient);
+	}
+	
+	@Test
+	public void shouldFindAllResultsForPatientStatus() throws Exception {
+		Collection<PatientStatus> allStatuses = Arrays.asList(ps1, ps2, ps3, ps4);
+		
+		when(patientStatusRepo.findByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(allStatuses);
+		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
+		
+		underTest.findAllStatuses(arbitraryId, model);
+		verify(model).addAttribute("patientStatuses", allStatuses);
+		
 	}
 	
 

@@ -44,8 +44,19 @@ public class PatientStatusController {
 		if(patient.isPresent()) {
 			Collection<PatientStatus> patientStatuses = patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(id);
 			model.addAttribute("patientStatuses", patientStatuses);
-			model.addAttribute("patient", patient.get());
-			return "partials/patientStatus-three";			
+			return "partials/statusChange-three";			
+		}
+		throw new PatientNotFoundException();
+	}
+
+	@GetMapping("/status-history-all/{id}")
+	public String findAllStatuses(@PathVariable(value="id")long id, Model model) throws Exception{
+		Optional<Patient> patient = patientRepo.findById(id);
+		
+		if(patient.isPresent()) {
+			Collection<PatientStatus> allStatuses = patientStatusRepo.findByParentIdOrderByStatusDateTimeStampDesc(id);
+			model.addAttribute("patientStatuses", allStatuses);
+			return "partials/statusChange-all";
 		}
 		throw new PatientNotFoundException();
 	}

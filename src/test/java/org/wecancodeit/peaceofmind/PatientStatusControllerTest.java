@@ -98,9 +98,7 @@ public class PatientStatusControllerTest {
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
 		
 		underTest.findAllStatuses(arbitraryId, model);
-		verify(model).addAttribute("patientStatuses", allStatuses);
-		
+		verify(model).addAttribute("patientStatuses", allStatuses);	
 	}
 	
-
 }

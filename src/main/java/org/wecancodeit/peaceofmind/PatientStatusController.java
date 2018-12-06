@@ -60,5 +60,17 @@ public class PatientStatusController {
 		}
 		throw new PatientNotFoundException();
 	}
+	
+	@GetMapping("/status-history-one/{id}")
+	public String showSingleStatus(@PathVariable(value="id")long id, Model model) throws Exception {
+		Optional<Patient> patient = patientRepo.findById(id);
+		
+		if(patient.isPresent()) {
+			PatientStatus status = patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(id);
+			model.addAttribute("status", status);
+			return "partials/statusChange-one";
+		}
+		throw new PatientNotFoundException();
+	}
 
 }

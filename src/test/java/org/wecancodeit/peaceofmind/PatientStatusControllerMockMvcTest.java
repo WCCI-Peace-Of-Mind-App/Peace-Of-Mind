@@ -107,5 +107,16 @@ public class PatientStatusControllerMockMvcTest {
 			.andExpect(view().name(is("partials/statusChange-all")))
 			.andExpect(model().attribute("patientStatuses", allStatuses));
 	}
+	
+	@Test
+	public void shouldBeOkToReturnToOneView() throws Exception{
+		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
+		when(patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(status);
+
+		mvc.perform(get("/status-history-one/1"))
+			.andExpect(status().isOk())
+			.andExpect(view().name(is("partials/statusChange-one")))
+			.andExpect(model().attribute("status", status));
+	}
 
 }

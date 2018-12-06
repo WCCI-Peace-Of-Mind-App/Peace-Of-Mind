@@ -13,6 +13,11 @@ xhr.onreadystatechange = function() {
     }
 }
 
+function postOneStatus(patientId) {
+    xhr.open('GET', '/status-history-one/' + patientId, true);
+    xhr.send();
+}
+
 function postThreeStatuses(patientId) {
     xhr.open('GET', '/status-history-three/' + patientId, true);
     xhr.send();
@@ -22,6 +27,15 @@ function postAllStatuses(patientId) {
     xhr.open('GET', '/status-history-all/' + patientId, true);
     xhr.send();
 }
+
+showOneButton.addEventListener('click', function() {
+    postOneStatus(patientId);
+    showOneButton.style.display = "none";
+    showThreeButton.innerText = "View Status History";
+    showThreeButton.style.display = "inline-block";
+    showAllButton.style.display = "none";
+
+})
 
 showThreeButton.addEventListener('click', function() {
     postThreeStatuses(patientId);

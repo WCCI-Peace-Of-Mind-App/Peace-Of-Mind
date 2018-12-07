@@ -13,6 +13,50 @@ const hoverInnerDiv = (evt)=> {
     }
   }
 };
+
+const cloneNonDivChildren = (oDivParent, aNonDivChildNodes) => {
+  for(const el in oDivParent.childNodes){
+    if(oDivParent.childNodes.hasOwnProperty(el)){
+      if(`${oDivParent.childNodes[el]}` !== '[object HTMLDivElement]'){
+        if(`${oDivParent.childNodes[el]}`!='[object Text]' || oDivParent.childNodes[el].length>0){
+          aNonDivChildNodes[aNonDivChildNodes.length] = oDivParent.childNodes[el].cloneNode(true);
+        }
+      }
+    }
+  }
+};
+const deleteNonDivChildren = (oDivParent) => {
+  let k = 0;
+  while(oDivParent.childNodes.hasOwnProperty(k)){
+    if(`${oDivParent.childNodes[k]}` === '[object HTMLDivElement]'){
+      k++;
+    } else {
+      oDivParent.removeChild(oDivParent.childNodes[k]);
+    }
+  }
+};
+const removeDivInnerHtml = (oInnerDiv) => {
+  const answer = oInnerDiv.innerHTML;
+  while(oInnerDiv.childNodes.hasOwnProperty(0)){
+    oInnerDiv.removeChild(oInnerDiv.childNodes[0]);
+  }
+  return answer;
+};
+const insertArrayOfNodes = (oElementToFill, aNodeFilling) => {
+  for (const key in aNodeFilling) {
+    if (aNodeFilling.hasOwnProperty(key))
+        oElementToFill.insertBefore(aNodeFilling[key], null);
+  }
+};
+
+const swapInnerDiv = (evt) => {
+  const aIncumbentInnerChildren = [];
+  cloneNonDivChildren(evt.target, aIncumbentInnerChildren);
+  deleteNonDivChildren(evt.target);
+  const sNewDivSiblings = removeDivInnerHtml(evt.target.childNodes[0]);
+  insertArrayOfNodes(evt.target.childNodes[0], aIncumbentInnerChildren);
+  evt.target.insertAdjacentHTML('afterbegin', sNewDivSiblings);
+};
 // const functions = {
 // hoverInnerDiv: (this)=> {
 // for(let el in this.childNodes){

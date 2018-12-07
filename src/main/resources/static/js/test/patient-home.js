@@ -30,6 +30,78 @@ const functions = {
         evt.target.parentElement.insertBefore(hoverParent, evt.target);
       }
     }
+  },
+  cloneNonDivChildren: (oDivParent, aNonDivChildNodes) => {
+    for(let el in oDivParent.childNodes){
+      if(oDivParent.childNodes.hasOwnProperty(el)){
+        if(`${oDivParent.childNodes[el]}` !== '[object HTMLDivElement]'){
+          if(`${oDivParent.childNodes[el]}`!='[object Text]' || oDivParent.childNodes[el].length>0){
+            aNonDivChildNodes[aNonDivChildNodes.length] = oDivParent.childNodes[el].cloneNode(true);
+          }
+        }
+      }
+    }
+  },
+  deleteNonDivChildren: (oDivParent) => {
+    let k = 0;
+    while(oDivParent.childNodes.hasOwnProperty(k)){
+      if(`${oDivParent.childNodes[k]}` === '[object HTMLDivElement]'){
+        k++;
+      } else {
+        oDivParent.removeChild(oDivParent.childNodes[k]);
+      }
+    }
+  },
+  removeDivInnerHtml: (oInnerDiv) => {
+    const answer = oInnerDiv.innerHTML;
+    while(oInnerDiv.childNodes.hasOwnProperty(0)){
+      oInnerDiv.removeChild(oInnerDiv.childNodes[0]);
+    }
+    return answer;
+  },
+  insertArrayOfNodes: (oElementToFill, aNodeFilling) => {
+    for (const key in aNodeFilling) {
+      if (aNodeFilling.hasOwnProperty(key))
+          oElementToFill.insertBefore(aNodeFilling[key], null);
+    }
   }
 }
+/*
+const swapInnerDiv = (evt) => {
+  let aNonDivchildNodes = [];
+  let sIncumbentDivInside = '';
+  let oOriginalDiv;
+  for(let el in evt.target.childNodes){
+    if(evt.target.childNodes.hasOwnProperty(el)){
+      if(evt.target.childNodes[el].toString() === '[object HTMLDivElement]'){
+        oOriginalDiv = evt.target.childNodes[el];
+        sIncumbentDivInside = oOriginalDiv.innerHTML;
+        for(let i in oOriginalDiv.childNodes){
+          if(oOriginalDiv.childNodes.hasOwnProperty(i)) oOriginalDiv.removeChild(oOriginalDiv.childNodes[i]);
+        }
+      } else {
+        if(`${evt.target.childNodes[el]}`!='[object Text]' || evt.target.childNodes[el].length>0){
+          aNonDivchildNodes[aNonDivchildNodes.length] = evt.target.childNodes[el].cloneNode(true);
+          evt.target.removeChild(evt.target.childNodes[el]);
+        }
+      }
+    }
+  }
+  if(oOriginalDiv!=null){
+    aNonDivchildNodes.forEach(
+      (value, index, array) => {
+        console.log(`IN foreach loop. value: ${value} and index: ${index}`);
+        if(`${value}`=='[object Text]'){
+          oOriginalDiv.insertAdjacentText('beforeend',value);
+        } else {
+          oOriginalDiv.insertBefore(value, null);
+        }
+      }
+    )
+    console.log(`Original Div was found and the collection of siblings iterated. The content of the original Div was ${sIncumbentDivInside}`);
+    evt.target.insertAdjacentHTML('insertafter', sIncumbentDivInside);
+  }
+  
+};
+*/
 module.exports = functions;

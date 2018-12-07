@@ -9,5 +9,7 @@ public interface PatientStatusRepository extends CrudRepository<PatientStatus, L
   Collection<PatientStatus> findByParentIdOrderByStatusDateTimeStampDesc(long id);
   
   PatientStatus findTop1ByParentIdOrderByStatusDateTimeStampDesc(long id);
+ 
+  Collection<PatientStatus> findTop3ByParentIdOrderByStatusDateTimeStampDesc(long id);
   
 }

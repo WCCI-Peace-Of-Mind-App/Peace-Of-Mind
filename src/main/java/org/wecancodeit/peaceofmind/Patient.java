@@ -42,6 +42,9 @@ public class Patient implements IPerson {
 
 	@OneToMany(mappedBy="parent")
 	private Collection<PatientStatus> statusHistory;
+	
+	@OneToMany(mappedBy="patient")
+	private Collection<Diary> diary; 
 
 	public long getId() {
 		return id;
@@ -79,6 +82,10 @@ public class Patient implements IPerson {
 	
 	public Collection<PatientStatus> getStatusHistory() {
 		return statusHistory;
+	}
+	
+	public Collection<Diary> getDiary() {
+		return diary; 
 	}
 
 	public Patient() {}

@@ -1,0 +1,75 @@
+* {
+  font-family: 'Raleway', sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #ebf5fa;
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
+  background-image: linear-gradient(to right,
+    #0f87c3,
+    #068bcd,
+    #49b9f2,
+    #49b9f2,
+    lightblue);
+}
+
+.logo {
+  display: flex;
+  text-align: left;
+  height: 3em;
+  justify-content: center;
+  background: transparent;
+}
+
+nav a {
+  display: flex;
+  padding: 0.5em;
+  text-align: right;
+  text-decoration: none;
+  color: #04496b;
+  background: transparent;
+}
+
+nav a:visited {
+  color: #04496b;
+  background: transparent;
+}
+
+nav a:hover {
+  opacity: 0.6;
+  background: transparent;
+}
+
+nav h2 {
+  background: transparent;
+}
+
+.dashboard {
+  height: 100%;
+  grid-gap: 5%;
+  padding: 5%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+header {
+  text-align: center;
+  text-decoration: underline;
+  padding-top: 2%;
+  color: #04496b;
+}
+
+
+
+
+footer {
+  text-align: center;
+  color: black;
+  padding-top: 15%;
+}

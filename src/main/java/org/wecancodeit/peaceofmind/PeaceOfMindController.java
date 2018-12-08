@@ -36,6 +36,9 @@ public class PeaceOfMindController {
 
 	@Resource
 	MedicationTrackerRepository medTrackerRepo;
+	
+	@Resource
+	DiaryRepository diaryRepo;
 
 	@RequestMapping("/patient")
 	public String returnPatient(@RequestParam(value = "id") long id, Model model) throws PatientNotFoundException {
@@ -66,6 +69,23 @@ public class PeaceOfMindController {
 
 		throw new PatientNotFoundException();
 
+	}
+	
+	@RequestMapping("/patient-diary")
+	public String returnPatientDiaryPage(@RequestParam(value = "id") long id, Model model) 	throws PatientNotFoundException {
+		Optional<Patient> patient = patientRepo.findById(id);
+		Collection<Diary> diaryEntries = diaryRepo.findAllByPatient(patient.get());
+
+		if (patient.isPresent()) {
+			model.addAttribute("patient", patient.get());
+			if (diaryEntries.size() > 0) {
+			model.addAttribute("diarys", diaryEntries);
+			}
+
+			return "patient-Diary";
+		}
+
+		throw new PatientNotFoundException();
 	}
 
 	@RequestMapping("/non-medical-user")

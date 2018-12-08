@@ -41,6 +41,9 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 	
 	@Resource
 	private MedicationTrackerRepository medTrackerRepo;
+	
+	@Resource
+	private DiaryRepository diaryRepo;
   
   @Resource
   private PatientStatusRepository patientStatusRepo;
@@ -107,6 +110,7 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		medTrackerRepo.save(new MedicationTracker(med8, pastDay, 1, 1));
 		medLogRepo.save(new MedicationLog(med12));
 		medLogRepo.save(new MedicationLog(med18));
+		diaryRepo.save(new Diary(pastDate, "Forgot tin foil cannot be microwaved", patient1));
 
 		
 		LocalDateTime time1 = LocalDateTime.of(2018, 12, 1, 8, 30);

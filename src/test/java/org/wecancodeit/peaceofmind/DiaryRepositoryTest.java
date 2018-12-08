@@ -80,7 +80,7 @@ public class DiaryRepositoryTest {
 	
 	@Test
 	public void shouldBeAbleToSearchForDiariesByDate() {
-		Collection<Diary> result = diaryRepo.findAllByDateTimeContains(dateTest);
+		Collection<Diary> result = diaryRepo.findAllByPatientAndDateTimeContains(patient, dateTest);
 		assertThat(result, contains(underTest));
 	}
 

@@ -8,7 +8,7 @@ public interface DiaryRepository extends CrudRepository<Diary, Long> {
 
 	Collection<Diary> findAllByPatient(Patient patient);
 
-	Collection<Diary> findAllByDateTimeContains(String date);
+	Collection<Diary> findAllByPatientAndDateTimeContains(Patient patient, String date);
 
 	
 }

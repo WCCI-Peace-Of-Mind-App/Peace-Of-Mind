@@ -2,97 +2,115 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>A Patient</title>
-  <link href="/css/patient-main-style.css" rel="stylesheet">
+	<title>A Patient</title>
+	<link href="/css/patient-main-style.css" rel="stylesheet">
+	<script type="text/javascript" src="/js/patient-home.js"></script>
+	<script>
+      const swapInnerDivTargetSelectors = [
+		  '.nonMedUser',
+		  '.medUser',
+		  '.userInfo'
+	  ];
+		document.addEventListener('readystatechange', (evt) => {
+			if (evt.target.readyState === 'complete') {
+			  swapInnerDivTargetSelectors.forEach((v, i, collection) => {
+                  document.querySelector(v).addEventListener(
+					  'click',
+					  swapInnerDiv.bind(document.querySelector(v), v)
+				  )
+			  });
+			}
+		})
+	</script>
 </head>
 
 <body class="container">
 
-  <nav>
-    <img class="logo" src="images/logo.png" alt="logo">
-    <h2>
-      <a th:href="@{/patient(id=${patient.id})}">Account</a>
-    </h2>
-  </nav>
+	<nav>
+		<img class="logo" src="images/logo.png" alt="logo">
+		<h2>
+			<a th:href="@{/patient(id=${patient.id})}">Account</a>
+		</h2>
+	</nav>
 
-  <div class="dashboard">
+	<div class="dashboard">
 
-    <section class="medication" th:if="${patient.medications}">
-      <img class="medicineIcon" src="images/medicine.png" alt="medication-icon">
-      <h2>
-        <a th:href="@{/my-medications(id=${patient.id})}">Medications</a>
-      </h2>
-    </section>
+		<section class="medication" th:if="${patient.medications}">
+			<img class="medicineIcon" src="images/medicine.png" alt="medication-icon">
+			<h2>
+				<a th:href="@{/my-medications(id=${patient.id})}">Medications</a>
+			</h2>
+		</section>
 
-    <input type="hidden" class="patient-id" name="patientId" th:value="${patient.id}"/>
-  
-    <section class="patientStatus">
-      <img class="emotionsIcon" src="images/emotions.png" alt="emotion-icon">
-      <h2>How are you feeling?</h2>
-      <div class="emotionalStatus">
-        <img class="emotionIndicator" src="images/happiness.png" alt="happy-icon">
-        <input type="radio" id="happy" name="currentStatus" value="happy" checked>
-        <img class="emotionIndicator" src="images/tearful.png" alt="sad-icon">
-        <input type="radio" id="sad" name="currentStatus" value="sad">
-        <img class="emotionIndicator" src="images/angry.png" alt="angry-icon">
-        <input type="radio" id="angry" name="currentStatus" value="angry">
-        <img class="emotionIndicator" src="images/confused.png" alt="confused-icon">
-        <input type="radio" id="confused" name="currentStatus" value="confused">
-        <button class="submit-status btn">Submit Status</button>
-      </div>
-    </section>
+		<section class="patientStatus">
+			<img class="emotionsIcon" src="images/emotions.png" alt="emotion-icon">
+			<h2>How are you feeling?</h2>
+			<div class="emotionalStatus">
+				<img class="emotionIndicator" src="images/happy.png" alt="happy-icon"> <img class="emotionIndicator" src="images/sad.png"
+				 alt="sad-icon"> <img class="emotionIndicator" src="images/angry.png" alt="angry-icon">
+				<img class="emotionIndicator" src="images/confused.png" alt="confused-icon">
+			</div>
+		</section>
 
-    <section class="nonMedUser" th:if="${patient.nonMedicalUser}">
-      <img class="nonMedIcon" src="images/Caregiver.png" alt="caregiver-icon">
-      <h2>Your Caregiver</h2>
-      <div class="nonMedUserInfo">
-        <h3>[[${patient.nonMedicalUser.firstName}]] [[${patient.nonMedicalUser.lastName}]]</h3>
-        <p>Contact</p>
-        <ul>
-          <li th:if="${patient.nonMedicalUser.contactInfo.address}">[[${patient.nonMedicalUser.contactInfo.address}]]</li>
-          <li th:if="${patient.nonMedicalUser.contactInfo.phone}">[[${patient.nonMedicalUser.contactInfo.phone}]]</li>
-          <li th:if="${patient.nonMedicalUser.contactInfo.email}">[[${patient.nonMedicalUser.contactInfo.email}]]</li>
-        </ul>
-      </div>
-    </section>
 
-    <section class="medUser" th:if="${patient.medicalUser}">
-      <img class="docIcon" src="images/doctor.png" alt="doctor-icon">
-      <h2>Medical Care Professional</h2>
-      <div class="medUserInfo">
-        <h3>[[${patient.medicalUser.firstName}]] [[${patient.medicalUser.lastName}]]</h3>
-        <p th:text=" 'Specialty: ' + (${patient.medicalUser.medicalSpecialty} ?: 'unknown')"></p>
-        <p th:text=" 'Institution: ' + (${patient.medicalUser.medicalInstitution} ?: 'unknown')"></p>
-        <p th:text=" 'Institution Phone: ' + (${patient.medicalUser.institutionTelephone} ?: 'unknown')"></p>
-        <p>Contact</p>
-        <ul>
-          <li th:if="${patient.medicalUser.contactInfo.phone}">[[${patient.medicalUser.contactInfo.phone}]]</li>
-          <li th:if="${patient.medicalUser.contactInfo.email}">[[${patient.medicalUser.contactInfo.email}]]</li>
-        </ul>
-      </div>
-    </section>
+		<section class="nonMedUser" th:if="${patient.nonMedicalUser}">
+			<img class="nonMedIcon" src="images/Caregiver.png" alt="caregiver-icon">
+			<h2>Your Caregiver</h2>
+			<div class="nonMedUserInfo">
+				<h3>[[${patient.nonMedicalUser.firstName}]]
+					[[${patient.nonMedicalUser.lastName}]]</h3>
+				<p>Contact</p>
+				<ul>
+					<li th:if="${patient.nonMedicalUser.contactInfo.address}">[[${patient.nonMedicalUser.contactInfo.address}]]</li>
+					<li th:if="${patient.nonMedicalUser.contactInfo.phone}">[[${patient.nonMedicalUser.contactInfo.phone}]]</li>
+					<li th:if="${patient.nonMedicalUser.contactInfo.email}">[[${patient.nonMedicalUser.contactInfo.email}]]</li>
+				</ul>
+			</div>
+		</section>
 
-    <section class="userInfo">
-      <img class="addressIcon" src="images/address.png" alt="address-icon">
-      <h2>Your Address</h2>
-      <div class="userInfo">
-        <p th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</p>
-      </div>
-    </section>
+		<section class="medUser" th:if="${patient.medicalUser}">
+			<img class="docIcon" src="images/doctor.png" alt="doctor-icon">
+			<h2>Medical Care Professional</h2>
+			<div class="medUserInfo">
+				<h3>[[${patient.medicalUser.firstName}]]
+					[[${patient.medicalUser.lastName}]]</h3>
+				<p th:text=" 'Specialty: ' + (${patient.medicalUser.medicalSpecialty} ?: 'unknown')"></p>
+				<p th:text=" 'Institution: ' + (${patient.medicalUser.medicalInstitution} ?: 'unknown')"></p>
+				<p th:text=" 'Institution Phone: ' + (${patient.medicalUser.institutionTelephone} ?: 'unknown')"></p>
+				<p>Contact</p>
+				<ul>
+					<li th:if="${patient.medicalUser.contactInfo.phone}">[[${patient.medicalUser.contactInfo.phone}]]</li>
+					<li th:if="${patient.medicalUser.contactInfo.email}">[[${patient.medicalUser.contactInfo.email}]]</li>
+				</ul>
+			</div>
+		</section>
 
-    <section class="diary">
-      <img class="diaryIcon" src="images/diary.png" alt="diary-icon">
-      <h2>Your Diary</h2>
-      <div class="diary">
-        <p><em>placeholder</em></p>
-      </div>
-    </section>
+		<section class="userInfo">
+			<img class="addressIcon" src="images/address.png" alt="address-icon">
+			<h2>Your Address</h2>
+			<div class="userInfo">
+			<address>
+				<p th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</p>
+			</address>	
+			</div>
+		</section>
 
-  </div>
+		<section class="diary">
+			<img class="diaryIcon" src="images/diary.png" alt="diary-icon">
+			<h2>Your Diary</h2>
+			<div class="diary">
+				<p>
+					<em>placeholder</em>
+				</p>
+			</div>
+		</section>
 
-  <footer>
-    <small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>
-  </footer>
+	</div>
+
+	<footer>
+		<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final
+			project</small>
+	</footer>
 
   <script src="./js/add-status.js"></script>
 

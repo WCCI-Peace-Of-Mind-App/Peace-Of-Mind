@@ -2,13 +2,15 @@
   "name": "test",
   "version": "1.0.0",
   "description": "",
-  "main": "patient-home.js",
+
+  "main": "index.js",
+  "jest": {
+  "verbose": true
+  },
   "scripts": {
     "test": "jest"
   },
-  "jest": {
-    "verbose": true
-  },
+
   "keywords": [],
   "author": "",
   "license": "ISC",

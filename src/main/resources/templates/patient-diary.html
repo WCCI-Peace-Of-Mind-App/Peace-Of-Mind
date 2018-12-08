@@ -17,7 +17,7 @@
   <header>
     <h2>My Diary</h2>
   </header>
-<div class="container">
+<div class="dashboard">
 
   <form method="POST">
     <div>
@@ -28,7 +28,7 @@
       <input type="hidden" th:value="${patient.id}" name="patientId"/>
     </div>
     <div>
-      <button th:formaction="@{add-diaryEntry}">add Entry</button> </div>
+      <button th:formaction="@{add-diaryEntry}">Add Entry</button> </div>
   </form>
 
   <div class="past-entries" th:if="${diarys}">
@@ -41,7 +41,6 @@
     </div>
 
   </div>
-
 </div>
   <footer>
     <small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>

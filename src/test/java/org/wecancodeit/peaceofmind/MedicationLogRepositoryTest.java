@@ -2,13 +2,11 @@ package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -44,13 +42,12 @@ public class MedicationLogRepositoryTest {
 	long medLogId;
 	
 	DateTimeFormatter yyyymmddmmhh = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");  
-	DateTimeFormatter yyyymmdd = DateTimeFormatter.ofPattern("yyyy/MM/dd"); 	
 
 
 	@Before
 	public void setUp() {
 		Medication testMed = medRepo
-				.save(new Medication("Chocolate Frog", "1 frog", AdministrationEnum.ORAL, 1, doseFrequencyTimeEnum.Daily, "img.jpg", "good spirits"));
+				.save(new Medication("Chocolate Frog", "1 frog", "oral", 1, "daily", "img.jpg", "good spirits"));
 
 		underTest = medLogRepo.save(new MedicationLog(testMed));
 		medLogId = underTest.getId();
@@ -86,15 +83,6 @@ public class MedicationLogRepositoryTest {
 		assertThat(result, not(pastDateTime));
 	}
 	
-	
-	@Test
-	public void shouldBeAbleToFindByDate() {
-		String date = LocalDateTime.now().format(yyyymmdd);
-		
-		Collection<MedicationLog> medLogs = medLogRepo.findAllByDateTimeContains(date);
-		
-		assertThat(medLogs, contains(underTest));
-	}
 	
 	
 	

@@ -37,7 +37,6 @@ public class PatientRepositoryTest {
 	Patient patient2;
 	long patientId;
 	MedicalUser medUser;
-	long medUserId;
 	
 	@Before
 	public void setUp() {
@@ -49,7 +48,6 @@ public class PatientRepositoryTest {
 		patient2 = patientRepo.save(new Patient(null, null, contactInfo2, null, null, null));
 		
 		medUser = medUserRepo.save(new MedicalUser("Otto", "Octavius", null, "Therapist", "Ohio State Med", "911", "docOc", "tentacles8", patient));
-		medUserId = medUser.getId();
 		
 		entity.flush();
 		entity.clear();
@@ -83,10 +81,5 @@ public class PatientRepositoryTest {
 
 	}
 	
-	@Test
-	public void shouldFindPatientFromMedUserId() {
-		Patient underTest = patientRepo.findByMedicalUserId(medUserId);
-		assertThat(underTest, is(patient));
-	}
 
 }

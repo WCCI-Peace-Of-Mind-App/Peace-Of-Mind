@@ -1,7 +1,6 @@
 package org.wecancodeit.peaceofmind;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,12 +39,6 @@ public class PatientStatus {
   public LocalDateTime getDateTime()
   {
     return this.statusDateTimeStamp;
-  }
-  
-  public String printDateTime() {
-	  DateTimeFormatter yyyymmddhhmm = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-
-	  return statusDateTimeStamp.format(yyyymmddhhmm);
   }
 
   public PatientStatusEnum getStatus()

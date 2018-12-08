@@ -14,7 +14,7 @@ public class PatientStatusTest {
   {
     // assemble
     LocalDateTime dtExpected = LocalDateTime.now();
-    PatientStatusEnum statusExpected = PatientStatusEnum.SAD;
+    PatientStatusEnum statusExpected = PatientStatusEnum.NOTWELL;
     PatientStatus psTested = new PatientStatus(statusExpected, dtExpected, new Patient());
     // action
     
@@ -27,7 +27,7 @@ public class PatientStatusTest {
   public void assertGetWellStatusMatches()
   {
     // assemble
-    PatientStatusEnum statusExpected = PatientStatusEnum.HAPPY;
+    PatientStatusEnum statusExpected = PatientStatusEnum.WELL;
     PatientStatus psTested = new PatientStatus(statusExpected, new Patient());
     // action
     // assert

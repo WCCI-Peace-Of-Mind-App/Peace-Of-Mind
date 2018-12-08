@@ -25,7 +25,5 @@
 /nbdist/
 /.nb-gradle/
 /bin
-
-### NPM ###
 /src/main/resources/static/js/test/node_modules
 /node_modules

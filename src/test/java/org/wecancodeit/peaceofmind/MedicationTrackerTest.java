@@ -20,7 +20,7 @@ public class MedicationTrackerTest {
 	@Before
 	public void setUp() {
 		
-		testMed = new Medication("Chocolate Frog", "1 frog", AdministrationEnum.ORAL, 1, doseFrequencyTimeEnum.Daily, "img.jpg", "good spirits");
+		testMed = new Medication("Chocolate Frog", "1 frog", "oral", 1, "daily", "img.jpg", "good spirits");
 		
 		date = LocalDateTime.now().format(yyyymmdd);
 		

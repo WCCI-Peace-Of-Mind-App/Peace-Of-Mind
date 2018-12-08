@@ -4,7 +4,6 @@
 <head>
   <title>Peace Of Mind</title>
   <link href="/css/non-med-styles.css" rel="stylesheet">
-  <link href="/css/status-history.css" rel="stylesheet">
 </head>
 
 <body class="container">
@@ -13,68 +12,47 @@
         <img class="logo" src="images/logo.png" alt="logo">
         <h2>
             <a th:href="@{/medical-user(id=${medicalUser.id})}">Account</a>
-
+  
         </h2>
       </nav>
     </header>
 
-    <div class="dashboard">
     <h3>Your Dashboard</h3>
 
-  <h4>Your Patient:</h4>
-  <div th:if="${medicalUser.patient}">
+  <h4>Your Patients:</h4>
+  <div th:if="${medicalUser.patient}" th:each="patient : ${medicalUser.patient}">
     <p> [[${patient.firstName}]] [[${patient.lastName}]] </p>
     <p>Diagnosis: <span th:text="${patient.diagnosis}"></span></p>
 
     <section class="medLog">
-      <h3>Medication Adherence</h3>
-      <p>This Month</p>
-      <section class="medAdherenceDash" th:if="${medications}">
-        <div class="medStatus" th:each="medication : ${medications}">
-            <img th:src=${medication.adherentThisMonth}>
-            <h4><p id="medName" th:text=${medication.genericName}></p></h4>
-        </div>
-      </section>
-              <a th:href="@{/med-tracker-history-med(id=${patient.id})}">Full Adherence History</a>
+      <h3>Med Log</h3>
+      <div>
+        <p> <em>place holder for medlog display</em> </p>
+      </div>
     </section>
 
-
-		<input class="id" type="hidden" name="id" th:value="${patient.id}">
-    <section class="patientStatus" th:if="${status.id}">
-      <div class="statusChange">
-				<h3>Current Patient Status</h3>
-				<img th:src="@{'images/' + ${status.status.getImageFile()}}">
-				<p>Entered at [[${status.printDateTime()}]]</p>
-				<p>Would you like to view the status history?</p>
-			</div>
-			<button class="show-one" type="submit" value="submit">Show One</button>
-			<button class="show-three" type="submit" value="submit">View Status History</button>
-			<button class="show-all" type="submit" value="submit">Show All</button>
+    <section class="patientStatus">
+      <h3>Current Patient Status</h3>
+      <p><em>placeholder!!!!</em></p>
     </section>
 
     <section class="medication-info">
 
-      <h3>Medication Details:</h3>
+      <p>Medication Details:</p>
       <div th:if="${patient.medications}">
         <ul>
           <div th:each="medication : ${patient.medications}">
-            <br/>
-            <h4>[[${medication.genericName}]]</h4>
+            <li>[[${medication.genericName}]]</li>
             <p>Reason for administration: [[${medication.reason}]]</p>
             <p>Dosage: [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
           </div>
         </ul>
       </div>
-      <br/>
-      <form method="post">
-        <p>Would you like to add a new medication to this patient?</p>
-        <button class="btn meds-btn" type="submit" value="submit" id="btn-add-med" th:formaction="@{|/add-medication/${patient.id}/${medicalUser.id}|}">Add Medication</button>
-      </form>
     </section>
 
     <section class="patient-contactinfo">
       <div>
-        <h3>Contact Information:</h3>
+        <p>Contact Information:</p>
         <ul>
           <li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
           <li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>
@@ -96,13 +74,9 @@
       </div>
     </div>
   </div>
-</div>
-
   <footer>
     <span>&copy; Peace of Mind WCCI Final project</span>
   </footer>
-
-  <script src="./js/show-statuses.js"></script>
 </body>
 
 </html>

@@ -19,7 +19,6 @@ test('expected body of text',
         const sReplacement = '><';
         expect(document.body.innerHTML.replace(sPattern, sReplacement)).toBe(expectedInnerHTML.replace(sPattern, sReplacement));
     }
-
 )*/
 
 document.body.insertAdjacentHTML('beforeend', '<section class="nonMedUser"><img class="nonMedIcon" src="images/Caregiver.png" alt="caregiver-icon"><h2>Your Caregiver</h2><div class="nonMedUserInfo"><h3>first_name last_name</h3><p>Contact</p><ul><li >[[${patient.nonMedicalUser.contactInfo.address}]]</li><li>[[${patient.nonMedicalUser.contactInfo.phone}]]</li><li>[[${patient.nonMedicalUser.contactInfo.email}]]</li></ul></div></section>');
@@ -72,3 +71,31 @@ test(
     expect(oSectionToAddNonMedSiblings.outerHTML.concat('')).toBe(sExpectedFinalHtml);
   }
 )
+const sExpectedHtmlWithDataFor = '<section class="nonMedUser"><h3>first_name last_name</h3><p>Contact</p><ul><li>[[${patient.nonMedicalUser.contactInfo.address}]]</li><li>[[${patient.nonMedicalUser.contactInfo.phone}]]</li><li>[[${patient.nonMedicalUser.contactInfo.email}]]</li></ul><div class="nonMedUserInfo"><img class="nonMedIcon" src="images/Caregiver.png" alt="caregiver-icon"><h2 data-forcontainerselector=".nonMedUser">Your Caregiver</h2></div></section>';
+test(
+  'Assert click on Section gives desired HTML when swapInnerDiv is attached',
+  () => {
+    const oSection = document.createElement('section');
+    oSection.classList.add('nonMedUser');
+    oSection.innerHTML = '<img class="nonMedIcon" src="images/Caregiver.png" alt="caregiver-icon"><h2 data-forcontainerselector=".nonMedUser">Your Caregiver</h2><div class="nonMedUserInfo"><h3>first_name last_name</h3><p>Contact</p><ul><li >[[${patient.nonMedicalUser.contactInfo.address}]]</li><li>[[${patient.nonMedicalUser.contactInfo.phone}]]</li><li>[[${patient.nonMedicalUser.contactInfo.email}]]</li></ul></div>';
+    oSection.addEventListener('click', functions.swapInnerDiv.bind(oSection, '.nonMedUser'));
+    oSection.click();
+    expect(oSection.outerHTML.concat('')).toBe(sExpectedHtmlWithDataFor);
+  }
+);
+test(
+    'Assert click on text gives desired HTML when swapInnerDiv is attached',
+    () => {
+      const oSection = document.createElement('section');
+      oSection.classList.add('nonMedUser');
+      const oText = document.createElement('h2');
+      oText.innerText = 'Your Caregiver';
+      oText.setAttribute('data-forContainerSelector', '.nonMedUser');
+      oSection.appendChild(oText);
+      oSection.insertAdjacentHTML('afterbegin', '<img class="nonMedIcon" src="images/Caregiver.png" alt="caregiver-icon">');
+      oSection.insertAdjacentHTML('beforeend', '<div class="nonMedUserInfo"><h3>first_name last_name</h3><p>Contact</p><ul><li>[[${patient.nonMedicalUser.contactInfo.address}]]</li><li>[[${patient.nonMedicalUser.contactInfo.phone}]]</li><li>[[${patient.nonMedicalUser.contactInfo.email}]]</li></ul></div>');
+      oSection.addEventListener('click', functions.swapInnerDiv.bind(oSection, '.nonMedUser'));
+      oText.click();
+      expect(oSection.outerHTML.concat('')).toBe(sExpectedHtmlWithDataFor);
+    }
+  );

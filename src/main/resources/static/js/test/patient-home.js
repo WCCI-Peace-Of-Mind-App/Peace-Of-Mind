@@ -64,7 +64,24 @@ const functions = {
       if (aNodeFilling.hasOwnProperty(key))
           oElementToFill.insertBefore(aNodeFilling[key], null);
     }
+  },swapInnerDiv: function(evt, selector) {
+    let oContainer;
+    for (const iterator in this) {
+      if(this.hasOwnProperty(iterator))
+          console.log(`In swapInnerDiv this is ${this} and key ${iterator} points to ${this[iterator]}`); 
+    }
+    oContainer = document.querySelector(selector);
+    if(/*oContainer && oContainer.hasOwnProperty('childNodes') &&*/ oContainer.childNodes.length>0){
+      evt.cancelBubble = true;
+      const aIncumbentInnerChildren = [];
+      functions.cloneNonDivChildren(evt.target, aIncumbentInnerChildren);
+      functions.deleteNonDivChildren(evt.target);
+      const sNewDivSiblings = functions.removeDivInnerHtml(evt.target.childNodes[0]);
+      functions.insertArrayOfNodes(evt.target.childNodes[0], aIncumbentInnerChildren);
+      evt.target.insertAdjacentHTML('afterbegin', sNewDivSiblings);
+    }
   }
+
 }
 /*
 const swapInnerDiv = (evt) => {

@@ -6,18 +6,19 @@
 	<link href="/css/patient-main-style.css" rel="stylesheet">
 	<script type="text/javascript" src="/js/patient-home.js"></script>
 	<script>
-
+      const swapInnerDivTargetSelectors = [
+		  '.nonMedUser',
+		  '.medUser',
+		  '.userInfo'
+	  ];
 		document.addEventListener('readystatechange', (evt) => {
 			if (evt.target.readyState === 'complete') {
-				const test = document.querySelector('.nonMedUser');
-				const test1 = document.querySelector('.medUser');
-				const test2 = document.querySelector('.userInfo');
-				test.addEventListener(
-					'click', hoverInnerDiv.bind(test));
-				test1.addEventListener(
-					'click', hoverInnerDiv.bind(test1));
-				test2.addEventListener(
-					'click', hoverInnerDiv.bind(test2));
+			  swapInnerDivTargetSelectors.forEach((v, i, collection) => {
+                  document.querySelector(v).addEventListener(
+					  'click',
+					  swapInnerDiv.bind(document.querySelector(v), v)
+				  )
+			  });
 			}
 		})
 	</script>

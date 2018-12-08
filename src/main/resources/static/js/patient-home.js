@@ -49,14 +49,19 @@ const insertArrayOfNodes = (oElementToFill, aNodeFilling) => {
   }
 };
 
-const swapInnerDiv = (evt) => {
-  const aIncumbentInnerChildren = [];
-  cloneNonDivChildren(evt.target, aIncumbentInnerChildren);
-  deleteNonDivChildren(evt.target);
-  const sNewDivSiblings = removeDivInnerHtml(evt.target.childNodes[0]);
-  insertArrayOfNodes(evt.target.childNodes[0], aIncumbentInnerChildren);
-  evt.target.insertAdjacentHTML('afterbegin', sNewDivSiblings);
-};
+const swapInnerDiv = (selector, evt) => {
+  let oContainer;
+  oContainer = document.querySelector(selector);
+  if(oContainer && oContainer.childNodes && oContainer.childNodes.length>0){
+    evt.cancelBubble = true;
+    const aIncumbentInnerChildren = [];
+    cloneNonDivChildren(oContainer, aIncumbentInnerChildren);
+    deleteNonDivChildren(oContainer);
+    const sNewDivSiblings = removeDivInnerHtml(oContainer.childNodes[0]);
+    insertArrayOfNodes(oContainer.childNodes[0], aIncumbentInnerChildren);
+    oContainer.insertAdjacentHTML('afterbegin', sNewDivSiblings);
+  }
+}
 // const functions = {
 // hoverInnerDiv: (this)=> {
 // for(let el in this.childNodes){

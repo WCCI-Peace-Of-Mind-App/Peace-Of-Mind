@@ -139,7 +139,7 @@ footer {
 	color: black;
 }
 
-.medUser.hover {
+/* .medUser.hover {
 	position: fixed;
 	display: block;
 	width: 100%;
@@ -148,12 +148,13 @@ footer {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5);
+	color: blue;
+	background-color: rgba(0, 0, 0, 0.5); 
 	z-index: 2;
 	cursor: pointer;
-}
+} */
 
-.medUser.hover .medUserInfo {
+/* .medUser.hover .medUserInfo {
 	position: absolute;
 	overflow: visible;
 	top: 50%;
@@ -163,8 +164,8 @@ footer {
 	color: blue;
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
-}
-.nonMedUser.hover {
+} */
+/* .nonMedUser.hover {
 	position: fixed;
 	display: block;
 	width: 100%;
@@ -173,12 +174,13 @@ footer {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5);
+	color: blue;
+	background-color: rgba(0, 0, 0, 0.5); 
 	z-index: 2;
 	cursor: pointer;
-}
+} */
 
-.nonMedUser.hover .nonMedUserInfo {
+/* .nonMedUser.hover .nonMedUserInfo {
 	position: absolute;
 	overflow: visible;
 	top: 50%;
@@ -188,8 +190,8 @@ footer {
 	color: blue;
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
-}
-.userInfo.hover {
+} */
+/* .userInfo.hover {
 	position: fixed;
 	display: block;
 	width: 100%;
@@ -198,12 +200,13 @@ footer {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5);
+	color: blue;
+	background-color: rgba(0, 0, 0, 0.5); 
 	z-index: 2;
 	cursor: pointer;
-}
+} */
 
-.userInfo.hover .userInfo {
+/* .userInfo.hover .userInfo {
 	position: absolute;
 	overflow: visible;
 	top: 50%;
@@ -213,4 +216,13 @@ footer {
 	color: blue;
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
+} */
+
+.medUser li, .nonMedUser li, userInfo li {
+	visibility: visible;
 }
+
+section p, section h3, section ul, section li, section address {
+	background: transparent;
+}
+

@@ -3,7 +3,6 @@ const newMedication = document.querySelector(".new-medication");
 const id = document.querySelector("#id").value;
 const drugName = document.querySelector("#name");
 const dosage = document.querySelector("#dosage");
-const administration = document.querySelector("#administration");
 const amount = document.querySelector("#amount");
 const picture = document.querySelector("#picture");
 const reason = document.querySelector("#reason");
@@ -36,7 +35,7 @@ function textIsNumber(textbox) {
 }
 
 function validateTextData() {
-    return (textHasValue(drugName) && textHasValue(dosage) && textHasValue(administration) && textHasValue(reason));
+    return (textHasValue(drugName) && textHasValue(dosage) && textHasValue(reason));
 }
 
 function validateAllData() {
@@ -64,7 +63,6 @@ function displayMessage(textToPost) {
 function clearEntryFields() {
     drugName.value="";
     dosage.value="";
-    administration.value="";
     amount.value="";
     reason.value="";
 }
@@ -73,19 +71,19 @@ function changeCaseOfText(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-function submitMedication(id, drugName, dosage, administration, amount, picture, reason) {
+function submitMedication(id, drugName, dosage, amount, picture, reason) {
     let frequencyTime = document.querySelector('input[name="frequencyTime"]:checked').value;
-    let value1 = changeCaseOfText(drugName.value);
-    let value2 = changeCaseOfText(dosage.value);
-    let value3 = changeCaseOfText(administration.value);
-    let value4 = changeCaseOfText(amount.value);
-    let value5 = changeCaseOfText(reason.value);
-    postMedication(id, value1, value2, value3, value4, frequencyTime, picture.value, value5);
+    let administration = document.querySelector('input[name="administration"]:checked').value;
+    let value2 = changeCaseOfText(drugName.value);
+    let value3 = changeCaseOfText(dosage.value);
+    let value5 = changeCaseOfText(amount.value);
+    let value8 = changeCaseOfText(reason.value);
+    postMedication(id, value2, value3, administration, value5, frequencyTime, picture.value, value8);
 }
 
 submitMed.addEventListener('click', function() {
     if(validateAllData()) {
-        submitMedication(id, drugName, dosage, administration, amount, picture, reason);
+        submitMedication(id, drugName, dosage, amount, picture, reason);
         clearEntryFields();
         showThenHideMessage();
     } else if (!(validateTextData())) {

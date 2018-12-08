@@ -12,7 +12,7 @@ public class MedicationTest {
 	
 	@Before
 	public void setUp() {
-	underTest = new Medication("drug", "2 pills", "oral", 2, doseFrequencyTimeEnum.Daily, "aaa.jpg", "placebo");	
+	underTest = new Medication("drug", "2 pills", AdministrationEnum.ORAL, 2, doseFrequencyTimeEnum.Daily, "aaa.jpg", "placebo");	
 	}
 
 	@Test
@@ -29,8 +29,8 @@ public class MedicationTest {
 	
 	@Test
 	public void shouldHaveAnAdministration() {
-		String result = underTest.getAdministration();
-		assertThat(result, is("oral"));
+		AdministrationEnum result = underTest.getAdministration();
+		assertThat(result, is(AdministrationEnum.ORAL));
 	}
 	
 	@Test

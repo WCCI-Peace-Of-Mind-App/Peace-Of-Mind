@@ -69,10 +69,23 @@ function clearEntryFields() {
     reason.value="";
 }
 
+function changeCaseOfText(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function submitMedication(id, drugName, dosage, administration, amount, picture, reason) {
+    let frequencyTime = document.querySelector('input[name="frequencyTime"]:checked').value;
+    let value1 = changeCaseOfText(drugName.value);
+    let value2 = changeCaseOfText(dosage.value);
+    let value3 = changeCaseOfText(administration.value);
+    let value4 = changeCaseOfText(amount.value);
+    let value5 = changeCaseOfText(reason.value);
+    postMedication(id, value1, value2, value3, value4, frequencyTime, picture.value, value5);
+}
+
 submitMed.addEventListener('click', function() {
     if(validateAllData()) {
-        let frequencyTime = document.querySelector('input[name="frequencyTime"]:checked').value;
-        postMedication(id, drugName.value, dosage.value, administration.value, amount.value, frequencyTime, picture.value, reason.value);
+        submitMedication(id, drugName, dosage, administration, amount, picture, reason);
         clearEntryFields();
         showThenHideMessage();
     } else if (!(validateTextData())) {

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Patient-Diary</title>
+  <link href="/css/diary-style.css" rel="stylesheet">
+</head>
+
+<body class="container">
+
+  <nav>
+    <img class="logo" src="images/logo.png" alt="logo">
+    <h2>
+      <a th:href="@{/patient-home(id=${patient.id})}">Home</a>
+    </h2>
+  </nav>
+  <header>
+    <h2>My Diary</h2>
+  </header>
+<div class="dashboard">
+
+  <form method="POST">
+    <div>
+      <label>What's on your mind?:</label>
+      <input type="text" name="entryText" />
+    </div>
+    <div>
+      <input type="hidden" th:value="${patient.id}" name="patientId"/>
+    </div>
+    <div>
+      <button th:formaction="@{add-diaryEntry}">Add Entry</button> </div>
+  </form>
+
+  <div class="past-entries" th:if="${diarys}">
+
+    <div class="past-entries" th:each="diary : ${diarys}">
+      <section class="entry">
+        <p th:text=${diary.dateTime}></p>
+        <p th:text=${diary.entryText}></p>
+      </section>
+    </div>
+
+  </div>
+</div>
+  <footer>
+    <small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>
+  </footer>
+
+</body>
+
+</html>

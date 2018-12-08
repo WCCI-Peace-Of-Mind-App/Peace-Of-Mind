@@ -90,10 +90,6 @@ section {
   background: transparent;
 }
 
-med-button {
-
-}
-
 .log-medication button {
   background: transparent;
   height: 2em;
@@ -104,6 +100,9 @@ med-button {
   padding: 2%;
   outline: transparent;
   text-align: center;
+  line-height: 0;
+  font-weight: bold;
+  margin-bottom: .5em;
 }
 
 .log-medication button:hover {
@@ -124,4 +123,9 @@ footer {
   text-align: center;
   color: black;
   padding-top: 15%;
+}
+
+.notification {
+  text-align: center;
+  margin-top: 1em;
 }

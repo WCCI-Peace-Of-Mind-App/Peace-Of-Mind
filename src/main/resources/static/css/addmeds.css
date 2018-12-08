@@ -1,4 +1,9 @@
-.text, .time, .reason, .new-medication {
+.inputs {
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+.text, .time, .administration, .reason, .new-medication {
     padding: .4em;
 }
 
@@ -6,6 +11,10 @@
     width: 332px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.textbox {
+    background-color: #f9fbfd;
 }
 
 .drugname .textbox {
@@ -18,4 +27,42 @@
 
 .amount .textbox {
     width: calc(100% - 152px);
+}
+
+.administration p {
+    display: inline-block;
+}
+
+.administration label,
+.time label {
+    font-style: italic;
+}
+
+.picture {
+    display: none;
+}
+
+button {
+    background: transparent;
+    height: 2em;
+    border: none;
+    background-image: linear-gradient(#0f87c3, #068bcd 0%, #49b9f2 100%);
+    font-size: medium;
+    border-radius: 10px;
+    padding: 1.5%;
+    outline: transparent;
+    text-align: center;
+    line-height: 0;
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+  
+button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 20px rgba(169, 201, 255, .6);
+}
+
+.new-medication {
+    font-weight: bold;
+    font-style: italic;
 }

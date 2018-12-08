@@ -22,25 +22,25 @@
 
         <h3>Add a New Medication for [[${patient.firstName}]] [[${patient.lastName}]]</h3>
 
-        <input type="hidden" id="id" name="id" th:value="${patient.id}">
-        
-        <div class="text">
-            <div class="drugname">
-                <label for="name">Drug Name</label>
-                <input class="textbox" type="text" id="name" name="genericName">
+        <div class="inputs">
+            <input type="hidden" id="id" name="id" th:value="${patient.id}">
+            
+            <div class="text">
+                <div class="drugname">
+                    <label for="name">Drug Name</label>
+                    <input class="textbox" type="text" id="name" name="genericName">
+                </div>
             </div>
-        </div>
-
-        <div class="text">
-            <div class="dosage">
-                <label for="dosage">Dosage</label>
-                <input class="textbox" type="text" id="dosage" name="dosage">    
+    
+            <div class="text">
+                <div class="dosage">
+                    <label for="dosage">Dosage</label>
+                    <input class="textbox" type="text" id="dosage" name="dosage">    
+                </div>
             </div>
-        </div>
-
-        <div class="text">
+            
             <div class="administration">
-                <p>Method Of Administration</p>
+                <p>Method Of Administration: </p>
                 <label for="oral">Oral</label>
                 <input class="administration" type="radio" id="oral" name="administration" value="oral" checked>
                 <label for="inhaler">Inhaler</label>
@@ -48,46 +48,51 @@
                 <label for="injection">Injection</label>
                 <input class="administration" type="radio" id="injection" name="administration" value="injection">
             </div>
-        </div>
-
-
-        <div class="text">
-            <div class="amount">
-                <label for="amount">Frequency Amount</label>
-                <input class="textbox" type="text" id="amount" name="frequencyAmount">
+            
+            <div class="text">
+                <div class="amount">
+                    <label for="amount">Frequency Amount</label>
+                    <input class="textbox" type="text" id="amount" name="frequencyAmount">
+                </div>
+            </div>
+    
+    
+            <div class="time">
+                <p>How frequently should the patient take the medication?</p>
+                <label for="daily">Daily</label>
+                <input class="time" type="radio" id="daily" name="frequencyTime" value="daily" checked>
+                <label for="weekly">Weekly</label>
+                <input class="time" type="radio" id="weely" name="frequencyTime" value="weekly">
+                <label for="monthly">Monthly</label>
+                <input class="time" type="radio" id="monthly" name="frequencyTime" value="monthly">
+                <label for="needed">As Needed</label>
+                <input class="time" type="radio" id="needed" name="frequencyTime" value="needed">
+            </div>
+    
+            
+            <div class="reason">
+                <label for="reason">Why does the patient take the drug?</label>
+                <input class="textbox" type="text" id="reason" name="reason">
+            </div>
+            
+            <div class="picture">
+                <input class="picture" type="hidden" id="picture" name="picture" value="na">
             </div>
         </div>
+            
 
-
-        <div class="time">
-            <p>How frequently should the patient take the medication?</p>
-            <label for="daily">Daily</label>
-            <input class="time" type="radio" id="daily" name="frequencyTime" value="daily" checked>
-            <label for="weekly">Weekly</label>
-            <input class="time" type="radio" id="weely" name="frequencyTime" value="weekly">
-            <label for="monthly">Monthly</label>
-            <input class="time" type="radio" id="monthly" name="frequencyTime" value="monthly">
-            <label for="needed">As Needed</label>
-            <input class="time" type="radio" id="needed" name="frequencyTime" value="needed">
-        </div>
-
-        
-        <div class="reason">
-            <label for="reason">Why does the patient take the drug?</label>
-            <input class="textbox" type="text" id="reason" name="reason">
-        </div>
-        
         <button class="submit-btn btn">Submit</button>
         
-        <div class="picture">
-            <input class="picture" type="hidden" id="picture" name="picture" value="na">
-        </div>
-
         <div class="new-medication">
 
         </div>
 
     </div>
+
+    <footer>
+        <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>
+    </footer>
+        
     <script src="../../js/add-meds.js"></script>
 </body>
 </html>

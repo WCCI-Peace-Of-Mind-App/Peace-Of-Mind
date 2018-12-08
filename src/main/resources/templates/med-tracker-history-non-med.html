@@ -3,7 +3,7 @@
 
 <head>
 	<title>Peace Of Mind</title>
-	<link href="/css/med-hist-style.css" rel="stylesheet">
+	<link href="/css/non-med-styles.css" rel="stylesheet">
 </head>
 
 <body class="container">
@@ -20,17 +20,16 @@
 
 	<div class="dashboard" th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
 
-<h1> Medication Adherence History </h1>
 
 		<section class="medTracker" th:if="${medicationTrackers}">
+			<h3>Medication Adherence</h3>
+			<p>This Year</p>
 
 			<div th:each="medTracker : ${medicationTrackers}">
 				<p th:text=${medTracker.date}></p>
 				<p th:text=${medTracker.medication.genericName}></p>
 				<p>[[${medTracker.dosesMissed}]] doses missed</p>
-					<br>
 			</div>
-
 		</section>
 
 	</div>

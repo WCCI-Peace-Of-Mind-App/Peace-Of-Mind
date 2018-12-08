@@ -6,5 +6,7 @@ public enum AdministrationEnum {
 	INHALER,
 	INJECTION;
 	
-
+	public String toString() {
+		return name().toLowerCase();
+	}
 }

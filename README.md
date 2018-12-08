@@ -1,10 +1,12 @@
 # Peace Of Mind
 
 Peace of Mind is a final project for the WeCanCodeIT! Bootcamp located in Columbus, OH.
+
 The Application is meant to function as an aid for individuals in the early stages of Alzheimer's or Dementia
 to help them track their medications and their emotions day-to-day, as well as provide a centralized Dashboard
 with quick access to information such as their emergency contact, their home address and their medical care
 professional to help give them some autonomy.
+
 It also features linked accounts for the patient's caregiver(emergency contact) and medical care professional
 where they will be able to quickly review their patient's adherence to their medications and view their most
 recent logged emotional status. Giving them the ability to assist without needing to maintain an oppressive

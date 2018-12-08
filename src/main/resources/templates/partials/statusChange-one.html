@@ -1,4 +1,4 @@
 <h3>Current Patient Status</h3>
 <img th:if="${status.status}" th:src="@{'images/' + ${status.status.getImageFile()}}">
 <p>Entered at [[${status.printDateTime()}]]</p>
-<p>Would you like to view the status history?</p>
+<p class="history-question">Would you like to view the status history?</p>

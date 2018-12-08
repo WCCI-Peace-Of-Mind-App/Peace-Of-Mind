@@ -26,11 +26,11 @@ import the project into your local IDE (we used Eclipse), and start up the appli
 
 ## Authors
 
-* **Todd Kenzie** - (https://github.com/ToddKenzie)
-* **Macharia Kuria** - (https://github.com/MachariaKuria)
-* **Michael Mosher** - (https://github.com/Michael-Mosher)
-* **Izzy Elwyn** - (https://github.com/IzzyElwyn)
+* [Todd Kenzie](https://github.com/ToddKenzie)
+* [Macharia Kuria](https://github.com/MachariaKuria)
+* [Michael Mosher](https://github.com/Michael-Mosher)
+* [Izzy Elwyn](https://github.com/IzzyElwyn)
 
 ## Acknowledgments
 
-* WeCanCodeIT (https://github.com/WeCanCodeIT)
+* [WeCanCodeIT](https://github.com/WeCanCodeIT)

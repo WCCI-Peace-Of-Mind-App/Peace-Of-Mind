@@ -13,6 +13,7 @@
         ).then(
           (text) => {
             evt.target.parentElement.insertAdjacentHTML(`beforebegin`, text);
+            evt.target.parentElement.style.display = "none";
           }
         ).catch(
           (error) => console.log(`asyncAddReview fetch attempt to ${sPayload}: error.getMessage()`)

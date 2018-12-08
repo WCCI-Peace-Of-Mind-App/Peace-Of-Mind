@@ -16,10 +16,6 @@
     width: calc(100% - 73px);
 }
 
-.administration .textbox {
-    width: calc(100% - 120px);
-}
-
 .amount .textbox {
     width: calc(100% - 152px);
 }

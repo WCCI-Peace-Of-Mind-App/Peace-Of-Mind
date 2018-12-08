@@ -50,7 +50,7 @@ public class MedicationLogRepositoryTest {
 	@Before
 	public void setUp() {
 		Medication testMed = medRepo
-				.save(new Medication("Chocolate Frog", "1 frog", "oral", 1, doseFrequencyTimeEnum.Daily, "img.jpg", "good spirits"));
+				.save(new Medication("Chocolate Frog", "1 frog", AdministrationEnum.ORAL, 1, doseFrequencyTimeEnum.Daily, "img.jpg", "good spirits"));
 
 		underTest = medLogRepo.save(new MedicationLog(testMed));
 		medLogId = underTest.getId();

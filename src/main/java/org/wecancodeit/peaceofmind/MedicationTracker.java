@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.scheduling.annotation.EnableScheduling;
+
 @Entity
+@EnableScheduling
 public class MedicationTracker {
 
 	@Id
@@ -17,8 +20,9 @@ public class MedicationTracker {
 	@ManyToOne
 	private Medication medication;
 	private int dosesTaken;
+	private int dosesNeeded;
+	private int dosesMissed;
 	private String date;
-	
 
 	public long getId() {
 		return id;
@@ -32,14 +36,31 @@ public class MedicationTracker {
 		return dosesTaken;
 	}
 
-	public void doseTaken() {
-		dosesTaken++;
+	public void setDosesTaken(int totalDoses) {
+		dosesTaken = totalDoses;
+	}
+	
+	public int getDosesNeeded() {
+		return dosesNeeded;
+	}
+	
+	public void setDoseNeeded(int doseNeeded) {
+		dosesNeeded = doseNeeded;
+		
+	}
+	
+	public int getDosesMissed() {
+		return dosesMissed;
+	}
+	
+	public void setDosesMissed(int doseMissed) {
+		dosesMissed = doseMissed;
 	}
 
 	public String getDate() {
 		return date;
 	}
-	
+
 	public MedicationTracker() {
 
 	}
@@ -51,6 +72,14 @@ public class MedicationTracker {
 		this.medication = medication;
 		this.dosesTaken = 0;
 		this.date = LocalDateTime.now().format(yyyymmdd);
+	}
+
+	//for testing purposes only
+	public MedicationTracker(Medication medication, String pastDate, int needed, int taken) {
+		this.medication = medication;
+		this.dosesNeeded = needed;
+		this.dosesTaken = taken;
+		this.date = pastDate;
 	}
 
 	@Override
@@ -74,5 +103,6 @@ public class MedicationTracker {
 			return false;
 		return true;
 	}
+
 
 }

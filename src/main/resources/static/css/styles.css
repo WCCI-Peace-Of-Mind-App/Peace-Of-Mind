@@ -8,6 +8,7 @@
 
 .container {
   max-width: auto;
+  text-align: center;
 }
 
 nav {
@@ -57,9 +58,6 @@ nav h2 {
   height: 100%;
   grid-gap: 5%;
   padding: 5%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
 }
 
 li {

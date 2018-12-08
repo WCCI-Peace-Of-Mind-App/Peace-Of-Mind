@@ -1,5 +1,19 @@
 package org.wecancodeit.peaceofmind;
 
 public enum PatientStatusEnum {
-  WELL, NOTWELL
+  HAPPY ("happiness.png"), 
+  SAD ("tearful.png"), 
+  ANGRY ("angry.png"), 
+  CONFUSED ("confused.png");
+	
+	private final String imageFile;
+	
+	PatientStatusEnum(String imageFile) {
+		this.imageFile = imageFile;
+	}
+	
+	public String getImageFile() {
+		return imageFile;
+	}
+	
 }

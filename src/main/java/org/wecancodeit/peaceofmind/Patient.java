@@ -94,6 +94,10 @@ public class Patient implements IPerson {
 		this.statusHistory = new ArrayList<>();
 	}
 	
+	public void addMedication(Medication medication) {
+		medications.add(medication);
+	}
+	
 	public void setCurrentStatus(PatientStatus currentStatus) {
 		this.statusHistory.add(currentStatus);
 	}

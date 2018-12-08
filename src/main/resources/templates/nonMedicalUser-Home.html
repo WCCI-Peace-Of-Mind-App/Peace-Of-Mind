@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Peace Of Mind</title>
-<link href="/css/non-med-styles.css" rel="stylesheet">
+	<title>Peace Of Mind</title>
+	<link href="/css/non-med-styles.css" rel="stylesheet">
+	<link href="/css/status-history.css" rel="stylesheet">
 </head>
 
 <body class="container">
@@ -18,40 +19,44 @@
 		</nav>
 	</header>
 
-	<div class="dashboard" th:if="${nonMedicalUser.patient}"
-		th:each="patient : ${nonMedicalUser.patient}">
+	<div class="dashboard" th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
+		<h1>Your Dashboard</h1>
 
+		<section class="main">
+			<h3>Medication Adherence</h3>
+			<p>This Month</p>
+			<section class="medAdherenceDash" th:if="${medications}">
+				<div class="medStatus" th:each="medication : ${medications}">
+						<img th:src=${medication.adherentThisMonth}>
+						<h4><p id="medName" th:text=${medication.genericName}></p></h4>
+				</div>
+			</section>
+							<a th:href="@{/med-tracker-history-non-med(id=${patient.id})}">Full Adherence History</a>
+		</section>
 
-		<section class="medLog">
-			<h3>Med Log</h3>
-			<div>
-				<p>
-					<em>place holder for medlog display</em>
-				</p>
+		<input class="id" type="hidden" name="id" th:value="${patient.id}">
+		<section class="patientStatus" th:if="${status.id}">
+			<div class="statusChange">
+				<h3>Current Patient Status</h3>
+				<img th:src="@{'images/' + ${status.status.getImageFile()}}">
+				<p>Entered at [[${status.printDateTime()}]]</p>
+				<p>Would you like to view the status history?</p>
 			</div>
+			<button class="show-one" type="submit" value="submit">Show One</button>
+			<button class="show-three" type="submit" value="submit">View Status History</button>
+			<button class="show-all" type="submit" value="submit">Show All</button>
 		</section>
-
-		<section class="patientStatus">
-			<h3>Current Patient Status</h3>
-			<p>
-				<em>placeholder!!!!</em>
-			</p>
-		</section>
-
-
+		
+		
 		<section class="medUser">
-			<div th:if="${patient.medicalUser}"
-				th:each="medicalUser : ${patient.medicalUser}">
+			<div th:if="${patient.medicalUser}" th:each="medicalUser : ${patient.medicalUser}">
 				<h3>Medical Personnel Information</h3>
 				<div>
 					<h4>[[${medicalUser.firstName}]] [[${medicalUser.lastName}]]</h4>
 					<ul>
-						<li
-							th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
-						<li
-							th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
-						<li
-							th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
+						<li th:text=" 'Specialty: ' + (${medicalUser.medicalSpecialty} ?: 'unknown')"></li>
+						<li th:text=" 'Institution: ' + (${medicalUser.medicalInstitution} ?: 'unknown')"></li>
+						<li th:text=" 'Institution Phone: ' + (${medicalUser.institutionTelephone} ?: 'unknown')"></li>
 						<li>Other Contact Methods</li>
 						<ul>
 							<li th:if="${medicalUser.contactInfo.phone}">[[${medicalUser.contactInfo.phone}]]</li>
@@ -61,14 +66,15 @@
 				</div>
 			</div>
 		</section>
-
-
+		
+		
 	</div>
-
+	
 	<footer>
 		<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</small>
 	</footer>
-
+	
+	<script src="./js/show-statuses.js"></script>
 </body>
 
 </html>

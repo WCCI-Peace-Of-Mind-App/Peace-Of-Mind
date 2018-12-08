@@ -1,0 +1,21 @@
+.text, .time, .reason, .new-medication {
+    padding: .4em;
+}
+
+.text {
+    width: 332px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.drugname .textbox {
+    width: calc(100% - 100px);
+}
+
+.dosage .textbox {
+    width: calc(100% - 73px);
+}
+
+.amount .textbox {
+    width: calc(100% - 152px);
+}

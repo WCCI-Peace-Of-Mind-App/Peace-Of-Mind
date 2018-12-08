@@ -7,7 +7,7 @@
 }
 
 .container {
-	padding-bottom:2rem;
+  padding-bottom: 2rem;
   max-width: auto;
   text-align: center;
 }
@@ -69,39 +69,77 @@ section {
   padding: 2em 2em;
 }
 
+.medAdherenceDash {
+  display: flex;
+  align-items: center;
+  column-width: 4em;
+  column-gap: 1em;
+}
+
+.medAdherenceDash div {
+  break-inside: avoid-column;
+  page-break-inside: avoid;
+  background: transparent;
+  width: 5em;
+  height: 5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.medStatus {
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+section img {
+  width: 4em;
+  height: 4em;
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
 footer {
   text-align: center;
   color: black;
   padding-top: 15%;
 }
 
-.collapsed-par + .paragraph-copy {
+.collapsed-par+.paragraph-copy {
   display: none;
 }
-.expanded-par + .paragraph-copy {
+
+.expanded-par+.paragraph-copy {
   display: block;
 }
+
 .expanded-par .up-arrow {
   display: none;
 }
+
 .expanded-par .down-arrow {
   display: inline;
 }
+
 .collapsed-par .up-arrow {
   display: inline;
 }
+
 .collapsed-par .down-arrow {
   display: none;
 }
+
 .up-arrow, .down-arrow {
   font-size: 15px;
   margin-left: 10px;
 }
+
 .par-container {
   padding: 5px;
-
   border-radius: 5px;
   align-items: center;
   cursor: pointer;
-
 }

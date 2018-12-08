@@ -18,11 +18,12 @@ public class Medication {
 	private long id;
 	private String genericName;
 	private String dosage;
-	private String administration;
+	private AdministrationEnum administration;
 	private int frequencyAmount;
-	private String frequencyTime;
+	private doseFrequencyTimeEnum frequencyTime;
 	private String picture;
 	private String reason;
+	private String adherentThisMonth;
 	
 	@ManyToOne
 	private Patient patient;
@@ -46,7 +47,7 @@ public class Medication {
 		return dosage;
 	}
 
-	public String getAdministration() {
+	public AdministrationEnum getAdministration() {
 		return administration;
 	}
 
@@ -54,7 +55,7 @@ public class Medication {
 		return frequencyAmount;
 	}
 	
-	public String getFrequencyTime() {
+	public doseFrequencyTimeEnum getFrequencyTime() {
 		return frequencyTime;
 	}
 	
@@ -69,6 +70,14 @@ public class Medication {
 	public Patient getPatient() {
 		return patient;
 	}
+	
+	public String getAdherentThisMonth() {
+		return adherentThisMonth;
+	}
+	
+	public void setAdherentThisMonth(String adherence) {
+		adherentThisMonth = adherence;
+	}
 
 	
 	public Collection<MedicationLog> getMedicationLogs() {
@@ -82,7 +91,7 @@ public class Medication {
 
 	public Medication() {}
 	
-	public Medication(String genericName, String dosage, String administration, int frequencyAmount, String frequencyTime, String picture, String reason) {
+	public Medication(String genericName, String dosage, AdministrationEnum administration, int frequencyAmount, doseFrequencyTimeEnum frequencyTime, String picture, String reason) {
 		this.genericName = genericName;
 		this.dosage = dosage;
 		this.administration = administration;

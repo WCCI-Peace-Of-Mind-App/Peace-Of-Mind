@@ -4,12 +4,13 @@
 <head>
 	<title>Peace Of Mind</title>
 	<link href="/css/non-med-styles.css" rel="stylesheet">
+	<link href="/css/personal-info.css" rel="stylesheet">
 </head>
 
 <body class="container">
 	<div>
-		<header>
 
+		<header>
 			<nav>
 				<img class="logo" src="images/logo.png" alt="logo">
 				<h2>
@@ -17,36 +18,24 @@
 				</h2>
 			</nav>
 		</header>
+
 		<div class="dashboard">
 			<section class="account-info">
-				<h4>Your Account Information</h4>
-				<p>
-					YourUsername: <span th:text="${nonMedicalUser.userName}"></span>
-				</p>
-				<p>
-					First Name: <span th:text="${nonMedicalUser.firstName}"></span>
-				</p>
-				<p>
-					Last Name: <span th:text="${nonMedicalUser.lastName}"></span>
-				</p>
-				<p>Contact Info:</p>
-				<p>
-					<span th:text="${nonMedicalUser.contactInfo.address}"></span>
-				</p>
-				<p>
-					<span th:text="${nonMedicalUser.contactInfo.email}"></span>
-				</p>
-				<p>
-					<span th:text="${nonMedicalUser.contactInfo.phone}"></span>
-				</p>
+				<h2>Your Account Information</h2>
+				<p>Your Username: [[${nonMedicalUser.userName}]]</p>
+				<p>Name: [[${nonMedicalUser.firstName}]] [[${nonMedicalUser.lastName}]]</p>
+				<p>Contact Information:</p>
+				<p>[[${nonMedicalUser.contactInfo.address}]]</p>
+				<p>[[${nonMedicalUser.contactInfo.email}]]</p>
+				<p>[[${nonMedicalUser.contactInfo.phone}]]</p>
+
 				<section class="associated-patient">
-					<h4>Your Loved One's Account:</h4>
 					<div th:if="${nonMedicalUser.patient}" th:each="patient : ${nonMedicalUser.patient}">
-						<p>[[${patient.firstName}]] [[${patient.lastName}]]</p>
+					<h2>Your Loved One's Account: [[${patient.firstName}]] [[${patient.lastName}]]</h2>
 						<article class="medication">
 							<div th:if="${patient.medications}">
 								<h3>Medications</h3>
-								<div th:each="medication : ${patient.medications}">
+								<div class="med-container" th:each="medication : ${patient.medications}">
 									<h4 class="par-container collapsed-par" >
 										[[${medication.genericName}]]
 										<span class="up-arrow">
@@ -70,7 +59,7 @@
 
 						<article class="patient">
 							<div>
-								<h3>Contact</h3>
+								<h3>Contact Information</h3>
 								<ul>
 									<li th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</li>
 									<li th:if="${patient.contactInfo.phone}">[[${patient.contactInfo.phone}]]</li>

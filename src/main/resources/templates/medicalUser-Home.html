@@ -35,7 +35,7 @@
             <h4><p id="medName" th:text=${medication.genericName}></p></h4>
         </div>
       </section>
-              <a th:href="@{/med-tracker-history-med(id=${patient.id})}">Full Adherence History</a>
+              <a th:href="@{/med-tracker-history-med(id=${patient.id})}"><button>Full Adherence History</button></a>
     </section>
 
 
@@ -45,7 +45,7 @@
 				<h3>Current Patient Status</h3>
 				<img th:src="@{'images/' + ${status.status.getImageFile()}}">
 				<p>Entered at [[${status.printDateTime()}]]</p>
-				<p>Would you like to view the status history?</p>
+				<p class="history-question">Would you like to view the status history?</p>
 			</div>
 			<button class="show-one" type="submit" value="submit">Show One</button>
 			<button class="show-three" type="submit" value="submit">View Status History</button>

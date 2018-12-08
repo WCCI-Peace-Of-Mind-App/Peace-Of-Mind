@@ -58,14 +58,16 @@ nav h2 {
   grid-template-rows: repeat(3, 1fr);
 }
 
+.container {
+  text-align: center;
+}
+
 header {
   text-align: center;
   text-decoration: underline;
   padding-top: 2%;
   color: #04496b;
 }
-
-
 
 
 footer {

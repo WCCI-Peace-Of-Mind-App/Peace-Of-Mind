@@ -87,6 +87,16 @@ public class PeaceOfMindController {
 
 		throw new PatientNotFoundException();
 	}
+	
+	@RequestMapping("/add-diaryEntry")
+	public String addDiaryEntry(String entryText, long patientId) {
+		Patient author = patientRepo.findById(patientId).get();
+
+			Diary newEntry = new Diary(entryText, author);
+			diaryRepo.save(newEntry);
+			
+			return "redirect:/patient-diary?id=" + patientId;
+		}
 
 	@RequestMapping("/non-medical-user")
 	public String returnNonMedicalUser(@RequestParam(value = "id") long id, Model model)

@@ -18,6 +18,13 @@ nav {
     lightblue);
 }
 
+header {
+  text-align: center;
+  text-decoration: underline;
+  padding-top: 2%;
+  color: #04496b;
+}
+
 .logo {
   display: flex;
   text-align: left;
@@ -50,23 +57,46 @@ nav h2 {
 }
 
 .dashboard {
-  height: 100%;
-  grid-gap: 5%;
-  padding: 5%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: auto;
+  justify-content: center;
+  align-items: left;
+  height: 100%;
 }
 
 .container {
   text-align: center;
 }
 
-header {
-  text-align: center;
-  text-decoration: underline;
-  padding-top: 2%;
-  color: #04496b;
+div {
+	text-aling: center;
+	padding: 0.5em;
+	
+}
+
+input {
+	margin-top: .5rem;
+	padding: 2.5px;
+}
+
+button {
+	background: transparent;
+	height: 2em;
+	border: none;
+	background-image: linear-gradient(#0f87c3, #068bcd 0%, #49b9f2 100%);
+	font-size: medium;
+	border-radius: 10px;
+	padding: 1.5%;
+	outline: transparent;
+	text-align: center;
+	line-height: 0;
+	font-weight: bold;
+	margin: .5em .2em;
+}
+
+button:hover {
+	transform: scale(1.02);
+	box-shadow: 0 15px 20px rgba(169, 201, 255, .6);
 }
 
 

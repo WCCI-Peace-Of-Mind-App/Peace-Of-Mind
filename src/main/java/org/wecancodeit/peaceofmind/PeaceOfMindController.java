@@ -238,26 +238,6 @@ public class PeaceOfMindController {
 
 	}
 
-	@RequestMapping("/medication")
-	public String returnMedications(@RequestParam(value = "id") long id, Model model)
-			throws MedicationNotFoundException {
-		Optional<Medication> med = medRepo.findById(id);
-
-		if (med.isPresent()) {
-			model.addAttribute("medications", med.get());
-			return "medication";
-		}
-
-		throw new MedicationNotFoundException();
-
-	}
-
-	@RequestMapping("/all-medications")
-	public String returnAllMedications(Model model) {
-		model.addAttribute("medications", medRepo.findAll());
-		return "medications";
-
-	}
 
 	@RequestMapping("/my-medications")
 	public String returnPatientMedications(@RequestParam(value = "id") long id, Model model)

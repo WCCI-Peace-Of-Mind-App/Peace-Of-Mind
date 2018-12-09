@@ -56,12 +56,17 @@
         <p th:if="${medication.frequencyTime.name() == 'As_Needed'}">Please take [[${medication.dosage}]] via [[${medication.administration}]] as needed</p>
         <p th:unless="${medication.frequencyTime.name() == 'As_Needed'}">Please take [[${medication.dosage}]] via [[${medication.administration}]] [[${medication.frequencyAmount}]]x [[${medication.frequencyTime}]]</p>
       </section>
-      <div class="log-medication">
+      <div class="log-medication" th:each="medtracker : ${medTrackers}" th:if="${medtracker.medication.equals(medication)}">
+        <div th:if="${medtracker.dosesTaken < medtracker.dosesNeeded or medication.frequencyTime.name() == 'As_Needed'}">
             <button th:attr="data-medicationId=${medication.getId()}">Dose Taken</button>
-      </div>
+          </div>
+          <div th:unless="${medtracker.dosesTaken < medtracker.dosesNeeded or medication.frequencyTime.name() == 'As_Needed'}">
+            <p> You've taken all your doses for the day! </p>
+          </div>
     </div>
 
   </div>
+</div>
 
   <footer>
     <span>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final project</span>

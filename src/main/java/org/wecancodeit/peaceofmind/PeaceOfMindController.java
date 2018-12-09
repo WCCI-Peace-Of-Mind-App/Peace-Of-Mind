@@ -242,12 +242,21 @@ public class PeaceOfMindController {
 	@RequestMapping("/my-medications")
 	public String returnPatientMedications(@RequestParam(value = "id") long id, Model model)
 			throws PatientNotFoundException {
+		DateTimeFormatter yyyymmdd = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		String today = LocalDateTime.now().format(yyyymmdd);
+		
 		Optional<Patient> patient = patientRepo.findById(id);
 		Collection<Medication> meds = patient.get().getMedications();
+		Collection<MedicationTracker> medTrackers = new HashSet<>();
+		
+		for(Medication med : meds) {
+			medTrackers.add(medTrackerRepo.findByMedicationAndDate(med, today));
+		}
 
 		if (patient.isPresent()) {
 			model.addAttribute("patient", patient.get());
 			model.addAttribute("medications", meds);
+			model.addAttribute("medTrackers", medTrackers);
 			return "my-Medications";
 		}
 

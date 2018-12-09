@@ -50,12 +50,10 @@
 
     <div class="med-button" th:each="medication : ${medications}">
       <section class="medication">
+          <img class="medication-image" th:src="${medication.picture}" alt="Medication Image Here" />
         <h3>[[${medication.genericName}]]</h3>
         <p>Reason to Take: [[${medication.reason}]]</p>
         <p>Please take [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
-        <div th:if="${medication.picture}">
-          <img class="medication-image" src="${medication.picture}" alt="Medication Image Here" />
-        </div>
       </section>
       <div class="log-medication">
             <button th:attr="data-medicationId=${medication.getId()}">Dose Taken</button>

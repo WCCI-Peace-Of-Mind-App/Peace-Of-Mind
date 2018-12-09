@@ -72,7 +72,7 @@ li {
 section {
   display: flex;
   flex-direction: column;
-  height: 10em;
+  height: auto;
   padding: 1em 1em;
   background-image: linear-gradient(#0f87c3, #068bcd 0%, #49b9f2 100%);
   border-radius: 15px;
@@ -92,6 +92,11 @@ section {
 
 med-button {
 
+}
+
+.medication-image {
+  width: 10em;
+  position: relative;
 }
 
 .log-medication button {

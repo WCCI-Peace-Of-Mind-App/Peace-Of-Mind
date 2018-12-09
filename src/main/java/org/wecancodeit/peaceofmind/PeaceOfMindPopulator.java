@@ -82,7 +82,7 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		
 		ContactInfo contactInfo1 = contactInfoRepo.save(new ContactInfo(address1a, email1a, phone1a));
 		
-		Medication med1 = medRepo.save(new Medication("Donepezil", "23mg", AdministrationEnum.ORAL, 1, doseFrequencyTimeEnum.Daily, "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/45802-0571-78_NLMIMAGE10_7008B865.jpg", "Senile Dementia"));
+		Medication med1 = medRepo.save(new Medication("Donepezil", "23mg", AdministrationEnum.ORAL, 2, doseFrequencyTimeEnum.Daily, "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/45802-0571-78_NLMIMAGE10_7008B865.jpg", "Senile Dementia"));
 		Medication med2 = medRepo.save(new Medication("Sumatriptan", "100mg", AdministrationEnum.ORAL, 0, doseFrequencyTimeEnum.As_Needed, "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00378-4532-01_NLMIMAGE10_613F30B9.jpg", "Migraines"));
     Medication med3 = medRepo.save(new Medication("Aricept", "5mg", AdministrationEnum.ORAL, 1, doseFrequencyTimeEnum.Daily, "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00143-3142-05_NLMIMAGE10_E005702B.jpg", "Senile Dementia"));
     Medication med4 = medRepo.save(new Medication("Galantamine", "4mg", AdministrationEnum.ORAL, 1, doseFrequencyTimeEnum.Daily, "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00591-5440-50_NLMIMAGE10_B834DC76.jpg", "Senile Dementia"));

@@ -238,36 +238,25 @@ public class PeaceOfMindController {
 
 	}
 
-	@RequestMapping("/medication")
-	public String returnMedications(@RequestParam(value = "id") long id, Model model)
-			throws MedicationNotFoundException {
-		Optional<Medication> med = medRepo.findById(id);
-
-		if (med.isPresent()) {
-			model.addAttribute("medications", med.get());
-			return "medication";
-		}
-
-		throw new MedicationNotFoundException();
-
-	}
-
-	@RequestMapping("/all-medications")
-	public String returnAllMedications(Model model) {
-		model.addAttribute("medications", medRepo.findAll());
-		return "medications";
-
-	}
 
 	@RequestMapping("/my-medications")
 	public String returnPatientMedications(@RequestParam(value = "id") long id, Model model)
 			throws PatientNotFoundException {
+		DateTimeFormatter yyyymmdd = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		String today = LocalDateTime.now().format(yyyymmdd);
+		
 		Optional<Patient> patient = patientRepo.findById(id);
 		Collection<Medication> meds = patient.get().getMedications();
+		Collection<MedicationTracker> medTrackers = new HashSet<>();
+		
+		for(Medication med : meds) {
+			medTrackers.add(medTrackerRepo.findByMedicationAndDate(med, today));
+		}
 
 		if (patient.isPresent()) {
 			model.addAttribute("patient", patient.get());
 			model.addAttribute("medications", meds);
+			model.addAttribute("medTrackers", medTrackers);
 			return "my-Medications";
 		}
 

@@ -55,7 +55,8 @@ nav h2 {
   padding: 5%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
 }
 
 header {
@@ -124,4 +125,46 @@ footer {
   text-align: center;
   color: black;
   padding-top: 15%;
+}
+
+@media screen and (max-width: 750px) {
+	.dashboard {
+     display: flex;
+      flex-direction: column;
+      justify-content: center;
+	}
+}
+
+@media screen and (max-width: 40em) {
+	.dashboard {
+		grid-template-columns: 1fr;
+		grid-column-gap: 1em;
+		margin: 1em auto;
+		position: relative;
+	}
+	footer {
+		position: relative;
+	}
+}
+
+@media screen and (max-width: 25em) {
+	.dashboard {
+		grid-template-columns: 1fr;
+		grid-column-gap: 1em;
+		margin: 1em auto;
+		position: relative;
+	}
+	
+		nav h2 {
+		width: auto;
+		min-width: unset;
+		max-width: 100%;
+		position: relative;
+	}
+	
+    nav.open h2 {
+      visibility: hidden;
+      display: block;
+      max-width: 90%;
+    }
 }

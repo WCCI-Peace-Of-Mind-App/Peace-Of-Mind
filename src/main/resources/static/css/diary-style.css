@@ -1,77 +1,70 @@
 * {
-  font-family: 'Raleway', sans-serif;
-  padding: 0;
-  margin: 0;
-  background-color: #ebf5fa;
+	font-family: 'Raleway', sans-serif;
+	padding: 0;
+	margin: 0;
+	background-color: #ebf5fa;
 }
 
-
 nav {
-  display: flex;
-  justify-content: space-between;
-  text-align: right;
-  background-image: linear-gradient(to right,
-    #0f87c3,
-    #068bcd,
-    #49b9f2,
-    #49b9f2,
-    lightblue);
+	display: flex;
+	justify-content: space-between;
+	text-align: right;
+	background-image: linear-gradient(to right, #0f87c3, #068bcd, #49b9f2, #49b9f2, lightblue);
 }
 
 header {
-  text-align: center;
-  text-decoration: underline;
-  padding-top: 2%;
-  color: #04496b;
+	text-align: center;
+	text-decoration: underline;
+	padding-top: 2%;
+	color: #04496b;
 }
 
 .logo {
-  display: flex;
-  text-align: left;
-  height: 3em;
-  justify-content: center;
-  background: transparent;
+	display: flex;
+	text-align: left;
+	height: 3em;
+	justify-content: center;
+	background: transparent;
 }
 
 nav a {
-  display: flex;
-  padding: 0.5em;
-  text-align: right;
-  text-decoration: none;
-  color: #04496b;
-  background: transparent;
+	display: flex;
+	padding: 0.5em;
+	text-align: right;
+	text-decoration: none;
+	color: #04496b;
+	background: transparent;
 }
 
 nav a:visited {
-  color: #04496b;
-  background: transparent;
+	color: #04496b;
+	background: transparent;
 }
 
 nav a:hover {
-  opacity: 0.6;
-  background: transparent;
+	opacity: 0.6;
+	background: transparent;
 }
 
 nav h2 {
-  background: transparent;
+	background: transparent;
 }
 
 .dashboard {
-  display: grid;
-  grid-template-rows: auto;
-  justify-content: center;
-  align-items: left;
-  height: 100%;
+	display: grid;
+	grid-template-rows: auto;
+	justify-content: center;
+	align-items: left;
+	height: 100%;
 }
 
 .container {
-  text-align: center;
+	text-align: center;
 }
 
 div {
 	text-aling: center;
 	padding: 0.5em;
-	
 }
 
 input {
@@ -99,9 +92,55 @@ button:hover {
 	box-shadow: 0 15px 20px rgba(169, 201, 255, .6);
 }
 
-
 footer {
-  text-align: center;
-  color: black;
-  padding-top: 15%;
+	text-align: center;
+	color: black;
+	padding-top: 15%;
+}
+
+@media screen and (max-width: 600px) {
+	.dashboard {
+		grid-template-columns: 1fr;
+		grid-column-gap: 1em;
+		width: 60vw;
+		margin: 1em auto;
+		position: relative;
+	}
+	footer {
+		position: relative;
+	}
+}
+
+@media screen and (max-width: 40em) {
+	.dashboard {
+		grid-template-columns: 1fr;
+		grid-column-gap: 1em;
+		margin: 1em auto;
+		position: relative;
+	}
+	footer {
+		position: relative;
+	}
+}
+
+@media screen and (max-width: 25em) {
+	.dashboard {
+		grid-template-columns: 1fr;
+		grid-column-gap: 1em;
+		margin: 1em auto;
+		position: relative;
+	}
+	
+		nav h2 {
+		width: auto;
+		min-width: unset;
+		max-width: 100%;
+		position: relative;
+	}
+	
+    nav.open h2 {
+      visibility: hidden;
+      display: block;
+      max-width: 90%;
+    }
 }

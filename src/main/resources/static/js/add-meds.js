@@ -59,11 +59,11 @@ function addWarningText(textToPost) {
 }
 
 function closeMessageDiv() {
-    newMedication.style.display = "none";
+    newMedication.style.opacity = 0;
 }
 
 function showThenHideMessage() {
-    newMedication.style.display = "block";
+    newMedication.style.opacity = 1;
     timing = window.setTimeout(closeMessageDiv, 5000);
 }
 

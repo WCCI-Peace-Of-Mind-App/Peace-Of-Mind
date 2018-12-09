@@ -24,17 +24,22 @@
 
 		<section class="medTracker" th:if="${medicationTrackers}">
 			<h3>Medication Adherence</h3>
-			<p>This Year</p>
+			<h4>This Year</h4>
 
 			<div th:each="medTracker : ${medicationTrackers}">
 				<div class="grid-container">
 					<p class="item-1" th:text=${medTracker.date}></p>
 					<p class="item-2" th:text=${medTracker.medication.genericName}></p>
-					<p class="item-3" th:classappend="(${medTracker.dosesMissed} > 0) ? noncompliant : '' ">[[${medTracker.dosesMissed}]] doses missed</p>
+					<div class="item-3" th:switch="${medTracker.dosesMissed}">
+						<p th:if="${medTracker.dosesMissed} == 0">Compliant</p>
+						<p th:unless="${medTracker.dosesMissed} == 0" class="noncompliant">[[${medTracker.dosesMissed}]] doses missed</p>
+					</div>
 				</div>
 			</div>
 		</section>
 			
+		<a th:href="@{/non-medical-user-home(id=${nonMedicalUser.id})}"><button>Return To Main Page</button></a>
+
 	</div>
 
 	<footer>

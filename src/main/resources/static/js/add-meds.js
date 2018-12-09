@@ -9,6 +9,7 @@ const reason = document.querySelector("#reason");
 
 const submitMed = document.querySelector(".submit-btn");
 
+
 const missingEntry = "Make sure all fields are filled out before submitting";
 const notANumber = "Frequency Amount must be a number";
 
@@ -21,25 +22,34 @@ xhr.onreadystatechange = function() {
 };
 
 function postMedication(id, drugname, dosage, administration, frequencyAmount, frequencyTime, picture, reason) {
-     xhr.open('POST', "/add-medication/add/" + id + "/" + drugname + "/" + dosage + "/" + administration + "/" + frequencyAmount + "/" + frequencyTime + "/" + picture + "/" + reason);
-     xhr.send();
+    xhr.open('POST', "/add-medication/add/" + id + "/" + drugname + "/" + dosage + "/" + administration + "/" + frequencyAmount + "/" + frequencyTime + "/" + picture + "/" + reason);
+    xhr.send();
 }
 
 function textHasValue(textbox) {
     return (textbox.value !== "");
 }
 
+function textIsAlphanumereic(textbox) {
+    let regex = /^[A-Za-z0-9]+$/;
+    return(textbox.value.match(regex));
+}
+
 function textIsNumber(textbox) {
-    const regex = /^[0-9]+$/;
+    let regex = /^[0-9]+$/;
     return (textbox.value.match(regex));
 }
 
-function validateTextData() {
-    return (textHasValue(drugName) && textHasValue(dosage) && textHasValue(reason));
+function validateTextBoxesHaveData () {
+    return (textHasValue(drugName) && textHasValue(dosage) && textHasValue(reason) && textHasValue(amount));
+}
+
+function validateTextBoxesHaveValidData() {
+    return(textIsAlphanumereic(drugName) && textIsAlphanumereic(dosage) && textIsAlphanumereic(reason));
 }
 
 function validateAllData() {
-    return(validateTextData() && textIsNumber(amount));
+    return(validateTextBoxesHaveValidData() && textIsNumber(amount));
 }
 
 function addWarningText(textToPost) {
@@ -86,9 +96,11 @@ submitMed.addEventListener('click', function() {
         submitMedication(id, drugName, dosage, amount, picture, reason);
         clearEntryFields();
         showThenHideMessage();
-    } else if (!(validateTextData())) {
+    } else if (!(validateTextBoxesHaveData())) {
         displayMessage(missingEntry);
-    } else {
+    } else if (!(textIsNumber(amount))) {
         displayMessage(notANumber);
+    } else {
+        displayMessage("Use only alpha-numeric characters please");
     }
 });

@@ -53,7 +53,8 @@
           <img class="medication-image" th:src="${medication.picture}" alt="Medication Image Here" />
         <h3>[[${medication.genericName}]]</h3>
         <p>Reason to Take: [[${medication.reason}]]</p>
-        <p>Please take [[${medication.dosage}]] via [[${medication.administration}]] every [[${medication.frequencyAmount}]] [[${medication.frequencyTime}]]</p>
+        <p th:if="${medication.frequencyTime.name() == 'As_Needed'}">Please take [[${medication.dosage}]] via [[${medication.administration}]] as needed</p>
+        <p th:unless="${medication.frequencyTime.name() == 'As_Needed'}">Please take [[${medication.dosage}]] via [[${medication.administration}]] [[${medication.frequencyAmount}]]x [[${medication.frequencyTime}]]</p>
       </section>
       <div class="log-medication">
             <button th:attr="data-medicationId=${medication.getId()}">Dose Taken</button>

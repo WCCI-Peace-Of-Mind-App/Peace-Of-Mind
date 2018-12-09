@@ -74,6 +74,7 @@ section {
   align-items: center;
   column-width: 4em;
   column-gap: 1em;
+  justify-content: center;
 }
 
 .medAdherenceDash div {
@@ -82,15 +83,14 @@ section {
   background: transparent;
   width: 5em;
   height: 5em;
-  margin-left: auto;
-  margin-right: auto;
+
 }
 
 .medStatus {
   width: auto;
   height: auto;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 0 2em;
+
 }
 
 

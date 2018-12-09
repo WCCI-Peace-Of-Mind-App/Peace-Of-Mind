@@ -9,6 +9,8 @@ const reason = document.querySelector("#reason");
 
 const submitMed = document.querySelector(".submit-btn");
 
+let timing = null;
+
 
 const missingEntry = "Make sure all fields are filled out before submitting";
 const notANumber = "Frequency Amount must be a number";
@@ -62,7 +64,13 @@ function closeMessageDiv() {
 
 function showThenHideMessage() {
     newMedication.style.display = "block";
-    window.setTimeout(closeMessageDiv, 5000);
+    timing = window.setTimeout(closeMessageDiv, 5000);
+}
+
+function stopExistingTimeout() {
+    if (timing !== null) {
+        clearTimeout(timing);
+    }
 }
 
 function displayMessage(textToPost) {
@@ -92,6 +100,7 @@ function submitMedication(id, drugName, dosage, amount, picture, reason) {
 }
 
 submitMed.addEventListener('click', function() {
+    stopExistingTimeout();
     if(validateAllData()) {
         submitMedication(id, drugName, dosage, amount, picture, reason);
         clearEntryFields();

@@ -50,8 +50,9 @@
 
     <div class="med-button" th:each="medication : ${medications}">
       <section class="medication">
-          <img class="medication-image" th:src="${medication.picture}" alt="Medication Image Here" />
         <h3>[[${medication.genericName}]]</h3>
+          <img th:unless="${medication.picture} == 'na'" class="medication-image" th:src="${medication.picture}" alt="Medication Image Here" />
+          <p th:if="${medication.picture} == 'na'">(No image found in file)</p>
         <p>Reason to Take: [[${medication.reason}]]</p>
         <p th:if="${medication.frequencyTime.name() == 'As_Needed'}">Please take [[${medication.dosage}]] via [[${medication.administration}]] as needed</p>
         <p th:unless="${medication.frequencyTime.name() == 'As_Needed'}">Please take [[${medication.dosage}]] via [[${medication.administration}]] [[${medication.frequencyAmount}]]x [[${medication.frequencyTime}]]</p>

@@ -86,7 +86,6 @@ section {
 }
 
 section .emotionIndicator {
-	visibility: hidden;
 	background: transparent;
 }
 
@@ -226,3 +225,12 @@ section p, section h3, section ul, section li, section address {
 	background: transparent;
 }
 
+.hidden {
+	visibility: hidden;
+	display: none;
+}
+
+.patientStatus img.emotionsIcon {
+  visibility: visible;
+  display: inherit;
+}

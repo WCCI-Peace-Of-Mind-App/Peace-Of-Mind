@@ -2,10 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>A Patient</title>
-	<link href="/css/patient-main-style.css" rel="stylesheet">
-	<script type="text/javascript" src="/js/patient-home.js"></script>
-	<script>
+<title>Peace of Mind - Patient Home</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<link href="/css/patient-main-style.css" rel="stylesheet">
+
+<script type="text/javascript" src="/js/patient-home.js"></script>
+<script>
       const swapInnerDivTargetSelectors = [
 		  '.nonMedUser',
 		  '.medUser',
@@ -47,25 +53,29 @@
 	<div class="dashboard">
 
 		<section class="medication" th:if="${patient.medications}">
-			<img class="medicineIcon" src="images/medicine.png" alt="medication-icon">
+			<img class="medicineIcon" src="images/medicine.png"
+				alt="medication-icon">
 			<h2>
 				<a th:href="@{/my-medications(id=${patient.id})}">Medications</a>
 			</h2>
 		</section>
 
 		<section class="patientStatus">
-			<img class="emotionsIcon" src="images/emotions.png" alt="emotion-icon">
+			<img class="emotionsIcon" src="images/emotions.png"
+				alt="emotion-icon">
 			<h2>How are you feeling?</h2>
 			<div class="emotionalStatus">
-				<img class="emotionIndicator" src="images/happiness.png" alt="happy-icon" data-emotionIndicator="HAPPY"> <img class="emotionIndicator" src="images/tearful.png"
-				 alt="sad-icon" data-emotionIndicator="SAD"> <img class="emotionIndicator" src="images/angry.png" alt="angry-icon" data-emotionIndicator="ANGRY">
+				<img class="emotionIndicator" src="images/happiness.png" alt="happy-icon" data-emotionIndicator="HAPPY">
+        <img class="emotionIndicator" src="images/tearful.png" alt="sad-icon" data-emotionIndicator="SAD">
+        <img class="emotionIndicator" src="images/angry.png" alt="angry-icon" data-emotionIndicator="ANGRY">
 				<img class="emotionIndicator" src="images/confused.png" alt="confused-icon" data-emotionIndicator="CONFUSED">
 			</div>
 		</section>
 
 
 		<section class="nonMedUser" th:if="${patient.nonMedicalUser}">
-			<img class="nonMedIcon" src="images/Caregiver.png" alt="caregiver-icon">
+			<img class="nonMedIcon" src="images/Caregiver.png"
+				alt="caregiver-icon">
 			<h2>Your Caregiver</h2>
 			<div class="nonMedUserInfo">
 				<h3>[[${patient.nonMedicalUser.firstName}]]
@@ -85,9 +95,12 @@
 			<div class="medUserInfo">
 				<h3>[[${patient.medicalUser.firstName}]]
 					[[${patient.medicalUser.lastName}]]</h3>
-				<p th:text=" 'Specialty: ' + (${patient.medicalUser.medicalSpecialty} ?: 'unknown')"></p>
-				<p th:text=" 'Institution: ' + (${patient.medicalUser.medicalInstitution} ?: 'unknown')"></p>
-				<p th:text=" 'Institution Phone: ' + (${patient.medicalUser.institutionTelephone} ?: 'unknown')"></p>
+				<p
+					th:text=" 'Specialty: ' + (${patient.medicalUser.medicalSpecialty} ?: 'unknown')"></p>
+				<p
+					th:text=" 'Institution: ' + (${patient.medicalUser.medicalInstitution} ?: 'unknown')"></p>
+				<p
+					th:text=" 'Institution Phone: ' + (${patient.medicalUser.institutionTelephone} ?: 'unknown')"></p>
 				<p>Contact</p>
 				<ul>
 					<li th:if="${patient.medicalUser.contactInfo.phone}">[[${patient.medicalUser.contactInfo.phone}]]</li>
@@ -100,15 +113,17 @@
 			<img class="addressIcon" src="images/address.png" alt="address-icon">
 			<h2>Your Address</h2>
 			<div class="userInfo">
-			<address>
-				<p th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</p>
-			</address>	
+				<address>
+					<p th:if="${patient.contactInfo.address}">[[${patient.contactInfo.address}]]</p>
+				</address>
 			</div>
 		</section>
 
 		<section class="diary">
 			<img class="diaryIcon" src="images/diary.png" alt="diary-icon">
-			<h2>Your Diary</h2>
+			<h2>
+				<a th:href="@{/patient-diary(id=${patient.id})}">Your Diary</a>
+			</h2>
 			<div class="diary">
 				<p>
 					<em>placeholder</em>
@@ -117,13 +132,10 @@
 		</section>
 
 	</div>
-
-	<footer>
-		<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus Final
-			project</small>
-	</footer>
-
-  <script src="./js/add-status.js"></script>
+		<footer id="footer">
+			<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus
+				Final project</small>
+		</footer>
 
 </body>
 

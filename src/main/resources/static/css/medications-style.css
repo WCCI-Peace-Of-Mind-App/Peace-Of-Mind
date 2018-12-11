@@ -55,7 +55,8 @@ nav h2 {
   padding: 5%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
 }
 
 header {
@@ -69,11 +70,16 @@ li {
   list-style: none;
 }
 
+.med-button {
+  margin-bottom: 1em;
+}
+
 section {
   display: flex;
   flex-direction: column;
   height: auto;
   padding: 1em 1em;
+  margin-bottom: 1.5em;
   background-image: linear-gradient(#0f87c3, #068bcd 0%, #49b9f2 100%);
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(169, 201, 255, .4);
@@ -135,4 +141,43 @@ footer {
 .notification {
   text-align: center;
   margin-top: 1em;
+  }
+
+
+@media screen and (max-width: 750px) {
+	.dashboard {
+     display: flex;
+      flex-direction: column;
+      justify-content: center;
+	}
+}
+
+@media screen and (max-width: 40em) {
+	.dashboard {
+		margin: 1em auto;
+		position: relative;
+	}
+	footer {
+		position: relative;
+	}
+}
+
+@media screen and (max-width: 25em) {
+	.dashboard {
+		margin: 1em auto;
+		position: relative;
+	}
+	
+		nav h2 {
+		width: auto;
+		min-width: unset;
+		max-width: 100%;
+		position: relative;
+	}
+	
+    nav.open h2 {
+      visibility: hidden;
+      display: block;
+      max-width: 90%;
+    }
 }

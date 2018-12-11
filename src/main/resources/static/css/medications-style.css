@@ -70,11 +70,16 @@ li {
   list-style: none;
 }
 
+.med-button {
+  margin-bottom: 1em;
+}
+
 section {
   display: flex;
   flex-direction: column;
   height: auto;
   padding: 1em 1em;
+  margin-bottom: 1.5em;
   background-image: linear-gradient(#0f87c3, #068bcd 0%, #49b9f2 100%);
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(169, 201, 255, .4);
@@ -149,8 +154,6 @@ footer {
 
 @media screen and (max-width: 40em) {
 	.dashboard {
-		grid-template-columns: 1fr;
-		grid-column-gap: 1em;
 		margin: 1em auto;
 		position: relative;
 	}
@@ -161,8 +164,6 @@ footer {
 
 @media screen and (max-width: 25em) {
 	.dashboard {
-		grid-template-columns: 1fr;
-		grid-column-gap: 1em;
 		margin: 1em auto;
 		position: relative;
 	}
@@ -179,3 +180,4 @@ footer {
       display: block;
       max-width: 90%;
     }
+}

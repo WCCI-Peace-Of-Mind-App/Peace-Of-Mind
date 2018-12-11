@@ -2,42 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Peace of Mind - Patient Home</title>
+	<title>Peace of Mind - Patient Home</title>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<link href="/css/patient-main-style.css" rel="stylesheet">
+	<link href="/css/patient-main-style.css" rel="stylesheet">
 
-<script type="text/javascript" src="/js/patient-home.js"></script>
-<script>
-      const swapInnerDivTargetSelectors = [
-		  '.nonMedUser',
-		  '.medUser',
-		  '.userInfo'/*,
+	<script type="text/javascript" src="/js/patient-home.js"></script>
+	<script>
+		const swapInnerDivTargetSelectors = [
+			'.nonMedUser',
+			'.medUser',
+			'.userInfo'/*,
 		  '.patientStatus'*/
-	  ];
-	  const patientEmotionContainerSelector = '.patientStatus';
-	  const emotionIndicatorSelector = '.emotionIndicator';
-	  document.addEventListener('readystatechange', (evt) => {
-		if (evt.target.readyState === 'complete') {
-		  swapInnerDivTargetSelectors.forEach((v, i, collection) => {
-              document.querySelector(v).addEventListener(
-				  'click',
-				  swapInnerDiv.bind(document.querySelector(v), v)
-			  )
-		  });
-		  
-		  document.querySelector(patientEmotionContainerSelector).addEventListener(
-			  'click',
-			  emotionIndicatorClickHandler.bind(null, patientEmotionContainerSelector, [[${patient.id}]], `${patientEmotionContainerSelector} img`)
-		  );
-			  // listener present on .patientStatus to swap siblings-children **and listener to Section to un-hide .emotionIndicator** at default
-			  // Click listener on images will 1) fetch POST add-status, 2) cancel propagation of bubble,
-			  // 3) hide other three icons
-		}
-	  });
+		];
+		const patientEmotionContainerSelector = '.patientStatus';
+		const emotionIndicatorSelector = '.emotionIndicator';
+		document.addEventListener('readystatechange', (evt) => {
+			if (evt.target.readyState === 'complete') {
+				swapInnerDivTargetSelectors.forEach((v, i, collection) => {
+					document.querySelector(v).addEventListener(
+						'click',
+						swapInnerDiv.bind(document.querySelector(v), v)
+					)
+				});
+
+				document.querySelector(patientEmotionContainerSelector).addEventListener(
+					'click',
+					emotionIndicatorClickHandler.bind(null, patientEmotionContainerSelector, [[${ patient.id }]], `${patientEmotionContainerSelector} img`)
+				);
+				// listener present on .patientStatus to swap siblings-children **and listener to Section to un-hide .emotionIndicator** at default
+				// Click listener on images will 1) fetch POST add-status, 2) cancel propagation of bubble,
+				// 3) hide other three icons
+			}
+		});
 	</script>
 </head>
 
@@ -53,29 +53,44 @@
 	<div class="dashboard">
 
 		<section class="medication" th:if="${patient.medications}">
-			<img class="medicineIcon" src="images/medicine.png"
-				alt="medication-icon">
+			<img class="medicineIcon" src="images/medicine.png" alt="medication-icon">
 			<h2>
 				<a th:href="@{/my-medications(id=${patient.id})}">Medications</a>
 			</h2>
 		</section>
 
 		<section class="patientStatus">
-			<img class="emotionsIcon" src="images/emotions.png"
-				alt="emotion-icon">
+			<img class="emotionsIcon" src="images/emotions.png" alt="emotion-icon">
 			<h2>How are you feeling?</h2>
 			<div class="emotionalStatus">
-				<img class="emotionIndicator" src="images/happiness.png" alt="happy-icon" data-emotionIndicator="HAPPY">
-        <img class="emotionIndicator" src="images/tearful.png" alt="sad-icon" data-emotionIndicator="SAD">
-        <img class="emotionIndicator" src="images/angry.png" alt="angry-icon" data-emotionIndicator="ANGRY">
-				<img class="emotionIndicator" src="images/confused.png" alt="confused-icon" data-emotionIndicator="CONFUSED">
+
+				<table id="table-content">
+					<tr>
+						<td>
+							<img class="emotionIndicator" src="images/happiness.png" alt="happy-icon" data-emotionIndicator="HAPPY">
+						</td>
+						<td>
+							<img class="emotionIndicator" src="images/tearful.png" alt="sad-icon" data-emotionIndicator="SAD">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img class="emotionIndicator" src="images/angry.png" alt="angry-icon" data-emotionIndicator="ANGRY">
+						</td>
+						<td>
+							<img class="emotionIndicator" src="images/confused.png" alt="confused-icon" data-emotionIndicator="CONFUSED">
+						</td>
+					</tr>
+				</table>
+
+
+
 			</div>
 		</section>
 
 
 		<section class="nonMedUser" th:if="${patient.nonMedicalUser}">
-			<img class="nonMedIcon" src="images/Caregiver.png"
-				alt="caregiver-icon">
+			<img class="nonMedIcon" src="images/Caregiver.png" alt="caregiver-icon">
 			<h2>Your Caregiver</h2>
 			<div class="nonMedUserInfo">
 				<h3>[[${patient.nonMedicalUser.firstName}]]
@@ -95,12 +110,9 @@
 			<div class="medUserInfo">
 				<h3>[[${patient.medicalUser.firstName}]]
 					[[${patient.medicalUser.lastName}]]</h3>
-				<p
-					th:text=" 'Specialty: ' + (${patient.medicalUser.medicalSpecialty} ?: 'unknown')"></p>
-				<p
-					th:text=" 'Institution: ' + (${patient.medicalUser.medicalInstitution} ?: 'unknown')"></p>
-				<p
-					th:text=" 'Institution Phone: ' + (${patient.medicalUser.institutionTelephone} ?: 'unknown')"></p>
+				<p th:text=" 'Specialty: ' + (${patient.medicalUser.medicalSpecialty} ?: 'unknown')"></p>
+				<p th:text=" 'Institution: ' + (${patient.medicalUser.medicalInstitution} ?: 'unknown')"></p>
+				<p th:text=" 'Institution Phone: ' + (${patient.medicalUser.institutionTelephone} ?: 'unknown')"></p>
 				<p>Contact</p>
 				<ul>
 					<li th:if="${patient.medicalUser.contactInfo.phone}">[[${patient.medicalUser.contactInfo.phone}]]</li>
@@ -132,10 +144,10 @@
 		</section>
 
 	</div>
-		<footer id="footer">
-			<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus
-				Final project</small>
-		</footer>
+	<footer id="footer">
+		<small>&copy; 2018 Peace Of Mind WCCI Flex Fall Columbus
+			Final project</small>
+	</footer>
 
 </body>
 

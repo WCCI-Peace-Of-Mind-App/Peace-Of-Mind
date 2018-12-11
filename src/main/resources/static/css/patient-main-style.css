@@ -157,6 +157,10 @@ section p, section h3, section ul, section li, section address {
   display: inherit;
 }
 
+.link-box {
+	text-decoration: none;
+}
+
 
 @media screen and (max-width: 750px) {
 	.dashboard {

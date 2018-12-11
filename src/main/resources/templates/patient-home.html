@@ -52,13 +52,13 @@
 
 	<div class="dashboard">
 
-		<section class="medication" th:if="${patient.medications}">
-			<img class="medicineIcon" src="images/medicine.png"
-				alt="medication-icon">
-			<h2>
-				<a th:href="@{/my-medications(id=${patient.id})}">Medications</a>
-			</h2>
-		</section>
+		<a class="link-box" th:href="@{/my-medications(id=${patient.id})}">
+			<section class="medication" th:if="${patient.medications}">
+				<img class="medicineIcon" src="images/medicine.png"
+					alt="medication-icon">
+				<h2>Medications</h2>
+			</section>
+		</a>
 
 		<section class="patientStatus">
 			<img class="emotionsIcon" src="images/emotions.png"
@@ -119,17 +119,12 @@
 			</div>
 		</section>
 
-		<section class="diary">
-			<img class="diaryIcon" src="images/diary.png" alt="diary-icon">
-			<h2>
-				<a th:href="@{/patient-diary(id=${patient.id})}">Your Diary</a>
-			</h2>
-			<div class="diary">
-				<p>
-					<em>placeholder</em>
-				</p>
-			</div>
-		</section>
+		<a class="link-box" th:href="@{/patient-diary(id=${patient.id})}">
+			<section class="diary">
+				<img class="diaryIcon" src="images/diary.png" alt="diary-icon">
+				<h2>Your Diary</h2>
+			</section>
+		</a>
 
 	</div>
 		<footer id="footer">

@@ -70,8 +70,12 @@ const unhidePatientStatusImages = (imageSelector, evnt) => {
 const changeFlexDirection = (containerSelection) => {
   if (document.querySelector(containerSelection).style.flexDirection === "row") {
     document.querySelector(containerSelection).style.flexDirection = "column";
+    document.querySelector(containerSelection).style.justifyContent = "center";
+    document.querySelector(containerSelection).style.flexWrap = "no wrap";
   } else {
     document.querySelector(containerSelection).style.flexDirection = "row";
+    document.querySelector(containerSelection).style.justifyContent = "space-evenly";
+    document.querySelector(containerSelection).style.flexWrap = "wrap";
   }
 }
 

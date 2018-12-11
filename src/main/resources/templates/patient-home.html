@@ -15,18 +15,29 @@
       const swapInnerDivTargetSelectors = [
 		  '.nonMedUser',
 		  '.medUser',
-		  '.userInfo'
+		  '.userInfo'/*,
+		  '.patientStatus'*/
 	  ];
-		document.addEventListener('readystatechange', (evt) => {
-			if (evt.target.readyState === 'complete') {
-			  swapInnerDivTargetSelectors.forEach((v, i, collection) => {
-                  document.querySelector(v).addEventListener(
-					  'click',
-					  swapInnerDiv.bind(document.querySelector(v), v)
-				  )
-			  });
-			}
-		})
+	  const patientEmotionContainerSelector = '.patientStatus';
+	  const emotionIndicatorSelector = '.emotionIndicator';
+	  document.addEventListener('readystatechange', (evt) => {
+		if (evt.target.readyState === 'complete') {
+		  swapInnerDivTargetSelectors.forEach((v, i, collection) => {
+              document.querySelector(v).addEventListener(
+				  'click',
+				  swapInnerDiv.bind(document.querySelector(v), v)
+			  )
+		  });
+		  
+		  document.querySelector(patientEmotionContainerSelector).addEventListener(
+			  'click',
+			  emotionIndicatorClickHandler.bind(null, patientEmotionContainerSelector, [[${patient.id}]], `${patientEmotionContainerSelector} img`)
+		  );
+			  // listener present on .patientStatus to swap siblings-children **and listener to Section to un-hide .emotionIndicator** at default
+			  // Click listener on images will 1) fetch POST add-status, 2) cancel propagation of bubble,
+			  // 3) hide other three icons
+		}
+	  });
 	</script>
 </head>
 
@@ -54,12 +65,10 @@
 				alt="emotion-icon">
 			<h2>How are you feeling?</h2>
 			<div class="emotionalStatus">
-				<img class="emotionIndicator" src="images/happy.png"
-					alt="happy-icon"> <img class="emotionIndicator"
-					src="images/sad.png" alt="sad-icon"> <img
-					class="emotionIndicator" src="images/angry.png" alt="angry-icon">
-				<img class="emotionIndicator" src="images/confused.png"
-					alt="confused-icon">
+				<img class="emotionIndicator" src="images/happiness.png" alt="happy-icon" data-emotionIndicator="HAPPY">
+        <img class="emotionIndicator" src="images/tearful.png" alt="sad-icon" data-emotionIndicator="SAD">
+        <img class="emotionIndicator" src="images/angry.png" alt="angry-icon" data-emotionIndicator="ANGRY">
+				<img class="emotionIndicator" src="images/confused.png" alt="confused-icon" data-emotionIndicator="CONFUSED">
 			</div>
 		</section>
 

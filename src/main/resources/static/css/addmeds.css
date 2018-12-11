@@ -65,4 +65,5 @@ button:hover {
 .new-medication {
     font-weight: bold;
     font-style: italic;
+    transition: 1s opacity;
 }

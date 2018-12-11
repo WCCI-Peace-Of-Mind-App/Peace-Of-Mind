@@ -87,7 +87,6 @@ section {
 }
 
 section .emotionIndicator {
-	visibility: hidden;
 	background: transparent;
 }
 
@@ -148,6 +147,16 @@ section p, section h3, section ul, section li, section address {
 	background: transparent;
 }
 
+.hidden {
+	visibility: hidden;
+	display: none;
+}
+
+.patientStatus img.emotionsIcon {
+  visibility: visible;
+  display: inherit;
+
+
 @media screen and (max-width: 750px) {
 	.dashboard {
 		display: grid;
@@ -195,4 +204,5 @@ section p, section h3, section ul, section li, section address {
 		display: block;
 		max-width: 90%;
 	}
+
 }

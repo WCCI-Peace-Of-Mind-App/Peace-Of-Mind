@@ -61,7 +61,49 @@ const swapInnerDiv = (selector, evt) => {
     insertArrayOfNodes(oContainer.childNodes[0], aIncumbentInnerChildren);
     oContainer.insertAdjacentHTML('afterbegin', sNewDivSiblings);
   }
-}
+};
+
+const unhidePatientStatusImages = (imageSelector, evnt) => {
+  document.querySelectorAll(imageSelector).forEach((imgEl) => imgEl.classList.remove('hidden'))
+};
+
+// listener present on .patientStatus to 1) swap siblings-children, 2) remove .hidden, then 3) any ".patientStatus img" items to get the following click listener:
+			  // Click listener on images will 1) cancel propagation of bubble, 2) fetch POST add-status,
+			  // 3) hide other three icons, (pause for fade) 4) then swap siblings-children
+// need class name for all emotion indicators, and the selector for the container
+const emotionIndicatorClickHandler = (containerSelector, patientId, emotionIndicatorSelector, eventObj) => {
+  console.log(`In emotionIndicatorClickHandler and received emotionIndicatorSelector ${emotionIndicatorSelector} and event object: ${eventObj}`);
+  swapInnerDiv(containerSelector, eventObj);
+  unhidePatientStatusImages(emotionIndicatorSelector, eventObj);
+  document.querySelectorAll(emotionIndicatorSelector).forEach(
+    (v, i, collection) => {
+        const targetEmotionIndicator = v;
+        v.addEventListener(
+            'click',
+            (event) => {
+                event.stopPropagation();
+                event.cancelBubble = true;
+                const headerObj = {
+                  method: "POST",
+                  cache: "no-cache",
+                  credentials: "same-origin",
+                  headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                  }
+                };
+                fetch(`http://localhost:8080/add-status/${targetEmotionIndicator.getAttribute('data-emotionIndicator')}/${patientId}`, headerObj).then(
+                    (response) => response.text
+                ).catch((err) => console.log(`add-status POST error: ${err.message}`));
+                document.querySelectorAll(emotionIndicatorSelector).forEach((value, index, list) => {
+                    if(value.getAttribute('data-emotionIndicator')!==targetEmotionIndicator.getAttribute('data-emotionIndicator'))  value.classList.add('hidden');
+                });
+                window.setTimeout(swapInnerDiv.bind(null,'.patientStatus', event), 500);
+    }
+  );
+  });
+};
+
+
 // const functions = {
 // hoverInnerDiv: (this)=> {
 // for(let el in this.childNodes){

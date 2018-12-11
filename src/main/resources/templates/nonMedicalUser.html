@@ -48,10 +48,8 @@
 									</h4>
 									<div class="paragraph-copy">
 										<p>Reason for administration: [[${medication.reason}]]</p>
-										<p>Dosage: [[${medication.dosage}]] via
-											[[${medication.administration}]] every
-											[[${medication.frequencyAmount}]]
-											[[${medication.frequencyTime}]]</p>
+										<p th:if="${medication.frequencyTime.name() == 'As_Needed'}">Dose: [[${medication.dosage}]] via [[${medication.administration}]] as needed</p>
+										<p th:unless="${medication.frequencyTime.name() == 'As_Needed'}">Dose: [[${medication.dosage}]] via [[${medication.administration}]] [[${medication.frequencyAmount}]]x [[${medication.frequencyTime}]]</p>
 									</div>
 								</div>
 							</div>

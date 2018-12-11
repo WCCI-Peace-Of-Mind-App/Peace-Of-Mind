@@ -67,6 +67,18 @@ const unhidePatientStatusImages = (imageSelector, evnt) => {
   document.querySelectorAll(imageSelector).forEach((imgEl) => imgEl.classList.remove('hidden'))
 };
 
+const changeFlexDirection = (containerSelection) => {
+  if (document.querySelector(containerSelection).style.flexDirection === "row") {
+    document.querySelector(containerSelection).style.flexDirection = "column";
+    document.querySelector(containerSelection).style.justifyContent = "center";
+    document.querySelector(containerSelection).style.flexWrap = "no wrap";
+  } else {
+    document.querySelector(containerSelection).style.flexDirection = "row";
+    document.querySelector(containerSelection).style.justifyContent = "space-evenly";
+    document.querySelector(containerSelection).style.flexWrap = "wrap";
+  }
+}
+
 // listener present on .patientStatus to 1) swap siblings-children, 2) remove .hidden, then 3) any ".patientStatus img" items to get the following click listener:
 			  // Click listener on images will 1) cancel propagation of bubble, 2) fetch POST add-status,
 			  // 3) hide other three icons, (pause for fade) 4) then swap siblings-children
@@ -74,6 +86,7 @@ const unhidePatientStatusImages = (imageSelector, evnt) => {
 const emotionIndicatorClickHandler = (containerSelector, patientId, emotionIndicatorSelector, eventObj) => {
   console.log(`In emotionIndicatorClickHandler and received emotionIndicatorSelector ${emotionIndicatorSelector} and event object: ${eventObj}`);
   swapInnerDiv(containerSelector, eventObj);
+  changeFlexDirection(containerSelector);
   unhidePatientStatusImages(emotionIndicatorSelector, eventObj);
   document.querySelectorAll(emotionIndicatorSelector).forEach(
     (v, i, collection) => {
@@ -97,7 +110,8 @@ const emotionIndicatorClickHandler = (containerSelector, patientId, emotionIndic
                 document.querySelectorAll(emotionIndicatorSelector).forEach((value, index, list) => {
                     if(value.getAttribute('data-emotionIndicator')!==targetEmotionIndicator.getAttribute('data-emotionIndicator'))  value.classList.add('hidden');
                 });
-                window.setTimeout(swapInnerDiv.bind(null,'.patientStatus', event), 500);
+                window.setTimeout(swapInnerDiv.bind(null,'.patientStatus', event), 3000);
+                changeFlexDirection(containerSelector);
     }
   );
   });

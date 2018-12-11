@@ -176,6 +176,10 @@ section p, section h3, section ul, section li, section address {
 		height: 1500px;
 	}
 
+	.emotionIndicator {
+		margin: 5%;
+	}
+
 }
 
 @media screen and (max-width: 40em) {
@@ -187,6 +191,11 @@ section p, section h3, section ul, section li, section address {
 		max-width: 90%;
 		position: relative;
 	}
+	
+	.emotionIndicator {
+		margin: 0;
+	}
+
 }
 
 @media screen and (max-width: 25em) {
@@ -196,8 +205,8 @@ section p, section h3, section ul, section li, section address {
 		margin: 1em auto;
 		position: relative;
 		padding: .5rem;
-		
 	}
+
 	nav h2 {
 		width: auto;
 		min-width: unset;

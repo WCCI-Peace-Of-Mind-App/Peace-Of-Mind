@@ -24,8 +24,8 @@
 
 		<form method="POST">
 			<div>
-				<label>What's on your mind?:</label> <input type="text"
-					name="entryText" />
+				<label>What's on your mind?</label> 
+				<textarea name="entryText" autocomplete="off"></textarea>
 			</div>
 			<div>
 				<input type="hidden" th:value="${patient.id}" name="patientId" />

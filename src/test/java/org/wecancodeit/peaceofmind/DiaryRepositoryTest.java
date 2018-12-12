@@ -42,7 +42,7 @@ public class DiaryRepositoryTest {
 
 	@Before
 	public void setUp() {
-		patient = patientRepo.save(new Patient("firstName", "lastName", null, "01/01/0000", "diagnosis", null));
+		patient = patientRepo.save(new Patient("firstName", "lastName", null, "01/01/0000", "diagnosis", null, "solarid", "str@ng3W3@th3r"));
 		underTest = diaryRepo.save(new Diary("entry text", patient));
 		diaryId = underTest.getId();
 

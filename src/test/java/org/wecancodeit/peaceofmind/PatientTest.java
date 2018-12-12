@@ -4,14 +4,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.wecancodeit.peaceofmind.ContactInfo;
-import org.wecancodeit.peaceofmind.Patient;
 
 public class PatientTest {
 	
 	
 	ContactInfo contactInfo = new ContactInfo();
-	Patient underTest = new Patient("firstName", "lastName", contactInfo, "01/01/0000", "diagnosis", null);
+	Patient underTest = new Patient("firstName", "lastName", contactInfo, "01/01/0000", "diagnosis", null, "solarid", "str@ng3W3@th3r");
 	
 	
 	@Test

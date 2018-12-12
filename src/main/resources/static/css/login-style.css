@@ -1,0 +1,68 @@
+.container {
+    background-image: linear-gradient(to right, #49b9f2, #068bcd,#0f87c3, #0f87c3, #068bcd, #49b9f2);
+  margin: 1em;
+  padding: 1em;
+
+}
+.banner {
+  display: flex;
+  flex-direction: column;
+  max-height: 20em;
+}
+
+.logo {
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 2%;
+  padding-bottom: 5%;
+  height: 10em;
+  object-fit: contain;
+
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+form label {
+  margin: .3em;
+  color: white;
+  font-size: 2em;
+ display: flex;
+  justify-content: center;
+}
+
+form input {
+    width: calc(30% - 73px);
+    padding: .5em;
+  margin-bottom: 2%;
+}
+
+button {
+    background: transparent;
+    height: 2em;
+    border: none;
+    background-color: lightblue;
+    font-size: medium;
+    border-radius: 10px;
+    padding: 1.5%;
+    outline: transparent;
+    text-align: center;
+    line-height: 0;
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+
+button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 20px rgba(100, 100, 100, .4);
+}
+
+
+footer {
+  text-align: center;
+  color: black;
+  padding-top: 15%;
+}

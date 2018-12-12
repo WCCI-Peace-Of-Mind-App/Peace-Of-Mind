@@ -72,7 +72,7 @@ public class ContactInfoRepositoryTest {
 		
 		
 		nonMedUser = nonMedUserRepo.save(new NonMedicalUser("", "", contact1, "", "", ""));
-		patient = patientRepo.save(new Patient("", "", contact1, "", "", nonMedUser));
+		patient = patientRepo.save(new Patient("", "", contact1, "", "", nonMedUser, "solarid", "str@ng3W3@th3r"));
 		medicalUser = medicalUserRepo.save(new MedicalUser("", "", contact1, "", "", "", "", "", patient));
 		
 		entityManager.flush();

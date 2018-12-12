@@ -57,7 +57,7 @@ public class MedicationTrackerRepositoryTest {
 		NonMedicalUser nonMedUser = nonMedUserRepo.save(new NonMedicalUser("Albus", "Dumbledore", contact, "colleague", "", "" ));
 		Medication testMed = medRepo
 				.save(new Medication("Chocolate Frog", "1 frog", AdministrationEnum.ORAL, 1, doseFrequencyTimeEnum.Daily, "img.jpg", "good spirits"));
-		patientRepo.save(new Patient("Gilderoy", "Lockhart", contact, "date", "dementia", nonMedUser, testMed ));
+		patientRepo.save(new Patient("Gilderoy", "Lockhart", contact, "date", "dementia", nonMedUser, "solarid", "str@ng3W3@th3r", testMed ));
 
 		medLogRepo.save(new MedicationLog(testMed));
 		underTest = medTrackerRepo.save(new MedicationTracker(testMed));

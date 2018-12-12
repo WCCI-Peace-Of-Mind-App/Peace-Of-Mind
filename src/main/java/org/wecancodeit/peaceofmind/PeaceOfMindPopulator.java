@@ -102,7 +102,7 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
     Medication med18 = medRepo.save(new Medication("Spironolactone", "50mg", AdministrationEnum.ORAL, 2, doseFrequencyTimeEnum.Daily, "https://rxpillimage.nlm.nih.gov/RxImage/image/images/gallery/original/00536-1004-10_NLMIMAGE10_1A400D30.jpg","Diuretic"));
 
 		
-		Patient patient1 = patientRepo.save(new Patient("Joe", "Bob", contactInfo1, "01/01/01", "Alzheimers", nonMedUser2, med1, med2));
+		Patient patient1 = patientRepo.save(new Patient("Joe", "Bob", contactInfo1, "01/01/01", "Alzheimers", nonMedUser2, "solarid", "str@ng3W3@th3r", med1, med2));
 		medLogRepo.save(new MedicationLog(med1));
 		medLogRepo.save(new MedicationLog(med12));
 		medLogRepo.save(new MedicationLog(med1, pastDate));

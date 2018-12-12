@@ -5,6 +5,7 @@
   <title>Peace Of Mind - Medical Home</title>
   <link href="/css/non-med-styles.css" rel="stylesheet">
   <link href="/css/status-history.css" rel="stylesheet">
+  <link href="/css/button.css" rel="stylesheet">
 </head>
 
 <body class="container">
@@ -67,7 +68,7 @@
       </div>
       <br/>
       <form method="post">
-        <p>Would you like to add a new medication to this patient?</p>
+        <p class="add-med-question">Would you like to add a new medication to this patient?</p>
         <button class="btn meds-btn" type="submit" value="submit" id="btn-add-med" th:formaction="@{|/add-medication/${patient.id}/${medicalUser.id}|}">Add Medication</button>
       </form>
     </section>

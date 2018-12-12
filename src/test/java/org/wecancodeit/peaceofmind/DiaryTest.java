@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class DiaryTest {
 
-	Patient patient = new Patient("firstName", "lastName", null, "01/01/0000", "diagnosis", null);
+	Patient patient = new Patient("firstName", "lastName", null, "01/01/0000", "diagnosis", null, "solarid", "str@ng3W3@th3r");
 	Diary underTest = new Diary("entry text", patient);
 	
 	DateTimeFormatter yyyymmddhhmm = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -335,6 +336,36 @@ public class PeaceOfMindController {
 
 		return "med-Tracker-History-Med";
 
+	}
+	
+	@RequestMapping("/user-login")
+	public String userLogin() {
+		return "/user-login";
+	}
+	
+
+	@RequestMapping(path = "/login", method = RequestMethod.GET)
+	public String Login(String userName, String password, Model model) {
+		MedicalUser medUser = medUserRepo.findByUserNameAndPassword(userName, password);
+		NonMedicalUser nonMedUser = nonMedUserRepo.findByUserNameAndPassword(userName, password);
+		Patient patient = patientRepo.findByUserNameAndPassword(userName, password);
+		
+		if (medUser != null) {
+			long id = medUser.getId();
+			
+			return "redirect:/medical-user-home?id=" + id;
+		} else if (nonMedUser != null) {
+			long id = nonMedUser.getId();
+			
+			return "redirect:/non-medical-user-home?id=" + id;
+		} else if (patient != null) {
+			
+			long id = patient.getId();
+			return "redirect:/patient-home?id=" + id;
+		} else {
+
+		return "redirect:/user-login";
+		}
 	}
 
 }

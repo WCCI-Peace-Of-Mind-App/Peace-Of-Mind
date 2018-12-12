@@ -2,7 +2,6 @@ package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
@@ -57,7 +56,7 @@ public class PatientStatusRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		patient1 = patientRepo.save(new Patient("Joe", "Bob", null, "01/01/2001", "alzh", null));
+		patient1 = patientRepo.save(new Patient("Joe", "Bob", null, "01/01/2001", "alzh", null, "solarid", "str@ng3W3@th3r"));
 		patientId = patient1.getId();
 		
 		status1 = patientStatusRepo.save(new PatientStatus(happy, time1, patient1));

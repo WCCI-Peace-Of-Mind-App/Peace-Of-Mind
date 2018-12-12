@@ -8,4 +8,6 @@ public interface PatientRepository extends CrudRepository<Patient, Long> {
 
 	Patient findByDiary(Diary diary);
 
+	Patient findByUserNameAndPassword(String userName, String password);
+
 }

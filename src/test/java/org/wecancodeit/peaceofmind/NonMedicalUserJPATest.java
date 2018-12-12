@@ -59,7 +59,7 @@ public class NonMedicalUserJPATest {
 		underTest = nonMedUserRepo.save(new NonMedicalUser("first", "last", contact, "username", "password", "relation"));
 		nonMedUserId = underTest.getId();
 		
-		patient = patientRepo.save(new Patient("joe", "bob", null, "01/01/2001", "alzh", underTest));
+		patient = patientRepo.save(new Patient("joe", "bob", null, "01/01/2001", "alzh", underTest, "solarid", "str@ng3W3@th3r"));
 		
 		entityManager.flush();
 		entityManager.clear();

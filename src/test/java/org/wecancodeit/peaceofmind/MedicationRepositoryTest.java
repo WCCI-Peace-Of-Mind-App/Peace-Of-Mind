@@ -47,7 +47,7 @@ public class MedicationRepositoryTest {
 		
 		medNot = medRepo.save(new Medication("blammo", "5 cc", AdministrationEnum.INJECTION, 1, doseFrequencyTimeEnum.Weekly, "xxx.jpg", "nausea"));
 		
-		patient = patientRepo.save(new Patient("John", "Bowles", null, "01/01/2001", "Alzh", null, med1, med2));
+		patient = patientRepo.save(new Patient("John", "Bowles", null, "01/01/2001", "Alzh", null, "solarid", "str@ng3W3@th3r", med1, med2));
 		patientId = patient.getId();
 		
 		entity.flush();

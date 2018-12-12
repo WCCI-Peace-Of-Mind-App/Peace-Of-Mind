@@ -42,11 +42,11 @@ public class PatientRepositoryTest {
 	@Before
 	public void setUp() {
 		contactInfo = contactInfoRepo.save(new ContactInfo());
-		patient = patientRepo.save(new Patient(null, null, contactInfo, null, null, null));
+		patient = patientRepo.save(new Patient(null, null, contactInfo, null, null, null, "solarid", "str@ng3W3@th3r"));
 		patientId = patient.getId();
 		
 		contactInfo2 = contactInfoRepo.save(new ContactInfo());
-		patient2 = patientRepo.save(new Patient(null, null, contactInfo2, null, null, null));
+		patient2 = patientRepo.save(new Patient(null, null, contactInfo2, null, null, null, "solarid", "str@ng3W3@th3r"));
 		
 		medUser = medUserRepo.save(new MedicalUser("Otto", "Octavius", null, "Therapist", "Ohio State Med", "911", "docOc", "tentacles8", patient));
 		medUserId = medUser.getId();

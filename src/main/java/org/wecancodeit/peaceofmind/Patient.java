@@ -45,6 +45,8 @@ public class Patient implements IPerson {
 	
 	@OneToMany(mappedBy="patient")
 	private Collection<Diary> diary; 
+	private String userName;
+	private String password;
 
 	public long getId() {
 		return id;
@@ -87,10 +89,19 @@ public class Patient implements IPerson {
 	public Collection<Diary> getDiary() {
 		return diary; 
 	}
+	
+
+	public String getUserName() {
+		return userName;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
 
 	public Patient() {}
 	
-	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis, NonMedicalUser nonMedicalUser, Medication...medications) {
+	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis, NonMedicalUser nonMedicalUser, String userName, String password, Medication...medications) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.contactInfo = contactInfo;
@@ -99,6 +110,8 @@ public class Patient implements IPerson {
 		this.nonMedicalUser = nonMedicalUser;
 		this.medications = new HashSet<>(Arrays.asList(medications));
 		this.statusHistory = new ArrayList<>();
+		this.userName = userName;
+		this.password = password;
 	}
 	
 	public void addMedication(Medication medication) {

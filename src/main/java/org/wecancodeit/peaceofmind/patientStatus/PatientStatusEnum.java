@@ -1,10 +1,10 @@
 package org.wecancodeit.peaceofmind.patientStatus;
 
 public enum PatientStatusEnum {
-  HAPPY ("happiness.png"), 
-  SAD ("tearful.png"), 
-  ANGRY ("angry.png"), 
-  CONFUSED ("confused.png");
+	HAPPY ("happiness.png"), 
+	SAD ("tearful.png"), 
+	ANGRY ("angry.png"), 
+	CONFUSED ("confused.png");
 	
 	private final String imageFile;
 	

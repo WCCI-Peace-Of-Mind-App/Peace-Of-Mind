@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.wecancodeit.peaceofmind.diary.Diary;
+import org.wecancodeit.peaceofmind.diary.DiaryRepository;
 import org.wecancodeit.peaceofmind.medication.Medication;
 import org.wecancodeit.peaceofmind.medication.MedicationLogRepository;
 import org.wecancodeit.peaceofmind.medication.MedicationRepository;

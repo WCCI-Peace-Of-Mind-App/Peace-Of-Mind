@@ -1,6 +1,7 @@
 package org.wecancodeit.peaceofmind;
 
 import org.springframework.data.repository.CrudRepository;
+import org.wecancodeit.peaceofmind.diary.Diary;
 
 public interface PatientRepository extends CrudRepository<Patient, Long> {
 

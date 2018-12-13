@@ -20,6 +20,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.NestedServletException;
+import org.wecancodeit.peaceofmind.diary.DiaryRepository;
 import org.wecancodeit.peaceofmind.medication.MedicationLogRepository;
 import org.wecancodeit.peaceofmind.medication.MedicationRepository;
 import org.wecancodeit.peaceofmind.medication.MedicationTrackerRepository;

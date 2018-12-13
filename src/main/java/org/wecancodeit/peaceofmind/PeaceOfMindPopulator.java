@@ -15,6 +15,8 @@ import org.wecancodeit.peaceofmind.contact.Email;
 import org.wecancodeit.peaceofmind.contact.EmailRepository;
 import org.wecancodeit.peaceofmind.contact.Phone;
 import org.wecancodeit.peaceofmind.contact.PhoneRepository;
+import org.wecancodeit.peaceofmind.diary.Diary;
+import org.wecancodeit.peaceofmind.diary.DiaryRepository;
 import org.wecancodeit.peaceofmind.medication.AdministrationEnum;
 import org.wecancodeit.peaceofmind.medication.Medication;
 import org.wecancodeit.peaceofmind.medication.MedicationLog;

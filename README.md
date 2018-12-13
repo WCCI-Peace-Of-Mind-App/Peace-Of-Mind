@@ -1,4 +1,4 @@
-![alt text](https://github.com/WCCI-Peace-Of-Mind-App/Peace-Of-Mind/tree/master/src/main/resources/static/images/ReadMeBanner.png?raw=true "Peace-of-Mind-Banner")
+![alt text](https://github.com/WCCI-Peace-Of-Mind-App/Peace-Of-Mind/blob/ie_logo_fiddling/src/main/resources/static/images/ReadMeBanner.png?raw=true "Peace-of-Mind-Banner")
 
 Peace of Mind is a final project for the WeCanCodeIT! Bootcamp located in Columbus, OH.
 

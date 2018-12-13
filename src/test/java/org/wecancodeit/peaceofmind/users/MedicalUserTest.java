@@ -21,7 +21,6 @@ public class MedicalUserTest {
 	String userName;
 	String userPassword;
 	
-	//String name, String address, ContactInfo contactInfo, String medicalSpecialty, String medicalInstitution, String institutionTelephone, String userName, String password	
 	MedicalUser user2;
 	
 	@Before
@@ -36,16 +35,49 @@ public class MedicalUserTest {
 		userName = "WcciAdmin2";
 		userPassword = "1999";
 
-		
-		
 		user  = new MedicalUser(firstName,lastName,contactInfo,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword, null);
 
 	}
 	
+	
 	@Test
-	public void shouldAssertUser2Constructor() {
-		contactInfo = new ContactInfo();
-			
+	public void shouldCreateMedicalUser() {
+		assertThat(user, instanceOf(MedicalUser.class));
+	}
+	
+	@Test
+	public void shouldRetunrMedicalUserNameMichael() {
+		String actualName = user.getFirstName();
+		assertThat(actualName, is(firstName));
+	}
+	
+	
+	@Test
+	public void shouldRetunrMedicalUserMtCarmel() {
+		String actualMedInstitution = user.getMedicalInstitution();	
+		assertThat(actualMedInstitution, is(medInstitution));
+	}
+	
+	@Test
+	public void shouldRetunrMedicalUser8009999990() {
+		String actualTelephone = user.getInstitutionTelephone();
+		assertThat(actualTelephone, is(institutionTelephone));
+	}
+		
+	@Test
+	public void shouldRetunrMedicalUserWcciAdmin2() {
+		String actualUserName = user.getUserName();
+		assertThat(actualUserName, is(userName));
+	}
+	
+	@Test
+	public void shouldRetunrMedicalUser1999() {
+		String actualPassword = user.getPassword();
+		assertThat(actualPassword, is(userPassword));
+	}
+	
+	@Test
+	public void shouldAssertCreationOfDifferentMedicalUser() {
 		firstName = "Simon";
 		lastName = "Bob";
 		medicalSpecialty = "Therapist";
@@ -53,10 +85,9 @@ public class MedicalUserTest {
 		institutionTelephone = "800999999";
 		userName = "wcciAdmin";
 		userPassword = "1222";
-
-		user2  = new MedicalUser(firstName,lastName,contactInfo,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword, null);
-
 		
+		user2  = new MedicalUser(firstName,lastName,contactInfo,medicalSpecialty,medInstitution,institutionTelephone,userName,userPassword, null);
+			
 		assertThat(((MedicalUser) user2).getFirstName(),is(firstName));
 		assertThat(((MedicalUser) user2).getLastName(),is(lastName));
 		assertThat(((MedicalUser) user2).getMedicalSpecialty(),is(medicalSpecialty));
@@ -64,48 +95,6 @@ public class MedicalUserTest {
 		assertThat(((MedicalUser) user2).getInstitutionTelephone(),is(institutionTelephone));
 		assertThat(((MedicalUser) user2).getUserName(),is(userName));
 		assertThat(((MedicalUser) user2).getPassword(),is(userPassword));
-	}
-	
-	@Test
-	public void shouldCreateMedicalUser() {
-		
-		user = new MedicalUser("","",null,"","","","","", null);		
-		assertThat(user, instanceOf(MedicalUser.class));
-		
-	}
-	
-	@Test
-	public void shouldRetunrMedicalUserNameMichael() {
-		String actualName = ((MedicalUser) user).getFirstName();
-		assertThat(actualName, is(firstName));
-	}
-	
-	
-	@Test
-	public void shouldRetunrMedicalUserMtCarmel() {
-		String actualMedInstitution = ((MedicalUser) user).getMedicalInstitution();	
-		assertThat(actualMedInstitution, is(medInstitution));
-	}
-	
-	@Test
-	public void shouldRetunrMedicalUser8009999990() {
-		String actualTelephone = ((MedicalUser) user).getInstitutionTelephone();
-		assertThat(actualTelephone, is(institutionTelephone));
-		
-	}
-		
-	@Test
-	public void shouldRetunrMedicalUserWcciAdmin2() {
-		String actualUserName = ((MedicalUser) user).getUserName();
-		assertThat(actualUserName, is(userName));
-		
-	}
-	
-	@Test
-	public void shouldRetunrMedicalUser1999() {
-		String actualPassword = ((MedicalUser) user).getPassword();
-		assertThat(actualPassword, is(userPassword));
-		
 	}
 	
 }

@@ -71,6 +71,7 @@ public class Patient implements IPerson {
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
+	
 	public String getDiagnosis() {
 		return diagnosis;
 	}
@@ -95,7 +96,6 @@ public class Patient implements IPerson {
 		return diary; 
 	}
 	
-
 	public String getUserName() {
 		return userName;
 	}

@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import org.wecancodeit.peaceofmind.contact.ContactInfo;
 
 @Entity
-public class NonMedicalUser implements INonPatientUser {
+public class NonMedicalUser implements IPerson {
 	
 	@Id
 	@GeneratedValue

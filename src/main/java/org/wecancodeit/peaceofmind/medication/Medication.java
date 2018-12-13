@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.wecancodeit.peaceofmind.Patient;
+import org.wecancodeit.peaceofmind.users.Patient;
 
 @Entity
 public class Medication {

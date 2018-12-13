@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.users;
 
 import org.wecancodeit.peaceofmind.contact.ContactInfo;
 

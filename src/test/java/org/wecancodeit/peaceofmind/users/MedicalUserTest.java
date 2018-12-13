@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.users;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -6,7 +6,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.wecancodeit.peaceofmind.MedicalUser;
 import org.wecancodeit.peaceofmind.contact.ContactInfo;
 
 public class MedicalUserTest {

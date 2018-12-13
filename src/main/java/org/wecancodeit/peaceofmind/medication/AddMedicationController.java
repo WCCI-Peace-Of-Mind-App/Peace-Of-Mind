@@ -9,12 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.wecancodeit.peaceofmind.MedicalUser;
-import org.wecancodeit.peaceofmind.MedicalUserNotFoundException;
-import org.wecancodeit.peaceofmind.MedicalUserRepository;
-import org.wecancodeit.peaceofmind.Patient;
-import org.wecancodeit.peaceofmind.PatientNotFoundException;
-import org.wecancodeit.peaceofmind.PatientRepository;
+import org.wecancodeit.peaceofmind.users.MedicalUser;
+import org.wecancodeit.peaceofmind.users.MedicalUserNotFoundException;
+import org.wecancodeit.peaceofmind.users.MedicalUserRepository;
+import org.wecancodeit.peaceofmind.users.Patient;
+import org.wecancodeit.peaceofmind.users.PatientNotFoundException;
+import org.wecancodeit.peaceofmind.users.PatientRepository;
 
 @Controller
 @RequestMapping("/add-medication")

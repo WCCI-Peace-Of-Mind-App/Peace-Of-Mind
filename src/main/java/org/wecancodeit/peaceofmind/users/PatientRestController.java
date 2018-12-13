@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.users;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.wecancodeit.peaceofmind.medication.Medication;
-import org.wecancodeit.peaceofmind.medication.MedicationLog;
-import org.wecancodeit.peaceofmind.medication.MedicationLogRepository;
-import org.wecancodeit.peaceofmind.medication.MedicationNotFoundException;
+import org.wecancodeit.peaceofmind.medication.*;
 
 //@RestController
 @Controller

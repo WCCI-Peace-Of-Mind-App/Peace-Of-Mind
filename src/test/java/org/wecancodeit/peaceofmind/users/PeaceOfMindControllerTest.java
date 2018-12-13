@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.users;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

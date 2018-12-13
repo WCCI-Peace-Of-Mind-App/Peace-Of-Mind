@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 import java.time.LocalDateTime;
 
 import org.junit.Test;
-import org.wecancodeit.peaceofmind.Patient;
+import org.wecancodeit.peaceofmind.users.Patient;
 
 public class PatientStatusTest {
 

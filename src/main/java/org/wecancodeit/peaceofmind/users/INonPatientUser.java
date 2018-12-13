@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.users;
 
 public interface INonPatientUser extends IPerson {
 

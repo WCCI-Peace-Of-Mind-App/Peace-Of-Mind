@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.Test;
-import org.wecancodeit.peaceofmind.Patient;
+import org.wecancodeit.peaceofmind.users.Patient;
 
 public class DiaryTest {
 

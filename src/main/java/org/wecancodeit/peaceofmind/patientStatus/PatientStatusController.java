@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.wecancodeit.peaceofmind.Patient;
-import org.wecancodeit.peaceofmind.PatientNotFoundException;
-import org.wecancodeit.peaceofmind.PatientRepository;
+import org.wecancodeit.peaceofmind.users.Patient;
+import org.wecancodeit.peaceofmind.users.PatientNotFoundException;
+import org.wecancodeit.peaceofmind.users.PatientRepository;
 
 @Controller
 public class PatientStatusController {

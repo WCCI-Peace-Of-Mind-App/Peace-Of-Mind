@@ -15,8 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
-import org.wecancodeit.peaceofmind.Patient;
-import org.wecancodeit.peaceofmind.PatientRepository;
+import org.wecancodeit.peaceofmind.users.Patient;
+import org.wecancodeit.peaceofmind.users.PatientRepository;
 
 public class PatientStatusControllerTest {
 	

@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.users;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

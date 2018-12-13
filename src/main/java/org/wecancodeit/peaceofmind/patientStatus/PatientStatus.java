@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.wecancodeit.peaceofmind.Patient;
+import org.wecancodeit.peaceofmind.users.Patient;
 @Entity
 public class PatientStatus {
   @GeneratedValue

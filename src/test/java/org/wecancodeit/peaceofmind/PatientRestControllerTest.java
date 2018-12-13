@@ -31,6 +31,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.NestedServletException;
+import org.wecancodeit.peaceofmind.medication.Medication;
+import org.wecancodeit.peaceofmind.medication.MedicationLog;
+import org.wecancodeit.peaceofmind.medication.MedicationLogRepository;
+import org.wecancodeit.peaceofmind.medication.MedicationRepository;
 @RunWith(SpringRunner.class)
 @WebMvcTest(PatientRestController.class)
 public class PatientRestControllerTest {

@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.medication;
 
 public class MedicationNotFoundException extends Exception {
 

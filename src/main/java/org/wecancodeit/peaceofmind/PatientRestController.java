@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.wecancodeit.peaceofmind.medication.Medication;
+import org.wecancodeit.peaceofmind.medication.MedicationLog;
+import org.wecancodeit.peaceofmind.medication.MedicationLogRepository;
+import org.wecancodeit.peaceofmind.medication.MedicationNotFoundException;
 
 //@RestController
 @Controller

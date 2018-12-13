@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.wecancodeit.peaceofmind.contact.ContactInfo;
+import org.wecancodeit.peaceofmind.medication.Medication;
 import org.wecancodeit.peaceofmind.patientStatus.PatientStatus;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

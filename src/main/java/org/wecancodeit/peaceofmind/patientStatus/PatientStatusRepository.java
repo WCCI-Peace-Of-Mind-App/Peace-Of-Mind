@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind.patientStatus;
+package org.wecancodeit.peaceofmind.patientstatus;
 
 import java.util.Collection;
 

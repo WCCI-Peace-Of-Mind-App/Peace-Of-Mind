@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind.patientStatus;
+package org.wecancodeit.peaceofmind.patientstatus;
 //import org.apache.commons.collections4.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -6,6 +6,8 @@ import static org.junit.Assert.assertThat;
 import java.time.LocalDateTime;
 
 import org.junit.Test;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatus;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatusEnum;
 import org.wecancodeit.peaceofmind.users.Patient;
 
 public class PatientStatusTest {

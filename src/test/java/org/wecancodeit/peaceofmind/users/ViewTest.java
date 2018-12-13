@@ -24,8 +24,8 @@ import org.wecancodeit.peaceofmind.diary.DiaryRepository;
 import org.wecancodeit.peaceofmind.medication.MedicationLogRepository;
 import org.wecancodeit.peaceofmind.medication.MedicationRepository;
 import org.wecancodeit.peaceofmind.medication.MedicationTrackerRepository;
-import org.wecancodeit.peaceofmind.patientStatus.PatientStatus;
-import org.wecancodeit.peaceofmind.patientStatus.PatientStatusRepository;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatus;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatusRepository;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(PeaceOfMindController.class)

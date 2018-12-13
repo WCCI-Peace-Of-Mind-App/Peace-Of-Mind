@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind.patientStatus;
+package org.wecancodeit.peaceofmind.patientstatus;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
@@ -21,6 +21,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatus;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatusController;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatusRepository;
 import org.wecancodeit.peaceofmind.users.Patient;
 import org.wecancodeit.peaceofmind.users.PatientRepository;
 

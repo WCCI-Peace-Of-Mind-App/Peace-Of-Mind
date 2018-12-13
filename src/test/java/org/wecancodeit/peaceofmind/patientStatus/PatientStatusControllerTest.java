@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind.patientStatus;
+package org.wecancodeit.peaceofmind.patientstatus;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -15,6 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatus;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatusController;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatusEnum;
+import org.wecancodeit.peaceofmind.patientstatus.PatientStatusRepository;
 import org.wecancodeit.peaceofmind.users.Patient;
 import org.wecancodeit.peaceofmind.users.PatientRepository;
 

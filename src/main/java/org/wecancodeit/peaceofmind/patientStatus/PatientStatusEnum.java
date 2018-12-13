@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind.patientStatus;
+package org.wecancodeit.peaceofmind.patientstatus;
 
 public enum PatientStatusEnum {
 	HAPPY ("happiness.png"), 

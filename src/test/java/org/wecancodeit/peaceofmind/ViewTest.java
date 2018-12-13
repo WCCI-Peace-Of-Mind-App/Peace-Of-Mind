@@ -20,6 +20,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.NestedServletException;
+import org.wecancodeit.peaceofmind.patientStatus.PatientStatus;
+import org.wecancodeit.peaceofmind.patientStatus.PatientStatusRepository;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(PeaceOfMindController.class)

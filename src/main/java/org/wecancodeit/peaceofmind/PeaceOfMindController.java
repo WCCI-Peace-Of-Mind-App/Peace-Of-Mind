@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.wecancodeit.peaceofmind.patientStatus.PatientStatus;
+import org.wecancodeit.peaceofmind.patientStatus.PatientStatusRepository;
 
 @Controller
 public class PeaceOfMindController {

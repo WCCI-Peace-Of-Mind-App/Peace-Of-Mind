@@ -7,6 +7,9 @@ import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.wecancodeit.peaceofmind.patientStatus.PatientStatus;
+import org.wecancodeit.peaceofmind.patientStatus.PatientStatusEnum;
+import org.wecancodeit.peaceofmind.patientStatus.PatientStatusRepository;
 
 @Component
 public class PeaceOfMindPopulator implements CommandLineRunner {

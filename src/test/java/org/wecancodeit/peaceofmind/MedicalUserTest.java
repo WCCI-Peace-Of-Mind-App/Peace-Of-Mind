@@ -6,8 +6,8 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.wecancodeit.peaceofmind.ContactInfo;
 import org.wecancodeit.peaceofmind.MedicalUser;
+import org.wecancodeit.peaceofmind.contact.ContactInfo;
 
 public class MedicalUserTest {
 	

@@ -7,6 +7,14 @@ import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.wecancodeit.peaceofmind.contact.Address;
+import org.wecancodeit.peaceofmind.contact.AddressRepository;
+import org.wecancodeit.peaceofmind.contact.ContactInfo;
+import org.wecancodeit.peaceofmind.contact.ContactInfoRepository;
+import org.wecancodeit.peaceofmind.contact.Email;
+import org.wecancodeit.peaceofmind.contact.EmailRepository;
+import org.wecancodeit.peaceofmind.contact.Phone;
+import org.wecancodeit.peaceofmind.contact.PhoneRepository;
 import org.wecancodeit.peaceofmind.patientStatus.PatientStatus;
 import org.wecancodeit.peaceofmind.patientStatus.PatientStatusEnum;
 import org.wecancodeit.peaceofmind.patientStatus.PatientStatusRepository;

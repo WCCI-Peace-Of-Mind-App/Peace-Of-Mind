@@ -18,6 +18,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.wecancodeit.peaceofmind.contact.ContactInfo;
+import org.wecancodeit.peaceofmind.contact.ContactInfoRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest

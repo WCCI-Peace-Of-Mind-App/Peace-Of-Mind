@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.wecancodeit.peaceofmind.contact.ContactInfo;
+
 @Entity
 public class NonMedicalUser implements INonPatientUser {
 	

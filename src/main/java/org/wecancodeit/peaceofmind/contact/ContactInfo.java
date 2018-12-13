@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.contact;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.wecancodeit.peaceofmind.MedicalUser;
+import org.wecancodeit.peaceofmind.NonMedicalUser;
+import org.wecancodeit.peaceofmind.Patient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

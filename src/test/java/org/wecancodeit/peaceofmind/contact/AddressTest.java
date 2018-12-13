@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.contact;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNull;

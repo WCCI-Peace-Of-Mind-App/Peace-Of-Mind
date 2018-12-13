@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.contact;
 
 
 import static org.hamcrest.CoreMatchers.is;
@@ -16,6 +16,12 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.wecancodeit.peaceofmind.MedicalUser;
+import org.wecancodeit.peaceofmind.MedicalUserRepository;
+import org.wecancodeit.peaceofmind.NonMedicalUser;
+import org.wecancodeit.peaceofmind.NonMedicalUserRepository;
+import org.wecancodeit.peaceofmind.Patient;
+import org.wecancodeit.peaceofmind.PatientRepository;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

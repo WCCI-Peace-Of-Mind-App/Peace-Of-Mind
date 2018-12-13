@@ -45,7 +45,7 @@ public class Patient implements IPerson {
 	@OneToMany
 	private Collection<Medication> medications;
 
-	@OneToMany(mappedBy="parent")
+	@OneToMany(mappedBy="patient")
 	private Collection<PatientStatus> statusHistory;
 	
 	@OneToMany(mappedBy="patient")

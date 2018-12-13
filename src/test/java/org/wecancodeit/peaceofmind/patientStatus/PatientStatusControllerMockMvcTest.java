@@ -90,7 +90,7 @@ public class PatientStatusControllerMockMvcTest {
 	public void shouldBeOkToRouteTo3StatusView() throws Exception {
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
 		Collection<PatientStatus> patientStatuses = Arrays.asList(status, status2, status3);
-		when(patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatuses);
+		when(patientStatusRepo.findTop3ByPatientIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatuses);
 		
 		mvc.perform(get("/status-history-three/1"))
 			.andExpect(status().isOk())
@@ -102,7 +102,7 @@ public class PatientStatusControllerMockMvcTest {
 	public void shouldBeOkToRouteToAllStatusHistoryView() throws Exception {
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
 		Collection<PatientStatus> allStatuses = Arrays.asList(status, status2, status3);
-		when(patientStatusRepo.findByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(allStatuses);
+		when(patientStatusRepo.findByPatientIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(allStatuses);
 		
 		mvc.perform(get("/status-history-all/1"))
 			.andExpect(status().isOk())
@@ -113,7 +113,7 @@ public class PatientStatusControllerMockMvcTest {
 	@Test
 	public void shouldBeOkToReturnToOneView() throws Exception{
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
-		when(patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(status);
+		when(patientStatusRepo.findTop1ByPatientIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(status);
 
 		mvc.perform(get("/status-history-one/1"))
 			.andExpect(status().isOk())

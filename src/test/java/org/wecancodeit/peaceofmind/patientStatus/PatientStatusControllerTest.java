@@ -85,7 +85,7 @@ public class PatientStatusControllerTest {
 	public void shouldFindTop3ResultsForPatientStatus() throws Exception {
 		Collection<PatientStatus> patientStatuses = Arrays.asList(ps1, ps2, ps3);
 		
-		when(patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatuses);
+		when(patientStatusRepo.findTop3ByPatientIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatuses);
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
 		
 		underTest.findThreeRecentStatuses(arbitraryId, model);
@@ -96,7 +96,7 @@ public class PatientStatusControllerTest {
 	public void shouldFindAllResultsForPatientStatus() throws Exception {
 		Collection<PatientStatus> allStatuses = Arrays.asList(ps1, ps2, ps3, ps4);
 		
-		when(patientStatusRepo.findByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(allStatuses);
+		when(patientStatusRepo.findByPatientIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(allStatuses);
 		when(patientRepo.findById(arbitraryId)).thenReturn(Optional.of(patient));
 		
 		underTest.findAllStatuses(arbitraryId, model);

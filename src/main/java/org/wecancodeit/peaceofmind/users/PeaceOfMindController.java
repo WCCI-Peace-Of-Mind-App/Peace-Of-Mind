@@ -128,7 +128,7 @@ public class PeaceOfMindController {
 		Optional<NonMedicalUser> nonMedUser = nonMedUserRepo.findById(id);
 		Patient patient = nonMedUser.get().getPatient();
 		Long patientId = patient.getId();
-		PatientStatus currentStatus = patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(patientId);
+		PatientStatus currentStatus = patientStatusRepo.findTop1ByPatientIdOrderByStatusDateTimeStampDesc(patientId);
 		Collection<Medication> medications = patient.getMedications();
 
 		String currentMonthStart = thisMonth + "/01";
@@ -197,7 +197,7 @@ public class PeaceOfMindController {
 		NonMedicalUser nonMed = medUser.get().getPatient().getNonMedicalUser();
 		Patient patient = medUser.get().getPatient();
 		Long patientId = patient.getId();
-		PatientStatus currentStatus = patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(patientId);
+		PatientStatus currentStatus = patientStatusRepo.findTop1ByPatientIdOrderByStatusDateTimeStampDesc(patientId);
 		Collection<Medication> medications = patient.getMedications();
 
 		String currentMonthStart = thisMonth + "/01";

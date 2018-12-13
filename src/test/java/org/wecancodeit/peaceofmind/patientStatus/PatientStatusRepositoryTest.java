@@ -88,20 +88,20 @@ public class PatientStatusRepositoryTest {
 	@Test
 	public void shouldPullCollectionOfByDateTime() {
 		
-		Collection<PatientStatus> patientStatuses = patientStatusRepo.findByParentIdOrderByStatusDateTimeStampDesc(patientId);
+		Collection<PatientStatus> patientStatuses = patientStatusRepo.findByPatientIdOrderByStatusDateTimeStampDesc(patientId);
 		assertThat(patientStatuses, contains(status5, status4, status3, status2, status1));
 		
 	}
 	
 	@Test
 	public void shouldReturnRecentResult() {
-		PatientStatus checkedStatus= patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(patientId);
+		PatientStatus checkedStatus= patientStatusRepo.findTop1ByPatientIdOrderByStatusDateTimeStampDesc(patientId);
 		assertThat(checkedStatus, is(status5));
 	}
 	
 	@Test
 	public void shouldReturnTop3RecentStatuses() {
-		Collection<PatientStatus> checkedStatuses = patientStatusRepo.findTop3ByParentIdOrderByStatusDateTimeStampDesc(patientId);
+		Collection<PatientStatus> checkedStatuses = patientStatusRepo.findTop3ByPatientIdOrderByStatusDateTimeStampDesc(patientId);
 		assertThat(checkedStatuses, contains(status5, status4, status3));
 	}
 	

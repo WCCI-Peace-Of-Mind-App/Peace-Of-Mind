@@ -134,7 +134,7 @@ public class ViewTest {
 		when(nonMedUserRepo.findById(new Long(1234L))).thenReturn(Optional.ofNullable(oMockNonMedUser));
 		when(oMockNonMedUser.getPatient()).thenReturn(oMockPatient);
 		when(oMockPatient.getId()).thenReturn(arbitraryId);
-		when(patientStatusRepo.findTop1ByParentIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatus);
+		when(patientStatusRepo.findTop1ByPatientIdOrderByStatusDateTimeStampDesc(arbitraryId)).thenReturn(patientStatus);
 		mvc.perform(get("/non-medical-user-home?id=1234")).andExpect(status().isOk())
 				.andExpect(view().name(is("nonMedicalUser-Home")))
 				.andExpect(content().contentType("text/html;charset=UTF-8"))

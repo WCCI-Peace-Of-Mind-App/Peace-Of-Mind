@@ -1,6 +1,5 @@
 package org.wecancodeit.peaceofmind.medication;
 
-
 import java.util.Collection;
 
 import javax.persistence.Entity;

@@ -1,10 +1,10 @@
 package org.wecancodeit.peaceofmind.medication;
 
 public enum doseFrequencyTimeEnum {
-Daily ("daily"), 
-Weekly ("weekly"), 
-Monthly ("monthly"), 
-As_Needed ("needed");
+	Daily ("daily"), 
+	Weekly ("weekly"), 
+	Monthly ("monthly"), 
+	As_Needed ("needed");
 	
 	private String text;
 	

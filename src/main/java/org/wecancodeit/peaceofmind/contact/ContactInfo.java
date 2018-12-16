@@ -7,9 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.wecancodeit.peaceofmind.users.MedicalUser;
-import org.wecancodeit.peaceofmind.users.NonMedicalUser;
-import org.wecancodeit.peaceofmind.users.Patient;
+import org.wecancodeit.peaceofmind.users.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

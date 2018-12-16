@@ -13,10 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
-import org.wecancodeit.peaceofmind.users.MedicalUser;
-import org.wecancodeit.peaceofmind.users.MedicalUserRepository;
-import org.wecancodeit.peaceofmind.users.Patient;
-import org.wecancodeit.peaceofmind.users.PatientRepository;
+import org.wecancodeit.peaceofmind.users.*;
 
 public class AddMedicationControllerTest {
 

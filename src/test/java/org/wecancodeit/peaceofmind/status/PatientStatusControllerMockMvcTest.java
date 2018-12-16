@@ -21,11 +21,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.wecancodeit.peaceofmind.status.PatientStatus;
-import org.wecancodeit.peaceofmind.status.PatientStatusController;
-import org.wecancodeit.peaceofmind.status.PatientStatusRepository;
-import org.wecancodeit.peaceofmind.users.Patient;
-import org.wecancodeit.peaceofmind.users.PatientRepository;
+import org.wecancodeit.peaceofmind.users.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(PatientStatusController.class)

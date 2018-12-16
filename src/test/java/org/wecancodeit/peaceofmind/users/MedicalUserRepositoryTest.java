@@ -11,12 +11,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.wecancodeit.peaceofmind.contact.Address;
-import org.wecancodeit.peaceofmind.contact.AddressRepository;
-import org.wecancodeit.peaceofmind.contact.ContactInfo;
-import org.wecancodeit.peaceofmind.contact.ContactInfoRepository;
-import org.wecancodeit.peaceofmind.contact.Phone;
-import org.wecancodeit.peaceofmind.contact.PhoneRepository;
+import org.wecancodeit.peaceofmind.contact.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 public class MedicalUserRepositoryTest {

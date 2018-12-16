@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.status;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

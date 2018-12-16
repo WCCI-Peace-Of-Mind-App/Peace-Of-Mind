@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind;
+package org.wecancodeit.peaceofmind.status;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -10,9 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.wecancodeit.peaceofmind.users.Patient;
-import org.wecancodeit.peaceofmind.users.PatientNotFoundException;
-import org.wecancodeit.peaceofmind.users.PatientRepository;
+import org.wecancodeit.peaceofmind.users.*;
 
 @Controller
 public class PatientStatusController {

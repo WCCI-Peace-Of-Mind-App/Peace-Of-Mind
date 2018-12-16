@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.NestedServletException;
 import org.wecancodeit.peaceofmind.diary.DiaryRepository;
 import org.wecancodeit.peaceofmind.medication.*;
-import org.wecancodeit.peaceofmind.*;
+import org.wecancodeit.peaceofmind.status.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(PeaceOfMindController.class)

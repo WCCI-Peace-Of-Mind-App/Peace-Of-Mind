@@ -1,6 +1,6 @@
 package org.wecancodeit.peaceofmind.users;
 
-public interface INonPatientUser extends IPerson {
+public interface IUser {
 
   public String getUserName();
   public String getPassword();

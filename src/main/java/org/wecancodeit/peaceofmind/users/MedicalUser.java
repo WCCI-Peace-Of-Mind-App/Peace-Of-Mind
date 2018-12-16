@@ -1,29 +1,16 @@
 package org.wecancodeit.peaceofmind.users;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import org.wecancodeit.peaceofmind.contact.ContactInfo;
 
 @Entity
-public class MedicalUser implements IPerson {
+public class MedicalUser extends AppUser {
  
-	@Id
-	@GeneratedValue
-	private long id;
-
-	private String firstName;
-	private String lastName;
-	@OneToOne(fetch = FetchType.LAZY)
-	private ContactInfo contactInfo;
 	private String medicalSpecialty;
 	private String medicalInstitution;
 	private String institutionTelephone;
-	private String userName;
-	private String password;
 
 	@OneToOne
 	private Patient patient;
@@ -32,38 +19,14 @@ public class MedicalUser implements IPerson {
 	
 	public MedicalUser(String firstName,String lastName, ContactInfo contactInfo, String medicalSpecialty,
 			String medicalInstitution, String institutionTelephone, String userName, String password, Patient patient) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.contactInfo = contactInfo;
+		super(firstName, lastName, userName, password, contactInfo);
 		this.medicalSpecialty = medicalSpecialty;
 		this.medicalInstitution = medicalInstitution; 
 		this.institutionTelephone = institutionTelephone;
-		this.userName = userName;
-		this.password = password;
 		this.patient = patient;
 	}
 
-	public long getId() {
-      return this.id;
-	}
-
-	@Override
-	public String getFirstName() {
-		return this.firstName;
-	}
-    @Override
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	@Override
-	public ContactInfo getContactInfo() {
-		return this.contactInfo;
-	}
-
 	public String getMedicalSpecialty() {
-
 		return this.medicalSpecialty;
 	}
 
@@ -75,16 +38,6 @@ public class MedicalUser implements IPerson {
 		return this.institutionTelephone;
 	}
 
-	@Override
-	public String getUserName() {
-		return this.userName;
-	}
-
-	@Override
-	public String getPassword() {
-		return this.password;
-	}
-	
 	public Patient getPatient() {
 		return patient;
 	}

@@ -1,6 +1,5 @@
 package org.wecancodeit.peaceofmind.users;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,8 +7,6 @@ import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -18,21 +15,9 @@ import org.wecancodeit.peaceofmind.diary.Diary;
 import org.wecancodeit.peaceofmind.medication.Medication;
 import org.wecancodeit.peaceofmind.status.PatientStatus;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-public class Patient implements IPerson {
+public class Patient extends AppUser {
 	
-	@Id
-	@GeneratedValue
-	private long id;
-
-	private String firstName;
-	private String lastName;
-	
-	@JsonIgnore
-	@OneToOne(fetch = FetchType.LAZY)
-	private ContactInfo contactInfo; 
 	private String dateOfBirth;
 	private String diagnosis;
 	
@@ -50,24 +35,7 @@ public class Patient implements IPerson {
 	
 	@OneToMany(mappedBy="patient")
 	private Collection<Diary> diary; 
-	private String userName;
-	private String password;
 
-	public long getId() {
-		return id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	
-	public ContactInfo getContactInfo() {
-		return contactInfo;
-	}
-	
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -96,27 +64,15 @@ public class Patient implements IPerson {
 		return diary; 
 	}
 	
-	public String getUserName() {
-		return userName;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-
 	public Patient() {}
 	
 	public Patient(String firstName, String lastName, ContactInfo contactInfo, String dateOfBirth, String diagnosis, NonMedicalUser nonMedicalUser, String userName, String password, Medication...medications) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.contactInfo = contactInfo;
+		super(firstName, lastName, userName, password, contactInfo);
 		this.dateOfBirth = dateOfBirth;
 		this.diagnosis = diagnosis;
 		this.nonMedicalUser = nonMedicalUser;
 		this.medications = new HashSet<>(Arrays.asList(medications));
 		this.statusHistory = new ArrayList<>();
-		this.userName = userName;
-		this.password = password;
 	}
 	
 	public void addMedication(Medication medication) {

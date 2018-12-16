@@ -25,6 +25,10 @@ public abstract class AppUser implements IPerson, IUser {
 	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
 	protected ContactInfo contactInfo;
+	
+	public long getId() {
+		return id;
+	}
 		
 	public String getFirstName() {
 		return firstName;

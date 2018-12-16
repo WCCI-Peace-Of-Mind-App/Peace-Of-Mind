@@ -2,58 +2,18 @@ package org.wecancodeit.peaceofmind.users;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import org.wecancodeit.peaceofmind.contact.ContactInfo;
 
 @Entity
-public class NonMedicalUser implements IPerson {
+public class NonMedicalUser extends AppUser {
 	
-	@Id
-	@GeneratedValue
-	private long id;
-
-	private String firstName;
-	private String lastName;
-	@OneToOne(fetch = FetchType.LAZY)
-	private ContactInfo contactInfo;
-	private String userName;
-	private String password;
 	private String relationshipWithPatient;
 	
 	@OneToOne(mappedBy = "nonMedicalUser", fetch = FetchType.LAZY, optional = false)
 	private Patient patient;
 
-
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public String getFirstName() {
-		return firstName;
-	}
-
-	@Override
-	public String getLastName() {
-		return lastName;
-	}
-	
-	public ContactInfo getContactInfo() {
-		return contactInfo;
-	}
-
-	@Override
-	public String getUserName() {
-		return userName;
-	}
-	@Override
-	public String getPassword() {
-		return password;
-	}
-	
 	public String getRelationshipWithPatient() {
 		return relationshipWithPatient;
 	}
@@ -65,11 +25,7 @@ public class NonMedicalUser implements IPerson {
 	public NonMedicalUser() {}
 		
 	public NonMedicalUser(String firstName, String lastName, ContactInfo contactInfo, String userName, String password, String relationshipWithPatient) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.contactInfo = contactInfo;
-		this.userName = userName;
-		this.password = password;
+		super(firstName, lastName, userName, password, contactInfo);
 		this.relationshipWithPatient = relationshipWithPatient;
 	}
 

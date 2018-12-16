@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.wecancodeit.peaceofmind.diary.*;
 import org.wecancodeit.peaceofmind.medication.*;
-import org.wecancodeit.peaceofmind.patientstatus.*;
+import org.wecancodeit.peaceofmind.*;
 
 @Controller
 public class PeaceOfMindController {

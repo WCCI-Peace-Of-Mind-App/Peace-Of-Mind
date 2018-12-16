@@ -1,4 +1,4 @@
-package org.wecancodeit.peaceofmind.patientstatus;
+package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.contains;
@@ -17,9 +17,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.wecancodeit.peaceofmind.patientstatus.PatientStatus;
-import org.wecancodeit.peaceofmind.patientstatus.PatientStatusEnum;
-import org.wecancodeit.peaceofmind.patientstatus.PatientStatusRepository;
 import org.wecancodeit.peaceofmind.users.Patient;
 import org.wecancodeit.peaceofmind.users.PatientRepository;
 

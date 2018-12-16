@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.wecancodeit.peaceofmind.contact.*;
 import org.wecancodeit.peaceofmind.diary.*;
 import org.wecancodeit.peaceofmind.medication.*;
-import org.wecancodeit.peaceofmind.patientstatus.*;
 import org.wecancodeit.peaceofmind.users.*;
 
 @Component

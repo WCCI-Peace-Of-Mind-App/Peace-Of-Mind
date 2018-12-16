@@ -21,11 +21,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.NestedServletException;
 import org.wecancodeit.peaceofmind.diary.DiaryRepository;
-import org.wecancodeit.peaceofmind.medication.MedicationLogRepository;
-import org.wecancodeit.peaceofmind.medication.MedicationRepository;
-import org.wecancodeit.peaceofmind.medication.MedicationTrackerRepository;
-import org.wecancodeit.peaceofmind.patientstatus.PatientStatus;
-import org.wecancodeit.peaceofmind.patientstatus.PatientStatusRepository;
+import org.wecancodeit.peaceofmind.medication.*;
+import org.wecancodeit.peaceofmind.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(PeaceOfMindController.class)

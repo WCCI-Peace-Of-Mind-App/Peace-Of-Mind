@@ -1,11 +1,10 @@
-package org.wecancodeit.peaceofmind.patientstatus;
+package org.wecancodeit.peaceofmind;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.wecancodeit.peaceofmind.patientstatus.PatientStatusEnum;
 
 public class PatientStatusEnumTest {
 

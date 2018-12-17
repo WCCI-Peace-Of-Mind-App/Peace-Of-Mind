@@ -47,11 +47,11 @@ function validateTextBoxesHaveData () {
 }
 
 function validateTextBoxesHaveValidData() {
-    return(textIsAlphanumereic(drugName) && textIsAlphanumereic(dosage) && textIsAlphanumereic(reason));
+    return(textIsAlphanumereic(drugName) && textIsAlphanumereic(dosage));
 }
 
 function validateAllData() {
-    return(validateTextBoxesHaveValidData() && textIsNumber(amount));
+    return(validateTextBoxesHaveValidData() && textIsNumber(amount) && textHasValue(reason));
 }
 
 function addWarningText(textToPost) {

@@ -7,6 +7,11 @@ import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.wecancodeit.peaceofmind.contact.*;
+import org.wecancodeit.peaceofmind.diary.*;
+import org.wecancodeit.peaceofmind.medication.*;
+import org.wecancodeit.peaceofmind.status.*;
+import org.wecancodeit.peaceofmind.users.*;
 
 @Component
 public class PeaceOfMindPopulator implements CommandLineRunner {
@@ -113,16 +118,17 @@ public class PeaceOfMindPopulator implements CommandLineRunner {
 		diaryRepo.save(new Diary(pastDate, "Forgot tin foil cannot be microwaved", patient1));
 
 		
-		LocalDateTime time1 = LocalDateTime.of(2018, 12, 1, 8, 30);
-		LocalDateTime time2 = LocalDateTime.of(2018, 12, 3, 8, 30);
-		LocalDateTime time3 = LocalDateTime.of(2018, 12, 4, 8, 30);
-		LocalDateTime time4 = LocalDateTime.of(2018, 12, 4, 9, 30);
+		LocalDateTime time1 = LocalDateTime.now().minusDays(6);
+		LocalDateTime time2 = time1.plusDays(2).plusHours(4);
+		LocalDateTime time3 = time2.plusDays(2).plusHours(3).plusMinutes(15);
+		LocalDateTime time4 = time3.plusMinutes(36);
+		LocalDateTime time5 = time4.plusDays(1).plusHours(5).plusMinutes(10);
 		
         patientStatusRepo.save(new PatientStatus(PatientStatusEnum.ANGRY, time1, patient1));
         patientStatusRepo.save(new PatientStatus(PatientStatusEnum.SAD, time2, patient1));
         patientStatusRepo.save(new PatientStatus(PatientStatusEnum.HAPPY, time3, patient1));
         patientStatusRepo.save(new PatientStatus(PatientStatusEnum.CONFUSED, time4, patient1));
-        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.SAD, patient1));
+        patientStatusRepo.save(new PatientStatus(PatientStatusEnum.SAD, time5, patient1));
 
 		// End Patient 1 build
 		
